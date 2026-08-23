@@ -41,6 +41,12 @@ model Account {
   user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accountId             String
   providerId            String
+  // Added in Better Auth v1.7 ("account identity" change): scopes account
+  // identity by issuer instead of by provider config alone. Credential
+  // (email/password) accounts use "local:credential"; OAuth accounts use
+  // the provider's issuer. Required, non-null — this DB has no pre-1.7 rows
+  // to backfill, so no migration dance needed.
+  issuer                String
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -50,6 +56,8 @@ model Account {
   password              String?
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
+
+  @@unique([issuer, accountId])
 }
 
 model Verification {
