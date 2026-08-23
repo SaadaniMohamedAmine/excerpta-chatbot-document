@@ -162,6 +162,20 @@ function formatSourceLabel(match: VectorQueryResult): string {
 
 export type Citation = { documentId: string; pageNumber: number | null; excerpt: string };
 
+// The Citation shape only carries one numeric field. For PDF/DOCX chunks
+// that's a real page number; CSV/code chunks have no page, only a
+// lineRange/rowRange string like "12-40" — the workspace phase reuses
+// `pageNumber` as a 1-indexed row/line number for those, so we fall back to
+// the start of the range rather than persisting `null` and losing the
+// ability to highlight the cited row/line at all.
+function resolveCitationPageNumber(metadata: VectorQueryResult["metadata"]): number | null {
+  if (metadata.pageNumber != null) return metadata.pageNumber;
+  const range = metadata.lineRange ?? metadata.rowRange;
+  if (!range) return null;
+  const start = parseInt(range.split("-")[0], 10);
+  return Number.isNaN(start) ? null : start;
+}
+
 async function persistAssistantMessage(
   conversationId: string,
   fullText: string,
@@ -182,7 +196,7 @@ async function persistAssistantMessage(
       .filter((m): m is VectorQueryResult => Boolean(m))
       .map((m) => ({
         documentId: m.metadata.documentId,
-        pageNumber: m.metadata.pageNumber,
+        pageNumber: resolveCitationPageNumber(m.metadata),
         excerpt: m.metadata.chunkContent.slice(0, 300),
       }));
   }
