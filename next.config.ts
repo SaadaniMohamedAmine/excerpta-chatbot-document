@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  // pdf-parse/mammoth do Node-specific file/buffer work that breaks if bundled
+  // into the serverless function — keep them as real external requires.
+  serverExternalPackages: ["pdf-parse", "mammoth"],
   images: {
     remotePatterns: [
       // Google OAuth profile pictures
