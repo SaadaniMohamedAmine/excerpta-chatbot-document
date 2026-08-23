@@ -1,0 +1,55 @@
+/* components/workspace/CodeViewer.module.css */
+/* hljs emits global class names (hljs-keyword, hljs-string, ...) so they
+   are referenced with :global() inside this CSS Module. Colors are pulled
+   directly from the locked design system rather than a generic hljs theme. */
+
+.codeViewer :global(.hljs-keyword),
+.codeViewer :global(.hljs-selector-tag),
+.codeViewer :global(.hljs-literal) {
+  color: #1e3a8a;
+  font-weight: 600;
+}
+.codeViewer :global(.hljs-string),
+.codeViewer :global(.hljs-attr) {
+  color: #16a34a;
+}
+.codeViewer :global(.hljs-comment) {
+  color: #475569;
+  font-style: italic;
+}
+.codeViewer :global(.hljs-number) {
+  color: #d4a537;
+}
+.codeViewer :global(.hljs-title),
+.codeViewer :global(.hljs-function) {
+  color: #0f172a;
+  font-weight: 600;
+}
+.codeViewer :global(.hljs-variable),
+.codeViewer :global(.hljs-params) {
+  color: #0f172a;
+}
+
+:global(.dark) .codeViewer :global(.hljs-keyword),
+:global(.dark) .codeViewer :global(.hljs-selector-tag),
+:global(.dark) .codeViewer :global(.hljs-literal) {
+  color: #6d8fff;
+}
+:global(.dark) .codeViewer :global(.hljs-string),
+:global(.dark) .codeViewer :global(.hljs-attr) {
+  color: #4ade80;
+}
+:global(.dark) .codeViewer :global(.hljs-comment) {
+  color: #94a3b8;
+}
+:global(.dark) .codeViewer :global(.hljs-number) {
+  color: #e8c468;
+}
+:global(.dark) .codeViewer :global(.hljs-title),
+:global(.dark) .codeViewer :global(.hljs-function) {
+  color: #f1f5f9;
+}
+:global(.dark) .codeViewer :global(.hljs-variable),
+:global(.dark) .codeViewer :global(.hljs-params) {
+  color: #f1f5f9;
+}
