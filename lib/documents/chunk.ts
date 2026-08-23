@@ -1,5 +1,5 @@
 // lib/documents/chunk.ts
-import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
+import { RecursiveCharacterTextSplitter, type SupportedTextSplitterLanguage } from "@langchain/textsplitters";
 import type { PdfExtraction, DocxExtraction, CsvRow, CodeLine, ExtractedDocument } from "./extract-text";
 
 const CHUNK_SIZE = 1000;
@@ -91,7 +91,12 @@ export function chunkCsv(rows: CsvRow[], headers: string[]): DocumentChunk[] {
 // language onto LangChain's tag where one exists; otherwise fall back to the
 // default character splitter (still correct, just without language-aware
 // split points like function/class boundaries).
-const LANGCHAIN_LANGUAGE_MAP: Record<string, string> = {
+// Verified against the installed @langchain/textsplitters' actual
+// SupportedTextSplitterLanguages list (cpp, go, java, js, php, proto, python,
+// rst, ruby, rust, scala, swift, markdown, latex, html, sol) — csharp isn't
+// in it, so it's deliberately omitted rather than mapped to a value that
+// would throw at runtime.
+const LANGCHAIN_LANGUAGE_MAP: Record<string, SupportedTextSplitterLanguage> = {
   javascript: "js",
   typescript: "js",
   python: "python",
@@ -101,18 +106,14 @@ const LANGCHAIN_LANGUAGE_MAP: Record<string, string> = {
   rust: "rust",
   cpp: "cpp",
   c: "cpp",
-  csharp: "csharp",
   php: "php",
   markdown: "markdown",
 };
 
 /**
- * VERIFY the LANGCHAIN_LANGUAGE_MAP values above against the
- * `SupportedTextSplitterLanguage` type exported by your installed
- * `@langchain/textsplitters` version before shipping — the supported-language
- * list has changed across versions. Any language not in the map (or that
- * throws when passed to `fromLanguage`) safely falls back to the default
- * splitter, so a stale mapping degrades chunk quality, it doesn't break.
+ * Any language not in the map above (or that throws when passed to
+ * `fromLanguage`) safely falls back to the default splitter, so a stale
+ * mapping degrades chunk quality, it doesn't break.
  */
 export async function chunkCode(lines: CodeLine[], language: string): Promise<DocumentChunk[]> {
   const fullText = lines.map((l) => l.text).join("\n");
@@ -121,7 +122,7 @@ export async function chunkCode(lines: CodeLine[], language: string): Promise<Do
   let splitter: RecursiveCharacterTextSplitter = defaultSplitter;
   if (mappedLanguage) {
     try {
-      splitter = RecursiveCharacterTextSplitter.fromLanguage(mappedLanguage as any, {
+      splitter = RecursiveCharacterTextSplitter.fromLanguage(mappedLanguage, {
         chunkSize: CHUNK_SIZE,
         chunkOverlap: CHUNK_OVERLAP,
       });

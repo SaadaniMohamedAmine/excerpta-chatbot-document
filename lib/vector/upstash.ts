@@ -11,17 +11,28 @@ export type ChunkMetadata = {
   rowRange: string | null;
 };
 
-const vectorIndex = new Index<ChunkMetadata>({
-  url: process.env.UPSTASH_VECTOR_REST_URL!,
-  token: process.env.UPSTASH_VECTOR_REST_TOKEN!,
-});
+// Lazy singleton — @upstash/vector's Index constructor throws immediately if
+// the env vars are unset, and Next.js evaluates route modules at build time
+// (to collect page data) even for routes nothing has called yet. Constructing
+// eagerly at module scope would break `npm run build` before Upstash Vector
+// is ever configured.
+let _vectorIndex: Index<ChunkMetadata> | undefined;
+function getVectorIndex(): Index<ChunkMetadata> {
+  if (!_vectorIndex) {
+    _vectorIndex = new Index<ChunkMetadata>({
+      url: process.env.UPSTASH_VECTOR_REST_URL!,
+      token: process.env.UPSTASH_VECTOR_REST_TOKEN!,
+    });
+  }
+  return _vectorIndex;
+}
 
 export async function upsertChunkVector(
   vectorId: string,
   embedding: number[],
   metadata: ChunkMetadata
 ): Promise<void> {
-  await vectorIndex.upsert({ id: vectorId, vector: embedding, metadata });
+  await getVectorIndex().upsert({ id: vectorId, vector: embedding, metadata });
 }
 
 /** Batch upsert — use this from the processing pipeline instead of looping upsertChunkVector. */
@@ -29,7 +40,7 @@ export async function upsertChunkVectorsBatch(
   items: { vectorId: string; embedding: number[]; metadata: ChunkMetadata }[]
 ): Promise<void> {
   if (items.length === 0) return;
-  await vectorIndex.upsert(
+  await getVectorIndex().upsert(
     items.map((item) => ({ id: item.vectorId, vector: item.embedding, metadata: item.metadata }))
   );
 }
@@ -83,7 +94,7 @@ export async function queryVector(
     return [];
   }
 
-  const results = await vectorIndex.query({
+  const results = await getVectorIndex().query({
     vector: embedding,
     topK,
     includeMetadata: true,
@@ -106,13 +117,13 @@ export async function queryVector(
  * (they store `vectorId`), then pass those ids to `deleteVectorsByIds`.
  */
 export async function deleteDocumentVectors(documentId: string): Promise<void> {
-  await vectorIndex.delete({ filter: `documentId = '${escapeForFilter(documentId)}'` });
+  await getVectorIndex().delete({ filter: `documentId = '${escapeForFilter(documentId)}'` });
 }
 
 /** Guaranteed-compatible fallback: delete by explicit vector id list. */
 export async function deleteVectorsByIds(vectorIds: string[]): Promise<void> {
   if (vectorIds.length === 0) return;
-  await vectorIndex.delete(vectorIds);
+  await getVectorIndex().delete(vectorIds);
 }
 
-export { vectorIndex };
+export { getVectorIndex };
