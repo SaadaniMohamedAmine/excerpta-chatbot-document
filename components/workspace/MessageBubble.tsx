@@ -8,11 +8,15 @@ import { CitationTag } from "@/components/ui/citation-tag";
 
 interface MessageBubbleProps {
   message: ChatUIMessage;
-  onCitationClick: (pageNumber: number, excerpt: string, documentId?: string) => void;
+  onCitationClick?: (pageNumber: number, excerpt: string, documentId?: string) => void;
   resolveDocumentTitle?: (documentId: string) => string | undefined;
+  /** Renders citations as inert reference tags instead of clickable
+   *  scroll-to-source buttons — used on the public /share/[token] page,
+   *  which has no document viewer to jump to. */
+  readOnly?: boolean;
 }
 
-export default function MessageBubble({ message, onCitationClick, resolveDocumentTitle }: MessageBubbleProps) {
+function MessageBubble({ message, onCitationClick, resolveDocumentTitle, readOnly = false }: MessageBubbleProps) {
   const isUser = message.role === "user";
   const citations = isUser ? [] : (message.citations ?? []);
 
@@ -42,9 +46,12 @@ export default function MessageBubble({ message, onCitationClick, resolveDocumen
                 key={`${citation.documentId}-${citation.pageNumber}-${i}`}
                 page={citation.pageNumber ?? undefined}
                 documentTitle={citation.documentTitle ?? resolveDocumentTitle?.(citation.documentId)}
-                onClick={() =>
-                  citation.pageNumber != null &&
-                  onCitationClick(citation.pageNumber, citation.excerpt, citation.documentId)
+                onClick={
+                  readOnly
+                    ? undefined
+                    : () =>
+                        citation.pageNumber != null &&
+                        onCitationClick?.(citation.pageNumber, citation.excerpt, citation.documentId)
                 }
               />
             ))}
@@ -54,3 +61,6 @@ export default function MessageBubble({ message, onCitationClick, resolveDocumen
     </div>
   );
 }
+
+export default MessageBubble;
+export { MessageBubble };
