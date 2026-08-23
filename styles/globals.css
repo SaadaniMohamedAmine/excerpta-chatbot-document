@@ -1,0 +1,48 @@
+/* styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: 248 250 252;
+  --color-surface: 255 255 255;
+  --color-primary: 30 58 138;
+  --color-gold: 212 165 55;
+  --color-text-primary: 15 23 42;
+  --color-text-secondary: 71 85 105;
+  --color-border: 226 232 240;
+  --color-success: 22 163 74;
+  --color-error: 220 38 38;
+  --color-warning: 245 158 11;
+}
+
+.dark {
+  --color-background: 11 18 32;
+  --color-surface: 19 27 46;
+  --color-primary: 109 143 255;
+  --color-gold: 232 196 104;
+  --color-text-primary: 241 245 249;
+  --color-text-secondary: 148 163 184;
+  --color-border: 30 41 59;
+  --color-success: 74 222 128;
+  --color-error: 248 113 113;
+  --color-warning: 251 191 36;
+}
+
+/* Default border color for every element, mirroring Tailwind's own
+   preflight pattern — so a bare `border` utility (no explicit color
+   class) already renders in the correct token color per theme.
+   `border-border` (or any other explicit border color utility) still
+   overrides this, since utility classes are more specific. */
+* {
+  border-color: rgb(var(--color-border));
+}
+
+body {
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-text-primary));
+}
+
+::selection {
+  background-color: rgb(var(--color-gold) / 0.3);
+}
