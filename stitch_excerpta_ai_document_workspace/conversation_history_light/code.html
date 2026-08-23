@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta - Conversation History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500&amp;family=Geist:wght@400;600&amp;family=Source+Serif+4:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#90a8ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#b6c4ff",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#f1bf4f",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-tertiary-container": "#f39461",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary": "#00236f",
+                        "on-error-container": "#93000a",
+                        "secondary": "#795900",
+                        "error-container": "#ffdad6",
+                        "outline": "#757682",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed-variant": "#264191",
+                        "tertiary": "#4b1c00",
+                        "primary-fixed": "#dce1ff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed": "#341100",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-surface-variant": "#444651",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "primary-container": "#1e3a8a",
+                        "secondary-fixed": "#ffdf9f",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdca59",
+                        "on-primary-fixed": "#00164e",
+                        "surface-tint": "#4059aa",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#6e2c00",
+                        "surface-bright": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#735500",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "workspace_gap": "1px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["Geist Mono"],
+                        "h1": ["Geist"],
+                        "body-excerpt": ["\"Source Serif 4\""],
+                        "h1-mobile": ["Geist"],
+                        "caption": ["Geist"],
+                        "body-ui": ["Geist"],
+                        "h2": ["Geist"],
+                        "display-wordmark": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-excerpt": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-wordmark": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .group:hover .group-hover\:flex {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen overflow-hidden flex">
+<!-- SideNavBar (from JSON) -->
+<nav class="bg-surface-container-low dark:bg-inverse-surface fixed left-0 h-full w-20 flex flex-col border-r border-outline-variant dark:border-outline flex flex-col items-center py-md space-y-md z-10 transition-all duration-200 ease-in-out">
+<div class="mb-xl flex items-center justify-center w-full">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+</div>
+<div class="flex-1 flex flex-col items-center space-y-md w-full px-sm">
+<a aria-label="Documents" class="w-full flex justify-center py-md rounded text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out group relative" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="description">description</span>
+<!-- Tooltip -->
+<div class="absolute left-16 opacity-0 group-hover:opacity-100 pointer-events-none bg-inverse-surface text-inverse-on-surface font-label-mono text-label-mono px-3 py-1 rounded transition-opacity whitespace-nowrap z-50">
+                    Documents
+                </div>
+</a>
+<!-- Active Tab: Collections (Semantic closest match for "Conversation History" / grouping) -->
+<a aria-label="Collections" class="w-full flex justify-center py-md rounded text-primary bg-primary/5 transition-all duration-200 ease-in-out relative" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="folder_special" style="font-variation-settings: 'FILL' 1;">folder_special</span>
+<div class="absolute left-0 top-1/4 h-1/2 w-1 bg-primary rounded-r"></div>
+</a>
+</div>
+<div class="mt-auto mb-lg w-full flex justify-center px-sm">
+<a aria-label="Settings" class="w-full flex justify-center py-md rounded text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out group relative" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="settings">settings</span>
+<div class="absolute left-16 opacity-0 group-hover:opacity-100 pointer-events-none bg-inverse-surface text-inverse-on-surface font-label-mono text-label-mono px-3 py-1 rounded transition-opacity whitespace-nowrap z-50">
+                    Settings
+                </div>
+</a>
+</div>
+<div class="pb-md w-full flex justify-center px-sm border-t border-outline-variant pt-md">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User profile" class="object-cover w-full h-full" data-alt="A macro photograph showing a highly detailed, abstract minimalist sculpture in pristine white marble, illuminated by soft, warm gallery lighting. The texture is smooth and flawless, representing a sophisticated, scholarly corporate environment with no extraneous details, emphasizing clarity and intellectual focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq14u-WfWbPUtg3WroEhF2R6BIDuSOlkHifA2fo0DG6fFA4vzdemt9aNWgQ69JhcYTS4pvC1zNwtRZEWBFwvbKyF5Ml0GhXRwfynORdGzA-AVsq43ok7M_Z4S5x7gWvlwFEkKeTBivUp6SabGclfj-_UI7mzOJh2G6xa3tj7zBz364DeyTE6TAUF76s8jY8E7PCVr1116qfQS4lbwqLqNVEqR3iGzFOERc8WTFb8yVXCH-em0xoBAW"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-20 flex-1 flex h-full bg-surface">
+<!-- Conversation List Pane (Sidebar style list) -->
+<section class="w-full max-w-md h-full border-r border-outline-variant flex flex-col bg-surface-bright z-0">
+<!-- Header -->
+<header class="h-16 px-lg flex items-center border-b border-outline-variant bg-surface sticky top-0">
+<h1 class="font-h2 text-h2 text-on-surface">Conversation History</h1>
+</header>
+<!-- Search / Filter (Minimalist) -->
+<div class="px-md py-sm border-b border-outline-variant bg-surface-container-lowest">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded py-2 pl-10 pr-3 font-body-ui text-body-ui text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search past syntheses..." type="text"/>
+</div>
+</div>
+<!-- List Area -->
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<!-- Group 1 -->
+<div class="pt-lg pb-sm">
+<h2 class="px-lg pb-sm font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Today</h2>
+<!-- Row 1 -->
+<a class="group block px-lg py-md border-b border-outline-variant hover:bg-surface-container-low transition-colors relative bg-primary/5" href="#">
+<div class="flex gap-md items-start">
+<div class="mt-1 flex-shrink-0 text-primary">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-h2 text-h2 text-on-surface truncate">Smith v. Jones Precedent Analysis</h3>
+<span class="font-caption text-caption text-on-surface-variant ml-2 whitespace-nowrap">10:42 AM</span>
+</div>
+<p class="font-body-ui text-body-ui text-on-surface-variant line-clamp-2 pr-8">
+                                    Could you summarize the dissenting opinion regarding the interpretation of the 4th amendment in this context?
+                                </p>
+</div>
+</div>
+<!-- Delete Icon (Visible on hover) -->
+<button aria-label="Delete conversation" class="absolute right-md top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:text-error hover:bg-error-container hidden group-hover:flex transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</a>
+<!-- Row 2 -->
+<a class="group block px-lg py-md border-b border-outline-variant hover:bg-surface-container-low transition-colors relative" href="#">
+<div class="flex gap-md items-start">
+<div class="mt-1 flex-shrink-0 text-on-surface-variant">
+<span class="material-symbols-outlined text-xl">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-h2 text-h2 text-on-surface truncate">Q3 Efficacy Trial Results</h3>
+<span class="font-caption text-caption text-on-surface-variant ml-2 whitespace-nowrap">8:15 AM</span>
+</div>
+<p class="font-body-ui text-body-ui text-on-surface-variant line-clamp-2 pr-8">
+                                    Highlight the statistical anomalies in the control group data table on page 14.
+                                </p>
+</div>
+</div>
+<button aria-label="Delete conversation" class="absolute right-md top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:text-error hover:bg-error-container hidden group-hover:flex transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</a>
+</div>
+<!-- Group 2 -->
+<div class="pt-md pb-sm">
+<h2 class="px-lg pb-sm font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Yesterday</h2>
+<!-- Row 3 -->
+<a class="group block px-lg py-md border-b border-outline-variant hover:bg-surface-container-low transition-colors relative" href="#">
+<div class="flex gap-md items-start">
+<div class="mt-1 flex-shrink-0 text-on-surface-variant">
+<span class="material-symbols-outlined text-xl">folder</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-h2 text-h2 text-on-surface truncate">Patent Portfolio Review 2023</h3>
+<span class="font-caption text-caption text-on-surface-variant ml-2 whitespace-nowrap">Yesterday</span>
+</div>
+<p class="font-body-ui text-body-ui text-on-surface-variant line-clamp-2 pr-8">
+                                    Cross-reference the claims in Document A with the prior art listed in Document C.
+                                </p>
+</div>
+</div>
+<button aria-label="Delete conversation" class="absolute right-md top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:text-error hover:bg-error-container hidden group-hover:flex transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</a>
+</div>
+</div>
+</section>
+<!-- Preview / Blank State Pane (Right side) -->
+<section class="flex-1 hidden md:flex flex-col items-center justify-center bg-surface-container-lowest p-2xl">
+<div class="max-w-lg text-center space-y-lg opacity-60">
+<span class="material-symbols-outlined text-6xl text-outline-variant font-light">forum</span>
+<h2 class="font-h1 text-h1 text-on-surface-variant">Select a conversation</h2>
+<p class="font-body-ui text-body-ui text-on-surface-variant">Review past syntheses, document analyses, and continued inquiries from your workspace history.</p>
+</div>
+</section>
+</main>
+<style>
+        /* Minimalist Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: theme('colors.outline-variant');
+            border-radius: 4px;
+        }
+        .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+            background-color: theme('colors.outline');
+        }
+    </style>
+</body></html>

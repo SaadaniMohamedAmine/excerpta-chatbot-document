@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta - Document Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;family=Source+Serif+4:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-container": "#90a8ff",
+                      "on-secondary-fixed": "#261a00",
+                      "surface-container-low": "#f2f4f6",
+                      "surface": "#f7f9fb",
+                      "inverse-primary": "#b6c4ff",
+                      "on-surface": "#191c1e",
+                      "secondary-fixed-dim": "#f1bf4f",
+                      "tertiary-fixed": "#ffdbcb",
+                      "on-tertiary-container": "#f39461",
+                      "on-background": "#191c1e",
+                      "on-tertiary-fixed-variant": "#773205",
+                      "on-error": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "primary": "#00236f",
+                      "on-error-container": "#93000a",
+                      "secondary": "#795900",
+                      "error-container": "#ffdad6",
+                      "outline": "#757682",
+                      "inverse-surface": "#2d3133",
+                      "on-primary-fixed-variant": "#264191",
+                      "tertiary": "#4b1c00",
+                      "primary-fixed": "#dce1ff",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary-fixed": "#341100",
+                      "error": "#ba1a1a",
+                      "primary-fixed-dim": "#b6c4ff",
+                      "on-surface-variant": "#444651",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface-container": "#eceef0",
+                      "primary-container": "#1e3a8a",
+                      "secondary-fixed": "#ffdf9f",
+                      "surface-dim": "#d8dadc",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#fdca59",
+                      "on-primary-fixed": "#00164e",
+                      "surface-tint": "#4059aa",
+                      "tertiary-fixed-dim": "#ffb691",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "surface-container-high": "#e6e8ea",
+                      "tertiary-container": "#6e2c00",
+                      "surface-bright": "#f7f9fb",
+                      "background": "#0b1220", /* Enforced dark background from prompt */
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#735500",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#c5c5d3",
+                      "citation-gold": "#E8C468"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "workspace_gap": "1px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "2xl": "48px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "label-mono": [
+                              "Geist Mono"
+                      ],
+                      "h1": [
+                              "Geist"
+                      ],
+                      "body-excerpt": [
+                              "\"Source Serif 4\""
+                      ],
+                      "h1-mobile": [
+                              "Geist"
+                      ],
+                      "caption": [
+                              "Geist"
+                      ],
+                      "body-ui": [
+                              "Geist"
+                      ],
+                      "h2": [
+                              "Geist"
+                      ],
+                      "display-wordmark": [
+                              "\"Source Serif 4\""
+                      ]
+              },
+              "fontSize": {
+                      "label-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "h1": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-excerpt": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-ui": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-wordmark": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b1220; /* Hardcoded dark mode background from prompt */
+            color: #dce1ff;
+        }
+        .citation-highlight {
+            background-color: rgba(232, 196, 104, 0.2); /* Citation Gold with opacity */
+            border-left: 2px solid #E8C468;
+        }
+        .split-pane-divider {
+            width: 1px;
+            background-color: #1e293b; /* 1px rule */
+        }
+        
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3133;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444651;
+        }
+    </style>
+</head>
+<body class="font-body-ui text-body-ui h-screen flex flex-col overflow-hidden">
+<!-- TopNav - from JSON -->
+<nav class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline fixed top-0 w-full h-16 z-50 flex justify-between items-center px-lg h-16 w-full">
+<div class="flex items-center gap-lg">
+<span class="font-display-wordmark text-display-wordmark text-primary dark:text-primary-fixed-dim">Excerpta</span>
+<div class="hidden md:flex gap-md h-full items-center">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors h-full flex items-center px-sm" href="#">Features</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors h-full flex items-center px-sm" href="#">How it works</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors p-xs rounded-DEFAULT">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+<button class="font-label-mono text-label-mono text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors border border-transparent hover:border-primary-fixed-dim px-md py-xs rounded-DEFAULT">Sign in</button>
+<button class="bg-primary text-on-primary font-label-mono text-label-mono px-md py-xs rounded-DEFAULT hover:bg-primary-container transition-colors">Try Excerpta</button>
+</div>
+</nav>
+<!-- Main Workspace Area -->
+<div class="flex flex-1 pt-16 h-full w-full">
+<!-- SideNavBar - from JSON -->
+<aside class="bg-surface-container-low dark:bg-inverse-surface border-r border-outline-variant dark:border-outline h-full w-20 flex flex-col items-center py-md space-y-md z-40 relative">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden mb-lg">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A small circular avatar placeholder image showing a subtle, modern, minimalist generic user silhouette icon in cool grey tones, matching a professional scholarly UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7H0AjQuMOTUia4P1MfRH4QPk2dtCXOiO0XMDSN_N0RgTb8ME0DqJh7gxIZnkA0THqYQsA6RjqLJwiWoxHIT_hAAJYATProp-Opm-XslMBBIsFio8LiWwFYcu4oEsn-mhUyFH8F8jKEreLCbBf_gwEw2HoiyPLtSYTXdPelLBqbmVcVGCSilSNVD-1wIDJKg3fxFQs69N-NwkXnfylCi1ZGburHsQWPf0tX-0thjvfF8RZzTDnR_60"/>
+</div>
+<nav class="flex flex-col gap-sm w-full px-sm">
+<a class="text-primary dark:text-primary-fixed-dim bg-primary/5 flex flex-col items-center p-sm rounded-lg transition-all duration-200 ease-in-out group" href="#" title="Documents">
+<span class="material-symbols-outlined mb-xs" data-icon="description" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-caption text-caption text-center opacity-0 group-hover:opacity-100 absolute left-20 bg-inverse-surface px-2 py-1 rounded-DEFAULT border border-outline ml-2 whitespace-nowrap z-50 pointer-events-none">Documents</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary dark:hover:text-primary-fixed-dim flex flex-col items-center p-sm rounded-lg transition-all duration-200 ease-in-out group" href="#" title="Collections">
+<span class="material-symbols-outlined mb-xs" data-icon="folder_special">folder_special</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary dark:hover:text-primary-fixed-dim flex flex-col items-center p-sm rounded-lg transition-all duration-200 ease-in-out group mt-auto absolute bottom-4" href="#" title="Settings">
+<span class="material-symbols-outlined mb-xs" data-icon="settings">settings</span>
+</a>
+</nav>
+</aside>
+<!-- 50/50 Split Pane Workspace -->
+<main class="flex-1 flex overflow-hidden w-full">
+<!-- LEFT PANE: Data Table Viewer -->
+<section class="w-1/2 h-full flex flex-col bg-[#0b1220] relative">
+<!-- Viewer Header -->
+<header class="h-14 border-b border-[#1e293b] flex items-center px-md justify-between bg-[#0b1220] z-10 shrink-0">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="table_chart">table_chart</span>
+<h2 class="font-h2 text-h2 text-primary-fixed-dim">research_data.csv</h2>
+</div>
+<div class="flex items-center gap-xs">
+<button class="p-xs text-on-surface-variant hover:text-primary-fixed-dim rounded-DEFAULT transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary-fixed-dim rounded-DEFAULT transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Table Content area -->
+<div class="flex-1 overflow-auto p-md">
+<div class="border border-[#1e293b] rounded-DEFAULT bg-[#131B2E] overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-[#1e293b] bg-[#0b1220]">
+<th class="font-label-mono text-label-mono text-on-surface-variant p-sm border-r border-[#1e293b] w-12 text-center">#</th>
+<th class="font-label-mono text-label-mono text-primary-fixed-dim p-sm border-r border-[#1e293b]">Sample ID</th>
+<th class="font-label-mono text-label-mono text-primary-fixed-dim p-sm border-r border-[#1e293b]">Variance (σ²)</th>
+<th class="font-label-mono text-label-mono text-primary-fixed-dim p-sm">Observation Notes</th>
+</tr>
+</thead>
+<tbody class="font-label-mono text-label-mono text-surface-dim">
+<tr class="border-b border-[#1e293b] hover:bg-[#1e293b] transition-colors">
+<td class="p-sm border-r border-[#1e293b] text-on-surface-variant text-center">10</td>
+<td class="p-sm border-r border-[#1e293b]">SMP-442-A</td>
+<td class="p-sm border-r border-[#1e293b]">0.042</td>
+<td class="p-sm">Initial baseline readings stable.</td>
+</tr>
+<tr class="border-b border-[#1e293b] hover:bg-[#1e293b] transition-colors">
+<td class="p-sm border-r border-[#1e293b] text-on-surface-variant text-center">11</td>
+<td class="p-sm border-r border-[#1e293b]">SMP-442-B</td>
+<td class="p-sm border-r border-[#1e293b]">0.089</td>
+<td class="p-sm">Slight elevation during thermal cycle.</td>
+</tr>
+<!-- Highlighted Row -->
+<tr class="border-b border-[#1e293b] citation-highlight text-on-primary">
+<td class="p-sm border-r border-[#1e293b] text-citation-gold font-bold text-center">12</td>
+<td class="p-sm border-r border-[#1e293b] text-white">SMP-443-X</td>
+<td class="p-sm border-r border-[#1e293b] text-white font-bold">1.450</td>
+<td class="p-sm text-white">Anomalous spike detected post-catalyst injection. Requires re-verification.</td>
+</tr>
+<tr class="border-b border-[#1e293b] hover:bg-[#1e293b] transition-colors">
+<td class="p-sm border-r border-[#1e293b] text-on-surface-variant text-center">13</td>
+<td class="p-sm border-r border-[#1e293b]">SMP-443-Y</td>
+<td class="p-sm border-r border-[#1e293b]">0.035</td>
+<td class="p-sm">Return to nominal parameters.</td>
+</tr>
+<tr class="hover:bg-[#1e293b] transition-colors">
+<td class="p-sm border-r border-[#1e293b] text-on-surface-variant text-center">14</td>
+<td class="p-sm border-r border-[#1e293b]">SMP-444-A</td>
+<td class="p-sm border-r border-[#1e293b]">0.040</td>
+<td class="p-sm">Standard control sample.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- 1px Split Pane Divider -->
+<div class="split-pane-divider h-full shrink-0 relative z-20">
+<!-- Drag handle visual -->
+<div class="absolute top-1/2 -left-[3px] w-[7px] h-8 bg-outline-variant rounded-full flex items-center justify-center cursor-col-resize opacity-50 hover:opacity-100 transition-opacity">
+<div class="w-[1px] h-4 bg-background"></div>
+</div>
+</div>
+<!-- RIGHT PANE: AI Chat Interface -->
+<section class="w-1/2 h-full flex flex-col bg-[#0b1220]">
+<!-- Chat Header -->
+<header class="h-14 border-b border-[#1e293b] flex items-center px-md justify-between shrink-0 bg-[#0b1220]">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="forum">forum</span>
+<h2 class="font-h2 text-h2 text-primary-fixed-dim">Analysis Assistant</h2>
+</div>
+<button class="p-xs text-on-surface-variant hover:text-primary-fixed-dim rounded-DEFAULT transition-colors border border-transparent hover:border-[#1e293b]">
+<span class="material-symbols-outlined text-sm" data-icon="cleaning_services">cleaning_services</span>
+</button>
+</header>
+<!-- Chat History -->
+<div class="flex-1 overflow-auto p-lg flex flex-col gap-lg">
+<!-- User Message -->
+<div class="flex flex-col items-end gap-xs max-w-[85%] self-end">
+<div class="bg-[#1e293b] text-surface-bright p-md rounded-lg rounded-tr-none border border-[#2d3133]">
+<p class="font-body-ui text-body-ui">Can you identify any anomalies in the latest batch of samples?</p>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">You · 10:42 AM</span>
+</div>
+<!-- AI Response -->
+<div class="flex flex-col items-start gap-xs max-w-[90%]">
+<div class="bg-[#131B2E] p-md rounded-lg rounded-tl-none border border-[#1e293b] flex flex-col gap-sm">
+<p class="font-body-ui text-body-ui text-surface-bright">
+                                Yes, reviewing <span class="font-label-mono text-primary-fixed-dim bg-[#1e293b] px-1 rounded">research_data.csv</span>, there is a significant statistical outlier in the recent batch.
+                            </p>
+<div class="border-l-2 border-primary-container pl-sm py-xs my-xs">
+<p class="font-body-excerpt text-body-excerpt text-surface-dim">
+                                    Sample <strong class="text-white">SMP-443-X</strong> exhibits a variance of <strong class="text-white">1.450</strong>, which is over 30 times higher than the surrounding baseline average (~0.045). 
+                                </p>
+</div>
+<p class="font-body-ui text-body-ui text-surface-bright mt-xs">
+                                The observation notes indicate this spike occurred post-catalyst injection and requires immediate re-verification.
+                                <span class="inline-flex items-center gap-1 bg-citation-gold/10 border border-citation-gold text-surface-bright font-label-mono text-label-mono px-2 py-0.5 rounded-sm ml-1 cursor-pointer hover:bg-citation-gold/20 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-citation-gold" data-icon="description">description</span>
+                                    [research_data.csv, row 12]
+                                </span>
+</p>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-caption text-caption text-on-surface-variant">Excerpta AI · 10:43 AM</span>
+<button class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors"><span class="material-symbols-outlined text-[14px]" data-icon="thumb_up">thumb_up</span></button>
+<button class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors"><span class="material-symbols-outlined text-[14px]" data-icon="content_copy">content_copy</span></button>
+</div>
+</div>
+</div>
+<!-- Chat Input area -->
+<div class="p-md border-t border-[#1e293b] bg-[#0b1220] shrink-0">
+<div class="relative flex items-center bg-[#131B2E] border border-[#1e293b] rounded-lg focus-within:border-primary-fixed-dim focus-within:ring-1 focus-within:ring-primary-fixed-dim transition-all">
+<button class="p-sm text-on-surface-variant hover:text-primary-fixed-dim absolute left-2">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</button>
+<input class="w-full bg-transparent border-none text-surface-bright font-body-ui text-body-ui py-sm pl-12 pr-12 focus:ring-0 placeholder:text-on-surface-variant" placeholder="Ask about your documents..." type="text"/>
+<button class="p-sm text-primary-fixed-dim hover:bg-primary-container/20 rounded-DEFAULT absolute right-2 transition-colors">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+<div class="flex gap-2 mt-2">
+<span class="text-xs text-on-surface-variant font-label-mono bg-[#1e293b] px-2 py-1 rounded">Shift + Enter for new line</span>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

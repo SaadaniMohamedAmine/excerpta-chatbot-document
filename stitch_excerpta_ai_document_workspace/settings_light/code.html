@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - Account - Excerpta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@500&amp;family=Source+Serif+4:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#90a8ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#b6c4ff",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#f1bf4f",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-tertiary-container": "#f39461",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary": "#00236f",
+                        "on-error-container": "#93000a",
+                        "secondary": "#795900",
+                        "error-container": "#ffdad6",
+                        "outline": "#757682",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed-variant": "#264191",
+                        "tertiary": "#4b1c00",
+                        "primary-fixed": "#dce1ff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed": "#341100",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-surface-variant": "#444651",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "primary-container": "#1e3a8a",
+                        "secondary-fixed": "#ffdf9f",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdca59",
+                        "on-primary-fixed": "#00164e",
+                        "surface-tint": "#4059aa",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#6e2c00",
+                        "surface-bright": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#735500",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "workspace_gap": "1px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["Geist Mono"],
+                        "h1": ["Geist"],
+                        "body-excerpt": ["\"Source Serif 4\""],
+                        "h1-mobile": ["Geist"],
+                        "caption": ["Geist"],
+                        "body-ui": ["Geist"],
+                        "h2": ["Geist"],
+                        "display-wordmark": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-excerpt": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-wordmark": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex font-body-ui text-body-ui">
+<!-- TopNavBar (Mobile Only) -->
+<nav class="md:hidden fixed top-0 w-full h-16 z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-lg">
+<div class="font-display-wordmark text-display-wordmark text-primary">Excerpta</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="search">search</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span></button>
+</div>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex fixed left-0 h-full w-20 flex-col items-center py-md space-y-md bg-surface-container-low border-r border-outline-variant z-40">
+<div class="mb-xl text-primary font-display-wordmark text-display-wordmark flex-shrink-0" style="writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);">Excerpta</div>
+<a aria-label="Documents" class="w-12 h-12 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+</a>
+<a aria-label="Collections" class="w-12 h-12 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="folder_special">folder_special</span>
+</a>
+<a aria-label="Settings" class="w-12 h-12 flex items-center justify-center rounded-lg text-primary bg-primary/5 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings" data-weight="fill" style="font-variation-settings: 'FILL' 1;">settings</span>
+</a>
+<div class="mt-auto">
+<img alt="User profile" class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A small, professional avatar portrait of an academic researcher with glasses, in a well-lit scholarly environment. The tone is warm and serious, fitting a modern corporate light-mode design system with deep ink blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHBHs837nn4EFUBlrkazAA-SFwwpK5mTDnMAhp-HwdZIAlOksLiy-_Jgbbzd6IGNwNDvuHxRKU9z_npjcQJWQmfOZVjXuLCFbN9V7769zWqLVagTsl7rBcoGm2tOkKBMGOrNXH0xI9n5iH3EgDUtEiYsG9SdelxGctIaoJgJnsr5bFJNMs5f1AV_bEGOA6pVMVzqcdxXVNrGJn8oaSgAmeoge9wbKjO0DusM674NC1AHjIQKexXeLX"/>
+</div>
+</nav>
+<!-- Main Workspace -->
+<div class="flex-1 flex flex-col md:ml-20 mt-16 md:mt-0 h-screen overflow-hidden">
+<!-- Sticky Header Context -->
+<header class="h-16 shrink-0 flex items-center px-xl border-b border-outline-variant bg-surface-bright hidden md:flex z-30">
+<div class="font-h2 text-h2 text-on-surface">Settings</div>
+<div class="ml-auto flex items-center gap-md text-on-surface-variant">
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[20px]">search</span></button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[20px]">dark_mode</span></button>
+</div>
+</header>
+<!-- Split Pane Layout for Settings -->
+<div class="flex-1 flex flex-col md:flex-row overflow-hidden bg-outline-variant gap-workspace_gap">
+<!-- Left Sub-navigation Pane -->
+<aside class="w-full md:w-64 shrink-0 bg-surface-bright flex flex-col overflow-y-auto">
+<div class="p-xl border-b border-outline-variant/30 md:hidden">
+<h1 class="font-h1-mobile text-h1-mobile text-on-surface">Settings</h1>
+</div>
+<nav class="p-md flex flex-row md:flex-col gap-sm overflow-x-auto md:overflow-x-visible no-scrollbar">
+<button class="flex items-center px-md py-sm rounded-lg bg-primary/5 text-primary text-left whitespace-nowrap md:whitespace-normal font-label-mono text-label-mono transition-colors">
+<span class="material-symbols-outlined mr-sm text-[18px]">person</span>
+                        Account
+                    </button>
+<button class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface text-left whitespace-nowrap md:whitespace-normal font-label-mono text-label-mono transition-colors">
+<span class="material-symbols-outlined mr-sm text-[18px]">palette</span>
+                        Appearance
+                    </button>
+<button class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface text-left whitespace-nowrap md:whitespace-normal font-label-mono text-label-mono transition-colors">
+<span class="material-symbols-outlined mr-sm text-[18px]">notifications</span>
+                        Notifications
+                    </button>
+<button class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface text-left whitespace-nowrap md:whitespace-normal font-label-mono text-label-mono transition-colors">
+<span class="material-symbols-outlined mr-sm text-[18px]">security</span>
+                        Security
+                    </button>
+</nav>
+</aside>
+<!-- Main Content Pane -->
+<main class="flex-1 bg-surface-bright overflow-y-auto p-xl md:p-2xl">
+<div class="max-w-3xl mx-auto space-y-2xl pb-2xl">
+<div>
+<h2 class="font-h2 text-h2 text-on-surface mb-xs">Account</h2>
+<p class="font-caption text-caption text-on-surface-variant mb-xl">Manage your personal information and scholarly profile.</p>
+<!-- Profile Info Bento -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mb-xl">
+<div class="p-lg rounded border border-outline-variant bg-surface flex flex-col items-start gap-md">
+<div class="flex items-center gap-md w-full">
+<img alt="Profile Picture" class="w-16 h-16 rounded-full border border-outline-variant object-cover" data-alt="A high-quality close-up portrait of an academic, soft natural lighting, set against a neutral scholarly background with subtle warm gold tones. Minimalist modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJggnW8wLSXaX_XjYo4o3DMh-f6B-uBDrWeOE6y3XAPO5n5Sg6YcUrY_gQnZf5Gdt4rqChimy9QbAZiV0m8-Iu0bYwcE4iq-SxuTEhrj_DS4GxnAVAaBI0iV8NBra-nvGn5NzYGl24S5VfkNXAlWeXHHPIsWn_vFUaTtjCeDjzF_BzMcduAXZ5BDLsbKZuqlE08ouh8UKnsEkHVpBXlQNoeJ-mVopvGHwy0xCrbHFM_YdfLB7Pf4C2"/>
+<div>
+<div class="font-label-mono text-label-mono text-on-surface">Dr. Eleanor Vance</div>
+<div class="font-caption text-caption text-on-surface-variant">Senior Researcher</div>
+</div>
+<button class="ml-auto px-md py-xs rounded border border-outline-variant text-on-surface-variant font-label-mono text-label-mono hover:border-primary hover:text-primary transition-colors">Change</button>
+</div>
+</div>
+<div class="p-lg rounded border border-outline-variant bg-surface space-y-md">
+<div>
+<label class="block font-label-mono text-label-mono text-on-surface-variant mb-xs">Email Address</label>
+<input class="w-full bg-surface-container-lowest border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded px-md py-sm font-body-ui text-body-ui text-on-surface transition-colors" type="email" value="e.vance@university.edu"/>
+</div>
+</div>
+</div>
+<!-- Connected Accounts -->
+<h3 class="font-label-mono text-label-mono text-on-surface-variant mb-md uppercase tracking-wider">Connected Identity</h3>
+<div class="p-md rounded border border-outline-variant bg-surface flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">school</span>
+</div>
+<div>
+<div class="font-body-ui text-body-ui text-on-surface font-semibold">Institutional SSO</div>
+<div class="font-caption text-caption text-on-surface-variant">Connected via University Portal</div>
+</div>
+</div>
+<span class="px-sm py-xs rounded bg-surface-container-high border border-outline-variant font-label-mono text-label-mono text-on-surface-variant text-[11px]">Active</span>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<!-- Appearance Section -->
+<div>
+<h2 class="font-h2 text-h2 text-on-surface mb-xs">Appearance</h2>
+<p class="font-caption text-caption text-on-surface-variant mb-xl">Customize your workspace environment for optimal reading.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-lg max-w-lg">
+<label class="cursor-pointer group">
+<div class="p-md rounded border-2 border-primary bg-surface flex flex-col items-center gap-md transition-all">
+<div class="w-full h-24 rounded bg-surface-container-lowest border border-outline-variant shadow-sm flex flex-col gap-xs p-sm">
+<div class="w-1/2 h-2 bg-outline-variant rounded"></div>
+<div class="w-full h-12 bg-surface-container-low rounded mt-auto"></div>
+</div>
+<div class="flex items-center gap-xs font-label-mono text-label-mono text-primary">
+<span class="material-symbols-outlined text-[16px]">light_mode</span> Light
+                                    </div>
+</div>
+<input checked="" class="sr-only" name="theme" type="radio" value="light"/>
+</label>
+<label class="cursor-pointer group">
+<div class="p-md rounded border border-outline-variant hover:border-primary/50 bg-surface flex flex-col items-center gap-md transition-all opacity-70 hover:opacity-100">
+<div class="w-full h-24 rounded bg-inverse-surface border border-outline shadow-sm flex flex-col gap-xs p-sm">
+<div class="w-1/2 h-2 bg-outline rounded"></div>
+<div class="w-full h-12 bg-surface-variant rounded mt-auto"></div>
+</div>
+<div class="flex items-center gap-xs font-label-mono text-label-mono text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">dark_mode</span> Dark
+                                    </div>
+</div>
+<input class="sr-only" name="theme" type="radio" value="dark"/>
+</label>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<!-- Danger Zone -->
+<div>
+<h2 class="font-h2 text-h2 text-error mb-xs">Danger Zone</h2>
+<p class="font-caption text-caption text-on-surface-variant mb-lg">Irreversible actions regarding your data and account.</p>
+<div class="p-lg rounded border border-error/30 bg-error-container/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-md">
+<div>
+<div class="font-body-ui text-body-ui text-on-surface font-semibold mb-xs">Delete Account</div>
+<div class="font-caption text-caption text-on-surface-variant max-w-md">Permanently remove your account, settings, and all associated document annotations. This action cannot be undone.</div>
+</div>
+<button class="shrink-0 px-md py-sm rounded border border-error text-error font-label-mono text-label-mono hover:bg-error hover:text-on-error transition-colors">
+                                Delete account
+                            </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

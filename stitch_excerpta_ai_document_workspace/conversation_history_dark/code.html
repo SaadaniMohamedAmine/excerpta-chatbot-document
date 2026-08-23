@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta - Conversation History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@500&amp;family=Source+Serif+4:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-container": "#90a8ff",
+                      "on-secondary-fixed": "#261a00",
+                      "surface-container-low": "#f2f4f6",
+                      "surface": "#f7f9fb",
+                      "inverse-primary": "#b6c4ff",
+                      "on-surface": "#191c1e",
+                      "secondary-fixed-dim": "#f1bf4f",
+                      "tertiary-fixed": "#ffdbcb",
+                      "on-tertiary-container": "#f39461",
+                      "on-background": "#191c1e",
+                      "on-tertiary-fixed-variant": "#773205",
+                      "on-error": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "primary": "#00236f",
+                      "on-error-container": "#93000a",
+                      "secondary": "#795900",
+                      "error-container": "#ffdad6",
+                      "outline": "#757682",
+                      "inverse-surface": "#2d3133",
+                      "on-primary-fixed-variant": "#264191",
+                      "tertiary": "#4b1c00",
+                      "primary-fixed": "#dce1ff",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary-fixed": "#341100",
+                      "error": "#ba1a1a",
+                      "primary-fixed-dim": "#b6c4ff",
+                      "on-surface-variant": "#444651",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface-container": "#eceef0",
+                      "primary-container": "#1e3a8a",
+                      "secondary-fixed": "#ffdf9f",
+                      "surface-dim": "#d8dadc",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#fdca59",
+                      "on-primary-fixed": "#00164e",
+                      "surface-tint": "#4059aa",
+                      "tertiary-fixed-dim": "#ffb691",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "surface-container-high": "#e6e8ea",
+                      "tertiary-container": "#6e2c00",
+                      "surface-bright": "#f7f9fb",
+                      "background": "#0b1220",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#735500",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#c5c5d3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "workspace_gap": "1px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "2xl": "48px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "label-mono": [
+                              "Geist Mono"
+                      ],
+                      "h1": [
+                              "Geist"
+                      ],
+                      "body-excerpt": [
+                              "\"Source Serif 4\""
+                      ],
+                      "h1-mobile": [
+                              "Geist"
+                      ],
+                      "caption": [
+                              "Geist"
+                      ],
+                      "body-ui": [
+                              "Geist"
+                      ],
+                      "h2": [
+                              "Geist"
+                      ],
+                      "display-wordmark": [
+                              "\"Source Serif 4\""
+                      ]
+              },
+              "fontSize": {
+                      "label-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "h1": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-excerpt": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-ui": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-wordmark": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for a precise feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1220;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3133;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444651;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface-variant font-body-ui h-screen overflow-hidden flex flex-col antialiased">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline fixed top-0 w-full h-16 z-50 flex justify-between items-center px-lg h-16 w-full transition-colors">
+<div class="flex items-center gap-xl">
+<div class="font-display-wordmark text-display-wordmark text-primary dark:text-primary-fixed-dim">
+                Excerpta
+            </div>
+<div class="hidden md:flex gap-md h-16">
+<a class="text-on-surface-variant dark:text-surface-variant flex flex-col justify-center hover:text-primary dark:hover:text-primary-fixed-dim transition-colors h-full px-xs" href="#">Features</a>
+<a class="text-on-surface-variant dark:text-surface-variant flex flex-col justify-center hover:text-primary dark:hover:text-primary-fixed-dim transition-colors h-full px-xs" href="#">How it works</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button aria-label="Toggle Theme" class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors p-xs">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+<button class="font-label-mono text-label-mono text-primary dark:text-primary-fixed-dim border border-primary dark:border-primary-fixed-dim px-md py-sm rounded transition-all duration-200 active:scale-95 hover:bg-primary/5">
+                Sign in
+            </button>
+<button class="font-label-mono text-label-mono bg-primary dark:bg-primary-fixed-dim text-on-primary dark:text-on-primary-fixed px-md py-sm rounded transition-all duration-200 active:scale-95 hover:bg-primary-container dark:hover:bg-primary">
+                Try Excerpta
+            </button>
+</div>
+</nav>
+<div class="flex flex-1 pt-16">
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low dark:bg-inverse-surface border-r border-outline-variant dark:border-outline fixed left-0 h-full w-20 flex flex-col flex flex-col items-center py-md space-y-md z-40 transition-colors">
+<button aria-label="User profile" class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-variant dark:bg-surface-container mb-md">
+<span class="font-label-mono text-label-mono text-on-surface dark:text-surface-bright">U</span>
+</button>
+<nav class="flex flex-col gap-sm w-full px-sm">
+<a class="flex flex-col items-center justify-center p-sm rounded text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200 ease-in-out group" href="#" title="Documents">
+<span class="material-symbols-outlined mb-xs group-hover:icon-fill" data-icon="description">description</span>
+<span class="font-caption text-[10px] hidden group-hover:block">Docs</span>
+</a>
+<a class="flex flex-col items-center justify-center p-sm rounded text-primary dark:text-primary-fixed-dim bg-primary/5 transition-all duration-200 ease-in-out" href="#" title="Collections">
+<span class="material-symbols-outlined icon-fill" data-icon="folder_special">folder_special</span>
+<span class="font-caption text-[10px]">History</span>
+</a>
+<a class="flex flex-col items-center justify-center p-sm rounded text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200 ease-in-out group" href="#" title="Settings">
+<span class="material-symbols-outlined mb-xs group-hover:icon-fill" data-icon="settings">settings</span>
+<span class="font-caption text-[10px] hidden group-hover:block">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-20 bg-background flex flex-col h-full overflow-hidden">
+<!-- Workspace Header -->
+<header class="px-xl py-lg border-b border-inverse-surface/50 flex justify-between items-end flex-shrink-0">
+<div>
+<h1 class="font-h1 text-h1 text-surface-bright mb-xs">Conversation History</h1>
+<p class="font-body-ui text-body-ui text-surface-variant">Review and continue past synthesis sessions.</p>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="bg-inverse-surface/30 border border-outline/30 rounded pl-xl pr-md py-sm font-label-mono text-label-mono text-surface-bright focus:outline-none focus:border-primary-fixed-dim transition-colors w-64 placeholder-outline/50" placeholder="Search conversations..." type="text"/>
+</div>
+</header>
+<!-- Conversation List (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-xl">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg max-w-7xl mx-auto">
+<!-- Chat Card 1 -->
+<div class="bg-inverse-surface/40 border border-outline/20 rounded-lg p-md hover:border-primary-fixed-dim/50 transition-colors cursor-pointer flex flex-col h-64 group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-md relative z-10">
+<h2 class="font-h2 text-h2 text-surface-bright line-clamp-2 pr-md">Analysis of Quantum Entanglement Theories in Recent Literature</h2>
+<span class="font-label-mono text-label-mono text-outline whitespace-nowrap text-[10px]">Today, 14:30</span>
+</div>
+<div class="flex-1 relative z-10 mb-md">
+<p class="font-body-excerpt text-body-excerpt text-surface-variant/80 line-clamp-3 text-sm leading-relaxed">
+                                The synthesis suggests a correlation between the observed anomalies in <span class="bg-secondary-fixed-dim/20 border border-secondary-fixed-dim/30 px-1 rounded text-secondary-fixed">Spooky Action at a Distance (Einstein, 1935)</span> and recent findings in topological insulators...
+                             </p>
+</div>
+<div class="mt-auto border-t border-outline/10 pt-sm flex items-center justify-between relative z-10">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded bg-inverse-surface border border-outline/30 flex items-center justify-center" title="Document 1">
+<span class="material-symbols-outlined text-[14px] text-primary-fixed-dim">article</span>
+</div>
+<div class="w-6 h-6 rounded bg-inverse-surface border border-outline/30 flex items-center justify-center" title="Document 2">
+<span class="material-symbols-outlined text-[14px] text-primary-fixed-dim">picture_as_pdf</span>
+</div>
+<div class="w-6 h-6 rounded bg-inverse-surface border border-outline/30 flex items-center justify-center text-[10px] font-label-mono text-surface-variant">
+                                    +2
+                                </div>
+</div>
+<span class="font-label-mono text-[11px] text-primary-fixed-dim group-hover:underline">Continue Chat →</span>
+</div>
+</div>
+<!-- Chat Card 2 -->
+<div class="bg-inverse-surface/40 border border-outline/20 rounded-lg p-md hover:border-primary-fixed-dim/50 transition-colors cursor-pointer flex flex-col h-64 group relative overflow-hidden">
+<div class="flex justify-between items-start mb-md relative z-10">
+<h2 class="font-h2 text-h2 text-surface-bright line-clamp-2 pr-md">Case Precedent Review: Smith v. CyberDyne</h2>
+<span class="font-label-mono text-label-mono text-outline whitespace-nowrap text-[10px]">Yesterday</span>
+</div>
+<div class="flex-1 relative z-10 mb-md">
+<p class="font-body-excerpt text-body-excerpt text-surface-variant/80 line-clamp-3 text-sm leading-relaxed">
+                                Regarding liability in automated systems, the precedent set in <span class="bg-secondary-fixed-dim/20 border border-secondary-fixed-dim/30 px-1 rounded text-secondary-fixed">Johnson v. AutoCorp (2018)</span> heavily influences the interpretation of strict liability here...
+                             </p>
+</div>
+<div class="mt-auto border-t border-outline/10 pt-sm flex items-center justify-between relative z-10">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded bg-inverse-surface border border-outline/30 flex items-center justify-center" title="Brief">
+<span class="material-symbols-outlined text-[14px] text-primary-fixed-dim">gavel</span>
+</div>
+</div>
+<span class="font-label-mono text-[11px] text-primary-fixed-dim group-hover:underline">Continue Chat →</span>
+</div>
+</div>
+<!-- Chat Card 3 -->
+<div class="bg-inverse-surface/40 border border-outline/20 rounded-lg p-md hover:border-primary-fixed-dim/50 transition-colors cursor-pointer flex flex-col h-64 group relative overflow-hidden">
+<div class="flex justify-between items-start mb-md relative z-10">
+<h2 class="font-h2 text-h2 text-surface-bright line-clamp-2 pr-md">Market Research: Q3 Renewable Energy Trends</h2>
+<span class="font-label-mono text-label-mono text-outline whitespace-nowrap text-[10px]">Oct 12</span>
+</div>
+<div class="flex-1 relative z-10 mb-md">
+<p class="font-body-excerpt text-body-excerpt text-surface-variant/80 line-clamp-3 text-sm leading-relaxed">
+                                Solar adoption rates in the EU have increased by 14% year-over-year, driven primarily by subsidy programs in Germany and Spain, as detailed in the <span class="bg-secondary-fixed-dim/20 border border-secondary-fixed-dim/30 px-1 rounded text-secondary-fixed">Global Energy Report (Q3)</span>...
+                             </p>
+</div>
+<div class="mt-auto border-t border-outline/10 pt-sm flex items-center justify-between relative z-10">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded bg-inverse-surface border border-outline/30 flex items-center justify-center" title="Report">
+<span class="material-symbols-outlined text-[14px] text-primary-fixed-dim">bar_chart</span>
+</div>
+<div class="w-6 h-6 rounded bg-inverse-surface border border-outline/30 flex items-center justify-center" title="Dataset">
+<span class="material-symbols-outlined text-[14px] text-primary-fixed-dim">dataset</span>
+</div>
+</div>
+<span class="font-label-mono text-[11px] text-primary-fixed-dim group-hover:underline">Continue Chat →</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

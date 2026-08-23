@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - My Documents</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f7f9fb",
+                        "secondary-fixed-dim": "#f1bf4f",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c5c5d3",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-surface-variant": "#444651",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "primary": "#00236f",
+                        "surface-tint": "#4059aa",
+                        "tertiary-fixed": "#ffdbcb",
+                        "tertiary-container": "#6e2c00",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "secondary-fixed": "#ffdf9f",
+                        "on-background": "#191c1e",
+                        "error": "#ba1a1a",
+                        "surface-container": "#eceef0",
+                        "primary-container": "#1e3a8a",
+                        "on-tertiary-fixed": "#341100",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "inverse-surface": "#2d3133",
+                        "surface": "#f7f9fb",
+                        "primary-fixed": "#dce1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-dim": "#d8dadc",
+                        "on-primary": "#ffffff",
+                        "secondary": "#795900",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-bright": "#f7f9fb",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary": "#4b1c00",
+                        "on-primary-fixed": "#00164e",
+                        "outline": "#757682",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdca59",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#735500",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary-fixed-variant": "#264191",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-container": "#f39461",
+                        "inverse-primary": "#b6c4ff",
+                        "on-primary-container": "#90a8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "workspace_gap": "1px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "display-wordmark": ["\"Source Serif 4\""],
+                        "h1-mobile": ["Geist"],
+                        "h1": ["Geist"],
+                        "body-excerpt": ["\"Source Serif 4\""],
+                        "label-mono": ["Geist Mono"],
+                        "body-ui": ["Geist"],
+                        "caption": ["Geist"],
+                        "h2": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-wordmark": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "h1-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-excerpt": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "h2": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-ui min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-low border-r border-outline-variant fixed left-0 h-full w-20 flex flex-col items-center py-md space-y-md z-40">
+<!-- Logo -->
+<div class="mb-lg">
+<span class="font-display-wordmark text-display-wordmark text-primary">E</span>
+</div>
+<!-- Nav Items -->
+<div class="flex flex-col space-y-sm w-full px-xs">
+<!-- Active: Documents -->
+<button class="w-full aspect-square flex flex-col items-center justify-center rounded text-primary bg-primary/5 transition-all duration-200 ease-in-out group">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-mono text-label-mono mt-xs opacity-0 group-hover:opacity-100 absolute -bottom-6 bg-surface-container-high px-2 py-1 rounded shadow-sm transition-opacity pointer-events-none whitespace-nowrap z-50">Documents</span>
+</button>
+<!-- Inactive: Collections -->
+<button class="w-full aspect-square flex flex-col items-center justify-center rounded text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out group">
+<span class="material-symbols-outlined">folder_special</span>
+<span class="font-label-mono text-label-mono mt-xs opacity-0 group-hover:opacity-100 absolute -bottom-6 bg-surface-container-high px-2 py-1 rounded shadow-sm transition-opacity pointer-events-none whitespace-nowrap z-50">Collections</span>
+</button>
+<!-- Inactive: Settings -->
+<button class="w-full aspect-square flex flex-col items-center justify-center rounded text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out group">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-mono text-label-mono mt-xs opacity-0 group-hover:opacity-100 absolute -bottom-6 bg-surface-container-high px-2 py-1 rounded shadow-sm transition-opacity pointer-events-none whitespace-nowrap z-50">Settings</span>
+</button>
+</div>
+<div class="mt-auto">
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant hover:border-primary transition-colors">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A small, professional portrait of a person against a solid warm light grey background. They are wearing a navy blazer. The lighting is soft and flattering, suitable for a corporate avatar in a modern minimalist UI design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJDCC9QGkGt6bHLzpEiOlD25fA1_trLzNnZTekevbFZY3PITPoLNFDLIXW5PptheffAIe5t5Y7Qi0lftJpAC34iOt9yxr7Fq7zLmSeiUS70P_jIYqSWtaV2H2QyG-fFRWkjJzOIS-zofw6NAmfqDM_Q-fKIfC0AsScvstrOwE7CHSBaSOsc3b4ZcOcHW7Z_sz9JXBohJl6Ad-nokOk44GZ4hmwLzBNGBsshsnz-6VJD0MtEPqBMzLF"/>
+</button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-20 flex-1 flex flex-col min-h-screen">
+<!-- TopAppBar Header -->
+<header class="h-16 border-b border-outline-variant bg-surface sticky top-0 z-30 flex items-center justify-between px-lg">
+<h1 class="font-h1 text-h1 text-on-surface m-0 tracking-tight">My Documents</h1>
+<div class="flex items-center space-x-md">
+<!-- Search Input -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-sm pointer-events-none">search</span>
+<input class="pl-xl pr-sm py-sm rounded bg-surface-container border border-outline-variant text-body-ui font-body-ui focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all w-64" placeholder="Search documents..." type="text"/>
+</div>
+<!-- Upload Button -->
+<button class="bg-primary text-on-primary px-md py-sm rounded font-body-ui text-body-ui font-medium flex items-center space-x-xs hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">upload_file</span>
+<span>Upload document</span>
+</button>
+</div>
+</header>
+<!-- Document Grid Canvas -->
+<div class="p-lg flex-1 bg-background overflow-y-auto">
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col hover:border-primary cursor-pointer transition-colors group">
+<div class="flex items-start space-x-sm mb-md">
+<div class="p-sm bg-error-container text-on-error-container rounded flex-shrink-0">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<h2 class="font-h2 text-h2 text-on-surface truncate group-hover:text-primary transition-colors">Q3_Financial_Report.pdf</h2>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">Uploaded Oct 12, 2023</p>
+</div>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-sm flex items-center justify-between">
+<span class="inline-flex items-center space-x-1 px-2 py-1 rounded bg-secondary-container/20 text-on-secondary-container font-label-mono text-label-mono border border-secondary-container/30">
+<span class="material-symbols-outlined text-[14px]">forum</span>
+<span>4 conversations</span>
+</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col hover:border-primary cursor-pointer transition-colors group">
+<div class="flex items-start space-x-sm mb-md">
+<div class="p-sm bg-primary-container text-on-primary-container rounded flex-shrink-0">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<h2 class="font-h2 text-h2 text-on-surface truncate group-hover:text-primary transition-colors">Employment_Contract.docx</h2>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">Uploaded Oct 10, 2023</p>
+</div>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-sm flex items-center justify-between">
+<span class="inline-flex items-center space-x-1 px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-mono text-label-mono border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]">forum</span>
+<span>1 conversation</span>
+</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col hover:border-primary cursor-pointer transition-colors group">
+<div class="flex items-start space-x-sm mb-md">
+<div class="p-sm bg-tertiary-container text-on-tertiary-container rounded flex-shrink-0">
+<span class="material-symbols-outlined">table_view</span>
+</div>
+<div class="flex-1 min-w-0">
+<h2 class="font-h2 text-h2 text-on-surface truncate group-hover:text-primary transition-colors">research_data.csv</h2>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">Uploaded Sep 28, 2023</p>
+</div>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-sm flex items-center justify-between">
+<span class="inline-flex items-center space-x-1 px-2 py-1 rounded bg-secondary-container/20 text-on-secondary-container font-label-mono text-label-mono border border-secondary-container/30">
+<span class="material-symbols-outlined text-[14px]">forum</span>
+<span>12 conversations</span>
+</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col hover:border-primary cursor-pointer transition-colors group">
+<div class="flex items-start space-x-sm mb-md">
+<div class="p-sm bg-surface-variant text-on-surface-variant rounded flex-shrink-0">
+<span class="material-symbols-outlined">code</span>
+</div>
+<div class="flex-1 min-w-0">
+<h2 class="font-h2 text-h2 text-on-surface truncate group-hover:text-primary transition-colors">auth_middleware.ts</h2>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">Uploaded Sep 15, 2023</p>
+</div>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-sm flex items-center justify-between">
+<span class="inline-flex items-center space-x-1 px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-mono text-label-mono border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]">forum</span>
+<span>0 conversations</span>
+</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col hover:border-primary cursor-pointer transition-colors group">
+<div class="flex items-start space-x-sm mb-md">
+<div class="p-sm bg-error-container text-on-error-container rounded flex-shrink-0">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<h2 class="font-h2 text-h2 text-on-surface truncate group-hover:text-primary transition-colors">Project_Apollo_Brief.pdf</h2>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">Uploaded Sep 02, 2023</p>
+</div>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-sm flex items-center justify-between">
+<span class="inline-flex items-center space-x-1 px-2 py-1 rounded bg-secondary-container/20 text-on-secondary-container font-label-mono text-label-mono border border-secondary-container/30">
+<span class="material-symbols-outlined text-[14px]">forum</span>
+<span>8 conversations</span>
+</span>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col hover:border-primary cursor-pointer transition-colors group">
+<div class="flex items-start space-x-sm mb-md">
+<div class="p-sm bg-primary-container text-on-primary-container rounded flex-shrink-0">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<h2 class="font-h2 text-h2 text-on-surface truncate group-hover:text-primary transition-colors">Meeting_Notes_Aug.docx</h2>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">Uploaded Aug 30, 2023</p>
+</div>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-sm flex items-center justify-between">
+<span class="inline-flex items-center space-x-1 px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-mono text-label-mono border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]">forum</span>
+<span>2 conversations</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

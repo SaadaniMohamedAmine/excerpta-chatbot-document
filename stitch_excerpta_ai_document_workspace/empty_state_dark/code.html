@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta - Upload Document</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Geist:wght@100..900&amp;family=Geist+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-container": "#90a8ff",
+                      "on-secondary-fixed": "#261a00",
+                      "surface-container-low": "#f2f4f6",
+                      "surface": "#f7f9fb",
+                      "inverse-primary": "#b6c4ff",
+                      "on-surface": "#191c1e",
+                      "secondary-fixed-dim": "#f1bf4f",
+                      "tertiary-fixed": "#ffdbcb",
+                      "on-tertiary-container": "#f39461",
+                      "on-background": "#191c1e",
+                      "on-tertiary-fixed-variant": "#773205",
+                      "on-error": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "primary": "#00236f",
+                      "on-error-container": "#93000a",
+                      "secondary": "#795900",
+                      "error-container": "#ffdad6",
+                      "outline": "#757682",
+                      "inverse-surface": "#131b2e",
+                      "on-primary-fixed-variant": "#264191",
+                      "tertiary": "#4b1c00",
+                      "primary-fixed": "#dce1ff",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary-fixed": "#341100",
+                      "error": "#ba1a1a",
+                      "primary-fixed-dim": "#b6c4ff",
+                      "on-surface-variant": "#444651",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface-container": "#eceef0",
+                      "primary-container": "#1e3a8a",
+                      "secondary-fixed": "#ffdf9f",
+                      "surface-dim": "#d8dadc",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#fdca59",
+                      "on-primary-fixed": "#00164e",
+                      "surface-tint": "#4059aa",
+                      "tertiary-fixed-dim": "#ffb691",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "surface-container-high": "#e6e8ea",
+                      "tertiary-container": "#6e2c00",
+                      "surface-bright": "#f7f9fb",
+                      "background": "#0f1524",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#735500",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#2d3856"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "workspace_gap": "1px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "2xl": "48px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "label-mono": ["Geist Mono"],
+                      "h1": ["Geist"],
+                      "body-excerpt": ["\"Source Serif 4\""],
+                      "h1-mobile": ["Geist"],
+                      "caption": ["Geist"],
+                      "body-ui": ["Geist"],
+                      "h2": ["Geist"],
+                      "display-wordmark": ["\"Source Serif 4\""]
+              },
+              "fontSize": {
+                      "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-excerpt": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "h1-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                      "body-ui": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "h2": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-wordmark": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar for dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3856;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4059aa;
+        }
+
+        .dropzone-dash {
+            background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%232D3856FF' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+            border-radius: 4px;
+        }
+        .dropzone-dash:hover {
+            background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%23B6C4FFFF' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+        }
+    </style>
+</head>
+<body class="bg-background text-inverse-on-surface h-screen flex overflow-hidden font-body-ui text-body-ui antialiased">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex fixed left-0 h-full w-20 flex-col items-center py-md space-y-md bg-inverse-surface border-r border-outline-variant z-50 transition-all duration-200 ease-in-out">
+<!-- Logo Area -->
+<div class="mb-xl flex flex-col items-center justify-center pt-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim text-[28px]" data-icon="book_4">book_4</span>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col space-y-sm w-full px-sm">
+<!-- Active Tab: Documents -->
+<button class="w-full flex flex-col items-center justify-center p-sm rounded text-primary-fixed-dim bg-primary/10 hover:bg-primary/20 transition-all duration-200 ease-in-out group" title="Documents">
+<span class="material-symbols-outlined filled mb-xs group-active:scale-95 transition-transform" data-icon="description">description</span>
+<span class="font-label-mono text-[10px] uppercase tracking-wider opacity-90">Docs</span>
+</button>
+<button class="w-full flex flex-col items-center justify-center p-sm rounded text-surface-variant hover:bg-primary/5 hover:text-primary-fixed-dim transition-all duration-200 ease-in-out group" title="Collections">
+<span class="material-symbols-outlined mb-xs group-active:scale-95 transition-transform" data-icon="folder_special">folder_special</span>
+<span class="font-label-mono text-[10px] uppercase tracking-wider opacity-70 group-hover:opacity-100 transition-opacity">Lib</span>
+</button>
+<button class="w-full flex flex-col items-center justify-center p-sm rounded text-surface-variant hover:bg-primary/5 hover:text-primary-fixed-dim transition-all duration-200 ease-in-out group" title="Settings">
+<span class="material-symbols-outlined mb-xs group-active:scale-95 transition-transform" data-icon="settings">settings</span>
+<span class="font-label-mono text-[10px] uppercase tracking-wider opacity-70 group-hover:opacity-100 transition-opacity">Pref</span>
+</button>
+</div>
+<!-- User Profile Avatar -->
+<div class="mt-auto pb-sm">
+<button class="w-10 h-10 rounded-full bg-outline-variant overflow-hidden border border-outline-variant hover:border-primary-fixed-dim transition-colors relative group">
+<img class="w-full h-full object-cover" data-alt="A minimalist digital avatar profile picture featuring a stylized, abstract geometric composition in deep ink blues and warm gold accents against a dark slate background. The lighting is soft and ambient, creating a professional, scholarly, and modern aesthetic. High quality, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_cNjFkTO_SMF_aVyUwAn1x7edF6-SgFvyn6kps43pigLIpsynGhuZ0Etldw9spRLDZdKNOrL9yhU1puG-rVt8r2NmyIHpocFO1CSh2Z44bkfz4HFtpq9HK-BtpwkF6FY6ifFW_wAACbiEEj7pRUdnqMrpqDPbJEnUCmaBO0Jp3dAf5YSLsMCuAqSg1AQ-E46atUDIKnGK3o1aHuXWwCHUW7vVlAgsfBVg4HaJ4MLYRocAjF6XfUK0"/>
+</button>
+</div>
+</nav>
+<!-- Main Workspace Area -->
+<main class="flex-1 ml-0 md:ml-20 h-full flex flex-col relative bg-background">
+<!-- Top App Bar (Sticky Nav for Mobile/General Context) -->
+<header class="h-16 w-full flex justify-between items-center px-lg border-b border-outline-variant bg-inverse-surface z-40">
+<div class="flex items-center">
+<!-- Mobile Menu Button -->
+<button class="md:hidden mr-md text-surface-variant hover:text-primary-fixed-dim">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="font-display-wordmark text-display-wordmark text-primary-fixed-dim">
+                    Excerpta
+                </div>
+</div>
+<div class="flex items-center space-x-md">
+<!-- Theme Toggle (Fixed to Dark for this prompt, but included structurally) -->
+<button class="text-surface-variant hover:text-primary-fixed-dim transition-colors" title="Toggle Theme">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+</div>
+</header>
+<!-- Centered Empty State Content -->
+<div class="flex-1 flex flex-col items-center justify-center p-lg md:p-2xl relative overflow-y-auto">
+<!-- Atmospheric background element (subtle) -->
+<div class="absolute inset-0 pointer-events-none opacity-10" style="background: radial-gradient(circle at center, #1e3a8a 0%, transparent 60%);"></div>
+<div class="w-full max-w-2xl text-center space-y-xl z-10">
+<!-- Header Text -->
+<div class="space-y-sm mb-lg">
+<h1 class="font-h1 text-h1 text-inverse-on-surface">Workspace</h1>
+<p class="font-body-ui text-body-ui text-surface-variant">Your scholarly library is currently empty.</p>
+</div>
+<!-- Dropzone -->
+<div class="w-full dropzone-dash bg-inverse-surface/50 backdrop-blur-sm p-xl flex flex-col items-center justify-center min-h-[320px] transition-all duration-300 group cursor-pointer" id="dropzone">
+<!-- Bold Duotone Icon -->
+<div class="relative w-24 h-24 mb-md flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500 ease-out"></div>
+<span class="material-symbols-outlined text-[64px] text-primary-fixed-dim opacity-90 group-hover:text-inverse-primary transition-colors duration-300 relative z-10" data-icon="upload_file" style="font-variation-settings: 'FILL' 1, 'wght' 200;">upload_file</span>
+<!-- Subtle secondary shape for 'duotone' feel -->
+<span class="material-symbols-outlined text-[64px] text-surface-tint opacity-30 absolute top-1 left-1 z-0" data-icon="upload_file" style="font-variation-settings: 'FILL' 1, 'wght' 400;">upload_file</span>
+</div>
+<h2 class="font-h2 text-h2 text-inverse-on-surface mb-xs">Upload a document to begin.</h2>
+<p class="font-body-ui text-body-ui text-surface-variant mb-xl max-w-md text-center">Drag and drop your PDF, EPUB, or TXT files here to start extracting and synthesizing knowledge.</p>
+<!-- Browse Files Button -->
+<button class="bg-primary text-on-primary font-label-mono text-label-mono px-lg py-sm rounded border border-primary hover:bg-primary-container transition-colors active:scale-95 duration-200">
+                        Browse files
+                    </button>
+<!-- Supported Formats Row -->
+<div class="mt-xl flex items-center space-x-md text-surface-variant opacity-60">
+<div class="flex items-center space-x-xs" title="PDF Supported">
+<span class="material-symbols-outlined text-[18px]" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span class="font-label-mono text-[11px] uppercase">PDF</span>
+</div>
+<div class="w-1 h-1 rounded-full bg-surface-variant"></div>
+<div class="flex items-center space-x-xs" title="EPUB Supported">
+<span class="material-symbols-outlined text-[18px]" data-icon="menu_book">menu_book</span>
+<span class="font-label-mono text-[11px] uppercase">EPUB</span>
+</div>
+<div class="w-1 h-1 rounded-full bg-surface-variant"></div>
+<div class="flex items-center space-x-xs" title="TXT Supported">
+<span class="material-symbols-outlined text-[18px]" data-icon="article">article</span>
+<span class="font-label-mono text-[11px] uppercase">TXT</span>
+</div>
+</div>
+</div>
+<!-- Footer Hint -->
+<div class="mt-lg pt-lg border-t border-outline-variant/30 text-center">
+<p class="font-caption text-caption text-surface-variant flex items-center justify-center space-x-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="lock">lock</span>
+<span>All uploads are processed securely and stored locally in your workspace.</span>
+</p>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple drag and drop visual feedback
+        const dropzone = document.getElementById('dropzone');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            dropzone.classList.add('bg-primary/5');
+            // Change dash border color on drag over by manipulating the background image style temporarily if needed, 
+            // but the hover state usually covers interaction. Adding a distinct class for drag is better.
+            dropzone.style.backgroundImage = "url(\"data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%23B6C4FFFF' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e\")";
+        }
+
+        function unhighlight(e) {
+            dropzone.classList.remove('bg-primary/5');
+            dropzone.style.backgroundImage = ""; // reset to CSS defined class
+        }
+    </script>
+</body></html>

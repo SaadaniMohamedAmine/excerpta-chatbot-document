@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Multi-Document Collection View - Excerpta Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#90a8ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#b6c4ff",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#f1bf4f",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-tertiary-container": "#f39461",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary": "#00236f",
+                        "on-error-container": "#93000a",
+                        "secondary": "#795900",
+                        "error-container": "#ffdad6",
+                        "outline": "#757682",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed-variant": "#264191",
+                        "tertiary": "#4b1c00",
+                        "primary-fixed": "#dce1ff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed": "#341100",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-surface-variant": "#444651",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "primary-container": "#1e3a8a",
+                        "secondary-fixed": "#ffdf9f",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdca59",
+                        "on-primary-fixed": "#00164e",
+                        "surface-tint": "#4059aa",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#6e2c00",
+                        "surface-bright": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#735500",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d3",
+                        "citation-gold": "#E8C468"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "workspace_gap": "1px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["Geist Mono"],
+                        "h1": ["Geist"],
+                        "body-excerpt": ["\"Source Serif 4\""],
+                        "h1-mobile": ["Geist"],
+                        "caption": ["Geist"],
+                        "body-ui": ["Geist"],
+                        "h2": ["Geist"],
+                        "display-wordmark": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-excerpt": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-wordmark": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #131B2E; /* Dark background */
+            color: #f7f9fb;
+        }
+        /* Custom scrollbar for dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131B2E; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3133; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444651; 
+        }
+    </style>
+</head>
+<body class="h-screen w-full flex overflow-hidden font-body-ui text-body-ui bg-[#131B2E] text-surface">
+<!-- SideNavBar (Shared Component) -->
+<nav class="fixed left-0 h-full w-20 flex flex-col bg-surface-container-low dark:bg-inverse-surface text-primary dark:text-primary-fixed-dim font-label-mono text-label-mono border-r border-outline-variant dark:border-outline flex flex-col items-center py-md space-y-md z-50">
+<div class="mb-xl mt-md">
+<!-- Brand Logo placeholder, typically in top nav, but keeping spacing -->
+<span class="font-display-wordmark text-display-wordmark text-primary dark:text-primary-fixed-dim">E</span>
+</div>
+<!-- Navigation Tabs -->
+<a aria-label="Documents" class="text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out p-sm rounded-lg flex flex-col items-center justify-center w-14 h-14" href="#">
+<span class="material-symbols-outlined mb-xs" data-icon="description">description</span>
+<span class="text-[10px]">Docs</span>
+</a>
+<a aria-label="Collections" class="text-primary dark:text-primary-fixed-dim bg-primary/5 hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out p-sm rounded-lg flex flex-col items-center justify-center w-14 h-14" href="#">
+<span class="material-symbols-outlined mb-xs" data-icon="folder_special">folder_special</span>
+<span class="text-[10px]">Colls</span>
+</a>
+<a aria-label="Settings" class="text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out p-sm rounded-lg flex flex-col items-center justify-center w-14 h-14 mt-auto" href="#">
+<span class="material-symbols-outlined mb-xs" data-icon="settings">settings</span>
+<span class="text-[10px]">Set</span>
+</a>
+<!-- User Avatar -->
+<div class="mt-auto pb-md pt-lg border-t border-outline-variant dark:border-outline w-full flex justify-center">
+<img alt="User profile" class="w-10 h-10 rounded-full object-cover border border-outline-variant dark:border-outline" data-alt="A small, circular avatar image of a professional user in a dark, minimalist setting. High contrast, professional lighting, subtle background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApyGpW7x9F-02byQ1bD8hW9dUDPKzcTi6nQIX8UQu67trM4A-upJt66CPsT8Wj7SZzeHt-zsux8LLm4iEV9H8Dd1yowR6S7riosk25EYDFTtZgQ-Sf4r5J_uAm_8Kp08SKzHwzkpRUkDP7OhNg7DrQ9LCKqOgsgyW56JCJb6vJtQdzFflqDmDMLQrJskXQYxgWLJDSyp8ek6B8xUygNYFV31GZeuJkxWzqsgyuatEiDuI6n4qjFItD"/>
+</div>
+</nav>
+<!-- Main Workspace (Split-Pane) -->
+<main class="ml-20 flex-1 flex h-full">
+<!-- LEFT PANE: Document Collection (Compact List) -->
+<section class="w-1/3 h-full flex flex-col border-r border-[#1E293B] bg-[#131B2E]">
+<!-- Collection Header -->
+<header class="h-16 flex items-center px-lg border-b border-[#1E293B] bg-[#131B2E] shrink-0">
+<div class="flex-1">
+<h2 class="font-h2 text-h2 text-surface">Constitutional Law Synthesis</h2>
+<p class="font-caption text-caption text-surface-variant mt-1">4 Documents • Updated 2 hrs ago</p>
+</div>
+<button class="text-surface-variant hover:text-surface transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<!-- Document List -->
+<div class="flex-1 overflow-y-auto p-md space-y-sm">
+<!-- Doc 1 (Active) -->
+<div class="p-md rounded border border-primary bg-primary/5 cursor-pointer flex gap-md items-start group">
+<div class="w-10 h-12 bg-inverse-surface rounded flex items-center justify-center shrink-0 border border-[#1E293B]">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-label-mono text-label-mono text-surface truncate group-hover:text-primary-fixed-dim transition-colors">Marbury v. Madison Analysis.pdf</h3>
+<p class="font-caption text-caption text-surface-variant mt-xs line-clamp-2">Overview of judicial review principles established in 1803.</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-label-mono text-[10px] bg-inverse-surface text-surface-variant border border-[#1E293B]">PDF</span>
+<span class="font-caption text-[10px] text-surface-variant">Viewed 10m ago</span>
+</div>
+</div>
+</div>
+<!-- Doc 2 -->
+<div class="p-md rounded border border-[#1E293B] bg-inverse-surface/50 hover:border-outline cursor-pointer flex gap-md items-start group transition-colors">
+<div class="w-10 h-12 bg-[#131B2E] rounded flex items-center justify-center shrink-0 border border-[#1E293B]">
+<span class="material-symbols-outlined text-surface-variant">article</span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-label-mono text-label-mono text-surface truncate group-hover:text-surface-bright transition-colors">Federalist No. 78 Excerpts.docx</h3>
+<p class="font-caption text-caption text-surface-variant mt-xs line-clamp-2">Hamilton's defense of the judicial branch.</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-label-mono text-[10px] bg-[#131B2E] text-surface-variant border border-[#1E293B]">DOCX</span>
+<span class="font-caption text-[10px] text-surface-variant">Viewed yesterday</span>
+</div>
+</div>
+</div>
+<!-- Doc 3 -->
+<div class="p-md rounded border border-[#1E293B] bg-inverse-surface/50 hover:border-outline cursor-pointer flex gap-md items-start group transition-colors">
+<div class="w-10 h-12 bg-[#131B2E] rounded flex items-center justify-center shrink-0 border border-[#1E293B]">
+<span class="material-symbols-outlined text-surface-variant">library_books</span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-label-mono text-label-mono text-surface truncate group-hover:text-surface-bright transition-colors">Article III Text.txt</h3>
+<p class="font-caption text-caption text-surface-variant mt-xs line-clamp-2">Raw text of the US Constitution, Article III.</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-label-mono text-[10px] bg-[#131B2E] text-surface-variant border border-[#1E293B]">TXT</span>
+<span class="font-caption text-[10px] text-surface-variant">Viewed 3d ago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Collection Actions -->
+<div class="p-md border-t border-[#1E293B] bg-[#131B2E]">
+<button class="w-full py-2 px-4 rounded border border-[#1E293B] hover:border-outline text-surface-variant hover:text-surface flex items-center justify-center gap-2 transition-colors font-label-mono text-label-mono">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Add Document
+                </button>
+</div>
+</section>
+<!-- RIGHT PANE: Chat & Synthesis Interface -->
+<section class="flex-1 h-full flex flex-col bg-inverse-surface">
+<!-- Chat Header -->
+<header class="h-16 flex items-center justify-between px-lg border-b border-[#1E293B] bg-inverse-surface shrink-0">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim">forum</span>
+<h2 class="font-h2 text-h2 text-surface">Synthesis Assistant</h2>
+</div>
+<div class="flex items-center gap-md">
+<!-- Theme Toggle Placeholder (from guidance) -->
+<button aria-label="Toggle Theme" class="text-surface-variant hover:text-surface transition-colors flex items-center">
+<span class="material-symbols-outlined">light_mode</span>
+</button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded font-label-mono text-label-mono hover:bg-primary-container transition-colors">
+                        Export Notes
+                    </button>
+</div>
+</header>
+<!-- Chat History -->
+<div class="flex-1 overflow-y-auto p-xl space-y-xl">
+<!-- User Message -->
+<div class="flex gap-md max-w-4xl mx-auto">
+<div class="w-8 h-8 rounded-full bg-[#131B2E] border border-[#1E293B] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-surface-variant text-[18px]">person</span>
+</div>
+<div class="flex-1 pt-1">
+<p class="font-body-ui text-body-ui text-surface">
+                            Summarize the tension between the judicial review concept in Marbury v. Madison and Hamilton's description of the judiciary in Federalist 78.
+                        </p>
+</div>
+</div>
+<!-- AI Response with Citations -->
+<div class="flex gap-md max-w-4xl mx-auto">
+<div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center shrink-0">
+<span class="font-display-wordmark text-[16px] text-primary-fixed-dim">E</span>
+</div>
+<div class="flex-1 pt-1 space-y-md">
+<p class="font-body-ui text-body-ui text-surface-dim">
+                            The tension primarily lies in the perceived power of the judiciary. Hamilton, in Federalist No. 78, characterizes the judiciary as the "least dangerous" branch, arguing it has "no influence over either the sword or the purse" 
+                            <span class="inline-flex items-center px-1.5 py-0.5 rounded font-label-mono text-[11px] bg-citation-gold/10 border border-citation-gold text-surface align-middle mx-1 cursor-pointer hover:bg-citation-gold/20 transition-colors">Fed 78, p.2</span>.
+                        </p>
+<p class="font-body-ui text-body-ui text-surface-dim">
+                            However, Chief Justice Marshall's ruling in Marbury v. Madison establishes the principle of judicial review, asserting that "it is emphatically the province and duty of the judicial department to say what the law is" 
+                            <span class="inline-flex items-center px-1.5 py-0.5 rounded font-label-mono text-[11px] bg-citation-gold/10 border border-citation-gold text-surface align-middle mx-1 cursor-pointer hover:bg-citation-gold/20 transition-colors">Marbury, p.14</span>. This effectively gives the court the power to invalidate acts of the legislature, a power arguably stronger than Hamilton's initial characterization suggested.
+                        </p>
+<!-- Excerpt Block -->
+<div class="mt-lg p-lg border-l-2 border-citation-gold bg-[#131B2E] rounded-r">
+<p class="font-body-excerpt text-body-excerpt text-surface-variant italic">
+                                "The interpretation of the laws is the proper and peculiar province of the courts. A constitution is, in fact, and must be regarded by the judges, as a fundamental law. <span class="bg-citation-gold/30 text-surface not-italic px-1">It therefore belongs to them to ascertain its meaning</span>, as well as the meaning of any particular act proceeding from the legislative body."
+                            </p>
+<p class="font-caption text-caption text-surface-variant mt-sm text-right">— Alexander Hamilton, Federalist No. 78</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Input Area -->
+<div class="p-lg border-t border-[#1E293B] bg-inverse-surface shrink-0">
+<div class="max-w-4xl mx-auto relative">
+<div class="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
+<button aria-label="Add context" class="text-surface-variant hover:text-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+</button>
+</div>
+<input class="w-full bg-[#131B2E] border border-[#1E293B] text-surface placeholder:text-surface-variant rounded-xl py-3 pl-12 pr-12 font-body-ui text-body-ui focus:outline-none focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim transition-all" placeholder="Ask about these documents..." type="text"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-primary-fixed-dim hover:text-inverse-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+<p class="text-center font-caption text-[11px] text-surface-variant mt-sm">
+                    AI can make mistakes. Verify critical citations.
+                </p>
+</div>
+</section>
+</main>
+</body></html>

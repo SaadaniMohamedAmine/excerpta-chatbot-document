@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign In - Excerpta</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@500&amp;family=Source+Serif+4:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#90a8ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#b6c4ff",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#f1bf4f",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-tertiary-container": "#f39461",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary": "#00236f",
+                        "on-error-container": "#93000a",
+                        "secondary": "#795900",
+                        "error-container": "#ffdad6",
+                        "outline": "#757682",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed-variant": "#264191",
+                        "tertiary": "#4b1c00",
+                        "primary-fixed": "#dce1ff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed": "#341100",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-surface-variant": "#444651",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "primary-container": "#1e3a8a",
+                        "secondary-fixed": "#ffdf9f",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdca59",
+                        "on-primary-fixed": "#00164e",
+                        "surface-tint": "#4059aa",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#6e2c00",
+                        "surface-bright": "#f7f9fb",
+                        "background": "#0B1220", /* Enforced dark background from prompt */
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#735500",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d3",
+                        "dark-surface": "#131B2E" /* Surface color for cards on dark bg */
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "workspace_gap": "1px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["Geist Mono", "monospace"],
+                        "h1": ["Geist", "sans-serif"],
+                        "body-excerpt": ["Source Serif 4", "serif"],
+                        "h1-mobile": ["Geist", "sans-serif"],
+                        "caption": ["Geist", "sans-serif"],
+                        "body-ui": ["Geist", "sans-serif"],
+                        "h2": ["Geist", "sans-serif"],
+                        "display-wordmark": ["Source Serif 4", "serif"]
+                    },
+                    "fontSize": {
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-excerpt": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-wordmark": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex flex-col items-center justify-center p-md">
+<!-- Brand Wordmark -->
+<div class="mb-lg flex flex-col items-center">
+<h1 class="font-display-wordmark text-display-wordmark text-primary-fixed-dim tracking-tight">Excerpta</h1>
+</div>
+<!-- Sign In Card -->
+<main class="w-full max-w-md bg-dark-surface border border-outline-variant/30 rounded-lg p-xl flex flex-col gap-lg shadow-[0_8px_32px_-8px_rgba(0,0,0,0.5)]">
+<header class="flex flex-col gap-sm">
+<h2 class="font-h1 text-h1 text-inverse-on-surface">Sign in</h2>
+<p class="font-body-ui text-body-ui text-surface-variant/80">Continue to your scholarly workspace.</p>
+</header>
+<form class="flex flex-col gap-md" onsubmit="event.preventDefault();">
+<div class="flex flex-col gap-sm">
+<label class="font-label-mono text-label-mono text-surface-variant" for="email">Email</label>
+<input class="w-full bg-inverse-surface/50 border border-outline-variant/40 rounded focus:border-[#6D8FFF] focus:ring-1 focus:ring-[#6D8FFF] text-inverse-on-surface font-body-ui text-body-ui px-md py-sm transition-colors duration-200" id="email" name="email" placeholder="researcher@university.edu" required="" type="email"/>
+</div>
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-center">
+<label class="font-label-mono text-label-mono text-surface-variant" for="password">Password</label>
+<a class="font-caption text-caption text-[#6D8FFF] hover:text-primary-fixed-dim transition-colors" href="#">Forgot password?</a>
+</div>
+<input class="w-full bg-inverse-surface/50 border border-outline-variant/40 rounded focus:border-[#6D8FFF] focus:ring-1 focus:ring-[#6D8FFF] text-inverse-on-surface font-body-ui text-body-ui px-md py-sm transition-colors duration-200" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+<button class="w-full bg-[#6D8FFF] text-on-primary font-body-ui text-body-ui font-medium rounded py-sm mt-sm hover:bg-[#6D8FFF]/90 transition-colors duration-200" type="submit">
+                Sign in
+            </button>
+</form>
+<div class="relative flex items-center py-sm">
+<div class="flex-grow border-t border-outline-variant/30"></div>
+<span class="flex-shrink-0 mx-md font-caption text-caption text-surface-variant">or continue with</span>
+<div class="flex-grow border-t border-outline-variant/30"></div>
+</div>
+<div class="flex flex-col gap-sm">
+<button class="w-full bg-transparent border border-outline-variant/40 text-inverse-on-surface font-body-ui text-body-ui rounded py-sm flex items-center justify-center gap-md hover:bg-inverse-surface/50 transition-colors duration-200">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
+                Google
+            </button>
+<button class="w-full bg-transparent border border-outline-variant/40 text-inverse-on-surface font-body-ui text-body-ui rounded py-sm flex items-center justify-center gap-md hover:bg-inverse-surface/50 transition-colors duration-200">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.146-1.11-1.45-1.11-1.45-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.523 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.606 9.606 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48C19.137 20.107 22 16.373 22 11.969 22 6.463 17.522 2 12 2z" fill-rule="evenodd"></path></svg>
+                GitHub
+            </button>
+</div>
+</main>
+<footer class="mt-lg">
+<p class="font-body-ui text-body-ui text-surface-variant">
+            Don't have an account? 
+            <a class="text-[#6D8FFF] hover:text-primary-fixed-dim transition-colors" href="#">Create account</a>
+</p>
+</footer>
+</body></html>

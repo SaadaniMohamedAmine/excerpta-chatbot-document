@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Export Conversation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@500&amp;family=Source+Serif+4:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#90a8ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#b6c4ff",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#f1bf4f",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-tertiary-container": "#f39461",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary": "#00236f",
+                        "on-error-container": "#93000a",
+                        "secondary": "#795900",
+                        "error-container": "#ffdad6",
+                        "outline": "#757682",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed-variant": "#264191",
+                        "tertiary": "#4b1c00",
+                        "primary-fixed": "#dce1ff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed": "#341100",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-surface-variant": "#444651",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "primary-container": "#1e3a8a",
+                        "secondary-fixed": "#ffdf9f",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdca59",
+                        "on-primary-fixed": "#00164e",
+                        "surface-tint": "#4059aa",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#6e2c00",
+                        "surface-bright": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#735500",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "workspace_gap": "1px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["Geist Mono"],
+                        "h1": ["Geist"],
+                        "body-excerpt": ["\"Source Serif 4\""],
+                        "h1-mobile": ["Geist"],
+                        "caption": ["Geist"],
+                        "body-ui": ["Geist"],
+                        "h2": ["Geist"],
+                        "display-wordmark": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-excerpt": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-wordmark": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Shared Styles for Custom Icons if needed, though we primarily use Material Symbols */
+        .format-card-selected {
+            border-color: #00236f; /* primary */
+            background-color: rgba(0, 35, 111, 0.05); /* primary/5 */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-ui text-body-ui h-screen w-screen overflow-hidden flex font-[Geist]">
+<!-- Simulated Blurred/Dimmed Background Workspace -->
+<div class="fixed inset-0 bg-surface-variant/50 backdrop-blur-sm z-40 flex items-center justify-center p-md">
+<!-- Modal Container -->
+<div class="bg-surface rounded-xl shadow-lg border border-outline-variant w-full max-w-2xl overflow-hidden flex flex-col z-50">
+<!-- Modal Header -->
+<div class="px-xl py-lg border-b border-outline-variant flex items-center justify-between">
+<h2 class="font-h2 text-h2 text-on-surface">Export conversation</h2>
+<button aria-label="Close modal" class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-xl flex flex-col md:flex-row gap-xl">
+<!-- Left Column: Format Selection -->
+<div class="flex-1 flex flex-col gap-md">
+<p class="font-body-ui text-body-ui text-on-surface-variant mb-sm">Select file format</p>
+<div class="flex gap-md h-full">
+<!-- PDF Card (Selected by default) -->
+<button class="flex-1 border border-primary bg-primary/5 rounded-lg p-md flex flex-col items-center justify-center gap-sm transition-colors hover:bg-primary/10 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<div class="w-12 h-12 bg-surface rounded flex items-center justify-center border border-outline-variant text-[#e2574c] group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<span class="font-label-mono text-label-mono text-primary mt-sm">PDF Document</span>
+</button>
+<!-- DOCX Card -->
+<button class="flex-1 border border-outline-variant bg-surface rounded-lg p-md flex flex-col items-center justify-center gap-sm transition-colors hover:border-primary hover:bg-primary/5 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<div class="w-12 h-12 bg-surface rounded flex items-center justify-center border border-outline-variant text-[#2b579a] group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface-variant group-hover:text-primary mt-sm transition-colors">Word Document</span>
+</button>
+</div>
+</div>
+<!-- Right Column: Preview Thumbnail -->
+<div class="flex-1 flex flex-col gap-md">
+<p class="font-body-ui text-body-ui text-on-surface-variant mb-sm">Preview</p>
+<div class="border border-outline-variant rounded-lg bg-surface-container-low p-sm flex-1 flex items-center justify-center relative overflow-hidden h-[240px]">
+<!-- Abstract Document Preview representation -->
+<div class="w-[160px] h-[200px] bg-white border border-outline-variant shadow-sm flex flex-col p-md gap-sm scale-95 origin-center">
+<div class="h-2 w-3/4 bg-surface-variant rounded"></div>
+<div class="h-2 w-full bg-surface-variant rounded"></div>
+<div class="h-2 w-5/6 bg-surface-variant rounded"></div>
+<div class="mt-md h-20 w-full bg-surface-variant/50 rounded flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-opacity-50">format_align_left</span>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded mt-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-xl py-lg border-t border-outline-variant bg-surface-container-lowest flex items-center justify-end gap-lg">
+<button class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+                    Cancel
+                </button>
+<button class="bg-primary text-on-primary font-label-mono text-label-mono px-lg py-sm rounded hover:bg-primary-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Download
+                </button>
+</div>
+</div>
+</div>
+<!-- Underlying UI Mockup (Dimmed out) -->
+<div class="w-full h-full flex flex-col blur-sm opacity-20 pointer-events-none">
+<header class="h-16 border-b border-outline-variant flex items-center justify-between px-lg bg-surface">
+<div class="font-display-wordmark text-display-wordmark text-primary">Excerpta</div>
+</header>
+<div class="flex-1 flex">
+<nav class="w-20 border-r border-outline-variant flex flex-col items-center py-md bg-surface-container-low gap-md"></nav>
+<main class="flex-1 flex p-xl gap-xl"></main>
+</div>
+</div>
+</body></html>

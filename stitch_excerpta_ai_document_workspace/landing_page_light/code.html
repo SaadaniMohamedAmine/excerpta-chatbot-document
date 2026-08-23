@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta - Chat with any document</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Note: Assuming Geist is available or using a fallback if not explicitly imported, as per instruction to leverage Google Fonts but rely on Tailwind config for definitions. -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f7f9fb",
+                        "secondary-fixed-dim": "#f1bf4f",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c5c5d3",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-surface-variant": "#444651",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "primary": "#00236f",
+                        "surface-tint": "#4059aa",
+                        "tertiary-fixed": "#ffdbcb",
+                        "tertiary-container": "#6e2c00",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "secondary-fixed": "#ffdf9f",
+                        "on-background": "#191c1e",
+                        "error": "#ba1a1a",
+                        "surface-container": "#eceef0",
+                        "primary-container": "#1e3a8a",
+                        "on-tertiary-fixed": "#341100",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "inverse-surface": "#2d3133",
+                        "surface": "#f7f9fb",
+                        "primary-fixed": "#dce1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-dim": "#d8dadc",
+                        "on-primary": "#ffffff",
+                        "secondary": "#795900",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-bright": "#f7f9fb",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary": "#4b1c00",
+                        "on-primary-fixed": "#00164e",
+                        "outline": "#757682",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdca59",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#735500",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary-fixed-variant": "#264191",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-container": "#f39461",
+                        "inverse-primary": "#b6c4ff",
+                        "on-primary-container": "#90a8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "workspace_gap": "1px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "display-wordmark": [
+                            "\"Source Serif 4\""
+                        ],
+                        "h1-mobile": [
+                            "system-ui", "sans-serif" // Fallback for Geist
+                        ],
+                        "h1": [
+                            "system-ui", "sans-serif"
+                        ],
+                        "body-excerpt": [
+                            "\"Source Serif 4\""
+                        ],
+                        "label-mono": [
+                            "\"Geist Mono\"", "monospace"
+                        ],
+                        "body-ui": [
+                            "system-ui", "sans-serif"
+                        ],
+                        "caption": [
+                            "system-ui", "sans-serif"
+                        ],
+                        "h2": [
+                            "system-ui", "sans-serif"
+                        ]
+                    },
+                    "fontSize": {
+                        "display-wordmark": [
+                            "24px",
+                            {
+                                "lineHeight": "32px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "h1-mobile": [
+                            "24px",
+                            {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "h1": [
+                            "32px",
+                            {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "body-excerpt": [
+                            "18px",
+                            {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "label-mono": [
+                            "13px",
+                            {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "500"
+                            }
+                        ],
+                        "body-ui": [
+                            "16px",
+                            {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "caption": [
+                            "12px",
+                            {
+                                "lineHeight": "16px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "h2": [
+                            "20px",
+                            {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-ui text-body-ui antialiased">
+<!-- TopNavBar (from JSON) -->
+<nav class="bg-surface dark:bg-inverse-surface fixed top-0 w-full h-16 z-50 border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center px-lg transition-all duration-200">
+<!-- Brand -->
+<div class="flex items-center">
+<span class="font-display-wordmark text-display-wordmark text-primary dark:text-primary-fixed-dim">Excerpta</span>
+</div>
+<!-- Navigation Links (Desktop) -->
+<div class="hidden md:flex space-x-lg">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors py-sm" href="#">Features</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors py-sm" href="#">How it works</a>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center space-x-md">
+<!-- Theme Toggle -->
+<button aria-label="Toggle Theme" class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-sm rounded-DEFAULT">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+<a class="hidden sm:block text-primary dark:text-primary-fixed-dim font-label-mono text-label-mono px-md py-sm border border-primary rounded-DEFAULT hover:bg-primary/5 transition-colors" href="#">Sign in</a>
+<a class="bg-primary text-on-primary font-label-mono text-label-mono px-md py-sm rounded-DEFAULT hover:bg-primary-container transition-colors shadow-sm" href="#">Try Excerpta</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-2xl mt-xl min-h-screen">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-lg py-2xl lg:py-[96px] text-center">
+<div class="max-w-3xl mx-auto space-y-lg mb-2xl">
+<h1 class="font-display-wordmark text-[48px] leading-[56px] text-on-background tracking-tight">
+                    Chat with any document. <br/>
+<span class="text-primary block mt-sm font-h1 text-h1">Every answer cited to the page.</span>
+</h1>
+<p class="font-body-excerpt text-body-excerpt text-on-surface-variant max-w-2xl mx-auto">
+                    Precise answers, cited to the line. Experience a Scholarly-Warm environment designed for deep synthesis and uncompromising accuracy.
+                </p>
+<div class="flex justify-center space-x-md pt-md">
+<a class="bg-primary text-on-primary font-label-mono text-label-mono px-xl py-md rounded-DEFAULT hover:bg-primary-container transition-colors shadow-sm text-center min-w-[160px]" href="#">Start Chatting</a>
+<a class="text-primary bg-transparent border border-primary font-label-mono text-label-mono px-xl py-md rounded-DEFAULT hover:bg-primary/5 transition-colors text-center min-w-[160px]" href="#">View Demo</a>
+</div>
+</div>
+<!-- Hero Visual (Split Pane Mockup) -->
+<div class="relative w-full max-w-5xl mx-auto rounded-lg border border-outline-variant bg-surface-container-lowest shadow-[0_12px_48px_-12px_rgba(0,35,111,0.12)] overflow-hidden">
+<!-- Mockup Header -->
+<div class="h-10 bg-surface-container border-b border-outline-variant flex items-center px-md space-x-sm">
+<div class="w-3 h-3 rounded-full bg-outline-variant/50"></div>
+<div class="w-3 h-3 rounded-full bg-outline-variant/50"></div>
+<div class="w-3 h-3 rounded-full bg-outline-variant/50"></div>
+</div>
+<!-- Mockup Split Body -->
+<div class="flex flex-col md:flex-row h-[400px] md:h-[600px] bg-background">
+<!-- Chat Pane (Left) -->
+<div class="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-outline-variant bg-surface-container-lowest p-md flex flex-col">
+<div class="flex-1 overflow-y-auto space-y-md pr-sm">
+<!-- User Message -->
+<div class="bg-surface-container-low p-md rounded-DEFAULT rounded-tr-none self-end ml-xl">
+<p class="font-body-ui text-body-ui text-on-surface">Summarize the methodology used in this study.</p>
+</div>
+<!-- AI Message -->
+<div class="bg-primary/5 border border-primary/20 p-md rounded-DEFAULT rounded-tl-none mr-lg">
+<p class="font-body-ui text-body-ui text-on-surface mb-sm">The authors employed a mixed-methods approach, combining quantitative surveys with qualitative interviews to assess long-term impacts.</p>
+<!-- Citation Tag -->
+<span class="inline-flex items-center px-sm py-xs bg-secondary-fixed-dim/10 border border-secondary-fixed-dim rounded-DEFAULT font-label-mono text-label-mono text-on-surface">
+<span class="material-symbols-outlined text-[14px] mr-xs">description</span> Pg. 14, Para 2
+                                </span>
+</div>
+</div>
+<!-- Input Mockup -->
+<div class="mt-md pt-md border-t border-outline-variant/50">
+<div class="bg-surface-container-low border border-outline-variant rounded-DEFAULT h-10 flex items-center px-md text-on-surface-variant font-body-ui text-body-ui opacity-70">
+                                Ask a question...
+                            </div>
+</div>
+</div>
+<!-- Document Pane (Right) -->
+<div class="w-full md:w-2/3 bg-surface-container-lowest p-xl overflow-y-auto relative">
+<div class="max-w-2xl mx-auto space-y-md">
+<div class="h-6 w-3/4 bg-outline-variant/20 rounded-sm mb-lg"></div>
+<div class="h-4 w-full bg-outline-variant/20 rounded-sm"></div>
+<div class="h-4 w-full bg-outline-variant/20 rounded-sm"></div>
+<div class="h-4 w-5/6 bg-outline-variant/20 rounded-sm"></div>
+<!-- Highlighted Text -->
+<div class="mt-xl font-body-excerpt text-body-excerpt text-on-surface leading-relaxed">
+                                ...Furthermore, <span class="bg-secondary-fixed-dim/30 px-xs rounded-sm">the quantitative surveys were distributed across three distinct demographics</span>, ensuring a robust dataset that minimizes regional bias. Qualitative interviews followed...
+                            </div>
+<div class="h-4 w-full bg-outline-variant/20 rounded-sm mt-xl"></div>
+<div class="h-4 w-4/5 bg-outline-variant/20 rounded-sm"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="py-2xl bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-lg">
+<div class="text-center mb-xl">
+<h2 class="font-h1 text-h1 text-on-background mb-sm">Designed for Deep Synthesis</h2>
+<p class="font-body-ui text-body-ui text-on-surface-variant">Tools built for researchers, not casual browsers.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Feature 1 -->
+<div class="bg-surface-container-lowest p-xl rounded-lg border border-outline-variant hover:border-primary transition-colors flex flex-col h-full">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-lg text-primary">
+<span class="material-symbols-outlined" data-icon="upload_file" style="font-variation-settings: 'FILL' 1;">upload_file</span>
+</div>
+<h3 class="font-h2 text-h2 text-on-background mb-sm">Multi-format upload</h3>
+<p class="font-body-ui text-body-ui text-on-surface-variant flex-1">Ingest PDFs, Word documents, EPUBs, and raw text files instantly into your secure workspace.</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-lowest p-xl rounded-lg border border-outline-variant hover:border-primary transition-colors flex flex-col h-full">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed-dim/20 flex items-center justify-center mb-lg text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="format_quote" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+</div>
+<h3 class="font-h2 text-h2 text-on-background mb-sm">Source citations</h3>
+<p class="font-body-ui text-body-ui text-on-surface-variant flex-1">Every claim generated by the AI is backed by a precise, inline citation linked directly to your source text.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-lowest p-xl rounded-lg border border-outline-variant hover:border-primary transition-colors flex flex-col h-full">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-lg text-primary">
+<span class="material-symbols-outlined" data-icon="find_in_page" style="font-variation-settings: 'FILL' 1;">find_in_page</span>
+</div>
+<h3 class="font-h2 text-h2 text-on-background mb-sm">Auto-scroll to source</h3>
+<p class="font-body-ui text-body-ui text-on-surface-variant flex-1">Click any citation tag to instantly scroll the document viewer to the exact line, highlighted for context.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works -->
+<section class="py-2xl bg-background">
+<div class="max-w-7xl mx-auto px-lg">
+<h2 class="font-h1 text-h1 text-on-background mb-xl text-center">How it works</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl relative">
+<!-- Connecting Line (Desktop) -->
+<div class="hidden md:block absolute top-1/2 left-[16%] right-[16%] h-[1px] bg-outline-variant -translate-y-1/2 z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-lowest border-2 border-primary flex items-center justify-center mb-md font-h2 text-h2 text-primary shadow-sm">
+                            1
+                        </div>
+<h3 class="font-h2 text-h2 text-on-background mb-xs">Upload</h3>
+<p class="font-body-ui text-body-ui text-on-surface-variant">Add your documents to the library.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-lowest border-2 border-primary flex items-center justify-center mb-md font-h2 text-h2 text-primary shadow-sm">
+                            2
+                        </div>
+<h3 class="font-h2 text-h2 text-on-background mb-xs">Ask</h3>
+<p class="font-body-ui text-body-ui text-on-surface-variant">Query across one or hundreds of files.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center mb-md font-h2 text-h2 text-on-primary shadow-sm">
+                            3
+                        </div>
+<h3 class="font-h2 text-h2 text-on-background mb-xs">Get cited answer</h3>
+<p class="font-body-ui text-body-ui text-on-surface-variant">Review synthesized responses with exact references.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Minimal Footer -->
+<footer class="bg-surface-container border-t border-outline-variant py-xl mt-auto">
+<div class="max-w-7xl mx-auto px-lg flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+<div class="mb-md md:mb-0">
+<span class="font-display-wordmark text-display-wordmark text-primary">Excerpta</span>
+<p class="font-caption text-caption text-on-surface-variant mt-xs">© 2024 Excerpta Inc. All rights reserved.</p>
+</div>
+<div class="flex space-x-lg font-label-mono text-label-mono text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>

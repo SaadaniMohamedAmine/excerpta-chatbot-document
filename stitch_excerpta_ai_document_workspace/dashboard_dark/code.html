@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta Dashboard - My Documents</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..144,400;8..144,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#f7f9fb",
+                      "secondary-fixed-dim": "#f1bf4f",
+                      "on-tertiary-fixed-variant": "#773205",
+                      "on-secondary": "#ffffff",
+                      "outline-variant": "#c5c5d3",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-surface-variant": "#444651",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "primary": "#00236f",
+                      "surface-tint": "#4059aa",
+                      "tertiary-fixed": "#ffdbcb",
+                      "tertiary-container": "#6e2c00",
+                      "tertiary-fixed-dim": "#ffb691",
+                      "secondary-fixed": "#ffdf9f",
+                      "on-background": "#191c1e",
+                      "error": "#ba1a1a",
+                      "surface-container": "#eceef0",
+                      "primary-container": "#1e3a8a",
+                      "on-tertiary-fixed": "#341100",
+                      "primary-fixed-dim": "#b6c4ff",
+                      "inverse-surface": "#2d3133",
+                      "surface": "#f7f9fb",
+                      "primary-fixed": "#dce1ff",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#261a00",
+                      "surface-dim": "#d8dadc",
+                      "on-primary": "#ffffff",
+                      "secondary": "#795900",
+                      "surface-container-high": "#e6e8ea",
+                      "surface-bright": "#f7f9fb",
+                      "surface-container-low": "#f2f4f6",
+                      "tertiary": "#4b1c00",
+                      "on-primary-fixed": "#00164e",
+                      "outline": "#757682",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#fdca59",
+                      "on-error-container": "#93000a",
+                      "on-secondary-container": "#735500",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-primary-fixed-variant": "#264191",
+                      "on-surface": "#191c1e",
+                      "on-tertiary-container": "#f39461",
+                      "inverse-primary": "#b6c4ff",
+                      "on-primary-container": "#90a8ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "workspace_gap": "1px",
+                      "base": "4px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "2xl": "48px"
+              },
+              "fontFamily": {
+                      "display-wordmark": ["\"Source Serif 4\""],
+                      "h1-mobile": ["Geist"],
+                      "h1": ["Geist"],
+                      "body-excerpt": ["\"Source Serif 4\""],
+                      "label-mono": ["Geist Mono"],
+                      "body-ui": ["Geist"],
+                      "caption": ["Geist"],
+                      "h2": ["Geist"]
+              },
+              "fontSize": {
+                      "display-wordmark": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "h1-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-excerpt": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "body-ui": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                      "h2": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-inverse-surface text-inverse-on-surface font-body-ui antialiased h-screen overflow-hidden flex">
+<!-- SideNavBar (Shared Component) -->
+<nav class="fixed left-0 h-full w-20 flex flex-col bg-surface-container-low dark:bg-inverse-surface border-r border-outline-variant dark:border-outline flex flex-col items-center py-md space-y-md z-50">
+<!-- Brand Logo (Minimal footprint for thin sidebar) -->
+<div class="mb-xl flex items-center justify-center w-full">
+<span class="font-display-wordmark text-display-wordmark text-primary dark:text-primary-fixed-dim select-none">E</span>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col w-full space-y-sm px-xs items-center font-label-mono text-label-mono">
+<!-- Active Tab: Documents -->
+<li class="w-full">
+<a class="flex flex-col items-center justify-center p-sm rounded-lg text-primary dark:text-primary-fixed-dim bg-primary/5 transition-all duration-200 ease-in-out group" href="#" title="Documents">
+<span class="material-symbols-outlined mb-xs group-active:scale-95 transition-transform" style="font-variation-settings: 'FILL' 1;">description</span>
+</a>
+</li>
+<!-- Inactive Tab: Collections -->
+<li class="w-full">
+<a class="flex flex-col items-center justify-center p-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out group" href="#" title="Collections">
+<span class="material-symbols-outlined mb-xs group-active:scale-95 transition-transform">folder_special</span>
+</a>
+</li>
+<!-- Inactive Tab: Settings -->
+<li class="w-full mt-auto pt-xl">
+<a class="flex flex-col items-center justify-center p-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out group" href="#" title="Settings">
+<span class="material-symbols-outlined mb-xs group-active:scale-95 transition-transform">settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-20 flex-1 flex flex-col h-full bg-surface dark:bg-inverse-surface">
+<!-- Top Bar -->
+<header class="flex justify-between items-center px-lg py-md border-b border-outline-variant/30 h-16 w-full shrink-0">
+<!-- Title -->
+<div class="flex items-center gap-md">
+<h1 class="font-h1 text-h1 text-on-surface dark:text-inverse-on-surface">My Documents</h1>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-lg">
+<!-- Search -->
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="bg-surface-container dark:bg-[#1f2325] border border-outline-variant/50 rounded-lg pl-[32px] pr-md py-sm font-body-ui text-body-ui text-on-surface dark:text-inverse-on-surface focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim outline-none transition-colors w-64 placeholder:text-on-surface-variant/50" placeholder="Search documents..." type="text"/>
+</div>
+<!-- Primary Action -->
+<button class="bg-primary dark:bg-primary-fixed-dim text-on-primary dark:text-on-primary-fixed font-body-ui text-body-ui px-md py-[6px] rounded-lg hover:bg-primary-container dark:hover:bg-primary-fixed transition-colors flex items-center gap-sm active:scale-95 duration-200">
+<span class="material-symbols-outlined text-sm">upload_file</span>
+                    Upload document
+                </button>
+<!-- Avatar -->
+<button class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/50 hover:border-primary-fixed-dim transition-colors">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A minimalist digital avatar depicting an abstract geometric shape in subtle gold and deep blue tones, set against a dark grey background. The style is modern, professional, and refined." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf9xLU_3tzZeixxUrFolqLAAxzRJDfoyfE_NhilfdHTNHRl49fuPGmTfWFQsfx1byh__na8YPc_ly7e2UiEQ9t-luAkKaQrqUJ72a1Qe6PBecxHuEttbTmcBwLvAp-3W41hfSq9007IsOsgD71zFzT4u1syx747pDV2IQrKy7xAu17e4ShBp62maGDWEPeX_ElIHhNzyTBb-Qmnb7rqRoB8SrSGNOuOjqdgcmF2-ilSQXfaGQJeDiL"/>
+</button>
+</div>
+</header>
+<!-- Document Grid Workspace -->
+<div class="flex-1 overflow-y-auto p-lg scrollbar-hide">
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-lg auto-rows-max">
+<!-- Card 1: PDF -->
+<div class="group bg-surface-container-lowest dark:bg-[#25282a] border border-outline-variant/30 rounded-xl p-md flex flex-col gap-md hover:border-primary-fixed-dim transition-colors cursor-pointer shadow-sm shadow-black/5">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-lg bg-[#f1bf4f]/10 flex items-center justify-center text-[#f1bf4f] border border-[#f1bf4f]/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<button class="text-outline hover:text-inverse-on-surface transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div>
+<h2 class="font-h2 text-h2 text-on-surface dark:text-inverse-on-surface truncate" title="Q3_Financial_Report.pdf">Q3_Financial_Report.pdf</h2>
+<div class="flex items-center justify-between mt-sm">
+<span class="font-caption text-caption text-on-surface-variant dark:text-outline">Oct 12, 2023</span>
+<span class="inline-flex items-center gap-xs font-label-mono text-label-mono text-primary-fixed-dim bg-primary/10 px-xs py-[2px] rounded border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">forum</span> 4 conv.
+                            </span>
+</div>
+</div>
+</div>
+<!-- Card 2: DOCX -->
+<div class="group bg-surface-container-lowest dark:bg-[#25282a] border border-outline-variant/30 rounded-xl p-md flex flex-col gap-md hover:border-primary-fixed-dim transition-colors cursor-pointer shadow-sm shadow-black/5">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary-fixed-dim border border-primary/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<button class="text-outline hover:text-inverse-on-surface transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div>
+<h2 class="font-h2 text-h2 text-on-surface dark:text-inverse-on-surface truncate" title="Employment_Contract.docx">Employment_Contract.docx</h2>
+<div class="flex items-center justify-between mt-sm">
+<span class="font-caption text-caption text-on-surface-variant dark:text-outline">Nov 02, 2023</span>
+<span class="inline-flex items-center gap-xs font-label-mono text-label-mono text-primary-fixed-dim bg-primary/10 px-xs py-[2px] rounded border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">forum</span> 1 conv.
+                            </span>
+</div>
+</div>
+</div>
+<!-- Card 3: CSV -->
+<div class="group bg-surface-container-lowest dark:bg-[#25282a] border border-outline-variant/30 rounded-xl p-md flex flex-col gap-md hover:border-primary-fixed-dim transition-colors cursor-pointer shadow-sm shadow-black/5">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-lg bg-[#444651]/20 flex items-center justify-center text-[#c5c5d3] border border-[#c5c5d3]/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dataset</span>
+</div>
+<button class="text-outline hover:text-inverse-on-surface transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div>
+<h2 class="font-h2 text-h2 text-on-surface dark:text-inverse-on-surface truncate" title="research_data.csv">research_data.csv</h2>
+<div class="flex items-center justify-between mt-sm">
+<span class="font-caption text-caption text-on-surface-variant dark:text-outline">Sep 28, 2023</span>
+<span class="inline-flex items-center gap-xs font-label-mono text-label-mono text-on-surface-variant dark:text-outline bg-[#444651]/10 px-xs py-[2px] rounded border border-outline/20">
+<span class="material-symbols-outlined text-[14px]">forum</span> 0 conv.
+                            </span>
+</div>
+</div>
+</div>
+<!-- Card 4: TS (Code) -->
+<div class="group bg-surface-container-lowest dark:bg-[#25282a] border border-outline-variant/30 rounded-xl p-md flex flex-col gap-md hover:border-primary-fixed-dim transition-colors cursor-pointer shadow-sm shadow-black/5">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/20 flex items-center justify-center text-tertiary-fixed-dim border border-tertiary-fixed-dim/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">code</span>
+</div>
+<button class="text-outline hover:text-inverse-on-surface transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div>
+<h2 class="font-h2 text-h2 text-on-surface dark:text-inverse-on-surface truncate" title="auth_middleware.ts">auth_middleware.ts</h2>
+<div class="flex items-center justify-between mt-sm">
+<span class="font-caption text-caption text-on-surface-variant dark:text-outline">Dec 15, 2023</span>
+<span class="inline-flex items-center gap-xs font-label-mono text-label-mono text-primary-fixed-dim bg-primary/10 px-xs py-[2px] rounded border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">forum</span> 12 conv.
+                            </span>
+</div>
+</div>
+</div>
+<!-- Card 5: PDF -->
+<div class="group bg-surface-container-lowest dark:bg-[#25282a] border border-outline-variant/30 rounded-xl p-md flex flex-col gap-md hover:border-primary-fixed-dim transition-colors cursor-pointer shadow-sm shadow-black/5">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-lg bg-[#f1bf4f]/10 flex items-center justify-center text-[#f1bf4f] border border-[#f1bf4f]/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<button class="text-outline hover:text-inverse-on-surface transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div>
+<h2 class="font-h2 text-h2 text-on-surface dark:text-inverse-on-surface truncate" title="Lit_Review_v2_Final.pdf">Lit_Review_v2_Final.pdf</h2>
+<div class="flex items-center justify-between mt-sm">
+<span class="font-caption text-caption text-on-surface-variant dark:text-outline">Jan 05, 2024</span>
+<span class="inline-flex items-center gap-xs font-label-mono text-label-mono text-primary-fixed-dim bg-primary/10 px-xs py-[2px] rounded border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">forum</span> 8 conv.
+                            </span>
+</div>
+</div>
+</div>
+<!-- Card 6: DOCX -->
+<div class="group bg-surface-container-lowest dark:bg-[#25282a] border border-outline-variant/30 rounded-xl p-md flex flex-col gap-md hover:border-primary-fixed-dim transition-colors cursor-pointer shadow-sm shadow-black/5">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary-fixed-dim border border-primary/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<button class="text-outline hover:text-inverse-on-surface transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div>
+<h2 class="font-h2 text-h2 text-on-surface dark:text-inverse-on-surface truncate" title="Board_Meeting_Notes.docx">Board_Meeting_Notes.docx</h2>
+<div class="flex items-center justify-between mt-sm">
+<span class="font-caption text-caption text-on-surface-variant dark:text-outline">Jan 10, 2024</span>
+<span class="inline-flex items-center gap-xs font-label-mono text-label-mono text-primary-fixed-dim bg-primary/10 px-xs py-[2px] rounded border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">forum</span> 3 conv.
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

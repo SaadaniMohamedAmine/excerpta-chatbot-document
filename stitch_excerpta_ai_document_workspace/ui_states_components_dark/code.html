@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta - UI State Cards</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@500&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#4059aa",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#00164e",
+                        "error": "#ba1a1a",
+                        "on-surface": "#191c1e",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-surface-variant": "#444651",
+                        "surface": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-fixed": "#dce1ff",
+                        "inverse-surface": "#2d3133",
+                        "outline": "#757682",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "surface-variant": "#e0e3e5",
+                        "surface-dim": "#d8dadc",
+                        "primary-container": "#1e3a8a",
+                        "secondary-fixed-dim": "#f1bf4f",
+                        "secondary": "#795900",
+                        "on-secondary-fixed": "#261a00",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#264191",
+                        "inverse-primary": "#b6c4ff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#ffdf9f",
+                        "primary": "#00236f",
+                        "on-secondary-container": "#735500",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "on-background": "#191c1e",
+                        "on-tertiary-container": "#f39461",
+                        "surface-container-high": "#e6e8ea",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#90a8ff",
+                        "tertiary-container": "#6e2c00",
+                        "tertiary": "#4b1c00",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdca59",
+                        "surface-container": "#eceef0",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c5c5d3",
+                        "on-tertiary-fixed": "#341100"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "sm": "8px",
+                        "workspace_gap": "1px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "2xl": "48px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Geist"],
+                        "body-excerpt": ["\"Source Serif 4\""],
+                        "h1": ["Geist"],
+                        "caption": ["Geist"],
+                        "body-ui": ["Geist"],
+                        "display-wordmark": ["\"Source Serif 4\""],
+                        "h1-mobile": ["Geist"],
+                        "label-mono": ["Geist Mono"]
+                    },
+                    "fontSize": {
+                        "h2": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-excerpt": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-wordmark": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "h1-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom overrides for the requested dark theme that fall outside the generic config */
+        .theme-bg { background-color: #0B1220; }
+        .theme-surface { background-color: #131B2E; }
+        .theme-primary { color: #6D8FFF; }
+        .theme-primary-bg { background-color: #6D8FFF; }
+        .theme-gold { color: #E8C468; }
+        .theme-gold-bg { background-color: #E8C468; }
+        
+        .shimmer {
+            background: linear-gradient(90deg, #131B2E 25%, #1e293b 50%, #131B2E 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="theme-bg text-white font-body-ui p-xl min-h-screen">
+<div class="max-w-5xl mx-auto space-y-xl">
+<h1 class="font-h1 text-h1 text-white mb-2xl border-b border-slate-800 pb-sm">UI State Library</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- 1. EMPTY STATE - No documents -->
+<div class="theme-surface rounded-xl border border-slate-800 p-xl flex flex-col items-center justify-center text-center h-80">
+<i class="ph-duotone ph-file-text text-5xl theme-primary mb-md"></i>
+<h3 class="font-h2 text-h2 mb-sm text-white">Upload a document to begin.</h3>
+<p class="font-body-ui text-body-ui text-slate-400 mb-lg max-w-sm">Connect your scholarly library to start synthesizing knowledge.</p>
+<button class="theme-primary-bg text-white font-label-mono text-label-mono px-lg py-sm rounded hover:bg-opacity-90 transition-colors">
+                    Upload document
+                </button>
+</div>
+<!-- 2. EMPTY STATE - No conversations -->
+<div class="theme-surface rounded-xl border border-slate-800 p-lg flex flex-col h-80">
+<div class="flex-1 flex flex-col items-center justify-center text-center">
+<i class="ph-duotone ph-chat-centered-text text-4xl theme-primary mb-md"></i>
+<p class="font-body-ui text-body-ui text-slate-300 mb-lg">Ask a question to start the conversation.</p>
+<div class="flex flex-wrap justify-center gap-sm">
+<button class="border border-slate-700 bg-slate-800/50 hover:border-[#6D8FFF] hover:bg-[#6D8FFF]/5 rounded-lg px-md py-sm text-sm text-slate-300 transition-colors font-body-ui">
+                            What is this document about?
+                        </button>
+<button class="border border-slate-700 bg-slate-800/50 hover:border-[#6D8FFF] hover:bg-[#6D8FFF]/5 rounded-lg px-md py-sm text-sm text-slate-300 transition-colors font-body-ui">
+                            Summarize the key points
+                        </button>
+<button class="border border-slate-700 bg-slate-800/50 hover:border-[#6D8FFF] hover:bg-[#6D8FFF]/5 rounded-lg px-md py-sm text-sm text-slate-300 transition-colors font-body-ui">
+                            Find all mentions of budget
+                        </button>
+<button class="border border-slate-700 bg-slate-800/50 hover:border-[#6D8FFF] hover:bg-[#6D8FFF]/5 rounded-lg px-md py-sm text-sm text-slate-300 transition-colors font-body-ui">
+                            Analyze the methodology
+                        </button>
+</div>
+</div>
+</div>
+<!-- 3. ERROR STATE - Unsupported format -->
+<div class="theme-surface rounded-xl border border-slate-800 p-lg flex flex-col justify-center gap-md">
+<div class="bg-red-500/10 border border-red-500/30 rounded-lg p-md flex items-start gap-md">
+<i class="ph-fill ph-warning-circle text-xl text-red-400 mt-xs"></i>
+<div class="flex-1">
+<p class="font-body-ui text-body-ui text-red-200">This format isn't supported yet. Try PDF, DOCX, CSV, or a code file.</p>
+</div>
+<button class="text-slate-500 hover:text-white transition-colors">
+<i class="ph ph-x text-lg"></i>
+</button>
+</div>
+</div>
+<!-- 4. ERROR STATE - Processing failed -->
+<div class="theme-surface rounded-xl border border-slate-800 p-lg flex flex-col justify-center gap-md">
+<div class="bg-red-500/10 border border-red-500/30 rounded-lg p-md flex items-center gap-md">
+<i class="ph-fill ph-warning text-xl text-red-400"></i>
+<p class="font-body-ui text-body-ui text-red-200 flex-1">Something went wrong while processing this document.</p>
+<button class="font-label-mono text-label-mono text-red-400 hover:text-red-300 border border-red-500/50 rounded px-md py-sm transition-colors">
+                        Retry
+                    </button>
+</div>
+</div>
+<!-- 5. LOADING STATE - Document processing -->
+<div class="theme-surface rounded-xl border border-slate-800 p-xl flex flex-col justify-center gap-md">
+<div class="flex justify-between items-end mb-sm">
+<span class="font-label-mono text-label-mono text-slate-300">Indexing pages 1–42...</span>
+<span class="font-label-mono text-label-mono theme-primary">65%</span>
+</div>
+<div class="w-full bg-slate-800 rounded-full h-1 overflow-hidden">
+<div class="theme-primary-bg h-full rounded-full w-[65%] transition-all duration-500"></div>
+</div>
+</div>
+<!-- 6. LOADING STATE - AI Streaming -->
+<div class="theme-surface rounded-xl border border-slate-800 p-xl flex items-center">
+<div class="flex gap-md items-start max-w-md">
+<div class="w-8 h-8 rounded theme-primary-bg flex items-center justify-center shrink-0">
+<i class="ph-fill ph-sparkle text-white text-sm"></i>
+</div>
+<div class="bg-slate-800/50 border border-slate-700 rounded-lg rounded-tl-none p-md flex items-center gap-sm h-12">
+<div class="w-2 h-2 rounded-full bg-slate-400 typing-dot"></div>
+<div class="w-2 h-2 rounded-full bg-slate-400 typing-dot"></div>
+<div class="w-2 h-2 rounded-full bg-slate-400 typing-dot"></div>
+</div>
+</div>
+</div>
+<!-- 7. SKELETON LOADER - Dashboard -->
+<div class="theme-surface rounded-xl border border-slate-800 p-lg md:col-span-2">
+<h4 class="font-label-mono text-label-mono text-slate-400 mb-md">Recent Documents</h4>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-md">
+<!-- Skeleton Card 1 -->
+<div class="border border-slate-800 rounded-lg p-md space-y-md">
+<div class="h-24 rounded bg-slate-800/50 shimmer"></div>
+<div class="space-y-sm">
+<div class="h-4 rounded bg-slate-800/50 shimmer w-3/4"></div>
+<div class="h-3 rounded bg-slate-800/50 shimmer w-1/2"></div>
+</div>
+</div>
+<!-- Skeleton Card 2 -->
+<div class="border border-slate-800 rounded-lg p-md space-y-md hidden sm:block">
+<div class="h-24 rounded bg-slate-800/50 shimmer"></div>
+<div class="space-y-sm">
+<div class="h-4 rounded bg-slate-800/50 shimmer w-full"></div>
+<div class="h-3 rounded bg-slate-800/50 shimmer w-1/3"></div>
+</div>
+</div>
+<!-- Skeleton Card 3 -->
+<div class="border border-slate-800 rounded-lg p-md space-y-md hidden sm:block">
+<div class="h-24 rounded bg-slate-800/50 shimmer"></div>
+<div class="space-y-sm">
+<div class="h-4 rounded bg-slate-800/50 shimmer w-5/6"></div>
+<div class="h-3 rounded bg-slate-800/50 shimmer w-2/3"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- 8. CITATION DETAIL -->
+<div class="theme-surface rounded-xl border border-slate-800 p-xl flex items-center justify-center md:col-span-2">
+<div class="max-w-2xl bg-slate-800/30 border border-slate-700/50 rounded-lg p-lg text-slate-200 font-body-excerpt text-body-excerpt leading-relaxed">
+                    The findings suggest a significant correlation between architectural design and cognitive load, particularly in environments requiring sustained attention. As noted in the study, <span class="bg-[#E8C468]/10 text-white px-1 py-0.5 rounded border border-[#E8C468]/30 cursor-pointer hover:bg-[#E8C468]/20 hover:border-[#E8C468] hover:shadow-[0_0_8px_rgba(232,196,104,0.3)] transition-all duration-200">"spatial clarity reduces cognitive friction by up to 14%"</span> <span class="inline-flex items-center gap-xs font-label-mono text-[11px] bg-[#E8C468]/10 text-[#E8C468] border border-[#E8C468]/50 px-1.5 py-0.5 rounded cursor-pointer hover:bg-[#E8C468]/20 transition-colors ml-1">[p. 12]</span>. This challenges previous assumptions regarding open-plan workspaces.
+                </div>
+</div>
+</div>
+</div>
+</body></html>

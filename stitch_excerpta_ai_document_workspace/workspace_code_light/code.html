@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta - Document Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/css">
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/Geist-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/Geist-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/Geist-SemiBold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Geist Mono';
+            src: url('https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-mono/GeistMono-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Geist Mono';
+            src: url('https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-mono/GeistMono-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        .code-highlight {
+            background-color: rgba(212, 165, 55, 0.15); /* Citation Gold with opacity */
+            border-left: 2px solid #D4A537;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#90a8ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#b6c4ff",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#f1bf4f",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-tertiary-container": "#f39461",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary": "#00236f",
+                        "on-error-container": "#93000a",
+                        "secondary": "#795900",
+                        "error-container": "#ffdad6",
+                        "outline": "#757682",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed-variant": "#264191",
+                        "tertiary": "#4b1c00",
+                        "primary-fixed": "#dce1ff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed": "#341100",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-surface-variant": "#444651",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "primary-container": "#1e3a8a",
+                        "secondary-fixed": "#ffdf9f",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdca59",
+                        "on-primary-fixed": "#00164e",
+                        "surface-tint": "#4059aa",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#6e2c00",
+                        "surface-bright": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#735500",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d3",
+                        "citation-gold": "#D4A537"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "workspace_gap": "1px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["Geist Mono"],
+                        "h1": ["Geist"],
+                        "body-excerpt": ["\"Source Serif 4\""],
+                        "h1-mobile": ["Geist"],
+                        "caption": ["Geist"],
+                        "body-ui": ["Geist"],
+                        "h2": ["Geist"],
+                        "display-wordmark": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-excerpt": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-wordmark": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-ui h-screen overflow-hidden flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full h-16 z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-lg h-16 w-full">
+<div class="flex items-center space-x-lg">
+<a class="font-display-wordmark text-display-wordmark text-primary" href="#">Excerpta</a>
+<nav class="hidden md:flex space-x-md">
+<a class="font-body-ui text-body-ui text-on-surface-variant hover:text-primary transition-colors" href="#">Features</a>
+<a class="font-body-ui text-body-ui text-on-surface-variant hover:text-primary transition-colors" href="#">How it works</a>
+</nav>
+</div>
+<div class="flex items-center space-x-md">
+<button aria-label="Toggle dark mode" class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="dark_mode" data-weight="fill">dark_mode</span>
+</button>
+<a class="font-body-ui text-body-ui text-on-surface-variant hover:text-primary transition-colors" href="#">Sign in</a>
+<a class="font-body-ui text-body-ui bg-primary text-on-primary px-4 py-2 rounded transition-colors active:scale-95" href="#">Try Excerpta</a>
+</div>
+</header>
+<div class="flex flex-1 pt-16 overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex fixed left-0 h-full w-20 flex-col items-center py-md space-y-md bg-surface-container-low border-r border-outline-variant z-40">
+<div class="flex flex-col items-center mb-xl">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden mb-2">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0PPsLmFydvE8HNiayQkL9refj8yuoLPpzki29szdgLy7n_HE0DZ-ujmbd8fN9z2SfVSSSfTmciDzW7IKmhOWeHFMQEtYsIzQ5uxtOW8YmTQsXo7l2CKTAOKBUrIvWsyYbVGnGcJ4U7rsnxtCh1FNGdJGHZPq3yFJThGPLAEVdMX4WRj7AUa_sZdkC4ZLc0gh2GSP8Oz60X_-nJToS0PG98k1IcWtusS3aQ99o4aC-8pDC1lsyW_rX"/>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface-variant text-[10px]">Excerpta Pro</span>
+</div>
+<a aria-label="Documents" class="flex flex-col items-center justify-center w-14 h-14 rounded-lg bg-primary/5 text-primary transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="description">description</span>
+<span class="font-label-mono text-label-mono text-[10px]">Docs</span>
+</a>
+<a aria-label="Collections" class="flex flex-col items-center justify-center w-14 h-14 rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="folder_special">folder_special</span>
+<span class="font-label-mono text-label-mono text-[10px]">Collect</span>
+</a>
+<a aria-label="Settings" class="flex flex-col items-center justify-center w-14 h-14 rounded-lg text-on-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out group mt-auto mb-16" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="settings">settings</span>
+<span class="font-label-mono text-label-mono text-[10px]">Settings</span>
+</a>
+</nav>
+<!-- Main Workspace (50/50 Split) -->
+<main class="flex-1 flex ml-0 md:ml-20 overflow-hidden bg-outline-variant gap-workspace_gap">
+<!-- LEFT PANE: Code Viewer -->
+<section class="flex-1 bg-surface-lowest flex flex-col min-w-0 overflow-hidden">
+<!-- File Header -->
+<div class="h-12 border-b border-outline-variant flex items-center px-md bg-surface-container-lowest shrink-0">
+<span class="material-symbols-outlined text-outline mr-sm text-sm" data-icon="description">description</span>
+<span class="font-label-mono text-label-mono text-on-surface">auth_middleware.ts</span>
+</div>
+<!-- Code Area -->
+<div class="flex-1 overflow-y-auto bg-surface-container-lowest relative pb-xl">
+<div class="font-label-mono text-label-mono text-[13px] leading-[24px] text-on-surface-variant flex">
+<!-- Line Numbers -->
+<div class="w-12 shrink-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col items-end pr-3 py-4 text-outline select-none sticky left-0 z-10">
+<div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div>
+<div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div>
+<div>21</div><div>22</div><div>23</div><div class="text-citation-gold font-medium">24</div><div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div>
+</div>
+<!-- Code Content -->
+<div class="flex-1 py-4 overflow-x-auto whitespace-pre">
+<div class="px-4">import { Request, Response, NextFunction } from 'express';</div>
+<div class="px-4">import jwt from 'jsonwebtoken';</div>
+<div class="px-4"></div>
+<div class="px-4">interface AuthRequest extends Request {</div>
+<div class="px-4">    user?: any;</div>
+<div class="px-4">}</div>
+<div class="px-4"></div>
+<div class="px-4">export const requireAuth = (req: AuthRequest, res: Response, next: NextFunction) =&gt; {</div>
+<div class="px-4">    const authHeader = req.headers.authorization;</div>
+<div class="px-4"></div>
+<div class="px-4">    if (!authHeader) {</div>
+<div class="px-4">        return res.status(401).json({ error: 'Authorization header missing' });</div>
+<div class="px-4">    }</div>
+<div class="px-4"></div>
+<div class="px-4">    const parts = authHeader.split(' ');</div>
+<div class="px-4">    if (parts.length !== 2 || parts[0] !== 'Bearer') {</div>
+<div class="px-4">        return res.status(401).json({ error: 'Authorization header format must be Bearer [token]' });</div>
+<div class="px-4">    }</div>
+<div class="px-4"></div>
+<div class="px-4">    const token = parts[1];</div>
+<div class="px-4"></div>
+<div class="px-4">    try {</div>
+<div class="px-4">        const payload = jwt.verify(token, process.env.JWT_SECRET!);</div>
+<div class="px-4 code-highlight -mx-4 px-8 text-on-surface">        req.user = payload;</div>
+<div class="px-4">        next();</div>
+<div class="px-4">    } catch (err) {</div>
+<div class="px-4">        return res.status(401).json({ error: 'Invalid or expired token' });</div>
+<div class="px-4">    }</div>
+<div class="px-4">};</div>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT PANE: Chat Interface -->
+<section class="flex-1 bg-surface flex flex-col min-w-0">
+<!-- Chat Header -->
+<div class="h-12 border-b border-outline-variant flex items-center px-md bg-surface shrink-0 justify-between">
+<h2 class="font-h2 text-h2 text-on-surface">Analysis Session</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<!-- Chat History -->
+<div class="flex-1 overflow-y-auto p-lg space-y-xl">
+<!-- User Message -->
+<div class="flex justify-end">
+<div class="max-w-[85%] bg-surface-container-high rounded-xl rounded-tr-sm px-md py-sm">
+<p class="font-body-ui text-body-ui text-on-surface">
+                                How is the user identity attached to the request in the authentication middleware?
+                            </p>
+</div>
+</div>
+<!-- AI Message -->
+<div class="flex justify-start">
+<div class="flex flex-col gap-sm max-w-[90%]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-mono text-label-mono text-primary">Excerpta Assistant</span>
+</div>
+<div class="font-body-excerpt text-body-excerpt text-on-surface space-y-md">
+<p>
+                                    The authentication middleware verifies the JSON Web Token (JWT) provided in the <code class="font-label-mono text-[14px] bg-surface-container px-1 py-0.5 rounded">Authorization</code> header. Upon successful verification, the decoded payload, which contains the user's identity claims, is explicitly attached to the Express request object.
+                                </p>
+<p>
+                                    Specifically, the payload is assigned to the <code class="font-label-mono text-[14px] bg-surface-container px-1 py-0.5 rounded">req.user</code> property before passing control to the next middleware via <code class="font-label-mono text-[14px] bg-surface-container px-1 py-0.5 rounded">next()</code>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[12px] font-label-mono bg-citation-gold/10 border border-citation-gold text-on-surface cursor-pointer hover:bg-citation-gold/20 transition-colors">
+<span class="material-symbols-outlined text-[14px] mr-1" data-icon="link">link</span>
+                                        [auth_middleware.ts, l. 24]
+                                    </span>.
+                                    This allows subsequent route handlers to access the authenticated user's details directly from the request context.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="p-md border-t border-outline-variant bg-surface shrink-0">
+<div class="relative flex items-center bg-surface-container-low border border-outline-variant rounded-lg focus-within:border-primary transition-colors">
+<button class="absolute left-3 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="add_circle">add_circle</span>
+</button>
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-ui text-body-ui text-on-surface pl-10 pr-12 py-3 placeholder-on-surface-variant/50" placeholder="Ask a question about this document..." type="text"/>
+<button class="absolute right-3 text-on-surface-variant hover:text-primary transition-colors bg-primary/10 rounded-full w-8 h-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_upward">arrow_upward</span>
+</button>
+</div>
+<div class="flex justify-between items-center mt-2 px-1">
+<span class="font-caption text-caption text-outline text-[11px]">Shift + Enter for new line</span>
+<div class="flex gap-2">
+<span class="font-label-mono text-label-mono text-outline text-[10px] bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant">Context: auth_middleware.ts</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

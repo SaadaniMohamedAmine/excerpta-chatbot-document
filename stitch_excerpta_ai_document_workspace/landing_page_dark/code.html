@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta - Landing Page</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#f7f9fb",
+                      "secondary-fixed-dim": "#f1bf4f",
+                      "on-tertiary-fixed-variant": "#773205",
+                      "on-secondary": "#ffffff",
+                      "outline-variant": "#c5c5d3",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-surface-variant": "#444651",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "primary": "#00236f",
+                      "surface-tint": "#4059aa",
+                      "tertiary-fixed": "#ffdbcb",
+                      "tertiary-container": "#6e2c00",
+                      "tertiary-fixed-dim": "#ffb691",
+                      "secondary-fixed": "#ffdf9f",
+                      "on-background": "#191c1e",
+                      "error": "#ba1a1a",
+                      "surface-container": "#eceef0",
+                      "primary-container": "#1e3a8a",
+                      "on-tertiary-fixed": "#341100",
+                      "primary-fixed-dim": "#b6c4ff",
+                      "inverse-surface": "#2d3133",
+                      "surface": "#f7f9fb",
+                      "primary-fixed": "#dce1ff",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#261a00",
+                      "surface-dim": "#d8dadc",
+                      "on-primary": "#ffffff",
+                      "secondary": "#795900",
+                      "surface-container-high": "#e6e8ea",
+                      "surface-bright": "#f7f9fb",
+                      "surface-container-low": "#f2f4f6",
+                      "tertiary": "#4b1c00",
+                      "on-primary-fixed": "#00164e",
+                      "outline": "#757682",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#fdca59",
+                      "on-error-container": "#93000a",
+                      "on-secondary-container": "#735500",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-primary-fixed-variant": "#264191",
+                      "on-surface": "#191c1e",
+                      "on-tertiary-container": "#f39461",
+                      "inverse-primary": "#b6c4ff",
+                      "on-primary-container": "#90a8ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "workspace_gap": "1px",
+                      "base": "4px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "2xl": "48px"
+              },
+              "fontFamily": {
+                      "display-wordmark": [
+                              "\"Source Serif 4\""
+                      ],
+                      "h1-mobile": [
+                              "Geist"
+                      ],
+                      "h1": [
+                              "Geist"
+                      ],
+                      "body-excerpt": [
+                              "\"Source Serif 4\""
+                      ],
+                      "label-mono": [
+                              "Geist Mono"
+                      ],
+                      "body-ui": [
+                              "Geist"
+                      ],
+                      "caption": [
+                              "Geist"
+                      ],
+                      "h2": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "display-wordmark": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h1": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-excerpt": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-ui": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        /* Minimal custom CSS for things Tailwind config doesn't cover perfectly yet */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-gradient-primary {
+            background: linear-gradient(to right, #b6c4ff, #dce1ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+      </style>
+</head>
+<body class="bg-[#0B1220] text-primary-fixed-dim font-body-ui text-body-ui antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center px-lg h-16 w-full fixed top-0 w-full h-16 z-50">
+<div class="flex items-center gap-xl">
+<a class="font-display-wordmark text-display-wordmark text-primary dark:text-primary-fixed-dim transition-all duration-200 active:scale-95" href="#">Excerpta</a>
+<div class="hidden md:flex items-center gap-md">
+<a class="font-body-ui text-body-ui text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors transition-all duration-200 active:scale-95" href="#features">Features</a>
+<a class="font-body-ui text-body-ui text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors transition-all duration-200 active:scale-95" href="#how-it-works">How it works</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="font-body-ui text-body-ui text-primary dark:text-primary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors transition-all duration-200 active:scale-95 flex items-center justify-center p-sm rounded-DEFAULT">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dark_mode</span>
+</button>
+<a class="hidden md:inline-flex font-body-ui text-body-ui text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors transition-all duration-200 active:scale-95" href="#">Sign in</a>
+<a class="font-label-mono text-label-mono bg-primary-container text-on-primary-container px-md py-sm rounded-DEFAULT hover:bg-primary-container/90 transition-all duration-200 active:scale-95 border border-primary-fixed-variant" href="#">Try Excerpta</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-16 flex flex-col items-center">
+<!-- Hero Section -->
+<section class="w-full max-w-7xl mx-auto px-lg py-2xl lg:py-[96px] flex flex-col items-center text-center gap-xl">
+<div class="max-w-3xl flex flex-col items-center gap-md">
+<h1 class="font-display-wordmark text-[48px] md:text-[64px] leading-tight font-semibold tracking-tight">
+                    Chat with any document.<br/>
+<span class="text-[#6D8FFF]">Every answer cited to the page.</span>
+</h1>
+<p class="font-body-excerpt text-body-excerpt text-outline max-w-xl">
+                    Precise answers, cited to the line. Designed for researchers, legal professionals, and rigorous thinkers who demand verifiable truth from their AI.
+                </p>
+<div class="flex gap-md mt-sm">
+<a class="font-label-mono text-label-mono bg-primary-container text-on-primary-container px-lg py-sm rounded-DEFAULT hover:bg-primary-container/90 transition-all duration-200 active:scale-95 border border-primary-fixed-variant" href="#">Start Analyzing</a>
+<a class="font-label-mono text-label-mono border border-outline-variant text-primary-fixed-dim px-lg py-sm rounded-DEFAULT hover:bg-surface-variant/10 transition-all duration-200 active:scale-95" href="#demo">View Demo</a>
+</div>
+</div>
+<!-- Hero Visual (Split Pane Mockup) -->
+<div class="w-full max-w-5xl mt-xl glass-panel rounded-lg overflow-hidden border border-[#1E293B] shadow-2xl relative">
+<!-- Mac-like top bar for mockup -->
+<div class="bg-[#131B2E] h-8 flex items-center px-sm border-b border-[#1E293B]">
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-outline-variant/30"></div>
+<div class="w-3 h-3 rounded-full bg-outline-variant/30"></div>
+<div class="w-3 h-3 rounded-full bg-outline-variant/30"></div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row h-[500px]">
+<!-- Chat Pane (Left) -->
+<div class="w-full md:w-1/3 bg-[#0B1220] border-r border-[#1E293B] flex flex-col p-md">
+<div class="flex-grow flex flex-col gap-md overflow-hidden">
+<div class="bg-[#131B2E] p-sm rounded-DEFAULT border border-[#1E293B] self-end max-w-[85%]">
+<p class="font-body-ui text-body-ui text-primary-fixed-dim">What does the agreement state about termination?</p>
+</div>
+<div class="bg-surface-variant/5 p-sm rounded-DEFAULT border border-[#1E293B] self-start max-w-[95%]">
+<p class="font-body-ui text-body-ui text-primary-fixed-dim mb-2">The agreement may be terminated by either party with 30 days written notice.</p>
+<span class="inline-flex items-center gap-1 font-label-mono text-label-mono bg-secondary-fixed/10 text-secondary-fixed-dim border border-secondary-fixed/30 px-2 py-0.5 rounded-[2px]">
+<span class="material-symbols-outlined text-[14px]">description</span> Pg. 4, Section 2.1
+                                </span>
+</div>
+</div>
+<div class="mt-auto pt-sm">
+<div class="bg-[#131B2E] border border-primary-fixed-variant rounded-DEFAULT p-2 flex items-center">
+<span class="font-body-ui text-caption text-outline ml-2">Ask a question...</span>
+<span class="material-symbols-outlined ml-auto text-primary-fixed-dim">send</span>
+</div>
+</div>
+</div>
+<!-- Document Viewer Pane (Right) -->
+<div class="w-full md:w-2/3 bg-white p-lg overflow-hidden relative">
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, #000 27px, #000 28px);"></div>
+<div class="max-w-prose mx-auto">
+<h2 class="font-h1 text-h1 text-[#191c1e] mb-md border-b pb-sm">Master Services Agreement</h2>
+<p class="font-body-excerpt text-body-excerpt text-[#444651] mb-md">
+                                 This Master Services Agreement ("Agreement") is entered into as of the Effective Date by and between the parties listed below.
+                             </p>
+<h3 class="font-h2 text-h2 text-[#191c1e] mt-xl mb-sm">2. Term and Termination</h3>
+<p class="font-body-excerpt text-body-excerpt text-[#444651] mb-md relative">
+<span class="bg-[#f1bf4f]/30 border-b-2 border-[#f1bf4f] pb-[2px] transition-all duration-300">2.1 Either party may terminate this Agreement without cause by providing thirty (30) days prior written notice to the other party.</span> Upon termination, all outstanding payments shall become immediately due and payable.
+                                 
+                                 <!-- Highlight indicator line in margin -->
+</p><div class="absolute -left-6 top-0 bottom-0 w-1 bg-[#f1bf4f] rounded-full"></div>
+<p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section class="w-full bg-[#131B2E] py-2xl border-y border-[#1E293B]" id="features">
+<div class="max-w-7xl mx-auto px-lg">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl">
+<!-- Feature 1 -->
+<div class="flex flex-col gap-sm">
+<div class="w-10 h-10 rounded-DEFAULT bg-primary-container/30 border border-primary-fixed-variant flex items-center justify-center text-primary-fixed-dim mb-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">find_in_page</span>
+</div>
+<h3 class="font-h2 text-h2 text-primary-fixed-dim">Verifiable Citations</h3>
+<p class="font-body-ui text-body-ui text-outline">Every claim made by the AI is hyperlinked directly to the source document, highlighting the exact passage used to generate the answer.</p>
+</div>
+<!-- Feature 2 -->
+<div class="flex flex-col gap-sm">
+<div class="w-10 h-10 rounded-DEFAULT bg-primary-container/30 border border-primary-fixed-variant flex items-center justify-center text-primary-fixed-dim mb-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">library_books</span>
+</div>
+<h3 class="font-h2 text-h2 text-primary-fixed-dim">Cross-Document Synthesis</h3>
+<p class="font-body-ui text-body-ui text-outline">Ask questions across your entire library. Excerpta intelligently retrieves and synthesizes information from multiple PDFs simultaneously.</p>
+</div>
+<!-- Feature 3 -->
+<div class="flex flex-col gap-sm">
+<div class="w-10 h-10 rounded-DEFAULT bg-primary-container/30 border border-primary-fixed-variant flex items-center justify-center text-primary-fixed-dim mb-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">lock</span>
+</div>
+<h3 class="font-h2 text-h2 text-primary-fixed-dim">Enterprise Privacy</h3>
+<p class="font-body-ui text-body-ui text-outline">Your documents are processed in an isolated environment. We never train our base models on your proprietary research or legal files.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- How it works Section -->
+<section class="w-full py-2xl" id="how-it-works">
+<div class="max-w-5xl mx-auto px-lg text-center">
+<h2 class="font-h1 text-h1 text-primary-fixed-dim mb-xl">How it works</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg relative">
+<!-- Connector Line (Desktop) -->
+<div class="hidden md:block absolute top-1/2 left-[15%] right-[15%] h-px bg-[#1E293B] -z-10"></div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center gap-md bg-[#0B1220] p-md">
+<div class="w-12 h-12 rounded-full bg-[#131B2E] border border-[#1E293B] flex items-center justify-center text-secondary-fixed-dim font-label-mono text-[18px]">1</div>
+<h4 class="font-h2 text-h2 text-primary-fixed-dim">Upload</h4>
+<p class="font-body-ui text-caption text-outline">Drag and drop your PDFs, research papers, or legal contracts into your secure workspace.</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center gap-md bg-[#0B1220] p-md">
+<div class="w-12 h-12 rounded-full bg-[#131B2E] border border-[#1E293B] flex items-center justify-center text-secondary-fixed-dim font-label-mono text-[18px]">2</div>
+<h4 class="font-h2 text-h2 text-primary-fixed-dim">Ask</h4>
+<p class="font-body-ui text-caption text-outline">Query your documents in natural language. Ask for summaries, specific clauses, or thematic analysis.</p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center gap-md bg-[#0B1220] p-md">
+<div class="w-12 h-12 rounded-full bg-[#131B2E] border border-[#1E293B] flex items-center justify-center text-secondary-fixed-dim font-label-mono text-[18px]">3</div>
+<h4 class="font-h2 text-h2 text-primary-fixed-dim">Get Cited Answers</h4>
+<p class="font-body-ui text-caption text-outline">Receive precise answers with in-line citation tags that jump directly to the highlighted source text.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-[#1E293B] bg-[#131B2E] py-lg mt-auto">
+<div class="max-w-7xl mx-auto px-lg flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="font-display-wordmark text-[20px] text-primary-fixed-dim">Excerpta</div>
+<div class="flex gap-md font-body-ui text-caption text-outline">
+<a class="hover:text-primary-fixed-dim transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary-fixed-dim transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary-fixed-dim transition-colors" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>

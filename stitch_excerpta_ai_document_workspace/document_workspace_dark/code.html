@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta - Document Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#f7f9fb",
+                      "secondary-fixed-dim": "#f1bf4f",
+                      "on-tertiary-fixed-variant": "#773205",
+                      "on-secondary": "#ffffff",
+                      "outline-variant": "#c5c5d3",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-surface-variant": "#444651",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "primary": "#00236f",
+                      "surface-tint": "#4059aa",
+                      "tertiary-fixed": "#ffdbcb",
+                      "tertiary-container": "#6e2c00",
+                      "tertiary-fixed-dim": "#ffb691",
+                      "secondary-fixed": "#ffdf9f",
+                      "on-background": "#191c1e",
+                      "error": "#ba1a1a",
+                      "surface-container": "#eceef0",
+                      "primary-container": "#1e3a8a",
+                      "on-tertiary-fixed": "#341100",
+                      "primary-fixed-dim": "#b6c4ff",
+                      "inverse-surface": "#2d3133",
+                      "surface": "#f7f9fb",
+                      "primary-fixed": "#dce1ff",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#261a00",
+                      "surface-dim": "#d8dadc",
+                      "on-primary": "#ffffff",
+                      "secondary": "#795900",
+                      "surface-container-high": "#e6e8ea",
+                      "surface-bright": "#f7f9fb",
+                      "surface-container-low": "#f2f4f6",
+                      "tertiary": "#4b1c00",
+                      "on-primary-fixed": "#00164e",
+                      "outline": "#757682",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#fdca59",
+                      "on-error-container": "#93000a",
+                      "on-secondary-container": "#735500",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-primary-fixed-variant": "#264191",
+                      "on-surface": "#191c1e",
+                      "on-tertiary-container": "#f39461",
+                      "inverse-primary": "#b6c4ff",
+                      "on-primary-container": "#90a8ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "workspace_gap": "1px",
+                      "base": "4px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "2xl": "48px"
+              },
+              "fontFamily": {
+                      "display-wordmark": [
+                              "\"Source Serif 4\""
+                      ],
+                      "h1-mobile": [
+                              "Geist"
+                      ],
+                      "h1": [
+                              "Geist"
+                      ],
+                      "body-excerpt": [
+                              "\"Source Serif 4\""
+                      ],
+                      "label-mono": [
+                              "Geist Mono"
+                      ],
+                      "body-ui": [
+                              "Geist"
+                      ],
+                      "caption": [
+                              "Geist"
+                      ],
+                      "h2": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "display-wordmark": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h1": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-excerpt": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-ui": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface dark:bg-inverse-surface h-screen overflow-hidden flex flex-col font-body-ui text-body-ui">
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center px-lg h-16 w-full fixed top-0 w-full h-16 z-50 border-b border-outline-variant dark:border-outline bg-surface dark:bg-inverse-surface">
+<div class="flex items-center space-x-lg">
+<span class="font-display-wordmark text-display-wordmark text-primary dark:text-primary-fixed-dim">Excerpta</span>
+<nav class="hidden md:flex space-x-md">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Features</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">How it works</a>
+</nav>
+</div>
+<div class="flex items-center space-x-md">
+<button class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Sign in</a>
+<button class="bg-primary text-on-primary px-4 py-2 rounded font-label-mono text-label-mono transition-all duration-200 active:scale-95">Try Excerpta</button>
+</div>
+</header>
+<div class="flex flex-1 pt-16">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-surface-container-low dark:bg-inverse-surface fixed left-0 h-full w-20 flex flex-col border-r border-outline-variant dark:border-outline z-40 hidden md:flex flex-col items-center py-md space-y-md">
+<div class="mb-xl flex flex-col items-center">
+<div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mb-sm text-primary dark:text-primary-fixed-dim font-display-wordmark">E</div>
+</div>
+<a class="w-12 h-12 flex items-center justify-center rounded-lg text-primary dark:text-primary-fixed-dim bg-primary/5 transition-all duration-200 ease-in-out" href="#" title="Documents">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+</a>
+<a class="w-12 h-12 flex items-center justify-center rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out" href="#" title="Collections">
+<span class="material-symbols-outlined" data-icon="folder_special">folder_special</span>
+</a>
+<div class="flex-1"></div>
+<a class="w-12 h-12 flex items-center justify-center rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out mb-xl" href="#" title="Settings">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</a>
+</nav>
+<!-- Main Workspace Area -->
+<main class="flex-1 flex ml-0 md:ml-20 bg-background dark:bg-inverse-surface h-full">
+<!-- Left Pane: Document Viewer -->
+<section class="flex-1 flex flex-col border-r border-outline-variant dark:border-outline h-full">
+<!-- Toolbar -->
+<div class="h-12 border-b border-outline-variant dark:border-outline flex items-center justify-between px-md bg-surface dark:bg-inverse-surface">
+<div class="flex items-center space-x-sm">
+<span class="font-h2 text-h2 text-on-surface dark:text-on-secondary">Q3_Financial_Report.pdf</span>
+<span class="font-caption text-caption text-on-surface-variant dark:text-surface-variant bg-surface-container-high dark:bg-surface-variant px-2 py-1 rounded">Read Only</span>
+</div>
+<div class="flex items-center space-x-sm text-on-surface-variant dark:text-surface-variant">
+<button class="p-1 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded"><span class="material-symbols-outlined" data-icon="zoom_out">zoom_out</span></button>
+<span class="font-label-mono text-label-mono">100%</span>
+<button class="p-1 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded"><span class="material-symbols-outlined" data-icon="zoom_in">zoom_in</span></button>
+</div>
+</div>
+<!-- Document Content -->
+<div class="flex-1 overflow-y-auto p-xl bg-surface-container-lowest dark:bg-[#131B2E]">
+<div class="max-w-3xl mx-auto font-body-excerpt text-body-excerpt text-on-surface dark:text-on-secondary space-y-md">
+<h2 class="font-h1 text-h1 mb-lg">Q3 Financial Overview</h2>
+<p>The third quarter demonstrated significant resilience across all major operating segments. Total revenue increased by 14% year-over-year, driven primarily by strong performance in the cloud infrastructure division.</p>
+<p>Operating expenses were carefully managed, resulting in a 220 basis point improvement in operating margin. <span class="bg-[#E8C468]/30 px-1 py-0.5 rounded cursor-pointer hover:bg-[#E8C468]/50 transition-colors" title="View citation">Notably, R&amp;D expenditure remained stable at 18% of total revenue, reflecting our ongoing commitment to long-term innovation without compromising near-term profitability.</span></p>
+<p>Cash flow from operations reached a record $4.2 billion for the quarter, allowing for continued share repurchases and strategic investments.</p>
+</div>
+</div>
+</section>
+<!-- Right Pane: AI Chat -->
+<section class="flex-1 flex flex-col h-full bg-surface dark:bg-inverse-surface">
+<!-- Chat Header -->
+<div class="h-12 border-b border-outline-variant dark:border-outline flex items-center px-md justify-between">
+<span class="font-label-mono text-label-mono text-on-surface dark:text-on-secondary uppercase tracking-wider">Analysis Assistant</span>
+<button class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<!-- Chat History -->
+<div class="flex-1 overflow-y-auto p-md space-y-xl">
+<!-- User Message -->
+<div class="flex justify-end">
+<div class="bg-primary text-on-primary rounded-xl rounded-tr-sm p-md max-w-[80%]">
+<p class="font-body-ui text-body-ui">What was the R&amp;D expenditure as a percentage of revenue?</p>
+</div>
+</div>
+<!-- AI Response -->
+<div class="flex justify-start">
+<div class="bg-surface-container-lowest dark:bg-[#131B2E] border border-outline-variant dark:border-outline rounded-xl rounded-tl-sm p-md max-w-[90%] space-y-sm shadow-sm">
+<p class="font-body-ui text-body-ui text-on-surface dark:text-on-secondary">R&amp;D expenditure remained stable at 18% of total revenue.</p>
+<!-- Citation Tag -->
+<div class="inline-flex items-center space-x-1 bg-[#E8C468]/10 border border-[#E8C468] px-2 py-1 rounded font-label-mono text-label-mono text-on-surface dark:text-on-secondary cursor-pointer hover:bg-[#E8C468]/20 transition-colors">
+<span class="material-symbols-outlined text-[14px]" data-icon="description">description</span>
+<span>[p. 12]</span>
+</div>
+</div>
+</div>
+<!-- Suggested Questions -->
+<div class="flex flex-wrap gap-2 pt-4">
+<button class="px-3 py-1.5 rounded-full border border-outline-variant dark:border-outline text-on-surface-variant dark:text-surface-variant font-caption text-caption hover:border-primary dark:hover:border-primary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors">What were the main revenue drivers?</button>
+<button class="px-3 py-1.5 rounded-full border border-outline-variant dark:border-outline text-on-surface-variant dark:text-surface-variant font-caption text-caption hover:border-primary dark:hover:border-primary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors">Summarize cash flow</button>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-md border-t border-outline-variant dark:border-outline">
+<div class="relative flex items-center bg-surface-container-lowest dark:bg-[#131B2E] border border-outline-variant dark:border-outline rounded-lg focus-within:border-primary dark:focus-within:border-primary-fixed-dim focus-within:ring-1 focus-within:ring-primary transition-all">
+<button class="p-2 ml-1 text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim">
+<span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface dark:text-on-secondary font-body-ui text-body-ui py-3 placeholder-on-surface-variant dark:placeholder-surface-variant" placeholder="Ask a question about this document..." type="text"/>
+<button class="p-2 mr-1 text-primary dark:text-primary-fixed-dim hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

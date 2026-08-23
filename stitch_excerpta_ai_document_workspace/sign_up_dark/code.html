@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up - Excerpta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Geist+Mono:wght@100..900&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#90a8ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#b6c4ff",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#f1bf4f",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-tertiary-container": "#f39461",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary": "#00236f",
+                        "on-error-container": "#93000a",
+                        "secondary": "#795900",
+                        "error-container": "#ffdad6",
+                        "outline": "#757682",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed-variant": "#264191",
+                        "tertiary": "#4b1c00",
+                        "primary-fixed": "#dce1ff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed": "#341100",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-surface-variant": "#444651",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "primary-container": "#1e3a8a",
+                        "secondary-fixed": "#ffdf9f",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdca59",
+                        "on-primary-fixed": "#00164e",
+                        "surface-tint": "#4059aa",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#6e2c00",
+                        "surface-bright": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#735500",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "workspace_gap": "1px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": [
+                            "Geist Mono"
+                        ],
+                        "h1": [
+                            "Geist"
+                        ],
+                        "body-excerpt": [
+                            "\"Source Serif 4\""
+                        ],
+                        "h1-mobile": [
+                            "Geist"
+                        ],
+                        "caption": [
+                            "Geist"
+                        ],
+                        "body-ui": [
+                            "Geist"
+                        ],
+                        "h2": [
+                            "Geist"
+                        ],
+                        "display-wordmark": [
+                            "\"Source Serif 4\""
+                        ]
+                    },
+                    "fontSize": {
+                        "label-mono": [
+                            "13px",
+                            {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "500"
+                            }
+                        ],
+                        "h1": [
+                            "32px",
+                            {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "body-excerpt": [
+                            "18px",
+                            {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "h1-mobile": [
+                            "24px",
+                            {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "caption": [
+                            "12px",
+                            {
+                                "lineHeight": "16px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "body-ui": [
+                            "16px",
+                            {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "h2": [
+                            "20px",
+                            {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "display-wordmark": [
+                            "24px",
+                            {
+                                "lineHeight": "32px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "600"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-inverse-surface min-h-screen flex items-center justify-center p-md">
+<div class="w-full max-w-md bg-[#131B2E] border border-outline/30 rounded-lg p-xl flex flex-col gap-lg shadow-2xl relative overflow-hidden">
+<!-- Subtle decorative glow -->
+<div class="absolute -top-32 -right-32 w-64 h-64 bg-primary-fixed-dim/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col items-center gap-sm text-center z-10">
+<h1 class="font-display-wordmark text-display-wordmark text-primary-fixed-dim">Excerpta</h1>
+<h2 class="font-h1 text-h1 text-surface">Create an account</h2>
+<p class="font-body-ui text-body-ui text-surface-variant">Join the focused environment for deep synthesis.</p>
+</div>
+<form class="flex flex-col gap-md z-10">
+<div class="flex flex-col gap-xs">
+<label class="font-label-mono text-label-mono text-surface-variant uppercase tracking-wider" for="name">Full Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">person</span>
+<input class="w-full bg-[#1A233A] border border-outline/30 rounded focus:border-primary-fixed-dim focus:ring-0 text-surface font-body-ui text-body-ui pl-10 pr-3 py-2 transition-colors placeholder-outline" id="name" placeholder="Dr. Jane Doe" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-mono text-label-mono text-surface-variant uppercase tracking-wider" for="email">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">mail</span>
+<input class="w-full bg-[#1A233A] border border-outline/30 rounded focus:border-primary-fixed-dim focus:ring-0 text-surface font-body-ui text-body-ui pl-10 pr-3 py-2 transition-colors placeholder-outline" id="email" placeholder="jane.doe@university.edu" type="email"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-mono text-label-mono text-surface-variant uppercase tracking-wider" for="password">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">lock</span>
+<input class="w-full bg-[#1A233A] border border-outline/30 rounded focus:border-primary-fixed-dim focus:ring-0 text-surface font-body-ui text-body-ui pl-10 pr-10 py-2 transition-colors placeholder-outline" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant hover:text-primary-fixed-dim transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility_off</span>
+</button>
+</div>
+<p class="font-caption text-caption text-outline mt-1">Must be at least 8 characters long.</p>
+</div>
+<button class="w-full bg-primary-fixed-dim text-on-primary-fixed font-h2 text-h2 py-3 rounded mt-sm hover:bg-primary-fixed transition-colors flex justify-center items-center gap-sm" type="submit">
+                Create account
+                <span class="material-symbols-outlined" style="font-size: 20px;">arrow_forward</span>
+</button>
+</form>
+<div class="relative flex items-center py-sm z-10">
+<div class="flex-grow border-t border-outline/30"></div>
+<span class="flex-shrink-0 mx-4 font-caption text-caption text-surface-variant">or continue with</span>
+<div class="flex-grow border-t border-outline/30"></div>
+</div>
+<div class="flex gap-md z-10">
+<button class="flex-1 bg-[#1A233A] border border-outline/30 rounded py-2 flex justify-center items-center gap-sm hover:bg-[#1A233A]/80 hover:border-primary-fixed-dim transition-colors text-surface font-label-mono text-label-mono" type="button">
+<!-- Google Icon Placeholder -->
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"></path></svg>
+                Google
+            </button>
+<button class="flex-1 bg-[#1A233A] border border-outline/30 rounded py-2 flex justify-center items-center gap-sm hover:bg-[#1A233A]/80 hover:border-primary-fixed-dim transition-colors text-surface font-label-mono text-label-mono" type="button">
+<!-- ORCID Icon Placeholder (Generic Academic Icon) -->
+<span class="material-symbols-outlined" style="font-size: 20px;">school</span>
+                Institution
+            </button>
+</div>
+<p class="text-center font-body-ui text-body-ui text-surface-variant mt-sm z-10">
+            Already have an account? <a class="text-primary-fixed-dim hover:underline font-h2 text-h2 text-[16px]" href="#">Sign in</a>
+</p>
+</div>
+</body></html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta Dashboard - First Time Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-container": "#90a8ff",
+                      "on-secondary-fixed": "#261a00",
+                      "surface-container-low": "#f2f4f6",
+                      "surface": "#f7f9fb",
+                      "inverse-primary": "#b6c4ff",
+                      "on-surface": "#191c1e",
+                      "secondary-fixed-dim": "#f1bf4f",
+                      "tertiary-fixed": "#ffdbcb",
+                      "on-tertiary-container": "#f39461",
+                      "on-background": "#191c1e",
+                      "on-tertiary-fixed-variant": "#773205",
+                      "on-error": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "primary": "#00236f",
+                      "on-error-container": "#93000a",
+                      "secondary": "#795900",
+                      "error-container": "#ffdad6",
+                      "outline": "#757682",
+                      "inverse-surface": "#2d3133",
+                      "on-primary-fixed-variant": "#264191",
+                      "tertiary": "#4b1c00",
+                      "primary-fixed": "#dce1ff",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary-fixed": "#341100",
+                      "error": "#ba1a1a",
+                      "primary-fixed-dim": "#b6c4ff",
+                      "on-surface-variant": "#444651",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface-container": "#eceef0",
+                      "primary-container": "#1e3a8a",
+                      "secondary-fixed": "#ffdf9f",
+                      "surface-dim": "#d8dadc",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#fdca59",
+                      "on-primary-fixed": "#00164e",
+                      "surface-tint": "#4059aa",
+                      "tertiary-fixed-dim": "#ffb691",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "surface-container-high": "#e6e8ea",
+                      "tertiary-container": "#6e2c00",
+                      "surface-bright": "#f7f9fb",
+                      "background": "#f7f9fb",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#735500",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#c5c5d3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "workspace_gap": "1px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "2xl": "48px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "label-mono": [
+                              "Geist Mono"
+                      ],
+                      "h1": [
+                              "Geist"
+                      ],
+                      "body-excerpt": [
+                              "\"Source Serif 4\""
+                      ],
+                      "h1-mobile": [
+                              "Geist"
+                      ],
+                      "caption": [
+                              "Geist"
+                      ],
+                      "body-ui": [
+                              "Geist"
+                      ],
+                      "h2": [
+                              "Geist"
+                      ],
+                      "display-wordmark": [
+                              "\"Source Serif 4\""
+                      ]
+              },
+              "fontSize": {
+                      "label-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "h1": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-excerpt": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-ui": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-wordmark": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .ph-bold-duotone {
+            --ph-secondary-color: var(--color-secondary-fixed-dim); /* Assuming gold/yellowish */
+            --ph-primary-color: var(--color-primary);
+        }
+        
+        .drag-active {
+            border-color: #00236f !important; /* primary */
+            background-color: rgba(0, 35, 111, 0.05) !important;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen overflow-hidden flex font-body-ui text-body-ui">
+<!-- Top Navigation Anchor (Desktop only for full app context) -->
+<header class="fixed top-0 w-full h-16 z-50 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flex justify-between items-center px-lg hidden md:flex">
+<div class="flex items-center gap-md">
+<span class="font-display-wordmark text-display-wordmark text-primary dark:text-primary-fixed-dim">Excerpta</span>
+<nav class="flex items-center gap-lg ml-xl h-full">
+<!-- Suppressed navigation items for empty state focused task -->
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs rounded-full">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs rounded-full">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
+</div>
+</div>
+</header>
+<!-- Side Navigation (Mobile hidden, Desktop flex) -->
+<aside class="fixed left-0 h-full w-20 flex-col items-center py-md space-y-md bg-surface-container-low dark:bg-inverse-surface border-r border-outline-variant dark:border-outline hidden md:flex pt-[80px] z-40">
+<!-- Tab 1: Documents (Active) -->
+<a aria-label="Documents" class="w-12 h-12 flex items-center justify-center rounded-lg text-primary dark:text-primary-fixed-dim bg-primary/5 transition-all duration-200 ease-in-out active:scale-95 group relative" href="#">
+<span class="material-symbols-outlined" data-icon="description" data-weight="fill" style="font-variation-settings: 'FILL' 1;">description</span>
+<!-- Tooltip -->
+<span class="absolute left-full ml-sm px-xs py-[2px] bg-inverse-surface text-inverse-on-surface font-label-mono text-label-mono rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-md">Documents</span>
+</a>
+<!-- Tab 2: Collections -->
+<a aria-label="Collections" class="w-12 h-12 flex items-center justify-center rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out active:scale-95 group relative" href="#">
+<span class="material-symbols-outlined" data-icon="folder_special">folder_special</span>
+<span class="absolute left-full ml-sm px-xs py-[2px] bg-inverse-surface text-inverse-on-surface font-label-mono text-label-mono rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-md">Collections</span>
+</a>
+<!-- Tab 3: Settings -->
+<a aria-label="Settings" class="w-12 h-12 flex items-center justify-center rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary transition-all duration-200 ease-in-out active:scale-95 group relative mt-auto mb-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="absolute left-full ml-sm px-xs py-[2px] bg-inverse-surface text-inverse-on-surface font-label-mono text-label-mono rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-md">Settings</span>
+</a>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center w-full h-full md:pl-20 pt-16 bg-background relative overflow-y-auto p-lg">
+<!-- Decorative Header for Empty State Context -->
+<div class="mb-xl text-center max-w-lg mx-auto">
+<h1 class="font-h1 text-h1 md:font-h1 md:text-h1 text-on-surface mb-sm">Welcome to Workspace</h1>
+<p class="text-on-surface-variant text-body-ui">Your focused environment for deep synthesis. Start by adding source material.</p>
+</div>
+<!-- Drag & Drop Zone -->
+<div class="w-full max-w-3xl border-2 border-dashed border-outline-variant rounded-xl bg-surface flex flex-col items-center justify-center p-2xl transition-all duration-200 relative overflow-hidden group" id="drop-zone">
+<!-- Icon -->
+<div class="mb-lg p-md rounded-full bg-surface-container-low group-hover:bg-primary/5 transition-colors duration-300">
+<i class="ph-duotone ph-upload-simple text-[64px] text-primary" style="--ph-secondary-color: #f1bf4f; --ph-primary-color: #00236f;"></i>
+</div>
+<!-- Heading -->
+<h2 class="font-h2 text-h2 text-on-surface mb-md text-center">Upload a document to begin.</h2>
+<!-- Secondary Action (Browse) -->
+<div class="mb-lg">
+<label class="cursor-pointer inline-flex items-center justify-center px-lg py-sm border border-primary text-primary rounded bg-surface hover:bg-primary/5 active:scale-95 transition-all duration-200 font-label-mono text-label-mono" for="file-upload">
+                    Browse files
+                </label>
+<input accept=".pdf,.doc,.docx,.txt,.csv,.js,.py,.html,.css" class="hidden" id="file-upload" multiple="" type="file"/>
+</div>
+<!-- Subtext & Supported Formats -->
+<div class="flex flex-col items-center gap-sm">
+<p class="font-caption text-caption text-on-surface-variant text-center">Supported formats: PDF, DOCX, TXT, CSV, and code files</p>
+<div class="flex items-center gap-sm text-outline">
+<i class="ph ph-file-pdf text-xl"></i>
+<i class="ph ph-file-doc text-xl"></i>
+<i class="ph ph-file-text text-xl"></i>
+<i class="ph ph-file-csv text-xl"></i>
+<i class="ph ph-file-code text-xl"></i>
+</div>
+</div>
+<!-- Drag Overlay (Visible only when dragging over) -->
+<div class="absolute inset-0 bg-primary/5 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-200" id="drag-overlay">
+<div class="flex flex-col items-center">
+<i class="ph-duotone ph-download-simple text-[48px] text-primary mb-sm animate-bounce" style="--ph-secondary-color: #f1bf4f;"></i>
+<p class="font-h2 text-h2 text-primary font-bold">Drop files here</p>
+</div>
+</div>
+</div>
+<!-- Subtle shadow/elevation for the zone -->
+<div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none z-0"></div>
+</main>
+<!-- Bottom Navigation Bar (Mobile only) -->
+<nav class="fixed bottom-0 w-full h-16 bg-surface dark:bg-inverse-surface border-t border-outline-variant dark:border-outline flex justify-around items-center md:hidden z-50">
+<a aria-label="Documents" class="flex flex-col items-center justify-center w-full h-full text-primary dark:text-primary-fixed-dim border-t-2 border-primary pt-1 active:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-[2px]" data-icon="description" data-weight="fill" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-caption text-caption text-[10px]">Documents</span>
+</a>
+<a aria-label="Collections" class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-surface-variant border-t-2 border-transparent pt-1 hover:text-primary active:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-[2px]" data-icon="folder_special">folder_special</span>
+<span class="font-caption text-caption text-[10px]">Collections</span>
+</a>
+<a aria-label="Settings" class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-surface-variant border-t-2 border-transparent pt-1 hover:text-primary active:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined mb-[2px]" data-icon="settings">settings</span>
+<span class="font-caption text-caption text-[10px]">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple drag and drop visual feedback
+        const dropZone = document.getElementById('drop-zone');
+        const dragOverlay = document.getElementById('drag-overlay');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            dropZone.classList.add('drag-active');
+            dragOverlay.classList.remove('opacity-0');
+        }
+
+        function unhighlight(e) {
+            dropZone.classList.remove('drag-active');
+            dragOverlay.classList.add('opacity-0');
+        }
+
+        dropZone.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            let dt = e.dataTransfer;
+            let files = dt.files;
+            
+            // In a real app, this would trigger file processing
+            console.log("Files dropped:", files);
+            if(files.length > 0) {
+                 // Simulate loading state briefly
+                const uploadIcon = dropZone.querySelector('.ph-upload-simple');
+                if(uploadIcon) {
+                    uploadIcon.classList.remove('ph-upload-simple');
+                    uploadIcon.classList.add('ph-spinner', 'animate-spin');
+                    
+                    setTimeout(() => {
+                        uploadIcon.classList.add('ph-upload-simple');
+                        uploadIcon.classList.remove('ph-spinner', 'animate-spin');
+                    }, 1500);
+                }
+            }
+        }
+    </script>
+</body></html>

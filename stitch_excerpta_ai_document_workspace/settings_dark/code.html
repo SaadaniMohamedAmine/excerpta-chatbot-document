@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Excerpta - Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400..700&amp;family=Geist:wght@400..900&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#90a8ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#b6c4ff",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#f1bf4f",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-tertiary-container": "#f39461",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "primary": "#00236f",
+                        "on-error-container": "#93000a",
+                        "secondary": "#795900",
+                        "error-container": "#ffdad6",
+                        "outline": "#757682",
+                        "inverse-surface": "#131B2E", /* Adjusted for prompt requirement */
+                        "on-primary-fixed-variant": "#264191",
+                        "tertiary": "#4b1c00",
+                        "primary-fixed": "#dce1ff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed": "#341100",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-surface-variant": "#444651",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container": "#eceef0",
+                        "primary-container": "#1e3a8a",
+                        "secondary-fixed": "#ffdf9f",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fdca59",
+                        "on-primary-fixed": "#00164e",
+                        "surface-tint": "#4059aa",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-container": "#6e2c00",
+                        "surface-bright": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#735500",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "workspace_gap": "1px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["Geist Mono", "monospace"],
+                        "h1": ["Geist", "sans-serif"],
+                        "body-excerpt": ["Source Serif 4", "serif"],
+                        "h1-mobile": ["Geist", "sans-serif"],
+                        "caption": ["Geist", "sans-serif"],
+                        "body-ui": ["Geist", "sans-serif"],
+                        "h2": ["Geist", "sans-serif"],
+                        "display-wordmark": ["Source Serif 4", "serif"]
+                    },
+                    "fontSize": {
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-excerpt": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-ui": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-wordmark": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0f1423; /* Slightly darker than surface for contrast */
+            color: #eff1f3; /* inverse-on-surface */
+        }
+        .dark .border-outline { border-color: #374151; } /* Fallback outline */
+        .glass-panel {
+            background: rgba(19, 27, 46, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex">
+<!-- SideNavBar (from JSON) -->
+<nav class="hidden md:flex bg-surface-container-low dark:bg-inverse-surface text-primary dark:text-primary-fixed-dim font-label-mono text-label-mono fixed left-0 h-full w-20 flex flex-col border-r border-outline-variant dark:border-outline flex-col items-center py-md space-y-md z-40 transition-all duration-200 ease-in-out">
+<div class="mb-lg pt-sm">
+<span class="font-display-wordmark text-display-wordmark text-primary dark:text-primary-fixed-dim">E</span>
+</div>
+<!-- Navigation Items -->
+<a class="flex flex-col items-center justify-center p-sm rounded-DEFAULT text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary w-full max-w-[56px] h-[56px] group" href="#">
+<span class="material-symbols-outlined mb-xs text-[20px] transition-transform group-active:scale-95">description</span>
+<span class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">Docs</span>
+</a>
+<a class="flex flex-col items-center justify-center p-sm rounded-DEFAULT text-on-surface-variant dark:text-surface-variant hover:bg-primary/5 hover:text-primary w-full max-w-[56px] h-[56px] group" href="#">
+<span class="material-symbols-outlined mb-xs text-[20px] transition-transform group-active:scale-95">folder_special</span>
+<span class="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">Collections</span>
+</a>
+<a class="flex flex-col items-center justify-center p-sm rounded-DEFAULT text-primary dark:text-primary-fixed-dim bg-primary/5 hover:bg-primary/5 hover:text-primary w-full max-w-[56px] h-[56px] group" href="#">
+<span class="material-symbols-outlined mb-xs text-[20px] transition-transform group-active:scale-95" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-[10px] opacity-100 transition-opacity">Settings</span>
+</a>
+<div class="mt-auto pb-sm flex flex-col items-center">
+<img alt="User profile" class="w-8 h-8 rounded-full border border-outline dark:border-outline object-cover" data-alt="A small, circular avatar portrait of an academic professional in their 40s. The lighting is dramatic and moody, reflecting a modern, confident tone. The background is a deep, dark blue (#131B2E) with subtle golden highlights (#f1bf4f) illuminating the subject's face, conveying a sense of scholarly rigor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC1UsEFAMYRGGXk0_eaVj8Jzsyq7HTmGTS-q9oVR1HIBpI2gOLjIe_-qE76jBXGl6uxqnQIkuu4xbkcoZjLxm7OgmoJQ2sV2pucaZJmpB8Gdg-sQaf5Khbs2HNhd9DSKKT21oz4vRjWm-qcirTOjCZjyUZemvGbsy00aHCStTlD8eKbU-eG2GXRgFVQN9oha-yIrN82aDp9hZtcW05VLfO0xVPBYjdfLoiTXJ3q3yztaW4J9XVW-6y"/>
+</div>
+</nav>
+<!-- TopNavBar (Mobile) - Used as TopAppBar on Mobile as per instructions, hiding bottom nav since it's a settings page -->
+<header class="md:hidden bg-surface dark:bg-inverse-surface fixed top-0 w-full h-16 z-50 border-b border-outline-variant dark:border-outline flex justify-between items-center px-lg h-16 w-full">
+<div class="flex items-center">
+<span class="font-display-wordmark text-display-wordmark text-primary dark:text-primary-fixed-dim mr-sm">Excerpta</span>
+</div>
+<div class="flex items-center space-x-md">
+<button class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-20 mt-16 md:mt-0 p-lg md:p-xl flex justify-center w-full">
+<div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-xl">
+<!-- Settings Sub-nav (Left Column) -->
+<aside class="md:col-span-3 space-y-sm font-body-ui text-body-ui">
+<h2 class="font-h2 text-h2 mb-md text-surface-container-low">Settings</h2>
+<nav class="flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible space-x-sm md:space-x-0 md:space-y-xs pb-sm md:pb-0">
+<a class="flex items-center px-md py-sm rounded-DEFAULT bg-primary/10 text-primary-fixed-dim border border-primary/20 whitespace-nowrap" href="#">
+<span class="material-symbols-outlined mr-sm text-[18px]">person</span>
+                        Account
+                    </a>
+<a class="flex items-center px-md py-sm rounded-DEFAULT text-surface-variant hover:bg-white/5 hover:text-white transition-colors whitespace-nowrap" href="#">
+<span class="material-symbols-outlined mr-sm text-[18px]">notifications</span>
+                        Notifications
+                    </a>
+<a class="flex items-center px-md py-sm rounded-DEFAULT text-surface-variant hover:bg-white/5 hover:text-white transition-colors whitespace-nowrap" href="#">
+<span class="material-symbols-outlined mr-sm text-[18px]">security</span>
+                        Security
+                    </a>
+<a class="flex items-center px-md py-sm rounded-DEFAULT text-surface-variant hover:bg-white/5 hover:text-white transition-colors whitespace-nowrap" href="#">
+<span class="material-symbols-outlined mr-sm text-[18px]">credit_card</span>
+                        Billing
+                    </a>
+</nav>
+</aside>
+<!-- Settings Content (Right Column) -->
+<div class="md:col-span-9 space-y-xl">
+<!-- Profile Section (Glassmorphism Card) -->
+<section class="glass-panel rounded-lg p-lg md:p-xl flex flex-col md:flex-row gap-lg items-start md:items-center">
+<div class="relative shrink-0">
+<img class="w-24 h-24 rounded-lg object-cover border border-outline" data-alt="A high-quality, professional headshot of a researcher. The image is set against a very dark, moody studio background. Lighting is cinematic, with a soft key light highlighting the face and a subtle, warm rim light. The mood is confident, precise, and serious, fitting an academic application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAFbOprq3UGuR49sxJXKfP1vKLfokL_PRTOPW9z4Lo9sOc9_6fS7g_JT2DqivsaN8So3Vy6MxHwv7dn3QEC-Y2PaczDUJ1YLyPwrznrkfrSOb6niByWPZ9olHoJpT1Ezfi3HXlak1r3o_oefhDfR0EbXRcpMi8TOH6Purel2PdieDWs3_Hnj-g1yuD6sFwbf1__lBAgEvjZFcKuVHZPgazW8bHSQEueZjSAQg9MeCAfRi6RFcCRPMk"/>
+<button class="absolute bottom-[-8px] right-[-8px] bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-primary-container transition-colors shadow-lg">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+</div>
+<div class="flex-1 space-y-md w-full">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="block font-label-mono text-label-mono text-surface-variant mb-xs">Full Name</label>
+<input class="w-full bg-surface-container-lowest/5 border border-outline rounded-DEFAULT px-md py-sm text-surface-container-low font-body-ui focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="Dr. Eleanor Vance"/>
+</div>
+<div>
+<label class="block font-label-mono text-label-mono text-surface-variant mb-xs">Email Address</label>
+<input class="w-full bg-surface-container-lowest/5 border border-outline rounded-DEFAULT px-md py-sm text-surface-container-low font-body-ui focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="email" value="e.vance@university.edu"/>
+</div>
+</div>
+<div class="flex justify-end pt-sm">
+<button class="bg-primary hover:bg-primary-container text-white px-lg py-sm rounded-DEFAULT font-label-mono text-label-mono transition-colors">Save Changes</button>
+</div>
+</div>
+</section>
+<!-- Preferences Section -->
+<section class="glass-panel rounded-lg p-lg md:p-xl space-y-lg">
+<h3 class="font-h2 text-h2 text-surface-container-low border-b border-outline/50 pb-sm">Preferences</h3>
+<div class="flex items-center justify-between">
+<div>
+<div class="font-body-ui text-body-ui text-surface-container-low">Appearance</div>
+<div class="font-caption text-caption text-surface-variant">Toggle between light and dark workspace themes.</div>
+</div>
+<!-- Theme Toggle Component -->
+<div class="flex items-center bg-surface-container-lowest/10 rounded-full p-[2px] border border-outline/50">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">light_mode</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-inverse-surface shadow-sm border border-outline/50 flex items-center justify-center text-primary-fixed-dim">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">dark_mode</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-md border-t border-outline/30">
+<div>
+<div class="font-body-ui text-body-ui text-surface-container-low">Compact Citation Mode</div>
+<div class="font-caption text-caption text-surface-variant">Reduce vertical spacing in document viewer for denser reading.</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-outline rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</section>
+<!-- Danger Zone Section -->
+<section class="border border-error/30 bg-error/5 rounded-lg p-lg md:p-xl space-y-md mt-2xl relative overflow-hidden">
+<!-- Subtle red warning pattern/gradient in background -->
+<div class="absolute inset-0 bg-gradient-to-br from-error/0 to-error/10 pointer-events-none"></div>
+<div class="relative z-10">
+<h3 class="font-h2 text-h2 text-error mb-xs flex items-center">
+<span class="material-symbols-outlined mr-sm">warning</span>
+                            Danger Zone
+                        </h3>
+<p class="font-caption text-caption text-surface-variant mb-md max-w-2xl">
+                            Permanently delete your Excerpta account, all associated workspaces, documents, and synthesis collections. This action cannot be undone.
+                        </p>
+<div class="flex items-center justify-between border-t border-error/20 pt-md mt-md">
+<div class="font-body-ui text-body-ui text-surface-container-low">Delete Account</div>
+<button class="bg-error hover:bg-[#a01616] text-white px-lg py-sm rounded-DEFAULT font-label-mono text-label-mono transition-colors border border-error">
+                                Delete Account
+                            </button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>
