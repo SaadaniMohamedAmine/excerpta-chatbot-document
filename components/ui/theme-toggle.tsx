@@ -10,6 +10,10 @@ export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
+  // Intentional one-time mount flag (next-themes' own documented pattern to
+  // avoid a hydration mismatch) — not the "sync external state" case this
+  // lint rule targets.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   React.useEffect(() => setMounted(true), []);
 
   if (!mounted) {

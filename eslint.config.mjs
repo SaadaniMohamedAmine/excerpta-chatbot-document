@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Scratch space for the `remember` tooling plugin, not app source.
+    ".remember/**",
   ]),
 ]);
 
