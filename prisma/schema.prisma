@@ -9,13 +9,13 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String    @unique
-  emailVerified Boolean   @default(false)
+  email         String         @unique
+  emailVerified Boolean        @default(false)
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   documents     Document[]
   conversations Conversation[]
   collections   Collection[]
@@ -69,19 +69,20 @@ model Verification {
 }
 
 model Document {
-  id            String   @id @default(cuid())
-  userId        String
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  title         String
-  fileType      String   // pdf | docx | csv | code
-  fileUrl       String
-  fileSize      Int
-  pageCount     Int?
-  status        String   @default("processing") // processing | ready | failed
-  createdAt     DateTime @default(now())
-  chunks        Chunk[]
-  conversations Conversation[]
-  collections   CollectionDocument[]
+  id                 String               @id @default(cuid())
+  userId             String
+  user               User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title              String
+  fileType           String // pdf | docx | csv | code
+  fileUrl            String
+  fileSize           Int
+  pageCount          Int?
+  status             String               @default("processing") // processing | ready | failed
+  suggestedQuestions Json? // string[] generated at upload, stored as JSON
+  createdAt          DateTime             @default(now())
+  chunks             Chunk[]
+  conversations      Conversation[]
+  collections        CollectionDocument[]
 }
 
 model Chunk {
@@ -95,11 +96,11 @@ model Chunk {
 }
 
 model Collection {
-  id            String   @id @default(cuid())
+  id            String               @id @default(cuid())
   userId        String
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   name          String
-  createdAt     DateTime @default(now())
+  createdAt     DateTime             @default(now())
   documents     CollectionDocument[]
   conversations Conversation[]
 }
@@ -109,20 +110,21 @@ model CollectionDocument {
   documentId   String
   collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
   document     Document   @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
   @@id([collectionId, documentId])
 }
 
 model Conversation {
-  id           String       @id @default(cuid())
+  id           String      @id @default(cuid())
   userId       String
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   documentId   String?
-  document     Document?    @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  document     Document?   @relation(fields: [documentId], references: [id], onDelete: Cascade)
   collectionId String?
-  collection   Collection?  @relation(fields: [collectionId], references: [id], onDelete: Cascade)
-  isPublic     Boolean      @default(false)
-  shareToken   String?      @unique
-  createdAt    DateTime     @default(now())
+  collection   Collection? @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  isPublic     Boolean     @default(false)
+  shareToken   String?     @unique
+  createdAt    DateTime    @default(now())
   messages     Message[]
 }
 
@@ -130,7 +132,7 @@ model Message {
   id             String       @id @default(cuid())
   conversationId String
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  role           String       // user | assistant
+  role           String // user | assistant
   content        String
   citations      Json?
   createdAt      DateTime     @default(now())
