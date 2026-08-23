@@ -4,8 +4,13 @@
 // (the CLI no longer auto-loads .env files, hence the explicit dotenv import).
 // The runtime PrismaClient (lib/db.ts) still needs its own driver adapter —
 // this file only configures the Prisma CLI (generate/db push/studio).
-import "dotenv/config";
+// Plain "dotenv/config" only loads .env — this project follows Next.js's own
+// convention of keeping local secrets in .env.local instead, so it has to be
+// pointed at explicitly.
+import { config as loadEnv } from "dotenv";
 import { defineConfig } from "prisma/config";
+
+loadEnv({ path: ".env.local" });
 
 // Plain process.env read (not the `env()` helper) on purpose: `env()` throws
 // immediately if DATABASE_URL is unset, which would break `prisma generate`
