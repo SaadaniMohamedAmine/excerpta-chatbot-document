@@ -29,3 +29,23 @@ export async function GET(
 // that's out of scope. GET above always requires ownership; it does not
 // check isPublic. Do not add a sharing endpoint unless a later phase
 // explicitly asks for one.
+
+// Powers the delete-on-hover icon in ConversationHistoryList.
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+): Promise<NextResponse> {
+  const session = await auth.api.getSession({ headers: request.headers });
+  if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const { id } = await params;
+
+  const conversation = await prisma.conversation.findUnique({ where: { id } });
+  if (!conversation || conversation.userId !== session.user.id) {
+    return NextResponse.json({ error: "Conversation not found" }, { status: 404 });
+  }
+
+  await prisma.conversation.delete({ where: { id } });
+
+  return NextResponse.json({ ok: true });
+}
