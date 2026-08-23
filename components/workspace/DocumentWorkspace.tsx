@@ -12,7 +12,9 @@ import ProcessingPanel from "./ProcessingPanel";
 import ErrorPanel from "./ErrorPanel";
 import ConversationHistoryList from "@/components/dashboard/ConversationHistoryList";
 import { Button } from "@/components/ui/button";
-import { ClockCounterClockwise, Plus } from "@phosphor-icons/react";
+import { ClockCounterClockwise, Plus, Export, ShareNetwork } from "@phosphor-icons/react";
+import { ExportModal } from "./ExportModal";
+import { ShareModal } from "./ShareModal";
 import type { ChatUIMessage } from "@/lib/chat";
 
 export interface WorkspaceDocument {
@@ -50,6 +52,8 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [initialMessages, setInitialMessages] = useState<ChatUIMessage[]>([]);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [exportModalOpen, setExportModalOpen] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
   const [conversationLoading, setConversationLoading] = useState(true);
   const pdfViewerRef = useRef<PdfViewerHandle>(null);
 
@@ -143,8 +147,41 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
             <Plus className="mr-1.5 h-4 w-4" weight="regular" />
             New conversation
           </Button>
+          <button
+            type="button"
+            onClick={() => setShareModalOpen(true)}
+            disabled={!conversationId}
+            aria-label="Share conversation"
+            className="rounded-md p-2 text-text-secondary transition-colors hover:bg-background hover:text-text-primary disabled:opacity-40"
+          >
+            <ShareNetwork size={18} />
+          </button>
+          <button
+            type="button"
+            onClick={() => setExportModalOpen(true)}
+            disabled={!conversationId}
+            aria-label="Export conversation"
+            className="rounded-md p-2 text-text-secondary transition-colors hover:bg-background hover:text-text-primary disabled:opacity-40"
+          >
+            <Export size={18} />
+          </button>
         </div>
       </div>
+
+      {conversationId && (
+        <>
+          <ExportModal
+            open={exportModalOpen}
+            onClose={() => setExportModalOpen(false)}
+            conversationId={conversationId}
+          />
+          <ShareModal
+            open={shareModalOpen}
+            onClose={() => setShareModalOpen(false)}
+            conversationId={conversationId}
+          />
+        </>
+      )}
 
       {historyOpen && (
         <ConversationHistoryList
