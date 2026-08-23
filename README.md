@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Excerpta
 
-## Getting Started
+AI document chat that cites its sources, down to the page.
 
-First, run the development server:
+Excerpta is a full-stack AI chatbot for your documents. Upload a PDF, Word file,
+spreadsheet, or code file, ask it questions in plain language, and get answers
+grounded in the document — every claim cited to the exact page it came from, with
+a click-to-scroll interaction that jumps straight to the source passage.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Live demo:** [excerpta-chatbot-document.vercel.app](https://excerpta-chatbot-document.vercel.app)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Multi-format upload — PDF, DOCX, CSV, and code files, parsed as-is
+- Natural-language chat over the uploaded document, streamed token by token
+- Page-cited answers — every response names the exact source page
+- Click-to-scroll source highlighting — click a citation, jump to the passage
+- Multi-document collections — group related documents into one workspace
+- PDF and DOCX export of a conversation
+- Public sharing — share a read-only link to a conversation, revocable at any time
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech stack
 
-## Learn More
+**Frontend**
+- Next.js 16 (App Router, Turbopack)
+- TypeScript
+- Tailwind CSS v3
+- react-pdf
+- Phosphor Icons
 
-To learn more about Next.js, take a look at the following resources:
+**Backend**
+- Next.js Route Handlers
+- Better Auth (Google, GitHub, email/password)
+- PostgreSQL (Neon) + Prisma ORM
+- Vercel Blob (file storage, client-side direct upload)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**AI**
+- Groq (primary chat inference) with automatic fallback to Google Gemini
+- Google Gemini (embeddings via `@google/genai`, fallback chat)
+- LangChain.js `RecursiveCharacterTextSplitter` for chunking (retrieval and
+  streaming themselves are hand-rolled, not routed through the Vercel AI SDK's
+  `useChat` — the backend streams plain text with a citation marker parsed
+  server-side, which doesn't fit `useChat`'s structured stream protocol)
+- Upstash Vector (vector database)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Infra**
+- Vercel (hosting, free tier)
+- pdf-parse, mammoth, papaparse, highlight.js (file parsing)
+- pdfkit, docx (export)
 
-## Deploy on Vercel
+Every service in this stack runs on its free tier — there are no paid dependencies
+anywhere in the deployment.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Getting started
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/SaadaniMohamedAmine/excerpta-chatbot-document.git
+   cd excerpta-chatbot-document
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Copy the environment template and fill in your own keys (Neon connection string,
+   Better Auth secret + OAuth client IDs/secrets, Groq API key, Gemini API key,
+   Upstash Vector URL/token, Vercel Blob token):
+   ```bash
+   cp .env.example .env.local
+   ```
+4. Push the schema to your Neon database (this project uses `prisma db push`,
+   not migrations):
+   ```bash
+   npx prisma db push
+   ```
+5. Run the dev server:
+   ```bash
+   npm run dev
+   ```
+6. Open [http://localhost:3000](http://localhost:3000).
+
+---
+
+Excerpta is part of a portfolio of AI SaaS projects, built to demonstrate
+production-grade full-stack AI application patterns end to end — auth, storage,
+async processing, retrieval-augmented generation, and deployment — entirely on
+free-tier infrastructure.
