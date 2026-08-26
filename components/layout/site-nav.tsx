@@ -7,13 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { authClient, useSession } from "@/lib/auth-client";
-
-export const NAV_LINKS = [
-  { href: "/#features", label: "Features" },
-  { href: "/#pricing", label: "Pricing" },
-  { href: "/#whats-new", label: "What's new" },
-  { href: "/#how-it-works", label: "How it works" },
-] as const;
+import { NAV_LINKS } from "@/components/layout/nav-links";
 
 function AuthActions() {
   const router = useRouter();
