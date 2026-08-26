@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Gear, SignOut } from "@phosphor-icons/react";
+import { Gear, List, SignOut } from "@phosphor-icons/react";
 import { Logo } from "@/components/ui/logo";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Avatar } from "@/components/ui/avatar";
@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useSession, authClient } from "@/lib/auth-client";
 
-export function TopNav() {
+export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
   const router = useRouter();
   const { data: session } = useSession();
   const user = session?.user;
@@ -31,7 +31,17 @@ export function TopNav() {
   return (
     <header className="shrink-0 border-b border-border bg-surface">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Logo />
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={onMenuClick}
+            aria-label="Open menu"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-text-secondary transition-colors hover:bg-background hover:text-text-primary md:hidden"
+          >
+            <List size={20} weight="regular" />
+          </button>
+          <Logo />
+        </div>
         <div className="flex items-center gap-1">
           <LanguageSwitcher />
           <ThemeToggle />

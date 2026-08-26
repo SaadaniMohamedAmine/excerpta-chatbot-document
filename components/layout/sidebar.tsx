@@ -13,6 +13,7 @@ import {
   SidebarSimple,
   SignOut,
   CaretUpDown,
+  X,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { useSession, authClient } from "@/lib/auth-client";
@@ -36,7 +37,13 @@ const ACCOUNT_ITEMS = [{ href: "/settings", label: "Settings", icon: Gear }] as 
 
 const COLLAPSE_STORAGE_KEY = "excerpta:sidebar-collapsed";
 
-export function Sidebar() {
+export function Sidebar({
+  mobileOpen,
+  onMobileClose,
+}: {
+  mobileOpen: boolean;
+  onMobileClose: () => void;
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const { data: session } = useSession();
@@ -63,6 +70,7 @@ export function Sidebar() {
   }
 
   async function handleSignOut() {
+    onMobileClose();
     await authClient.signOut();
     router.push("/sign-in");
   }
@@ -70,36 +78,61 @@ export function Sidebar() {
   const user = session?.user;
 
   return (
-    <aside
-      className={cn(
-        "flex h-full shrink-0 flex-col overflow-hidden border-r border-border bg-surface py-4 transition-[width] duration-200 ease-in-out",
-        collapsed ? "w-16" : "w-64",
-        // Avoid a flash of the wrong width before localStorage is read.
-        !hydrated && "invisible"
+    <>
+      {/* Mobile backdrop */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          onClick={onMobileClose}
+          aria-hidden="true"
+        />
       )}
-    >
-      {/* New document CTA */}
-      <div className={cn("mb-4 px-3 transition-[padding] duration-200 ease-in-out", collapsed && "px-2")}>
-        <Link
-          href="/documents"
-          className={cn(
-            "flex h-10 items-center justify-center rounded-md bg-primary font-sans text-sm font-medium text-white transition-[width,gap,background-color] duration-200 ease-in-out hover:bg-primary/90",
-            collapsed ? "w-10 gap-0" : "w-full gap-2"
-          )}
-          aria-label="New document"
-          title="New document"
-        >
-          <Plus size={18} weight="bold" className="shrink-0" />
-          <span
-            className={cn(
-              "overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-200 ease-in-out",
-              collapsed ? "max-w-0 opacity-0" : "max-w-[10rem] opacity-100"
-            )}
+
+      <aside
+        className={cn(
+          "fixed inset-y-0 left-0 z-50 flex h-full w-64 -translate-x-full flex-col overflow-hidden border-r border-border bg-surface py-4 transition-transform duration-200 ease-in-out",
+          mobileOpen && "translate-x-0",
+          "md:static md:z-auto md:translate-x-0 md:transition-[width]",
+          collapsed ? "md:w-16" : "md:w-64",
+          // Avoid a flash of the wrong width before localStorage is read.
+          !hydrated && "md:invisible"
+        )}
+      >
+        {/* Mobile-only close button */}
+        <div className="mb-2 flex justify-end px-3 md:hidden">
+          <button
+            type="button"
+            onClick={onMobileClose}
+            aria-label="Close menu"
+            className="flex h-8 w-8 items-center justify-center rounded-md text-text-secondary transition-colors hover:bg-background hover:text-text-primary"
           >
-            New document
-          </span>
-        </Link>
-      </div>
+            <X size={18} weight="regular" />
+          </button>
+        </div>
+
+        {/* New document CTA */}
+        <div className={cn("mb-4 px-3 transition-[padding] duration-200 ease-in-out", collapsed && "px-2")}>
+          <Link
+            href="/documents"
+            onClick={onMobileClose}
+            className={cn(
+              "flex h-10 items-center justify-center rounded-md bg-primary font-sans text-sm font-medium text-white transition-[width,gap,background-color] duration-200 ease-in-out hover:bg-primary/90",
+              collapsed ? "w-10 gap-0" : "w-full gap-2"
+            )}
+            aria-label="New document"
+            title="New document"
+          >
+            <Plus size={18} weight="bold" className="shrink-0" />
+            <span
+              className={cn(
+                "overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-200 ease-in-out",
+                collapsed ? "max-w-0 opacity-0" : "max-w-[10rem] opacity-100"
+              )}
+            >
+              New document
+            </span>
+          </Link>
+        </div>
 
       {/* Workspace section */}
       <nav className="flex flex-col gap-1 px-3">
@@ -112,7 +145,13 @@ export function Sidebar() {
           Workspace
         </span>
         {WORKSPACE_ITEMS.map((item) => (
-          <SidebarNavItem key={item.href} item={item} pathname={pathname} collapsed={collapsed} />
+          <SidebarNavItem
+            key={item.href}
+            item={item}
+            pathname={pathname}
+            collapsed={collapsed}
+            onNavigate={onMobileClose}
+          />
         ))}
       </nav>
 
@@ -129,14 +168,20 @@ export function Sidebar() {
           Account
         </span>
         {ACCOUNT_ITEMS.map((item) => (
-          <SidebarNavItem key={item.href} item={item} pathname={pathname} collapsed={collapsed} />
+          <SidebarNavItem
+            key={item.href}
+            item={item}
+            pathname={pathname}
+            collapsed={collapsed}
+            onNavigate={onMobileClose}
+          />
         ))}
       </nav>
 
       <div className="flex-1" />
 
-      {/* Collapse toggle */}
-      <div className={cn("mb-2 px-3 transition-[padding] duration-200 ease-in-out", collapsed && "px-2")}>
+      {/* Collapse toggle — desktop only, doesn't apply to the mobile overlay drawer */}
+      <div className={cn("mb-2 hidden px-3 transition-[padding] duration-200 ease-in-out md:block", collapsed && "px-2")}>
         <button
           type="button"
           onClick={toggleCollapsed}
@@ -192,7 +237,7 @@ export function Sidebar() {
             <DropdownMenuLabel>{user?.email ?? "Account"}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="/settings" className="flex w-full items-center gap-2">
+              <Link href="/settings" onClick={onMobileClose} className="flex w-full items-center gap-2">
                 <Gear size={16} /> Settings
               </Link>
             </DropdownMenuItem>
@@ -203,7 +248,8 @@ export function Sidebar() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }
 
@@ -211,10 +257,12 @@ function SidebarNavItem({
   item,
   pathname,
   collapsed,
+  onNavigate,
 }: {
   item: { href: string; label: string; icon: React.ElementType };
   pathname: string | null;
   collapsed: boolean;
+  onNavigate?: () => void;
 }) {
   const isActive = pathname?.startsWith(item.href) ?? false;
   const Icon = item.icon;
@@ -222,6 +270,7 @@ function SidebarNavItem({
   return (
     <Link
       href={item.href}
+      onClick={onNavigate}
       aria-label={item.label}
       title={item.label}
       className={cn(
