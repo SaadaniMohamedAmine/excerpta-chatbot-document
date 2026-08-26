@@ -19,13 +19,13 @@ export function SiteNav() {
 
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm text-text-secondary transition-colors hover:text-text-primary"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 

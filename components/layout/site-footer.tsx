@@ -1,4 +1,5 @@
 // components/layout/site-footer.tsx
+import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
 import { NAV_LINKS } from "@/components/layout/site-nav";
 
@@ -9,13 +10,9 @@ export function SiteFooter() {
         <Logo href="/" />
         <div className="flex flex-wrap items-center justify-center gap-6">
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="transition-colors hover:text-text-primary"
-            >
+            <Link key={link.href} href={link.href} className="transition-colors hover:text-text-primary">
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
       </div>

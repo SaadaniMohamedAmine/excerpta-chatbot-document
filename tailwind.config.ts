@@ -25,6 +25,25 @@ const config: Config = {
       borderRadius: {
         DEFAULT: "0.5rem",
       },
+      keyframes: {
+        "eq-bar": {
+          "0%, 100%": {
+            transform: "scaleY(1)",
+            backgroundColor: "rgb(var(--color-primary) / 0.5)",
+          },
+          "20%": {
+            transform: "scaleY(1.5)",
+            backgroundColor: "rgb(var(--color-primary))",
+          },
+          "40%": {
+            transform: "scaleY(1)",
+            backgroundColor: "rgb(var(--color-primary) / 0.5)",
+          },
+        },
+      },
+      animation: {
+        "eq-bar": "eq-bar 1s linear infinite",
+      },
     },
   },
   plugins: [],
