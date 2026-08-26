@@ -14,6 +14,7 @@ import {
   FileArrowDown,
   Gear,
 } from "@phosphor-icons/react";
+import { BackToTop } from "@/components/ui/back-to-top";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
@@ -408,6 +409,8 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+
+      <BackToTop />
     </div>
   );
 }
