@@ -6,7 +6,6 @@ import {
   FileArrowUp,
   Quotes,
   CursorClick,
-  GithubLogo,
   ArrowRight,
   Check,
   Sparkle,
@@ -389,23 +388,16 @@ export default function LandingPage() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-10 text-sm text-text-secondary sm:flex-row sm:justify-between sm:px-6">
           <Logo href="/" />
-          <div className="flex items-center gap-6">
-            <a
-              href="https://github.com/SaadaniMohamedAmine/excerpta-chatbot-document"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 transition-colors hover:text-text-primary"
-            >
-              <GithubLogo size={16} weight="duotone" />
-              GitHub
-            </a>
-            {/* TODO: replace with your real portfolio site URL */}
-            <a
-              href="#"
-              className="transition-colors hover:text-text-primary"
-            >
-              Portfolio
-            </a>
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="transition-colors hover:text-text-primary"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       </footer>
