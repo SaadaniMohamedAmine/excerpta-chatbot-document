@@ -18,6 +18,7 @@ import { BackToTop } from "@/components/ui/back-to-top";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
+import { Reveal } from "@/components/ui/reveal";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const NAV_LINKS = [
@@ -160,7 +161,7 @@ export default function LandingPage() {
         {/* Hero */}
         <section className="mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 sm:pt-24">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <div>
+            <Reveal>
               <h1 className="font-serif text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
                 Chat with any document.
                 <br />
@@ -184,12 +185,12 @@ export default function LandingPage() {
                   See how it works
                 </a>
               </div>
-            </div>
+            </Reveal>
 
             {/* Hero visual: a static illustration of the split viewer/chat UI.
                 No screenshot exists yet — this is a decorative mockup built
                 entirely from divs and the design tokens. */}
-            <div className="relative">
+            <Reveal delayMs={150} className="relative">
               <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-xl">
                 <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
                   <span className="h-2.5 w-2.5 rounded-full bg-error/60" />
@@ -231,14 +232,14 @@ export default function LandingPage() {
                 aria-hidden="true"
                 className="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-2xl bg-primary/10"
               />
-            </div>
+            </Reveal>
           </div>
         </section>
 
         {/* Features */}
         <section id="features" className="scroll-mt-20 border-t border-border bg-surface">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-            <div className="max-w-2xl">
+            <Reveal className="max-w-2xl">
               <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
                 Built to answer with evidence.
               </h2>
@@ -246,19 +247,18 @@ export default function LandingPage() {
                 Excerpta is not a generic chatbot pointed at a file. Every part of it
                 exists to keep an answer traceable to the exact place it came from.
               </p>
-            </div>
+            </Reveal>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {FEATURES.map((feature) => (
-                <Card
-                  key={feature.title}
-                  className="group cursor-pointer border-border bg-background p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
-                >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
-                    <feature.icon size={24} weight="duotone" />
-                  </span>
-                  <h3 className="mt-5 text-base font-semibold">{feature.title}</h3>
-                  <p className="mt-2 text-sm text-text-secondary">{feature.description}</p>
-                </Card>
+              {FEATURES.map((feature, index) => (
+                <Reveal key={feature.title} delayMs={index * 80}>
+                  <Card className="group h-full cursor-pointer border-border bg-background p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
+                      <feature.icon size={24} weight="duotone" />
+                    </span>
+                    <h3 className="mt-5 text-base font-semibold">{feature.title}</h3>
+                    <p className="mt-2 text-sm text-text-secondary">{feature.description}</p>
+                  </Card>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -267,57 +267,58 @@ export default function LandingPage() {
         {/* Pricing */}
         <section id="pricing" className="scroll-mt-20 border-t border-border">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-            <div className="max-w-2xl">
+            <Reveal className="max-w-2xl">
               <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
                 Simple, transparent pricing.
               </h2>
               <p className="mt-4 text-text-secondary">
                 Excerpta is free during beta. A Pro plan for heavier workflows is on the way.
               </p>
-            </div>
+            </Reveal>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:max-w-3xl">
-              {PLANS.map((plan) => (
-                <Card
-                  key={plan.name}
-                  className={`cursor-pointer border-border bg-surface p-6 ${
-                    !plan.comingSoon ? "ring-1 ring-primary/30" : ""
-                  }`}
-                >
-                  <div className="flex items-baseline justify-between">
-                    <h3 className="text-lg font-semibold">{plan.name}</h3>
-                    {plan.comingSoon && (
-                      <span className="rounded-full bg-gold/20 px-2.5 py-0.5 text-xs font-medium text-text-primary">
-                        Coming soon
-                      </span>
-                    )}
-                  </div>
-                  <p className="mt-1 text-2xl font-semibold">{plan.price}</p>
-                  <p className="mt-2 text-sm text-text-secondary">{plan.tagline}</p>
-                  <ul className="mt-6 flex flex-col gap-2.5">
-                    {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-2 text-sm">
-                        <Check
-                          size={16}
-                          weight="bold"
-                          className="mt-0.5 shrink-0 text-primary"
-                        />
-                        <span className="text-text-secondary">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    asChild={!plan.comingSoon}
-                    disabled={plan.comingSoon}
-                    variant={plan.comingSoon ? "secondary" : "primary"}
-                    className="mt-6 w-full"
+              {PLANS.map((plan, index) => (
+                <Reveal key={plan.name} delayMs={index * 80}>
+                  <Card
+                    className={`h-full cursor-pointer border-border bg-surface p-6 ${
+                      !plan.comingSoon ? "ring-1 ring-primary/30" : ""
+                    }`}
                   >
-                    {plan.comingSoon ? (
-                      <span>{plan.cta.label}</span>
-                    ) : (
-                      <Link href={plan.cta.href as string}>{plan.cta.label}</Link>
-                    )}
-                  </Button>
-                </Card>
+                    <div className="flex items-baseline justify-between">
+                      <h3 className="text-lg font-semibold">{plan.name}</h3>
+                      {plan.comingSoon && (
+                        <span className="rounded-full bg-gold/20 px-2.5 py-0.5 text-xs font-medium text-text-primary">
+                          Coming soon
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1 text-2xl font-semibold">{plan.price}</p>
+                    <p className="mt-2 text-sm text-text-secondary">{plan.tagline}</p>
+                    <ul className="mt-6 flex flex-col gap-2.5">
+                      {plan.features.map((feature) => (
+                        <li key={feature} className="flex items-start gap-2 text-sm">
+                          <Check
+                            size={16}
+                            weight="bold"
+                            className="mt-0.5 shrink-0 text-primary"
+                          />
+                          <span className="text-text-secondary">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Button
+                      asChild={!plan.comingSoon}
+                      disabled={plan.comingSoon}
+                      variant={plan.comingSoon ? "secondary" : "primary"}
+                      className="mt-6 w-full"
+                    >
+                      {plan.comingSoon ? (
+                        <span>{plan.cta.label}</span>
+                      ) : (
+                        <Link href={plan.cta.href as string}>{plan.cta.label}</Link>
+                      )}
+                    </Button>
+                  </Card>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -326,28 +327,27 @@ export default function LandingPage() {
         {/* What's new */}
         <section id="whats-new" className="scroll-mt-20 border-t border-border bg-surface">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-            <div className="max-w-2xl">
+            <Reveal className="max-w-2xl">
               <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
                 What&apos;s new.
               </h2>
               <p className="mt-4 text-text-secondary">
                 Excerpta is actively evolving. Here&apos;s what shipped most recently.
               </p>
-            </div>
+            </Reveal>
             <div className="mt-12 grid gap-6 sm:grid-cols-2">
-              {CHANGELOG.map((entry) => (
-                <Card
-                  key={entry.title}
-                  className="group flex cursor-pointer gap-4 border-border bg-background p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
-                >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
-                    <entry.icon size={20} weight="duotone" />
-                  </span>
-                  <div>
-                    <h3 className="text-base font-semibold">{entry.title}</h3>
-                    <p className="mt-1 text-sm text-text-secondary">{entry.description}</p>
-                  </div>
-                </Card>
+              {CHANGELOG.map((entry, index) => (
+                <Reveal key={entry.title} delayMs={index * 80}>
+                  <Card className="group flex h-full cursor-pointer gap-4 border-border bg-background p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
+                      <entry.icon size={20} weight="duotone" />
+                    </span>
+                    <div>
+                      <h3 className="text-base font-semibold">{entry.title}</h3>
+                      <p className="mt-1 text-sm text-text-secondary">{entry.description}</p>
+                    </div>
+                  </Card>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -355,17 +355,17 @@ export default function LandingPage() {
 
         {/* How it works */}
         <section id="how-it-works" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
               How it works
             </h2>
             <p className="mt-4 text-text-secondary">
               Three steps, from a raw file to an answer you can verify.
             </p>
-          </div>
+          </Reveal>
           <div className="mt-12 grid gap-10 sm:grid-cols-3 sm:gap-8">
             {STEPS.map((step, index) => (
-              <div key={step.number} className="relative">
+              <Reveal key={step.number} delayMs={index * 120} className="relative">
                 <div className="flex items-center">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary font-serif text-base font-semibold text-white shadow-md shadow-primary/20">
                     {step.number}
@@ -379,7 +379,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="mt-5 text-base font-semibold">{step.title}</h3>
                 <p className="mt-2 text-sm text-text-secondary">{step.description}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </section>
