@@ -31,7 +31,7 @@ export function SettingsLayout({ user, providers }: SettingsLayoutProps) {
   const [activeTab, setActiveTab] = useState<SettingsTab>("profile");
 
   return (
-    <div className="mx-auto flex w-full max-w-4xl gap-10 px-6 py-10">
+    <div className="mx-auto flex w-full max-w-6xl gap-10 px-4 py-10 sm:px-6">
       <nav className="w-48 shrink-0">
         <h1 className="mb-6 text-xl font-semibold text-text-primary">Settings</h1>
         <ul className="flex flex-col gap-1">
