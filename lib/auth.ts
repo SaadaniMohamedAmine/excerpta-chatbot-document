@@ -12,6 +12,12 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 8,
+    // No email provider is wired up yet (see .env.example) — log the reset
+    // link server-side so the flow is testable locally instead of silently
+    // failing. Replace with a real sender (e.g. Resend) before production.
+    sendResetPassword: async ({ user, url }) => {
+      console.log(`[auth] Password reset requested for ${user.email}: ${url}`);
+    },
   },
   socialProviders: {
     google: {
