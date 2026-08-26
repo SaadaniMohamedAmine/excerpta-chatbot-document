@@ -83,8 +83,8 @@ export function Sidebar() {
         <Link
           href="/documents"
           className={cn(
-            "flex h-10 items-center justify-center gap-2 rounded-md bg-primary font-sans text-sm font-medium text-white transition-[width,background-color] duration-200 ease-in-out hover:bg-primary/90",
-            collapsed ? "w-10" : "w-full"
+            "flex h-10 items-center justify-center rounded-md bg-primary font-sans text-sm font-medium text-white transition-[width,gap,background-color] duration-200 ease-in-out hover:bg-primary/90",
+            collapsed ? "w-10 gap-0" : "w-full gap-2"
           )}
           aria-label="New document"
           title="New document"
@@ -143,8 +143,8 @@ export function Sidebar() {
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           className={cn(
-            "flex h-9 items-center gap-2 rounded-md text-text-secondary transition-[padding,background-color,color] duration-200 ease-in-out hover:bg-background hover:text-text-primary",
-            collapsed ? "w-full justify-center" : "w-full px-2"
+            "flex h-9 w-full items-center rounded-md text-text-secondary transition-[padding,gap,background-color,color] duration-200 ease-in-out hover:bg-background hover:text-text-primary",
+            collapsed ? "justify-center gap-0" : "gap-2 px-2"
           )}
         >
           <SidebarSimple size={18} weight="regular" className="shrink-0" />
@@ -166,8 +166,8 @@ export function Sidebar() {
             <button
               type="button"
               className={cn(
-                "flex items-center gap-2 rounded-md py-1.5 text-left transition-[width,padding,background-color] duration-200 ease-in-out hover:bg-background",
-                collapsed ? "w-10 justify-center px-0" : "w-full px-2"
+                "flex items-center rounded-md py-1.5 text-left transition-[width,padding,gap,background-color] duration-200 ease-in-out hover:bg-background",
+                collapsed ? "w-10 justify-center gap-0 px-0" : "w-full gap-2 px-2"
               )}
               aria-label="Account menu"
             >
@@ -225,8 +225,8 @@ function SidebarNavItem({
       aria-label={item.label}
       title={item.label}
       className={cn(
-        "relative flex h-10 items-center gap-2.5 rounded-md text-sm font-medium text-text-secondary transition-[width,padding,background-color,color] duration-200 ease-in-out hover:bg-background hover:text-text-primary",
-        collapsed ? "w-10 justify-center px-0" : "w-full px-2.5",
+        "relative flex h-10 items-center rounded-md text-sm font-medium text-text-secondary transition-[width,padding,gap,background-color,color] duration-200 ease-in-out hover:bg-background hover:text-text-primary",
+        collapsed ? "w-10 justify-center gap-0 px-0" : "w-full gap-2.5 px-2.5",
         isActive && "bg-primary/10 text-primary"
       )}
     >
