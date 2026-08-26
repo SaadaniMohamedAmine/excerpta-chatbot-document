@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
-import DocumentGrid from "@/components/dashboard/DocumentGrid";
+import { DocumentsExplorer } from "@/components/dashboard/DocumentsExplorer";
 import UploadDropzone from "@/components/dashboard/UploadDropzone";
 
 export default async function DocumentsPage() {
@@ -40,7 +40,11 @@ export default async function DocumentsPage() {
         {serializable.length > 0 && <UploadDropzone variant="button" />}
       </div>
 
-      {serializable.length === 0 ? <UploadDropzone variant="empty-state" /> : <DocumentGrid documents={serializable} />}
+      {serializable.length === 0 ? (
+        <UploadDropzone variant="empty-state" />
+      ) : (
+        <DocumentsExplorer documents={serializable} />
+      )}
     </div>
   );
 }
