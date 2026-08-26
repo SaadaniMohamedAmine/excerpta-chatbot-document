@@ -5,7 +5,7 @@ import * as React from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
 import { authClient } from "@/lib/auth-client";
@@ -74,9 +74,8 @@ export function ResetPasswordForm() {
               <label htmlFor="password" className="text-sm font-medium text-text-primary">
                 New password
               </label>
-              <Input
+              <PasswordInput
                 id="password"
-                type="password"
                 autoComplete="new-password"
                 required
                 minLength={8}

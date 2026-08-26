@@ -1,15 +1,57 @@
 // components/layout/site-nav.tsx
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { authClient, useSession } from "@/lib/auth-client";
+import { NAV_LINKS } from "@/components/layout/nav-links";
 
-export const NAV_LINKS = [
-  { href: "/#features", label: "Features" },
-  { href: "/#pricing", label: "Pricing" },
-  { href: "/#whats-new", label: "What's new" },
-  { href: "/#how-it-works", label: "How it works" },
-] as const;
+function AuthActions() {
+  const router = useRouter();
+  const { data: session, isPending } = useSession();
+
+  if (isPending) {
+    return <div className="h-8 w-[168px]" aria-hidden="true" />;
+  }
+
+  if (session?.user) {
+    return (
+      <>
+        <button
+          type="button"
+          onClick={async () => {
+            await authClient.signOut();
+            router.push("/");
+            router.refresh();
+          }}
+          className="hidden text-sm text-text-secondary transition-colors hover:text-text-primary sm:inline"
+        >
+          Sign out
+        </button>
+        <Button asChild size="sm">
+          <Link href="/documents">Go to Documents</Link>
+        </Button>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Link
+        href="/sign-in"
+        className="hidden text-sm text-text-secondary transition-colors hover:text-text-primary sm:inline"
+      >
+        Sign in
+      </Link>
+      <Button asChild size="sm">
+        <Link href="/sign-up">Try Excerpta</Link>
+      </Button>
+    </>
+  );
+}
 
 export function SiteNav() {
   return (
@@ -31,15 +73,7 @@ export function SiteNav() {
 
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <Link
-            href="/sign-in"
-            className="hidden text-sm text-text-secondary transition-colors hover:text-text-primary sm:inline"
-          >
-            Sign in
-          </Link>
-          <Button asChild size="sm">
-            <Link href="/sign-up">Try Excerpta</Link>
-          </Button>
+          <AuthActions />
         </div>
       </div>
     </header>

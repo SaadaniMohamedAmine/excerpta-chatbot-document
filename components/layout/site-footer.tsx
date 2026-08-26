@@ -1,7 +1,7 @@
 // components/layout/site-footer.tsx
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
-import { NAV_LINKS } from "@/components/layout/site-nav";
+import { NAV_LINKS } from "@/components/layout/nav-links";
 
 export function SiteFooter() {
   return (

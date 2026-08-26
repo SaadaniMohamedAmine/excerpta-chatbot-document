@@ -19,6 +19,7 @@ import { BackToTop } from "@/components/ui/back-to-top";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
+import { useSession } from "@/lib/auth-client";
 
 const FEATURES = [
   {
@@ -115,6 +116,9 @@ const STEPS = [
 ] as const;
 
 export default function LandingPage() {
+  const { data: session } = useSession();
+  const isSignedIn = Boolean(session?.user);
+
   return (
     <div className="min-h-screen bg-background text-text-primary">
       <SiteNav />
@@ -135,8 +139,11 @@ export default function LandingPage() {
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Button asChild size="lg">
-                  <Link href="/sign-up" className="inline-flex items-center gap-2">
-                    Try Excerpta
+                  <Link
+                    href={isSignedIn ? "/documents" : "/sign-up"}
+                    className="inline-flex items-center gap-2"
+                  >
+                    {isSignedIn ? "Go to Documents" : "Try Excerpta"}
                     <ArrowRight size={18} weight="bold" />
                   </Link>
                 </Button>
