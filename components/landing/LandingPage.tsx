@@ -8,11 +8,23 @@ import {
   CursorClick,
   GithubLogo,
   ArrowRight,
+  Check,
+  Sparkle,
+  ShareNetwork,
+  FileArrowDown,
+  Gear,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+
+const NAV_LINKS = [
+  { href: "#features", label: "Features" },
+  { href: "#pricing", label: "Pricing" },
+  { href: "#whats-new", label: "What's new" },
+  { href: "#how-it-works", label: "How it works" },
+] as const;
 
 const FEATURES = [
   {
@@ -32,6 +44,58 @@ const FEATURES = [
     title: "Auto-scroll to source",
     description:
       "Click a citation and the document jumps straight to the passage, highlighted in place.",
+  },
+] as const;
+
+const PLANS = [
+  {
+    name: "Free",
+    price: "$0",
+    tagline: "Full access while Excerpta is in beta.",
+    features: [
+      "Unlimited document uploads",
+      "PDF, DOCX, CSV, and code support",
+      "Cited, page-accurate answers",
+      "Public share links",
+    ],
+    cta: { label: "Try Excerpta", href: "/sign-up" },
+    comingSoon: false,
+  },
+  {
+    name: "Pro",
+    price: "TBD",
+    tagline: "For heavier, team-scale document workflows.",
+    features: [
+      "Priority processing",
+      "Larger documents & collections",
+      "Team-shared collections",
+      "Priority support",
+    ],
+    cta: { label: "Coming soon", href: null },
+    comingSoon: true,
+  },
+] as const;
+
+const CHANGELOG = [
+  {
+    icon: Sparkle,
+    title: "Polished landing experience",
+    description: "A dedicated public landing page, SEO metadata, and a real preview image.",
+  },
+  {
+    icon: Gear,
+    title: "Account & appearance settings",
+    description: "Manage your profile, switch themes, and delete your account and data.",
+  },
+  {
+    icon: ShareNetwork,
+    title: "Public sharing",
+    description: "Turn any conversation into a read-only link anyone can open, no sign-in needed.",
+  },
+  {
+    icon: FileArrowDown,
+    title: "Export conversations",
+    description: "Download any conversation as a formatted PDF or DOCX, citations included.",
   },
 ] as const;
 
@@ -65,18 +129,15 @@ export default function LandingPage() {
           <Logo href="/" />
 
           <nav className="hidden items-center gap-8 md:flex">
-            <a
-              href="#features"
-              className="text-sm text-text-secondary transition-colors hover:text-text-primary"
-            >
-              Features
-            </a>
-            <a
-              href="#how-it-works"
-              className="text-sm text-text-secondary transition-colors hover:text-text-primary"
-            >
-              How it works
-            </a>
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm text-text-secondary transition-colors hover:text-text-primary"
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
 
           <div className="flex items-center gap-3">
@@ -174,7 +235,7 @@ export default function LandingPage() {
         </section>
 
         {/* Features */}
-        <section id="features" className="border-t border-border bg-surface">
+        <section id="features" className="scroll-mt-20 border-t border-border bg-surface">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
             <div className="max-w-2xl">
               <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -187,9 +248,14 @@ export default function LandingPage() {
             </div>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {FEATURES.map((feature) => (
-                <Card key={feature.title} className="border-border bg-background p-6">
-                  <feature.icon size={28} weight="duotone" className="text-primary" />
-                  <h3 className="mt-4 text-base font-semibold">{feature.title}</h3>
+                <Card
+                  key={feature.title}
+                  className="group cursor-pointer border-border bg-background p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+                >
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
+                    <feature.icon size={24} weight="duotone" />
+                  </span>
+                  <h3 className="mt-5 text-base font-semibold">{feature.title}</h3>
                   <p className="mt-2 text-sm text-text-secondary">{feature.description}</p>
                 </Card>
               ))}
@@ -197,8 +263,97 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* Pricing */}
+        <section id="pricing" className="scroll-mt-20 border-t border-border">
+          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+            <div className="max-w-2xl">
+              <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+                Simple, transparent pricing.
+              </h2>
+              <p className="mt-4 text-text-secondary">
+                Excerpta is free during beta. A Pro plan for heavier workflows is on the way.
+              </p>
+            </div>
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:max-w-3xl">
+              {PLANS.map((plan) => (
+                <Card
+                  key={plan.name}
+                  className={`cursor-pointer border-border bg-surface p-6 ${
+                    !plan.comingSoon ? "ring-1 ring-primary/30" : ""
+                  }`}
+                >
+                  <div className="flex items-baseline justify-between">
+                    <h3 className="text-lg font-semibold">{plan.name}</h3>
+                    {plan.comingSoon && (
+                      <span className="rounded-full bg-gold/20 px-2.5 py-0.5 text-xs font-medium text-text-primary">
+                        Coming soon
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-1 text-2xl font-semibold">{plan.price}</p>
+                  <p className="mt-2 text-sm text-text-secondary">{plan.tagline}</p>
+                  <ul className="mt-6 flex flex-col gap-2.5">
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2 text-sm">
+                        <Check
+                          size={16}
+                          weight="bold"
+                          className="mt-0.5 shrink-0 text-primary"
+                        />
+                        <span className="text-text-secondary">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    asChild={!plan.comingSoon}
+                    disabled={plan.comingSoon}
+                    variant={plan.comingSoon ? "secondary" : "primary"}
+                    className="mt-6 w-full"
+                  >
+                    {plan.comingSoon ? (
+                      <span>{plan.cta.label}</span>
+                    ) : (
+                      <Link href={plan.cta.href as string}>{plan.cta.label}</Link>
+                    )}
+                  </Button>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* What's new */}
+        <section id="whats-new" className="scroll-mt-20 border-t border-border bg-surface">
+          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+            <div className="max-w-2xl">
+              <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+                What&apos;s new.
+              </h2>
+              <p className="mt-4 text-text-secondary">
+                Excerpta is actively evolving. Here&apos;s what shipped most recently.
+              </p>
+            </div>
+            <div className="mt-12 grid gap-6 sm:grid-cols-2">
+              {CHANGELOG.map((entry) => (
+                <Card
+                  key={entry.title}
+                  className="group flex cursor-pointer gap-4 border-border bg-background p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
+                    <entry.icon size={20} weight="duotone" />
+                  </span>
+                  <div>
+                    <h3 className="text-base font-semibold">{entry.title}</h3>
+                    <p className="mt-1 text-sm text-text-secondary">{entry.description}</p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* How it works */}
-        <section id="how-it-works" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <section id="how-it-works" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="max-w-2xl">
             <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
               How it works
@@ -207,18 +362,21 @@ export default function LandingPage() {
               Three steps, from a raw file to an answer you can verify.
             </p>
           </div>
-          <div className="mt-12 grid gap-10 sm:grid-cols-3 sm:gap-6">
+          <div className="mt-12 grid gap-10 sm:grid-cols-3 sm:gap-8">
             {STEPS.map((step, index) => (
               <div key={step.number} className="relative">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary font-serif text-sm font-semibold text-white">
+                <div className="flex items-center">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary font-serif text-base font-semibold text-white shadow-md shadow-primary/20">
                     {step.number}
                   </span>
                   {index < STEPS.length - 1 && (
-                    <span className="hidden h-px flex-1 bg-border sm:block" />
+                    <span
+                      aria-hidden="true"
+                      className="mx-3 hidden h-0.5 flex-1 bg-gradient-to-r from-primary to-border sm:block"
+                    />
                   )}
                 </div>
-                <h3 className="mt-4 text-base font-semibold">{step.title}</h3>
+                <h3 className="mt-5 text-base font-semibold">{step.title}</h3>
                 <p className="mt-2 text-sm text-text-secondary">{step.description}</p>
               </div>
             ))}
