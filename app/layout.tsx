@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { geistSans, geistMono, sourceSerif } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
+import { PageLoader } from "@/components/ui/page-loader";
 import "@/styles/globals.css";
 
 const SITE_URL = "https://excerpta-chatbot-document.vercel.app";
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-screen bg-background font-sans text-text-primary antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <PageLoader />
           {children}
         </ThemeProvider>
       </body>
