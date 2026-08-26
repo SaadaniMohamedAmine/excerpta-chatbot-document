@@ -13,19 +13,12 @@ import {
   FileArrowDown,
   Gear,
 } from "@phosphor-icons/react";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteNav } from "@/components/layout/site-nav";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Logo } from "@/components/ui/logo";
 import { Reveal } from "@/components/ui/reveal";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-
-const NAV_LINKS = [
-  { href: "#features", label: "Features" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#whats-new", label: "What's new" },
-  { href: "#how-it-works", label: "How it works" },
-] as const;
 
 const FEATURES = [
   {
@@ -124,37 +117,7 @@ const STEPS = [
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-text-primary">
-      {/* Nav */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <Logo href="/" />
-
-          <nav className="hidden items-center gap-8 md:flex">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-text-secondary transition-colors hover:text-text-primary"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <Link
-              href="/sign-in"
-              className="hidden text-sm text-text-secondary transition-colors hover:text-text-primary sm:inline"
-            >
-              Sign in
-            </Link>
-            <Button asChild size="sm">
-              <Link href="/sign-up">Try Excerpta</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <SiteNav />
 
       <main>
         {/* Hero */}
@@ -384,23 +347,7 @@ export default function LandingPage() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-10 text-sm text-text-secondary sm:flex-row sm:justify-between sm:px-6">
-          <Logo href="/" />
-          <div className="flex flex-wrap items-center justify-center gap-6">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="transition-colors hover:text-text-primary"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <BackToTop />
     </div>
