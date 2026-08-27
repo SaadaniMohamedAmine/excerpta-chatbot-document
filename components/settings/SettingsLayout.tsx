@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { User, PaintBrush, ShieldWarning } from "@phosphor-icons/react";
+import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import { ProfileSection } from "./ProfileSection";
 import { AppearanceSection } from "./AppearanceSection";
 import { DangerZoneSection } from "./DangerZoneSection";
@@ -31,10 +32,12 @@ export function SettingsLayout({ user, providers }: SettingsLayoutProps) {
   const [activeTab, setActiveTab] = useState<SettingsTab>("profile");
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl gap-10 px-4 py-10 sm:px-6">
-      <nav className="w-48 shrink-0">
-        <h1 className="mb-6 text-xl font-semibold text-text-primary">Settings</h1>
-        <ul className="flex flex-col gap-1">
+    <div className="mx-auto flex w-full max-w-6xl flex-col px-4 py-10 sm:px-6">
+      <PageHeaderBanner title="Settings" subtitle="Manage your profile, appearance, and account." />
+
+      <div className="mt-6 flex gap-10">
+        <nav className="w-48 shrink-0">
+          <ul className="flex flex-col gap-1">
           {TABS.map(({ id, label, icon: Icon }) => {
             const active = activeTab === id;
             return (
@@ -58,10 +61,11 @@ export function SettingsLayout({ user, providers }: SettingsLayoutProps) {
         </ul>
       </nav>
 
-      <div className="min-w-0 flex-1">
-        {activeTab === "profile" && <ProfileSection user={user} providers={providers} />}
-        {activeTab === "appearance" && <AppearanceSection />}
-        {activeTab === "account" && <DangerZoneSection userEmail={user.email} />}
+        <div className="min-w-0 flex-1">
+          {activeTab === "profile" && <ProfileSection user={user} providers={providers} />}
+          {activeTab === "appearance" && <AppearanceSection />}
+          {activeTab === "account" && <DangerZoneSection userEmail={user.email} />}
+        </div>
       </div>
     </div>
   );

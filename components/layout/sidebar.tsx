@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import {
+  SquaresFour,
   FileText,
   FolderStar,
   Gear,
@@ -76,6 +77,7 @@ export function Sidebar({
   const user = session?.user;
 
   const workspaceItems = [
+    { href: "/dashboard", label: "Dashboard", icon: SquaresFour },
     { href: "/documents", label: "Documents", icon: FileText, count: documentCount },
     { href: "/collections", label: "Collections", icon: FolderStar },
     { href: "/history", label: "History", icon: ClockCounterClockwise },

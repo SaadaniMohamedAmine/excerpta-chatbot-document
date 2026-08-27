@@ -13,6 +13,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { buildWeeklyBuckets } from "@/lib/analytics";
 import { StatCard } from "@/components/analytics/StatCard";
+import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import { DocumentsPerWeekChart } from "@/components/analytics/DocumentsPerWeekChart";
 import { BarList } from "@/components/analytics/BarList";
 
@@ -74,12 +75,10 @@ export default async function AnalyticsPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-      <div>
-        <h1 className="font-sans text-xl font-semibold text-text-primary">Analytics</h1>
-        <p className="mt-1 font-sans text-sm text-text-secondary">
-          A look at how your documents and conversations are adding up.
-        </p>
-      </div>
+      <PageHeaderBanner
+        title="Analytics"
+        subtitle="A look at how your documents and conversations are adding up."
+      />
 
       <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatCard label="Documents" value={documentCount} icon={FileText} />

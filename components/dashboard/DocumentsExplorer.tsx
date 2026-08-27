@@ -17,16 +17,16 @@ export function DocumentsExplorer({ documents }: { documents: DashboardDocument[
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative max-w-sm">
+      <div className="group relative max-w-md">
         <MagnifyingGlass
           size={16}
-          className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary"
+          className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary transition-colors group-focus-within:text-primary"
         />
         <Input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search documents…"
-          className="pl-9 pr-8"
+          className="h-11 pl-10 pr-9 shadow-sm"
           aria-label="Search documents"
         />
         {query && (

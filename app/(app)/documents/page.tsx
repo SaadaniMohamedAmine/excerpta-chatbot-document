@@ -4,8 +4,10 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import { DocumentsExplorer } from "@/components/dashboard/DocumentsExplorer";
 import UploadDropzone from "@/components/dashboard/UploadDropzone";
+import { AnalyticsTeaser } from "@/components/dashboard/AnalyticsTeaser";
 import { DashboardTour } from "@/components/onboarding/DashboardTour";
 
 const DEMO_DOCUMENT_TITLE = "Getting Started with Excerpta.pdf";
@@ -69,25 +71,42 @@ export default async function DocumentsPage() {
     conversationCount: d._count.conversations,
   }));
 
+  const totalConversations = serializable.reduce((sum, d) => sum + d.conversationCount, 0);
+
+  const citationCount =
+    serializable.length === 0
+      ? 0
+      : (
+          await prisma.message.findMany({
+            where: { role: "assistant", conversation: { userId: session.user.id } },
+            select: { citations: true },
+          })
+        ).reduce((total, m) => total + (Array.isArray(m.citations) ? m.citations.length : 0), 0);
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="font-sans text-xl font-semibold text-text-primary">My Documents</h1>
-          <p className="mt-1 font-sans text-sm text-text-secondary">
-            {serializable.length === 0
-              ? "Upload a document to begin."
-              : `${serializable.length} document${serializable.length === 1 ? "" : "s"}`}
-          </p>
-        </div>
-        {serializable.length > 0 && <UploadDropzone variant="button" />}
-      </div>
+      <PageHeaderBanner
+        title="My Documents"
+        subtitle={
+          serializable.length === 0
+            ? "Upload a document to begin."
+            : `${serializable.length} document${serializable.length === 1 ? "" : "s"}`
+        }
+        action={serializable.length > 0 ? <UploadDropzone variant="button" /> : undefined}
+      />
 
-      {serializable.length === 0 ? (
-        <UploadDropzone variant="empty-state" />
-      ) : (
-        <DocumentsExplorer documents={serializable} />
-      )}
+      <div className="mt-6">
+        {serializable.length === 0 ? (
+          <UploadDropzone variant="empty-state" />
+        ) : (
+          <>
+            <DocumentsExplorer documents={serializable} />
+            <div className="mt-4">
+              <AnalyticsTeaser conversationCount={totalConversations} citationCount={citationCount} />
+            </div>
+          </>
+        )}
+      </div>
 
       <Suspense fallback={null}>
         <DashboardTour autoStart={justOnboarded} />

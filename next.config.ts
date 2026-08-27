@@ -6,6 +6,11 @@ import type { NextConfig } from "next";
 // throws off both Turbopack module resolution and Vercel's output tracing.
 const nextConfig: NextConfig = {
   outputFileTracingRoot: __dirname,
+  // Default bottom-left position overlaps the app shell's sidebar profile
+  // block (dev-only, never ships to prod) — move it out of the way.
+  devIndicators: {
+    position: "top-right",
+  },
   turbopack: {
     root: __dirname,
   },

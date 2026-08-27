@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ClockCounterClockwise } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 
 export default async function HistoryPage() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -23,15 +24,17 @@ export default async function HistoryPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-      <h1 className="font-sans text-xl font-semibold text-text-primary">History</h1>
-      <p className="mt-1 font-sans text-sm text-text-secondary">
-        {conversations.length === 0
-          ? "No conversations yet."
-          : `${conversations.length} conversation${conversations.length === 1 ? "" : "s"}`}
-      </p>
+      <PageHeaderBanner
+        title="History"
+        subtitle={
+          conversations.length === 0
+            ? "No conversations yet."
+            : `${conversations.length} conversation${conversations.length === 1 ? "" : "s"}`
+        }
+      />
 
       {conversations.length === 0 ? (
-        <div className="mt-10 flex flex-col items-center justify-center gap-3 rounded-lg border border-border bg-surface py-16 text-center">
+        <div className="mt-6 flex flex-col items-center justify-center gap-3 rounded-lg border border-border bg-surface py-16 text-center">
           <ClockCounterClockwise size={32} className="text-text-secondary" />
           <p className="font-sans text-sm text-text-secondary">
             Start a conversation from a document or collection to see it here.
