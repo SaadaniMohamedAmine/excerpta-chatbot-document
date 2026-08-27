@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { ClockCounterClockwise, Plus, Export, ShareNetwork } from "@phosphor-icons/react";
 import { ExportModal } from "./ExportModal";
 import { ShareModal } from "./ShareModal";
+import { WorkspaceTour } from "@/components/onboarding/WorkspaceTour";
 import type { ChatUIMessage } from "@/lib/chat";
 
 export interface WorkspaceDocument {
@@ -136,6 +137,7 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
 
   return (
     <div className="flex h-full flex-col">
+      <WorkspaceTour />
       <div className="flex items-center justify-between border-b border-border bg-surface px-4 py-2">
         <h1 className="truncate font-sans text-sm font-medium text-text-primary">{document.title}</h1>
         <div className="flex items-center gap-2">

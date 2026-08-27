@@ -118,6 +118,7 @@ export function Sidebar({
           <Link
             href="/documents"
             onClick={onMobileClose}
+            data-tour="new-document"
             className={cn(
               "flex h-10 items-center justify-center rounded-md bg-primary font-sans text-sm font-medium text-white transition-[width,gap,background-color] duration-200 ease-in-out hover:bg-primary/90",
               collapsed ? "w-10 gap-0" : "w-full gap-2"
@@ -138,7 +139,7 @@ export function Sidebar({
         </div>
 
       {/* Workspace section */}
-      <nav className="flex flex-col gap-1 px-3">
+      <nav className="flex flex-col gap-1 px-3" data-tour="sidebar-workspace">
         <span
           className={cn(
             "overflow-hidden whitespace-nowrap px-2 font-sans text-xs font-medium uppercase tracking-wide text-text-secondary transition-[max-height,opacity,margin] duration-200 ease-in-out",

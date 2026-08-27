@@ -1,14 +1,57 @@
 // app/(app)/documents/page.tsx
+import { Suspense } from "react";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { DocumentsExplorer } from "@/components/dashboard/DocumentsExplorer";
 import UploadDropzone from "@/components/dashboard/UploadDropzone";
+import { DashboardTour } from "@/components/onboarding/DashboardTour";
+
+const DEMO_DOCUMENT_TITLE = "Getting Started with Excerpta.pdf";
+const DEMO_DOCUMENT_URL = `${process.env.NEXT_PUBLIC_APP_URL}/demo/getting-started-with-excerpta.pdf`;
+// Exact byte size of the generated asset (scripts/generate-demo-pdf.ts) —
+// keeps this page from needing an extra network round-trip just to know the
+// file size. Update if the demo PDF is regenerated with different content.
+const DEMO_DOCUMENT_SIZE_BYTES = 4694;
 
 export default async function DocumentsPage() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) redirect("/sign-in");
+
+  const user = await prisma.user.findUniqueOrThrow({
+    where: { id: session.user.id },
+    select: { onboardedAt: true },
+  });
+
+  let justOnboarded = false;
+  if (!user.onboardedAt) {
+    const demoDocument = await prisma.document.create({
+      data: {
+        userId: session.user.id,
+        title: DEMO_DOCUMENT_TITLE,
+        fileType: "pdf",
+        fileUrl: DEMO_DOCUMENT_URL,
+        fileSize: DEMO_DOCUMENT_SIZE_BYTES,
+        status: "processing",
+      },
+    });
+
+    // Same fire-and-forget trigger as /api/documents/[id]/retry — that route
+    // has an explicit note not to call lib/documents/process.ts directly, so
+    // this doesn't either. Fire-and-forget: the page renders immediately
+    // with the document showing "processing", same as any other upload.
+    fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/workflows/process-document`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ documentId: demoDocument.id }),
+    }).catch((error) => {
+      console.error("[documents/page] failed to trigger demo document processing:", error);
+    });
+
+    await prisma.user.update({ where: { id: session.user.id }, data: { onboardedAt: new Date() } });
+    justOnboarded = true;
+  }
 
   const documents = await prisma.document.findMany({
     where: { userId: session.user.id },
@@ -45,6 +88,10 @@ export default async function DocumentsPage() {
       ) : (
         <DocumentsExplorer documents={serializable} />
       )}
+
+      <Suspense fallback={null}>
+        <DashboardTour autoStart={justOnboarded} />
+      </Suspense>
     </div>
   );
 }
