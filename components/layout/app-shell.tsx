@@ -4,6 +4,7 @@
 import * as React from "react";
 import { TopNav } from "@/components/layout/top-nav";
 import { Sidebar } from "@/components/layout/sidebar";
+import { CommandPalette } from "@/components/command-palette/CommandPalette";
 
 export function AppShell({
   children,
@@ -25,6 +26,7 @@ export function AppShell({
         />
         <main className="flex-1 overflow-auto bg-background">{children}</main>
       </div>
+      <CommandPalette />
     </div>
   );
 }

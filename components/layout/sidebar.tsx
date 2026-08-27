@@ -13,6 +13,7 @@ import {
   SidebarSimple,
   SignOut,
   CaretUpDown,
+  MagnifyingGlass,
   X,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
@@ -66,6 +67,11 @@ export function Sidebar({
     });
   }
 
+  function openCommandPalette() {
+    onMobileClose();
+    window.dispatchEvent(new Event("excerpta:open-command-palette"));
+  }
+
   async function handleSignOut() {
     onMobileClose();
     await authClient.signOut();
@@ -110,6 +116,33 @@ export function Sidebar({
             className="flex h-8 w-8 items-center justify-center rounded-md text-text-secondary transition-colors hover:bg-background hover:text-text-primary"
           >
             <X size={18} weight="regular" />
+          </button>
+        </div>
+
+        {/* Search / command palette trigger */}
+        <div className={cn("mb-2 px-3 transition-[padding] duration-200 ease-in-out", collapsed && "px-2")}>
+          <button
+            type="button"
+            onClick={openCommandPalette}
+            className={cn(
+              "flex h-9 items-center rounded-md border border-border bg-background text-text-secondary transition-[width,gap,padding,border-color,color] duration-200 ease-in-out hover:border-primary/40 hover:text-text-primary",
+              collapsed ? "w-10 justify-center gap-0 px-0" : "w-full gap-2 px-2.5"
+            )}
+            aria-label="Search or jump to…"
+            title="Search or jump to… (⌘K)"
+          >
+            <MagnifyingGlass size={16} className="shrink-0" />
+            <span
+              className={cn(
+                "flex flex-1 items-center gap-2 overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-200 ease-in-out",
+                collapsed ? "max-w-0 opacity-0" : "max-w-[10rem] opacity-100"
+              )}
+            >
+              <span className="flex-1 text-left font-sans text-sm">Search…</span>
+              <kbd className="shrink-0 rounded border border-border bg-surface px-1.5 py-0.5 font-sans text-[10px] text-text-secondary">
+                ⌘K
+              </kbd>
+            </span>
           </button>
         </div>
 
