@@ -5,6 +5,7 @@ import { FileText, ChatCircleText, Quotes, FolderStar } from "@phosphor-icons/re
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { StatCard } from "@/components/analytics/StatCard";
+import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import { RecentDocumentsList } from "@/components/dashboard/RecentDocumentsList";
 import { RecentConversationsList } from "@/components/dashboard/RecentConversationsList";
 import { QuickActions } from "@/components/dashboard/QuickActions";
@@ -83,21 +84,19 @@ export default async function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-      <div className="relative overflow-hidden rounded-lg border border-border p-6">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgb(var(--color-primary)/0.16),_transparent_60%)]"
-        />
-        <div className="relative">
-          <h1 className="font-sans text-xl font-semibold text-text-primary">
+      <PageHeaderBanner
+        title={
+          <>
             {getGreeting()}, {firstName} <span aria-hidden="true">👋</span>
-          </h1>
-          <p className="mt-1 font-sans text-sm text-text-secondary">
+          </>
+        }
+        subtitle={
+          <>
             {documentCount} document{documentCount === 1 ? "" : "s"} tracked · {conversationCount}{" "}
             conversation{conversationCount === 1 ? "" : "s"}
-          </p>
-        </div>
-      </div>
+          </>
+        }
+      />
 
       <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatCard label="Documents" value={documentCount} icon={FileText} />
