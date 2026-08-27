@@ -9,6 +9,7 @@ import {
   FolderStar,
   Gear,
   ClockCounterClockwise,
+  ChartLineUp,
   Plus,
   SidebarSimple,
   SignOut,
@@ -78,6 +79,7 @@ export function Sidebar({
     { href: "/documents", label: "Documents", icon: FileText, count: documentCount },
     { href: "/collections", label: "Collections", icon: FolderStar },
     { href: "/history", label: "History", icon: ClockCounterClockwise },
+    { href: "/analytics", label: "Analytics", icon: ChartLineUp },
   ] as const;
 
   return (
