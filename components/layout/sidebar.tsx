@@ -18,6 +18,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useSession, authClient } from "@/lib/auth-client";
 import { Avatar } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -27,12 +28,6 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
-const WORKSPACE_ITEMS = [
-  { href: "/documents", label: "Documents", icon: FileText },
-  { href: "/collections", label: "Collections", icon: FolderStar },
-  { href: "/history", label: "History", icon: ClockCounterClockwise },
-] as const;
-
 const ACCOUNT_ITEMS = [{ href: "/settings", label: "Settings", icon: Gear }] as const;
 
 const COLLAPSE_STORAGE_KEY = "excerpta:sidebar-collapsed";
@@ -40,9 +35,11 @@ const COLLAPSE_STORAGE_KEY = "excerpta:sidebar-collapsed";
 export function Sidebar({
   mobileOpen,
   onMobileClose,
+  documentCount = 0,
 }: {
   mobileOpen: boolean;
   onMobileClose: () => void;
+  documentCount?: number;
 }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -76,6 +73,12 @@ export function Sidebar({
   }
 
   const user = session?.user;
+
+  const workspaceItems = [
+    { href: "/documents", label: "Documents", icon: FileText, count: documentCount },
+    { href: "/collections", label: "Collections", icon: FolderStar },
+    { href: "/history", label: "History", icon: ClockCounterClockwise },
+  ] as const;
 
   return (
     <>
@@ -115,6 +118,7 @@ export function Sidebar({
           <Link
             href="/documents"
             onClick={onMobileClose}
+            data-tour="new-document"
             className={cn(
               "flex h-10 items-center justify-center rounded-md bg-primary font-sans text-sm font-medium text-white transition-[width,gap,background-color] duration-200 ease-in-out hover:bg-primary/90",
               collapsed ? "w-10 gap-0" : "w-full gap-2"
@@ -135,7 +139,7 @@ export function Sidebar({
         </div>
 
       {/* Workspace section */}
-      <nav className="flex flex-col gap-1 px-3">
+      <nav className="flex flex-col gap-1 px-3" data-tour="sidebar-workspace">
         <span
           className={cn(
             "overflow-hidden whitespace-nowrap px-2 font-sans text-xs font-medium uppercase tracking-wide text-text-secondary transition-[max-height,opacity,margin] duration-200 ease-in-out",
@@ -144,7 +148,7 @@ export function Sidebar({
         >
           Workspace
         </span>
-        {WORKSPACE_ITEMS.map((item) => (
+        {workspaceItems.map((item) => (
           <SidebarNavItem
             key={item.href}
             item={item}
@@ -259,7 +263,7 @@ function SidebarNavItem({
   collapsed,
   onNavigate,
 }: {
-  item: { href: string; label: string; icon: React.ElementType };
+  item: { href: string; label: string; icon: React.ElementType; count?: number };
   pathname: string | null;
   collapsed: boolean;
   onNavigate?: () => void;
@@ -285,11 +289,16 @@ function SidebarNavItem({
       <Icon size={20} weight={isActive ? "fill" : "regular"} className="shrink-0" />
       <span
         className={cn(
-          "overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-200 ease-in-out",
+          "flex flex-1 items-center gap-2 overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-200 ease-in-out",
           collapsed ? "max-w-0 opacity-0" : "max-w-[10rem] opacity-100"
         )}
       >
-        {item.label}
+        <span className="flex-1 truncate">{item.label}</span>
+        {!!item.count && (
+          <Badge variant="outline" className="shrink-0 px-1.5 py-0 text-[10px]">
+            {item.count}
+          </Badge>
+        )}
       </span>
     </Link>
   );

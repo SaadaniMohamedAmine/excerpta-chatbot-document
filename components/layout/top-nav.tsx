@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Gear, List, SignOut } from "@phosphor-icons/react";
+import { Command, Gear, List, SignOut } from "@phosphor-icons/react";
 import { Logo } from "@/components/ui/logo";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Avatar } from "@/components/ui/avatar";
@@ -28,6 +28,10 @@ export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
     router.push("/sign-in");
   }
 
+  function openCommandPalette() {
+    window.dispatchEvent(new Event("excerpta:open-command-palette"));
+  }
+
   return (
     <header className="shrink-0 border-b border-border bg-surface">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
@@ -43,6 +47,15 @@ export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
           <Logo />
         </div>
         <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={openCommandPalette}
+            aria-label="Open command palette"
+            title="Command palette (⌘K)"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-text-secondary transition-colors hover:bg-background hover:text-text-primary"
+          >
+            <Command size={20} weight="regular" />
+          </button>
           <LanguageSwitcher />
           <ThemeToggle />
           <DropdownMenu>

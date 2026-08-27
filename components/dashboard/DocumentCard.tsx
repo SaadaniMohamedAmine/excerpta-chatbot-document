@@ -17,12 +17,19 @@ function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
 }
 
-export default function DocumentCard({ document }: { document: DashboardDocument }) {
+export default function DocumentCard({
+  document,
+  highlightForTour = false,
+}: {
+  document: DashboardDocument;
+  highlightForTour?: boolean;
+}) {
   const Icon = ICONS[document.fileType] ?? FileDoc;
 
   return (
     <Link
       href={`/documents/${document.id}`}
+      data-tour={highlightForTour ? "demo-document-card" : undefined}
       className="group flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 transition-colors hover:border-primary"
     >
       <div className="flex items-start justify-between">
