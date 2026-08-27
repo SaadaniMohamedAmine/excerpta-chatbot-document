@@ -6,6 +6,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { DocumentsExplorer } from "@/components/dashboard/DocumentsExplorer";
 import UploadDropzone from "@/components/dashboard/UploadDropzone";
+import { AnalyticsTeaser } from "@/components/dashboard/AnalyticsTeaser";
 import { DashboardTour } from "@/components/onboarding/DashboardTour";
 
 const DEMO_DOCUMENT_TITLE = "Getting Started with Excerpta.pdf";
@@ -69,6 +70,18 @@ export default async function DocumentsPage() {
     conversationCount: d._count.conversations,
   }));
 
+  const totalConversations = serializable.reduce((sum, d) => sum + d.conversationCount, 0);
+
+  const citationCount =
+    serializable.length === 0
+      ? 0
+      : (
+          await prisma.message.findMany({
+            where: { role: "assistant", conversation: { userId: session.user.id } },
+            select: { citations: true },
+          })
+        ).reduce((total, m) => total + (Array.isArray(m.citations) ? m.citations.length : 0), 0);
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <div className="mb-6 flex items-center justify-between">
@@ -86,7 +99,12 @@ export default async function DocumentsPage() {
       {serializable.length === 0 ? (
         <UploadDropzone variant="empty-state" />
       ) : (
-        <DocumentsExplorer documents={serializable} />
+        <>
+          <DocumentsExplorer documents={serializable} />
+          <div className="mt-4">
+            <AnalyticsTeaser conversationCount={totalConversations} citationCount={citationCount} />
+          </div>
+        </>
       )}
 
       <Suspense fallback={null}>
