@@ -7,6 +7,7 @@ import { prisma } from "@/lib/db";
 import { StatCard } from "@/components/analytics/StatCard";
 import { RecentDocumentsList } from "@/components/dashboard/RecentDocumentsList";
 import { RecentConversationsList } from "@/components/dashboard/RecentConversationsList";
+import { QuickActions } from "@/components/dashboard/QuickActions";
 
 function getGreeting(): string {
   const hour = new Date().getHours();
@@ -103,6 +104,8 @@ export default async function DashboardPage() {
         <RecentDocumentsList documents={recentDocumentItems} />
         <RecentConversationsList conversations={recentConversationItems} />
       </div>
+
+      <QuickActions />
     </div>
   );
 }
