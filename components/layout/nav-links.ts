@@ -8,7 +8,7 @@
 // (worked in dev, where this substitution isn't enforced the same way).
 export const NAV_LINKS = [
   { href: "/#features", label: "Features" },
-  { href: "/#pricing", label: "Pricing" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/#whats-new", label: "What's new" },
   { href: "/#how-it-works", label: "How it works" },
 ] as const;

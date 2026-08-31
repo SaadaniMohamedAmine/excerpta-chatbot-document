@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
 import { useSession } from "@/lib/auth-client";
+import { PLAN_DETAILS, type PlanId } from "@/lib/billing/plans";
 
 const FEATURES = [
   {
@@ -42,34 +43,24 @@ const FEATURES = [
   },
 ] as const;
 
-const PLANS = [
-  {
-    name: "Free",
-    price: "$0",
-    tagline: "Full access while Excerpta is in beta.",
-    features: [
-      "Unlimited document uploads",
-      "PDF, DOCX, CSV, and code support",
-      "Cited, page-accurate answers",
-      "Public share links",
-    ],
-    cta: { label: "Try Excerpta", href: "/sign-up" },
-    comingSoon: false,
-  },
-  {
-    name: "Pro",
-    price: "TBD",
-    tagline: "For heavier, team-scale document workflows.",
-    features: [
-      "Priority processing",
-      "Larger documents & collections",
-      "Team-shared collections",
-      "Priority support",
-    ],
-    cta: { label: "Coming soon", href: null },
-    comingSoon: true,
-  },
-] as const;
+const PLAN_CTA_LABEL: Record<PlanId, string> = {
+  free: "Get started",
+  pro: "Choose Pro",
+  team: "Choose Team",
+};
+
+// Full plan comparison and the actual upgrade/checkout flow live on
+// /pricing (and Settings → Billing) — landing page cards link there rather
+// than duplicating that logic here.
+const PLANS = (Object.keys(PLAN_DETAILS) as PlanId[]).map((id) => ({
+  id,
+  name: PLAN_DETAILS[id].name,
+  price: PLAN_DETAILS[id].price,
+  tagline: PLAN_DETAILS[id].description,
+  features: PLAN_DETAILS[id].features,
+  cta: { label: PLAN_CTA_LABEL[id], href: "/pricing" },
+  highlighted: id === "pro",
+}));
 
 const CHANGELOG = [
   {
@@ -241,22 +232,22 @@ export default function LandingPage() {
                 Simple, transparent pricing.
               </h2>
               <p className="mt-4 text-text-secondary">
-                Excerpta is free during beta. A Pro plan for heavier workflows is on the way.
+                Start free, upgrade when you need more room.
               </p>
             </Reveal>
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:max-w-3xl">
+            <div className="mt-12 grid gap-6 sm:grid-cols-3">
               {PLANS.map((plan, index) => (
                 <Reveal key={plan.name} delayMs={index * 80}>
                   <Card
                     className={`h-full cursor-pointer border-border bg-surface p-6 ${
-                      !plan.comingSoon ? "ring-1 ring-primary/30" : ""
+                      plan.highlighted ? "ring-1 ring-primary/30" : ""
                     }`}
                   >
                     <div className="flex items-baseline justify-between">
                       <h3 className="text-lg font-semibold">{plan.name}</h3>
-                      {plan.comingSoon && (
-                        <span className="rounded-full bg-gold/20 px-2.5 py-0.5 text-xs font-medium text-text-primary">
-                          Coming soon
+                      {plan.highlighted && (
+                        <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                          Most popular
                         </span>
                       )}
                     </div>
@@ -274,17 +265,8 @@ export default function LandingPage() {
                         </li>
                       ))}
                     </ul>
-                    <Button
-                      asChild={!plan.comingSoon}
-                      disabled={plan.comingSoon}
-                      variant={plan.comingSoon ? "secondary" : "primary"}
-                      className="mt-6 w-full"
-                    >
-                      {plan.comingSoon ? (
-                        <span>{plan.cta.label}</span>
-                      ) : (
-                        <Link href={plan.cta.href as string}>{plan.cta.label}</Link>
-                      )}
+                    <Button asChild variant={plan.highlighted ? "primary" : "secondary"} className="mt-6 w-full">
+                      <Link href={plan.cta.href}>{plan.cta.label}</Link>
                     </Button>
                   </Card>
                 </Reveal>
