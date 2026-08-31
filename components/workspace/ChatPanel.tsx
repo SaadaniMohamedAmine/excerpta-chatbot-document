@@ -72,8 +72,12 @@ export default function ChatPanel({
               />
             ))}
             {isWaitingForFirstToken && (
-              <div className="flex items-center gap-1 self-start px-3 py-2 font-sans text-sm text-text-secondary">
-                <span className="animate-pulse">Thinking…</span>
+              <div className="flex justify-start">
+                <div className="flex items-center gap-1.5 rounded-lg border border-border bg-surface px-4 py-3">
+                  <span className="h-2 w-2 animate-typing-dot rounded-full bg-primary [animation-delay:-0.3s]" />
+                  <span className="h-2 w-2 animate-typing-dot rounded-full bg-primary [animation-delay:-0.15s]" />
+                  <span className="h-2 w-2 animate-typing-dot rounded-full bg-primary" />
+                </div>
               </div>
             )}
             <div ref={bottomRef} />
