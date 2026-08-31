@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { User, PaintBrush, ShieldWarning } from "@phosphor-icons/react";
+import { User, PaintBrush, ShieldWarning, Gear } from "@phosphor-icons/react";
 import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import { ProfileSection } from "./ProfileSection";
 import { AppearanceSection } from "./AppearanceSection";
@@ -33,7 +33,11 @@ export function SettingsLayout({ user, providers }: SettingsLayoutProps) {
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col px-4 py-10 sm:px-6">
-      <PageHeaderBanner title="Settings" subtitle="Manage your profile, appearance, and account." />
+      <PageHeaderBanner
+        icon={Gear}
+        title="Settings"
+        subtitle="Manage your profile, appearance, and account."
+      />
 
       <div className="mt-6 flex gap-10">
         <nav className="w-48 shrink-0">

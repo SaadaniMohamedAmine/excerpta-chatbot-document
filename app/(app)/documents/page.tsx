@@ -2,6 +2,7 @@
 import { Suspense } from "react";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { FileText } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { PageHeaderBanner } from "@/components/ui/page-header-banner";
@@ -86,6 +87,7 @@ export default async function DocumentsPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <PageHeaderBanner
+        icon={FileText}
         title="My Documents"
         subtitle={
           serializable.length === 0

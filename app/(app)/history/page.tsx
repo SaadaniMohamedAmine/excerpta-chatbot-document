@@ -25,6 +25,7 @@ export default async function HistoryPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <PageHeaderBanner
+        icon={ClockCounterClockwise}
         title="History"
         subtitle={
           conversations.length === 0

@@ -7,6 +7,7 @@ import {
   Quotes,
   FolderStar,
   ChartPieSlice,
+  ChartLineUp,
   Trophy,
 } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/lib/auth";
@@ -76,6 +77,7 @@ export default async function AnalyticsPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <PageHeaderBanner
+        icon={ChartLineUp}
         title="Analytics"
         subtitle="A look at how your documents and conversations are adding up."
       />

@@ -1,7 +1,7 @@
 // app/(app)/dashboard/page.tsx
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { FileText, ChatCircleText, Quotes, FolderStar } from "@phosphor-icons/react/dist/ssr";
+import { SquaresFour, FileText, ChatCircleText, Quotes, FolderStar } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { StatCard } from "@/components/analytics/StatCard";
@@ -85,6 +85,7 @@ export default async function DashboardPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <PageHeaderBanner
+        icon={SquaresFour}
         title={
           <>
             {getGreeting()}, {firstName} <span aria-hidden="true">👋</span>
