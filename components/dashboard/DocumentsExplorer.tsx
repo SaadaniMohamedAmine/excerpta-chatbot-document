@@ -32,7 +32,7 @@ export function DocumentsExplorer({ documents }: { documents: DashboardDocument[
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex max-w-md items-center gap-3 rounded-lg border border-border bg-surface p-2 shadow-sm">
+      <div className="flex max-w-md items-center gap-3 rounded-lg border border-border bg-surface p-2 shadow-sm transition-colors focus-within:border-primary/50 focus-within:shadow-md focus-within:shadow-primary/10">
         <div className="group relative w-full">
           <MagnifyingGlass
             size={16}

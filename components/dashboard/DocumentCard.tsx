@@ -34,14 +34,18 @@ export default function DocumentCard({
     <Link
       href={`/documents/${document.id}`}
       data-tour={highlightForTour ? "demo-document-card" : undefined}
-      className="group relative flex cursor-pointer flex-col gap-3 overflow-hidden rounded-lg border border-border bg-gradient-to-b from-surface to-background p-4 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+      className="group relative flex cursor-pointer flex-col gap-3 overflow-hidden rounded-lg border border-border bg-gradient-to-b from-surface to-background p-4 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10"
     >
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-primary via-primary/40 to-transparent opacity-60 transition-opacity duration-200 group-hover:opacity-100"
+        className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-primary via-primary to-gold/60"
       />
-      <div className="flex items-start justify-between">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary/15 to-primary/5 text-primary transition-colors group-hover:from-primary/25 group-hover:to-primary/10">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgb(var(--color-primary)/0.12),_transparent_60%)] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+      />
+      <div className="relative flex items-start justify-between">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70 text-white shadow-md shadow-primary/30 transition-transform group-hover:scale-105">
           <Icon size={24} weight="duotone" />
         </span>
         {document.status === "processing" && (
@@ -58,7 +62,7 @@ export default function DocumentCard({
         )}
       </div>
 
-      <div className="min-w-0">
+      <div className="relative min-w-0">
         <h3 className="truncate font-sans text-sm font-medium text-text-primary group-hover:text-primary">
           {document.title}
         </h3>
@@ -70,7 +74,7 @@ export default function DocumentCard({
         </p>
       </div>
 
-      <div className="mt-auto flex items-center justify-between font-sans text-xs text-text-secondary">
+      <div className="relative mt-auto flex items-center justify-between font-sans text-xs text-text-secondary">
         <span className="flex items-center gap-1">
           <ChatCircleText className="h-3.5 w-3.5" weight="regular" />
           {document.conversationCount} conversation{document.conversationCount === 1 ? "" : "s"}
