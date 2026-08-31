@@ -12,6 +12,7 @@ import ProcessingPanel from "./ProcessingPanel";
 import ErrorPanel from "./ErrorPanel";
 import ConversationHistoryList from "@/components/dashboard/ConversationHistoryList";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   ClockCounterClockwise,
   Plus,
@@ -160,20 +161,29 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
             <h1 className="truncate font-sans text-sm font-medium text-text-primary">{document.title}</h1>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => setHistoryOpen((v) => !v)} className="hover:text-primary">
-              <ClockCounterClockwise className="mr-1.5 h-4 w-4" weight="duotone" />
-              History
-            </Button>
-            <Button variant="ghost" size="sm" onClick={startNewConversation} className="hover:text-primary">
+            <Button variant="primary" size="sm" onClick={startNewConversation}>
               <Plus className="mr-1.5 h-4 w-4" weight="bold" />
               New conversation
             </Button>
             <div className="flex items-center gap-1 rounded-full border border-border bg-background px-1 py-1 shadow-sm">
               <button
                 type="button"
+                onClick={() => setHistoryOpen((v) => !v)}
+                aria-label="Conversation history"
+                title="History"
+                className={cn(
+                  "rounded-full p-2 text-text-secondary transition-colors hover:bg-primary/10 hover:text-primary",
+                  historyOpen && "bg-primary/10 text-primary"
+                )}
+              >
+                <ClockCounterClockwise size={18} weight="duotone" />
+              </button>
+              <button
+                type="button"
                 onClick={() => setShareModalOpen(true)}
                 disabled={!conversationId}
                 aria-label="Share conversation"
+                title="Share"
                 className="rounded-full p-2 text-text-secondary transition-colors hover:bg-primary/10 hover:text-primary disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-text-secondary"
               >
                 <ShareNetwork size={18} weight="duotone" />
@@ -183,6 +193,7 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
                 onClick={() => setExportModalOpen(true)}
                 disabled={!conversationId}
                 aria-label="Export conversation"
+                title="Export"
                 className="rounded-full p-2 text-text-secondary transition-colors hover:bg-primary/10 hover:text-primary disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-text-secondary"
               >
                 <Export size={18} weight="duotone" />
