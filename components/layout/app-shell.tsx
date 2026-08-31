@@ -16,14 +16,14 @@ export function AppShell({
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   return (
-    <div className="flex h-screen flex-col">
-      <TopNav onMenuClick={() => setMobileOpen(true)} />
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar
-          mobileOpen={mobileOpen}
-          onMobileClose={() => setMobileOpen(false)}
-          documentCount={documentCount}
-        />
+    <div className="flex h-screen overflow-hidden">
+      <Sidebar
+        mobileOpen={mobileOpen}
+        onMobileClose={() => setMobileOpen(false)}
+        documentCount={documentCount}
+      />
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <TopNav onMenuClick={() => setMobileOpen(true)} />
         <main className="flex-1 overflow-auto bg-background">{children}</main>
       </div>
       <CommandPalette />

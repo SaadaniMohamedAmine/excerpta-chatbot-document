@@ -41,9 +41,14 @@ const config: Config = {
             backgroundColor: "rgb(var(--color-primary) / 0.5)",
           },
         },
+        "typing-dot": {
+          "0%, 60%, 100%": { transform: "scale(0.6)", opacity: "0.4" },
+          "30%": { transform: "scale(1)", opacity: "1" },
+        },
       },
       animation: {
         "eq-bar": "eq-bar 1s linear infinite",
+        "typing-dot": "typing-dot 1.1s ease-in-out infinite",
       },
     },
   },

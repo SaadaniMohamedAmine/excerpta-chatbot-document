@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ChatCircleText } from "@phosphor-icons/react";
 import { useDocumentChat, type ChatUIMessage } from "@/lib/chat";
 import MessageBubble from "./MessageBubble";
 import ChatInput from "./ChatInput";
@@ -52,6 +53,9 @@ export default function ChatPanel({
       <div className="flex-1 overflow-y-auto px-4 py-4">
         {messages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70 text-white shadow-md shadow-primary/30">
+              <ChatCircleText size={22} weight="duotone" />
+            </span>
             <p className="font-sans text-sm text-text-secondary">Ask a question</p>
             {suggestedQuestions.length > 0 && (
               <SuggestedQuestions questions={suggestedQuestions} onSelect={handleSuggestedQuestion} />
@@ -68,8 +72,12 @@ export default function ChatPanel({
               />
             ))}
             {isWaitingForFirstToken && (
-              <div className="flex items-center gap-1 self-start px-3 py-2 font-sans text-sm text-text-secondary">
-                <span className="animate-pulse">Thinking…</span>
+              <div className="flex justify-start">
+                <div className="flex items-center gap-1.5 rounded-lg border border-border bg-surface px-4 py-3">
+                  <span className="h-2 w-2 animate-typing-dot rounded-full bg-primary [animation-delay:-0.3s]" />
+                  <span className="h-2 w-2 animate-typing-dot rounded-full bg-primary [animation-delay:-0.15s]" />
+                  <span className="h-2 w-2 animate-typing-dot rounded-full bg-primary" />
+                </div>
               </div>
             )}
             <div ref={bottomRef} />

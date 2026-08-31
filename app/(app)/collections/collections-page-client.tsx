@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Plus } from "@phosphor-icons/react";
+import { Plus, FolderStar } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import CollectionCard, { type CollectionSummary } from "@/components/dashboard/CollectionCard";
@@ -26,6 +26,7 @@ export default function CollectionsPageClient({ collections, availableDocuments 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <PageHeaderBanner
+        icon={FolderStar}
         title="Collections"
         subtitle="Group related documents to ask questions across all of them at once."
         action={

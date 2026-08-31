@@ -2,12 +2,12 @@
 import { Suspense } from "react";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { FileText } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import { DocumentsExplorer } from "@/components/dashboard/DocumentsExplorer";
 import UploadDropzone from "@/components/dashboard/UploadDropzone";
-import { AnalyticsTeaser } from "@/components/dashboard/AnalyticsTeaser";
 import { DashboardTour } from "@/components/onboarding/DashboardTour";
 
 const DEMO_DOCUMENT_TITLE = "Getting Started with Excerpta.pdf";
@@ -86,6 +86,7 @@ export default async function DocumentsPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <PageHeaderBanner
+        icon={FileText}
         title="My Documents"
         subtitle={
           serializable.length === 0
@@ -99,12 +100,11 @@ export default async function DocumentsPage() {
         {serializable.length === 0 ? (
           <UploadDropzone variant="empty-state" />
         ) : (
-          <>
-            <DocumentsExplorer documents={serializable} />
-            <div className="mt-4">
-              <AnalyticsTeaser conversationCount={totalConversations} citationCount={citationCount} />
-            </div>
-          </>
+          <DocumentsExplorer
+            documents={serializable}
+            totalConversations={totalConversations}
+            citationCount={citationCount}
+          />
         )}
       </div>
 

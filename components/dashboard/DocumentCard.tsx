@@ -9,17 +9,11 @@ import {
   CircleNotch,
   WarningCircle,
 } from "@phosphor-icons/react/dist/ssr";
-import { formatRelativeDate } from "@/lib/format";
+import { formatRelativeDate, formatFileSize } from "@/lib/format";
 import type { DashboardDocument } from "./DocumentGrid";
 
 const ICONS = { pdf: FilePdf, docx: FileDoc, csv: FileCsv, code: FileCode } as const;
 const FILE_TYPE_LABELS = { pdf: "PDF", docx: "DOCX", csv: "CSV", code: "Code" } as const;
-
-function formatFileSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
 
 export default function DocumentCard({
   document,
@@ -34,11 +28,19 @@ export default function DocumentCard({
     <Link
       href={`/documents/${document.id}`}
       data-tour={highlightForTour ? "demo-document-card" : undefined}
-      className="group flex cursor-pointer flex-col gap-3 rounded-lg border border-border bg-surface p-4 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+      className="group relative flex w-full cursor-pointer flex-col gap-3 overflow-hidden rounded-lg border border-border bg-gradient-to-b from-surface to-background p-4 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10"
     >
-      <div className="flex items-start justify-between">
-        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
-          <Icon size={22} weight="duotone" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-primary via-primary to-gold/60"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgb(var(--color-primary)/0.12),_transparent_60%)] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+      />
+      <div className="relative flex items-start justify-between">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70 text-white shadow-md shadow-primary/30 transition-transform group-hover:scale-105">
+          <Icon size={24} weight="duotone" />
         </span>
         {document.status === "processing" && (
           <span className="flex items-center gap-1 rounded-full bg-warning/10 px-2 py-0.5 text-[10px] font-medium text-warning">
@@ -54,7 +56,7 @@ export default function DocumentCard({
         )}
       </div>
 
-      <div className="min-w-0">
+      <div className="relative min-w-0">
         <h3 className="truncate font-sans text-sm font-medium text-text-primary group-hover:text-primary">
           {document.title}
         </h3>
@@ -66,7 +68,7 @@ export default function DocumentCard({
         </p>
       </div>
 
-      <div className="mt-auto flex items-center justify-between font-sans text-xs text-text-secondary">
+      <div className="relative mt-auto flex items-center justify-between font-sans text-xs text-text-secondary">
         <span className="flex items-center gap-1">
           <ChatCircleText className="h-3.5 w-3.5" weight="regular" />
           {document.conversationCount} conversation{document.conversationCount === 1 ? "" : "s"}
