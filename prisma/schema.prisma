@@ -22,6 +22,14 @@ model User {
   collections   Collection[]
   sessions      Session[]
   accounts      Account[]
+
+  // --- Billing (Stripe, test mode) ---
+  plan                     String   @default("free") // free | pro | team
+  stripeCustomerId         String?  @unique
+  stripeSubscriptionId     String?  @unique
+  stripeSubscriptionStatus String? // active | canceled | past_due | ...
+  uploadCount              Int      @default(0)
+  uploadPeriodStart        DateTime @default(now())
 }
 
 model Session {
