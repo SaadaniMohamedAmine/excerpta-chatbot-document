@@ -12,7 +12,16 @@ import ProcessingPanel from "./ProcessingPanel";
 import ErrorPanel from "./ErrorPanel";
 import ConversationHistoryList from "@/components/dashboard/ConversationHistoryList";
 import { Button } from "@/components/ui/button";
-import { ClockCounterClockwise, Plus, Export, ShareNetwork } from "@phosphor-icons/react";
+import {
+  ClockCounterClockwise,
+  Plus,
+  Export,
+  ShareNetwork,
+  FilePdf,
+  FileDoc,
+  FileCsv,
+  FileCode,
+} from "@phosphor-icons/react";
 import { ExportModal } from "./ExportModal";
 import { ShareModal } from "./ShareModal";
 import { WorkspaceTour } from "@/components/onboarding/WorkspaceTour";
@@ -29,6 +38,8 @@ export interface WorkspaceDocument {
   createdAt: string;
   suggestedQuestions?: string[];
 }
+
+const FILE_ICONS = { pdf: FilePdf, docx: FileDoc, csv: FileCsv, code: FileCode } as const;
 
 export interface ActiveCitation {
   pageNumber: number;
@@ -124,6 +135,8 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
     return <ErrorPanel documentId={document.id} />;
   }
 
+  const DocIcon = FILE_ICONS[document.fileType] ?? FileDoc;
+
   const viewer =
     document.fileType === "csv" ? (
       <CsvViewer fileUrl={document.fileUrl} activeCitation={activeCitation} />
@@ -139,7 +152,12 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
     <div className="flex h-full flex-col">
       <WorkspaceTour />
       <div className="flex items-center justify-between border-b border-border bg-surface px-4 py-2">
-        <h1 className="truncate font-sans text-sm font-medium text-text-primary">{document.title}</h1>
+        <div className="flex min-w-0 items-center gap-2.5">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-white shadow-sm shadow-primary/30">
+            <DocIcon size={16} weight="duotone" />
+          </span>
+          <h1 className="truncate font-sans text-sm font-medium text-text-primary">{document.title}</h1>
+        </div>
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" onClick={() => setHistoryOpen((v) => !v)}>
             <ClockCounterClockwise className="mr-1.5 h-4 w-4" weight="regular" />

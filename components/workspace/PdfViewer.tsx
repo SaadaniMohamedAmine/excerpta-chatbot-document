@@ -94,13 +94,13 @@ const PdfViewer = forwardRef<PdfViewerHandle, PdfViewerProps>(function PdfViewer
 
   return (
     <div className="flex h-full flex-col bg-background">
-      <div className="flex items-center justify-between gap-2 border-b border-border bg-surface px-3 py-2">
-        <div className="flex items-center gap-1.5">
+      <div className="flex items-center justify-between gap-2 border-b border-border bg-background px-3 py-2.5">
+        <div className="flex items-center gap-1 rounded-full border border-border bg-surface px-1.5 py-1 shadow-sm">
           <button
             type="button"
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage <= 1}
-            className="rounded p-1.5 text-text-secondary hover:bg-gold/10 hover:text-text-primary disabled:opacity-30"
+            className="rounded-full p-1.5 text-text-secondary hover:bg-primary/10 hover:text-primary disabled:opacity-30"
             aria-label="Previous page"
           >
             <CaretLeft className="h-4 w-4" weight="bold" />
@@ -121,19 +121,19 @@ const PdfViewer = forwardRef<PdfViewerHandle, PdfViewerProps>(function PdfViewer
             type="button"
             onClick={() => goToPage(currentPage + 1)}
             disabled={!numPages || currentPage >= numPages}
-            className="rounded p-1.5 text-text-secondary hover:bg-gold/10 hover:text-text-primary disabled:opacity-30"
+            className="rounded-full p-1.5 text-text-secondary hover:bg-primary/10 hover:text-primary disabled:opacity-30"
             aria-label="Next page"
           >
             <CaretRight className="h-4 w-4" weight="bold" />
           </button>
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 rounded-full border border-border bg-surface px-1.5 py-1 shadow-sm">
           <button
             type="button"
             onClick={() => setScale((s) => Math.max(MIN_SCALE, +(s - SCALE_STEP).toFixed(2)))}
             disabled={scale <= MIN_SCALE}
-            className="rounded p-1.5 text-text-secondary hover:bg-gold/10 hover:text-text-primary disabled:opacity-30"
+            className="rounded-full p-1.5 text-text-secondary hover:bg-primary/10 hover:text-primary disabled:opacity-30"
             aria-label="Zoom out"
           >
             <MagnifyingGlassMinus className="h-4 w-4" weight="regular" />
@@ -145,7 +145,7 @@ const PdfViewer = forwardRef<PdfViewerHandle, PdfViewerProps>(function PdfViewer
             type="button"
             onClick={() => setScale((s) => Math.min(MAX_SCALE, +(s + SCALE_STEP).toFixed(2)))}
             disabled={scale >= MAX_SCALE}
-            className="rounded p-1.5 text-text-secondary hover:bg-gold/10 hover:text-text-primary disabled:opacity-30"
+            className="rounded-full p-1.5 text-text-secondary hover:bg-primary/10 hover:text-primary disabled:opacity-30"
             aria-label="Zoom in"
           >
             <MagnifyingGlassPlus className="h-4 w-4" weight="regular" />

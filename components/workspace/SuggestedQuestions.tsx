@@ -14,7 +14,7 @@ export default function SuggestedQuestions({ questions, onSelect }: SuggestedQue
           key={i}
           type="button"
           onClick={() => onSelect(q)}
-          className="rounded-full border border-border bg-surface px-3 py-1.5 font-sans text-xs text-text-primary transition-colors hover:border-primary hover:text-primary"
+          className="rounded-full border border-border bg-surface px-3 py-1.5 font-sans text-xs text-text-primary shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary hover:shadow-md hover:shadow-primary/10"
         >
           {q}
         </button>
