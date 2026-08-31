@@ -28,7 +28,7 @@ export default function DocumentCard({
     <Link
       href={`/documents/${document.id}`}
       data-tour={highlightForTour ? "demo-document-card" : undefined}
-      className="group relative flex cursor-pointer flex-col gap-3 overflow-hidden rounded-lg border border-border bg-gradient-to-b from-surface to-background p-4 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10"
+      className="group relative flex w-full cursor-pointer flex-col gap-3 overflow-hidden rounded-lg border border-border bg-gradient-to-b from-surface to-background p-4 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10"
     >
       <div
         aria-hidden="true"

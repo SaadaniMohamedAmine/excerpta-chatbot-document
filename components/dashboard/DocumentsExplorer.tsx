@@ -75,45 +75,48 @@ export function DocumentsExplorer({
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <div className="relative overflow-hidden rounded-lg border border-border bg-surface/50 p-4 lg:col-span-2">
+        <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface/50 p-4 lg:col-span-2">
           <div
             aria-hidden="true"
             className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-primary via-primary/50 to-gold/40"
           />
 
-          {filtered.length === 0 ? (
-            <p className="py-10 text-center font-sans text-sm text-text-secondary">
-              No documents match &ldquo;{query}&rdquo;.
-            </p>
-          ) : (
-            <>
+          <div className="flex-1">
+            {filtered.length === 0 ? (
+              <p className="py-10 text-center font-sans text-sm text-text-secondary">
+                No documents match &ldquo;{query}&rdquo;.
+              </p>
+            ) : (
               <DocumentGrid documents={paginated} />
-              <div className="mt-4 flex items-center justify-between border-t border-border pt-4 font-sans text-xs text-text-secondary">
-                <span>
-                  Page {currentPage} of {pageCount}
-                </span>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setPage((p) => Math.max(1, p - 1))}
-                    disabled={currentPage === 1}
-                    className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
-                  >
-                    <CaretLeft size={12} weight="bold" />
-                    Previous
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
-                    disabled={currentPage === pageCount}
-                    className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
-                  >
-                    Next
-                    <CaretRight size={12} weight="bold" />
-                  </button>
-                </div>
+            )}
+          </div>
+
+          {filtered.length > 0 && (
+            <div className="mt-4 flex items-center justify-between border-t border-border pt-4 font-sans text-xs text-text-secondary">
+              <span>
+                Page {currentPage} of {pageCount}
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
+                >
+                  <CaretLeft size={12} weight="bold" />
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+                  disabled={currentPage === pageCount}
+                  className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
+                >
+                  Next
+                  <CaretRight size={12} weight="bold" />
+                </button>
               </div>
-            </>
+            </div>
           )}
         </div>
 
