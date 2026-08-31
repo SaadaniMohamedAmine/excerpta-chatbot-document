@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { auth } from "@/lib/auth";
 import { ALLOWED_EXTENSIONS, ALLOWED_CONTENT_TYPES, MAX_FILE_SIZE_BYTES } from "@/lib/documents/constraints";
+import { assertCanUpload } from "@/lib/billing/usage";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const session = await auth.api.getSession({ headers: request.headers });
@@ -17,6 +18,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       body,
       request,
       onBeforeGenerateToken: async (pathname, clientPayload) => {
+        // Rejects before a Blob upload token is even issued — avoids
+        // consuming storage for an upload that would never be confirmed.
+        await assertCanUpload(session.user.id);
+
         const extension = pathname.split(".").pop()?.toLowerCase() ?? "";
         const fileType = ALLOWED_EXTENSIONS[extension];
         if (!fileType) {
@@ -57,9 +62,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(jsonResponse);
   } catch (error) {
     console.error("[documents/upload] token generation failed:", error);
+    const message = error instanceof Error ? error.message : "Upload failed";
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Upload failed" },
-      { status: 400 }
+      { error: message },
+      // 402 specifically on the quota case, so the frontend can tell "you
+      // need to upgrade" apart from an ordinary validation error (400).
+      { status: message.includes("monthly upload limit") ? 402 : 400 }
     );
   }
 }

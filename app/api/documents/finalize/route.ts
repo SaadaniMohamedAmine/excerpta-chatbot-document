@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { ALLOWED_EXTENSIONS, MAX_FILE_SIZE_BYTES } from "@/lib/documents/constraints";
+import { assertCanUpload, incrementUsage } from "@/lib/billing/usage";
 
 type FinalizeBody = {
   fileUrl: string;
@@ -39,6 +40,18 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ document: existing }, { status: 200 });
   }
 
+  // Second check here (defense in depth, same pattern as the rest of the
+  // app) — this is also the only place that actually increments usage, so a
+  // Blob upload abandoned before finalization never consumes quota.
+  try {
+    await assertCanUpload(session.user.id);
+  } catch (error) {
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Quota exceeded" },
+      { status: 402 }
+    );
+  }
+
   const document = await prisma.document.create({
     data: {
       userId: session.user.id,
@@ -49,6 +62,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       status: "processing",
     },
   });
+
+  await incrementUsage(session.user.id);
 
   // Fire-and-forget trigger of async processing — do NOT await this.
   const workflowUrl = new URL("/api/workflows/process-document", request.url);
