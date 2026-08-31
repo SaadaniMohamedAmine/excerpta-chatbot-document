@@ -149,88 +149,92 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
     );
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col bg-background p-4">
       <WorkspaceTour />
-      <div className="flex items-center justify-between border-b border-border bg-surface px-4 py-2">
-        <div className="flex min-w-0 items-center gap-2.5">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-white shadow-sm shadow-primary/30">
-            <DocIcon size={16} weight="duotone" />
-          </span>
-          <h1 className="truncate font-sans text-sm font-medium text-text-primary">{document.title}</h1>
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-border">
+        <div className="flex items-center justify-between border-b border-border bg-surface px-4 py-2">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-white shadow-sm shadow-primary/30">
+              <DocIcon size={16} weight="duotone" />
+            </span>
+            <h1 className="truncate font-sans text-sm font-medium text-text-primary">{document.title}</h1>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" onClick={() => setHistoryOpen((v) => !v)} className="hover:text-primary">
+              <ClockCounterClockwise className="mr-1.5 h-4 w-4" weight="duotone" />
+              History
+            </Button>
+            <Button variant="ghost" size="sm" onClick={startNewConversation} className="hover:text-primary">
+              <Plus className="mr-1.5 h-4 w-4" weight="bold" />
+              New conversation
+            </Button>
+            <div className="flex items-center gap-1 rounded-full border border-border bg-background px-1 py-1 shadow-sm">
+              <button
+                type="button"
+                onClick={() => setShareModalOpen(true)}
+                disabled={!conversationId}
+                aria-label="Share conversation"
+                className="rounded-full p-2 text-text-secondary transition-colors hover:bg-primary/10 hover:text-primary disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-text-secondary"
+              >
+                <ShareNetwork size={18} weight="duotone" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setExportModalOpen(true)}
+                disabled={!conversationId}
+                aria-label="Export conversation"
+                className="rounded-full p-2 text-text-secondary transition-colors hover:bg-primary/10 hover:text-primary disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-text-secondary"
+              >
+                <Export size={18} weight="duotone" />
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" onClick={() => setHistoryOpen((v) => !v)}>
-            <ClockCounterClockwise className="mr-1.5 h-4 w-4" weight="regular" />
-            History
-          </Button>
-          <Button variant="ghost" size="sm" onClick={startNewConversation}>
-            <Plus className="mr-1.5 h-4 w-4" weight="regular" />
-            New conversation
-          </Button>
-          <button
-            type="button"
-            onClick={() => setShareModalOpen(true)}
-            disabled={!conversationId}
-            aria-label="Share conversation"
-            className="rounded-md p-2 text-text-secondary transition-colors hover:bg-background hover:text-text-primary disabled:opacity-40"
-          >
-            <ShareNetwork size={18} />
-          </button>
-          <button
-            type="button"
-            onClick={() => setExportModalOpen(true)}
-            disabled={!conversationId}
-            aria-label="Export conversation"
-            className="rounded-md p-2 text-text-secondary transition-colors hover:bg-background hover:text-text-primary disabled:opacity-40"
-          >
-            <Export size={18} />
-          </button>
+
+        {conversationId && (
+          <>
+            <ExportModal
+              open={exportModalOpen}
+              onClose={() => setExportModalOpen(false)}
+              conversationId={conversationId}
+            />
+            <ShareModal
+              open={shareModalOpen}
+              onClose={() => setShareModalOpen(false)}
+              conversationId={conversationId}
+            />
+          </>
+        )}
+
+        {historyOpen && (
+          <ConversationHistoryList
+            scope={{ kind: "document", id: document.id }}
+            activeConversationId={conversationId}
+            onSelect={resumeConversation}
+          />
+        )}
+
+        <div className="min-h-0 flex-1">
+          <SplitPane
+            left={viewer}
+            right={
+              conversationLoading || !conversationId ? (
+                <div className="flex h-full items-center justify-center text-sm text-text-secondary">
+                  Starting conversation…
+                </div>
+              ) : (
+                <ChatPanel
+                  key={conversationId}
+                  conversationId={conversationId}
+                  documentTitle={document.title}
+                  suggestedQuestions={document.suggestedQuestions ?? []}
+                  initialMessages={initialMessages}
+                  onCitationClick={handleCitationClick}
+                />
+              )
+            }
+          />
         </div>
-      </div>
-
-      {conversationId && (
-        <>
-          <ExportModal
-            open={exportModalOpen}
-            onClose={() => setExportModalOpen(false)}
-            conversationId={conversationId}
-          />
-          <ShareModal
-            open={shareModalOpen}
-            onClose={() => setShareModalOpen(false)}
-            conversationId={conversationId}
-          />
-        </>
-      )}
-
-      {historyOpen && (
-        <ConversationHistoryList
-          scope={{ kind: "document", id: document.id }}
-          activeConversationId={conversationId}
-          onSelect={resumeConversation}
-        />
-      )}
-
-      <div className="min-h-0 flex-1">
-        <SplitPane
-          left={viewer}
-          right={
-            conversationLoading || !conversationId ? (
-              <div className="flex h-full items-center justify-center text-sm text-text-secondary">
-                Starting conversation…
-              </div>
-            ) : (
-              <ChatPanel
-                key={conversationId}
-                conversationId={conversationId}
-                documentTitle={document.title}
-                suggestedQuestions={document.suggestedQuestions ?? []}
-                initialMessages={initialMessages}
-                onCitationClick={handleCitationClick}
-              />
-            )
-          }
-        />
       </div>
     </div>
   );
