@@ -21,6 +21,8 @@ import { cn } from "@/lib/utils";
 import { useSession, authClient } from "@/lib/auth-client";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { UsageCard } from "@/components/layout/UsageCard";
+import type { PlanId } from "@/lib/billing/plans";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -38,10 +40,12 @@ export function Sidebar({
   mobileOpen,
   onMobileClose,
   documentCount = 0,
+  usage,
 }: {
   mobileOpen: boolean;
   onMobileClose: () => void;
   documentCount?: number;
+  usage: { plan: PlanId; used: number; limit: number };
 }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -211,6 +215,8 @@ export function Sidebar({
           </span>
         </button>
       </div>
+
+      <UsageCard plan={usage.plan} used={usage.used} limit={usage.limit} collapsed={collapsed} />
 
       {/* Profile block */}
       <div className={cn("border-t border-border px-3 pt-3 transition-[padding] duration-200 ease-in-out", collapsed && "px-2")}>
