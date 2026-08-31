@@ -34,11 +34,15 @@ export default function DocumentCard({
     <Link
       href={`/documents/${document.id}`}
       data-tour={highlightForTour ? "demo-document-card" : undefined}
-      className="group flex cursor-pointer flex-col gap-3 rounded-lg border border-border bg-surface p-4 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+      className="group relative flex cursor-pointer flex-col gap-3 overflow-hidden rounded-lg border border-border bg-gradient-to-b from-surface to-background p-4 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
     >
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-primary via-primary/40 to-transparent opacity-60 transition-opacity duration-200 group-hover:opacity-100"
+      />
       <div className="flex items-start justify-between">
-        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
-          <Icon size={22} weight="duotone" />
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary/15 to-primary/5 text-primary transition-colors group-hover:from-primary/25 group-hover:to-primary/10">
+          <Icon size={24} weight="duotone" />
         </span>
         {document.status === "processing" && (
           <span className="flex items-center gap-1 rounded-full bg-warning/10 px-2 py-0.5 text-[10px] font-medium text-warning">
