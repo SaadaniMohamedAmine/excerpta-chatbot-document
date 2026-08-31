@@ -2,18 +2,33 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { MagnifyingGlass, X } from "@phosphor-icons/react";
+import { MagnifyingGlass, X, CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 import DocumentGrid, { type DashboardDocument } from "./DocumentGrid";
 
+const PAGE_SIZE = 8;
+
 export function DocumentsExplorer({ documents }: { documents: DashboardDocument[] }) {
   const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return documents;
     return documents.filter((doc) => doc.title.toLowerCase().includes(q));
   }, [documents, query]);
+
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const currentPage = Math.min(page, pageCount);
+  const paginated = useMemo(
+    () => filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
+    [filtered, currentPage],
+  );
+
+  const handleQueryChange = (value: string) => {
+    setQuery(value);
+    setPage(1);
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -25,7 +40,7 @@ export function DocumentsExplorer({ documents }: { documents: DashboardDocument[
           />
           <Input
             value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => handleQueryChange(event.target.value)}
             placeholder="Search documents…"
             className="h-9 border-transparent bg-transparent pl-9 pr-8 shadow-none focus-visible:border-transparent focus-visible:ring-0"
             aria-label="Search documents"
@@ -33,7 +48,7 @@ export function DocumentsExplorer({ documents }: { documents: DashboardDocument[
           {query && (
             <button
               type="button"
-              onClick={() => setQuery("")}
+              onClick={() => handleQueryChange("")}
               aria-label="Clear search"
               className="absolute right-2.5 top-1/2 -translate-y-1/2 text-text-secondary hover:text-text-primary"
             >
@@ -48,7 +63,36 @@ export function DocumentsExplorer({ documents }: { documents: DashboardDocument[
           No documents match &ldquo;{query}&rdquo;.
         </p>
       ) : (
-        <DocumentGrid documents={filtered} />
+        <>
+          <DocumentGrid documents={paginated} />
+          {pageCount > 1 && (
+            <div className="flex items-center justify-between font-sans text-xs text-text-secondary">
+              <span>
+                Page {currentPage} of {pageCount}
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
+                >
+                  <CaretLeft size={12} weight="bold" />
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+                  disabled={currentPage === pageCount}
+                  className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
+                >
+                  Next
+                  <CaretRight size={12} weight="bold" />
+                </button>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
