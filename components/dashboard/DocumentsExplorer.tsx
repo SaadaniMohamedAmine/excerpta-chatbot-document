@@ -2,13 +2,24 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { MagnifyingGlass, X, CaretLeft, CaretRight } from "@phosphor-icons/react";
+import { MagnifyingGlass, X, CaretLeft, CaretRight, FileText, ChatCircleText, Quotes } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
+import { StatCard } from "@/components/analytics/StatCard";
+import { AnalyticsTeaser } from "./AnalyticsTeaser";
 import DocumentGrid, { type DashboardDocument } from "./DocumentGrid";
+import { formatFileSize } from "@/lib/format";
 
 const PAGE_SIZE = 8;
 
-export function DocumentsExplorer({ documents }: { documents: DashboardDocument[] }) {
+export function DocumentsExplorer({
+  documents,
+  totalConversations,
+  citationCount,
+}: {
+  documents: DashboardDocument[];
+  totalConversations: number;
+  citationCount: number;
+}) {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
 
@@ -30,10 +41,12 @@ export function DocumentsExplorer({ documents }: { documents: DashboardDocument[
     setPage(1);
   };
 
+  const totalSize = useMemo(() => documents.reduce((sum, doc) => sum + doc.fileSize, 0), [documents]);
+
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex max-w-md items-center gap-3 rounded-lg border border-border bg-surface p-2 shadow-sm transition-colors focus-within:border-primary/50 focus-within:shadow-md focus-within:shadow-primary/10">
-        <div className="group relative w-full">
+      <div className="flex items-center gap-3 rounded-lg border border-border bg-surface p-2 shadow-sm transition-colors focus-within:border-primary/50 focus-within:shadow-md focus-within:shadow-primary/10">
+        <div className="group relative w-full max-w-md">
           <MagnifyingGlass
             size={16}
             className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary transition-colors group-focus-within:text-primary"
@@ -56,44 +69,61 @@ export function DocumentsExplorer({ documents }: { documents: DashboardDocument[
             </button>
           )}
         </div>
+        <span className="ml-auto hidden shrink-0 whitespace-nowrap pr-2 font-sans text-xs text-text-secondary sm:inline">
+          {documents.length} document{documents.length === 1 ? "" : "s"} · {formatFileSize(totalSize)}
+        </span>
       </div>
 
-      {filtered.length === 0 ? (
-        <p className="py-10 text-center font-sans text-sm text-text-secondary">
-          No documents match &ldquo;{query}&rdquo;.
-        </p>
-      ) : (
-        <>
-          <DocumentGrid documents={paginated} />
-          {pageCount > 1 && (
-            <div className="flex items-center justify-between font-sans text-xs text-text-secondary">
-              <span>
-                Page {currentPage} of {pageCount}
-              </span>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                  className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
-                >
-                  <CaretLeft size={12} weight="bold" />
-                  Previous
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
-                  disabled={currentPage === pageCount}
-                  className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
-                >
-                  Next
-                  <CaretRight size={12} weight="bold" />
-                </button>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div className="relative overflow-hidden rounded-lg border border-border bg-surface/50 p-4 lg:col-span-2">
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-primary via-primary/50 to-gold/40"
+          />
+
+          {filtered.length === 0 ? (
+            <p className="py-10 text-center font-sans text-sm text-text-secondary">
+              No documents match &ldquo;{query}&rdquo;.
+            </p>
+          ) : (
+            <>
+              <DocumentGrid documents={paginated} />
+              <div className="mt-4 flex items-center justify-between border-t border-border pt-4 font-sans text-xs text-text-secondary">
+                <span>
+                  Page {currentPage} of {pageCount}
+                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
+                  >
+                    <CaretLeft size={12} weight="bold" />
+                    Previous
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+                    disabled={currentPage === pageCount}
+                    className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
+                  >
+                    Next
+                    <CaretRight size={12} weight="bold" />
+                  </button>
+                </div>
               </div>
-            </div>
+            </>
           )}
-        </>
-      )}
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <AnalyticsTeaser conversationCount={totalConversations} citationCount={citationCount} />
+          <StatCard label="Documents" value={documents.length} icon={FileText} />
+          <StatCard label="Conversations" value={totalConversations} icon={ChatCircleText} />
+          <StatCard label="Citations given" value={citationCount} icon={Quotes} />
+        </div>
+      </div>
     </div>
   );
 }

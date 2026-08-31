@@ -8,7 +8,6 @@ import { prisma } from "@/lib/db";
 import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import { DocumentsExplorer } from "@/components/dashboard/DocumentsExplorer";
 import UploadDropzone from "@/components/dashboard/UploadDropzone";
-import { AnalyticsTeaser } from "@/components/dashboard/AnalyticsTeaser";
 import { DashboardTour } from "@/components/onboarding/DashboardTour";
 
 const DEMO_DOCUMENT_TITLE = "Getting Started with Excerpta.pdf";
@@ -101,12 +100,11 @@ export default async function DocumentsPage() {
         {serializable.length === 0 ? (
           <UploadDropzone variant="empty-state" />
         ) : (
-          <>
-            <DocumentsExplorer documents={serializable} />
-            <div className="mt-4">
-              <AnalyticsTeaser conversationCount={totalConversations} citationCount={citationCount} />
-            </div>
-          </>
+          <DocumentsExplorer
+            documents={serializable}
+            totalConversations={totalConversations}
+            citationCount={citationCount}
+          />
         )}
       </div>
 
