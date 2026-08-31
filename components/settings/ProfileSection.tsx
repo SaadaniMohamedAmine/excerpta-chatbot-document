@@ -99,15 +99,11 @@ export function ProfileSection({ user, providers }: ProfileSectionProps) {
               </button>
             </div>
           ) : (
-            <div className="mt-1 flex items-center gap-3">
+            <div className="mt-1.5 flex items-center gap-3">
               <span className="text-sm text-text-secondary">{savedName || "—"}</span>
-              <button
-                type="button"
-                onClick={() => setIsEditing(true)}
-                className="text-sm text-primary hover:underline"
-              >
+              <Button onClick={() => setIsEditing(true)} size="sm">
                 Edit
-              </button>
+              </Button>
             </div>
           )}
           {error && <p className="mt-1.5 text-sm text-error">{error}</p>}
