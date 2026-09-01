@@ -2,6 +2,8 @@
 "use client";
 
 import * as React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { TopNav } from "@/components/layout/top-nav";
 import { Sidebar } from "@/components/layout/sidebar";
 import { CommandPalette } from "@/components/command-palette/CommandPalette";
@@ -31,6 +33,12 @@ export function AppShell({
         <main className="flex-1 overflow-auto bg-background">{children}</main>
       </div>
       <CommandPalette />
+      <ToastContainer
+        position="top-right"
+        theme="light"
+        toastClassName="!font-sans !text-sm"
+        autoClose={4000}
+      />
     </div>
   );
 }

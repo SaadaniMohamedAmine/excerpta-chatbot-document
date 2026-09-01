@@ -2,7 +2,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
 import { User, PaintBrush, ShieldWarning, Gear, CreditCard } from "@phosphor-icons/react";
 import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import { ProfileSection } from "./ProfileSection";
@@ -34,6 +35,7 @@ const TABS: Array<{ id: SettingsTab; label: string; icon: typeof User }> = [
 ];
 
 export function SettingsLayout({ user, providers, usage }: SettingsLayoutProps) {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<SettingsTab>("profile");
 
@@ -44,6 +46,22 @@ export function SettingsLayout({ user, providers, usage }: SettingsLayoutProps) 
       setActiveTab(tabParam as SettingsTab);
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    if (searchParams.get("billing") !== "success") return;
+
+    toast.success("Payment successful — your plan has been updated.");
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("billing");
+    router.replace(`/settings?${params.toString()}`);
+
+    // The plan change lands via Stripe's webhook, not this redirect, so the
+    // usage prop above can still be stale for a moment — refetch shortly
+    // after so the new plan actually shows instead of the pre-upgrade one.
+    const timeout = setTimeout(() => router.refresh(), 1500);
+    return () => clearTimeout(timeout);
+  }, [searchParams, router]);
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col px-4 py-10 sm:px-6">
