@@ -78,3 +78,33 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgb(var(--color-primary) / 0.8);
 }
+
+/* react-toastify theming — overrides its "light" variable set with our own
+   tokens (ToastContainer is always mounted with theme="light") rather than
+   letting it detect dark mode on its own. Since these values are var()
+   references (not resolved colors), they automatically follow our .dark
+   class the same way every other token on the page does — no separate
+   dark-mode block needed. */
+:root {
+  --toastify-color-light: rgb(var(--color-surface));
+  --toastify-text-color-light: rgb(var(--color-text-primary));
+  --toastify-toast-background: rgb(var(--color-surface));
+  --toastify-toast-bd-radius: 0.5rem;
+  --toastify-font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --toastify-icon-color-success: rgb(var(--color-success));
+  --toastify-icon-color-error: rgb(var(--color-error));
+  --toastify-icon-color-warning: rgb(var(--color-warning));
+  --toastify-icon-color-info: rgb(var(--color-primary));
+
+  --toastify-color-progress-light: rgb(var(--color-primary));
+  --toastify-color-progress-success: rgb(var(--color-success));
+  --toastify-color-progress-error: rgb(var(--color-error));
+  --toastify-color-progress-warning: rgb(var(--color-warning));
+  --toastify-color-progress-info: rgb(var(--color-primary));
+}
+
+.Toastify__toast {
+  border: 1px solid rgb(var(--color-border));
+  box-shadow: 0 10px 30px -10px rgb(0 0 0 / 0.15);
+}

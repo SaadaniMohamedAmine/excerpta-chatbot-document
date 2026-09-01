@@ -3,6 +3,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { upload } from "@vercel/blob/client";
 import { UploadSimple, FilePdf, FileDoc, FileCsv, FileCode, X } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
@@ -59,7 +60,11 @@ async function uploadWithProgress(file: File, onProgress: (pct: number) => void)
     }),
   });
   if (!res.ok) {
-    throw new Error(`Upload failed (${res.status}).`);
+    // Surface the server's actual message (e.g. the quota-limit text) —
+    // without this, res.status alone can't distinguish a quota block from
+    // any other failure, and DropzoneBody has nothing useful to show.
+    const body = await res.json().catch(() => null);
+    throw new Error(body?.error ?? `Upload failed (${res.status}).`);
   }
   const { document } = await res.json();
   return document;
@@ -135,7 +140,19 @@ function DropzoneBody({
         </div>
       )}
 
-      {error && <p className="font-sans text-xs text-error">{error}</p>}
+      {error && (
+        <p className="font-sans text-xs text-error">
+          {error}
+          {error.includes("upload limit") && (
+            <>
+              {" "}
+              <Link href="/settings?tab=billing" className="underline hover:no-underline">
+                Manage your plan
+              </Link>
+            </>
+          )}
+        </p>
+      )}
     </div>
   );
 }
