@@ -1,7 +1,7 @@
 // components/settings/SettingsLayout.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { User, PaintBrush, ShieldWarning, Gear, CreditCard } from "@phosphor-icons/react";
@@ -38,6 +38,7 @@ export function SettingsLayout({ user, providers, usage }: SettingsLayoutProps) 
   const router = useRouter();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<SettingsTab>("profile");
+  const billingToastShown = useRef(false);
 
   useEffect(() => {
     const tabParam = searchParams.get("tab");
@@ -48,7 +49,8 @@ export function SettingsLayout({ user, providers, usage }: SettingsLayoutProps) 
   }, [searchParams]);
 
   useEffect(() => {
-    if (searchParams.get("billing") !== "success") return;
+    if (searchParams.get("billing") !== "success" || billingToastShown.current) return;
+    billingToastShown.current = true;
 
     toast.success("Payment successful — your plan has been updated.");
 
