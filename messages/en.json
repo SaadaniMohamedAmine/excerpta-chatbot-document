@@ -120,7 +120,49 @@
     }
   },
   "Auth": {
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "or": "or",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithGithub": "Continue with GitHub",
+    "signInPage": {
+      "subtitle": "Sign in to continue reading with your documents.",
+      "forgotPassword": "Forgot password?",
+      "signingIn": "Signing in…",
+      "newToExcerpta": "New to Excerpta?",
+      "createAnAccount": "Create an account",
+      "defaultError": "Could not sign in. Check your email and password."
+    },
+    "signUpPage": {
+      "subtitle": "Create an account to start reading with Excerpta.",
+      "name": "Name",
+      "namePlaceholder": "Ada Lovelace",
+      "passwordPlaceholder": "At least 8 characters",
+      "creatingAccount": "Creating account…",
+      "createAccount": "Create account",
+      "alreadyHaveAccount": "Already have an account?",
+      "defaultError": "Could not create your account."
+    },
+    "forgotPasswordPage": {
+      "subtitle": "Enter your email and we'll send you a link to reset your password.",
+      "sendResetLink": "Send reset link",
+      "sending": "Sending…",
+      "sentMessage": "If that email has an account, a reset link is on its way. Check your inbox.",
+      "rememberedIt": "Remembered it?",
+      "backToSignIn": "Back to sign in",
+      "defaultError": "Could not send a reset link. Try again."
+    },
+    "resetPasswordPage": {
+      "subtitle": "Choose a new password.",
+      "newPassword": "New password",
+      "updatePassword": "Update password",
+      "updating": "Updating…",
+      "invalidLink": "This reset link is invalid or has expired.",
+      "requestNewOne": "Request a new one",
+      "updatedMessage": "Password updated. Redirecting you to sign in…",
+      "defaultError": "Could not reset your password. The link may have expired."
+    }
   },
   "Pricing": {
     "heading": "Simple, honest pricing.",
