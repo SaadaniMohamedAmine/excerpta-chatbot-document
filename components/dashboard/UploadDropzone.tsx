@@ -174,7 +174,10 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
       setProgress(0);
       try {
         const created = await uploadWithProgress(file, setProgress);
-        router.push(`/documents/${created.id}`);
+        // ?assignCollection=1 triggers CollectionAssignGate on the
+        // destination page — a real upload only, never the silent demo
+        // document seeded at onboarding.
+        router.push(`/documents/${created.id}?assignCollection=1`);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Upload failed.");
         setProgress(null);

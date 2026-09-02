@@ -6,6 +6,7 @@ import { FileText } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { PageHeaderBanner } from "@/components/ui/page-header-banner";
+import { resolveUploadCollectionId } from "@/lib/collections";
 import { DocumentsExplorer } from "@/components/dashboard/DocumentsExplorer";
 import UploadDropzone from "@/components/dashboard/UploadDropzone";
 import { DashboardTour } from "@/components/onboarding/DashboardTour";
@@ -28,6 +29,12 @@ export default async function DocumentsPage() {
 
   let justOnboarded = false;
   if (!user.onboardedAt) {
+    // Silent seed — no popup, no ?assignCollection= redirect param, unlike a
+    // real upload. In practice this is almost always what creates the
+    // account's very first (default) collection, since the demo document
+    // lands before any real upload.
+    const collectionId = await resolveUploadCollectionId(session.user.id);
+
     const demoDocument = await prisma.document.create({
       data: {
         userId: session.user.id,
@@ -36,6 +43,7 @@ export default async function DocumentsPage() {
         fileUrl: DEMO_DOCUMENT_URL,
         fileSize: DEMO_DOCUMENT_SIZE_BYTES,
         status: "processing",
+        collectionId,
       },
     });
 

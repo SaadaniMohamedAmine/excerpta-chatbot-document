@@ -17,7 +17,7 @@ export default async function CollectionPage({ params }: PageProps) {
 
   const collection = await prisma.collection.findFirst({
     where: { id: collectionId, userId: session.user.id },
-    include: { documents: { include: { document: true } } },
+    include: { documents: true },
   });
 
   if (!collection) {
@@ -27,11 +27,11 @@ export default async function CollectionPage({ params }: PageProps) {
   const serializable = {
     id: collection.id,
     name: collection.name,
-    documents: collection.documents.map((cd) => ({
-      id: cd.document.id,
-      title: cd.document.title,
-      fileType: cd.document.fileType as "pdf" | "docx" | "csv" | "code",
-      status: cd.document.status as "processing" | "ready" | "failed",
+    documents: collection.documents.map((d) => ({
+      id: d.id,
+      title: d.title,
+      fileType: d.fileType as "pdf" | "docx" | "csv" | "code",
+      status: d.status as "processing" | "ready" | "failed",
     })),
   };
 

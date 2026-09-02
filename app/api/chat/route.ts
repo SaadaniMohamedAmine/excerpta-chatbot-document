@@ -57,10 +57,11 @@ export async function POST(request: NextRequest): Promise<Response> {
   // (shared, multi-tenant) index.
   let documentIds: string[] | undefined;
   if (conversation.collectionId) {
-    const links = await prisma.collectionDocument.findMany({
+    const members = await prisma.document.findMany({
       where: { collectionId: conversation.collectionId },
+      select: { id: true },
     });
-    documentIds = links.map((l) => l.documentId);
+    documentIds = members.map((d) => d.id);
   }
 
   const hasScope = Boolean(conversation.documentId) || Boolean(documentIds && documentIds.length > 0);

@@ -7,14 +7,13 @@ import { Plus, FolderStar } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import CollectionCard, { type CollectionSummary } from "@/components/dashboard/CollectionCard";
-import NewCollectionModal, { type SelectableDocument } from "@/components/dashboard/NewCollectionModal";
+import NewCollectionModal from "@/components/dashboard/NewCollectionModal";
 
 interface CollectionsPageClientProps {
   collections: CollectionSummary[];
-  availableDocuments: SelectableDocument[];
 }
 
-export default function CollectionsPageClient({ collections, availableDocuments }: CollectionsPageClientProps) {
+export default function CollectionsPageClient({ collections }: CollectionsPageClientProps) {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -53,9 +52,7 @@ export default function CollectionsPageClient({ collections, availableDocuments 
         )}
       </div>
 
-      {modalOpen && (
-        <NewCollectionModal availableDocuments={availableDocuments} onClose={() => setModalOpen(false)} onCreated={handleCreated} />
-      )}
+      {modalOpen && <NewCollectionModal onClose={() => setModalOpen(false)} onCreated={handleCreated} />}
     </div>
   );
 }

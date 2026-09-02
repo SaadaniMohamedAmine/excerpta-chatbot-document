@@ -23,6 +23,10 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
+  // --- Collections (always-assigned, one-to-many) ---
+  lastUsedCollectionId String?
+  lastUsedCollection   Collection? @relation("UserLastUsedCollection", fields: [lastUsedCollectionId], references: [id], onDelete: SetNull)
+
   // --- Billing (Stripe, test mode) ---
   plan                     String   @default("free") // free | pro | team
   stripeCustomerId         String?  @unique
@@ -92,7 +96,16 @@ model Document {
   createdAt          DateTime             @default(now())
   chunks             Chunk[]
   conversations      Conversation[]
-  collections        CollectionDocument[]
+
+  // Every document belongs to exactly one collection — never orphaned.
+  // Restrict (not Cascade): a document must never end up with a dangling
+  // collectionId. DELETE /api/collections/[id] always reassigns documents
+  // to the account's default collection before deleting, in a transaction —
+  // this constraint is a safety net, not the normal mechanism.
+  collectionId String
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Restrict)
+
+  @@index([collectionId])
 }
 
 model Chunk {
@@ -106,22 +119,19 @@ model Chunk {
 }
 
 model Collection {
-  id            String               @id @default(cuid())
+  id            String         @id @default(cuid())
   userId        String
-  user          User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   name          String
-  createdAt     DateTime             @default(now())
-  documents     CollectionDocument[]
+  isDefault     Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  documents     Document[]
   conversations Conversation[]
-}
 
-model CollectionDocument {
-  collectionId String
-  documentId   String
-  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
-  document     Document   @relation(fields: [documentId], references: [id], onDelete: Cascade)
-
-  @@id([collectionId, documentId])
+  // Inverse of User.lastUsedCollectionId. Never more than one row in
+  // practice (an account only ever points at its own last-used collection),
+  // but Prisma models the inverse of an optional FK as an array.
+  lastUsedByUsers User[] @relation("UserLastUsedCollection")
 }
 
 model Conversation {
