@@ -32,5 +32,99 @@
     "switchToLight": "Passer au thème clair",
     "switchToDark": "Passer au thème sombre",
     "replayTour": "Revoir la visite guidée"
+  },
+  "Landing": {
+    "nav": {
+      "features": "Fonctionnalités",
+      "pricing": "Tarifs",
+      "whatsNew": "Nouveautés",
+      "howItWorks": "Fonctionnement"
+    },
+    "hero": {
+      "titleLine1": "Discutez avec n'importe quel document.",
+      "titleHighlight": "Chaque réponse citée à la page près.",
+      "subtitle": "Des réponses précises, citées à la ligne près. Importez un PDF, un DOCX, un tableur ou un fichier de code, et posez-lui n'importe quelle question — chaque affirmation renvoie à sa source.",
+      "ctaSignedIn": "Accéder aux documents",
+      "ctaSignedOut": "Essayer Excerpta",
+      "howItWorksLink": "Voir comment ça marche",
+      "mockFileName": "rapport-trimestriel.pdf",
+      "mockPageLabel": "Page 4 sur 12",
+      "mockQuestion": "Quelle a été la croissance du CA au T3 ?",
+      "mockAnswer": "Le chiffre d'affaires a progressé de 18 % sur le trimestre.",
+      "mockCitation": "p. 4"
+    },
+    "features": {
+      "heading": "Conçu pour répondre avec des preuves.",
+      "subtitle": "Excerpta n'est pas un chatbot générique pointé sur un fichier. Chaque partie de l'outil existe pour garder une réponse traçable jusqu'à l'endroit exact d'où elle vient.",
+      "items": [
+        {
+          "title": "Import multi-format",
+          "description": "Les fichiers PDF, DOCX, CSV et de code s'importent tels quels. Aucune conversion, aucune perte de mise en forme."
+        },
+        {
+          "title": "Citations des sources",
+          "description": "Chaque réponse indique la page exacte d'où elle vient — pas une paraphrase à prendre pour argent comptant."
+        },
+        {
+          "title": "Défilement automatique vers la source",
+          "description": "Cliquez sur une citation et le document défile directement jusqu'au passage, surligné sur place."
+        }
+      ]
+    },
+    "pricing": {
+      "heading": "Une tarification simple et transparente.",
+      "subtitle": "Commencez gratuitement, passez à un plan supérieur quand vous avez besoin de plus.",
+      "mostPopular": "Le plus populaire",
+      "ctaFree": "Commencer",
+      "ctaChoosePlan": "Choisir {plan}"
+    },
+    "whatsNew": {
+      "heading": "Quoi de neuf.",
+      "subtitle": "Excerpta évolue en continu. Voici les dernières nouveautés.",
+      "items": [
+        {
+          "title": "Landing page soignée",
+          "description": "Une vraie page d'accueil publique, des métadonnées SEO et une image de prévisualisation."
+        },
+        {
+          "title": "Paramètres du compte et d'apparence",
+          "description": "Gérez votre profil, changez de thème et supprimez votre compte et vos données."
+        },
+        {
+          "title": "Partage public",
+          "description": "Transformez n'importe quelle conversation en lien en lecture seule, accessible sans connexion."
+        },
+        {
+          "title": "Export des conversations",
+          "description": "Téléchargez n'importe quelle conversation en PDF ou DOCX mis en forme, citations incluses."
+        }
+      ]
+    },
+    "howItWorks": {
+      "heading": "Comment ça marche",
+      "subtitle": "Trois étapes, d'un fichier brut à une réponse vérifiable.",
+      "steps": [
+        {
+          "title": "Importez votre document",
+          "description": "Déposez un PDF, un fichier Word, un tableur ou un fichier de code. Excerpta l'analyse et le prépare pour la recherche en quelques secondes."
+        },
+        {
+          "title": "Posez une question",
+          "description": "Posez votre question en langage naturel. Excerpta parcourt tout le document pour trouver les passages qui y répondent réellement."
+        },
+        {
+          "title": "Obtenez une réponse citée",
+          "description": "Lisez la réponse, puis cliquez sur une citation pour aller directement à la page source — surlignée, en contexte."
+        }
+      ]
+    }
+  },
+  "Auth": {
+    "signIn": "Se connecter"
+  },
+  "Pricing": {
+    "heading": "Une tarification simple et honnête.",
+    "subtitle": "Commencez gratuitement. Passez à un plan supérieur quand vous en avez besoin.",
+    "redirecting": "Redirection…"
   }
 }

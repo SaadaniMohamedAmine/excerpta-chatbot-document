@@ -32,5 +32,99 @@
     "switchToLight": "Switch to light theme",
     "switchToDark": "Switch to dark theme",
     "replayTour": "Replay guided tour"
+  },
+  "Landing": {
+    "nav": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "whatsNew": "What's new",
+      "howItWorks": "How it works"
+    },
+    "hero": {
+      "titleLine1": "Chat with any document.",
+      "titleHighlight": "Every answer cited to the page.",
+      "subtitle": "Precise answers, cited to the line. Upload a PDF, DOCX, spreadsheet, or code file, and ask it anything — every claim traces back to its source.",
+      "ctaSignedIn": "Go to Documents",
+      "ctaSignedOut": "Try Excerpta",
+      "howItWorksLink": "See how it works",
+      "mockFileName": "quarterly-report.pdf",
+      "mockPageLabel": "Page 4 of 12",
+      "mockQuestion": "What was Q3 revenue growth?",
+      "mockAnswer": "Revenue grew 18% quarter over quarter.",
+      "mockCitation": "p. 4"
+    },
+    "features": {
+      "heading": "Built to answer with evidence.",
+      "subtitle": "Excerpta is not a generic chatbot pointed at a file. Every part of it exists to keep an answer traceable to the exact place it came from.",
+      "items": [
+        {
+          "title": "Multi-format upload",
+          "description": "PDF, DOCX, CSV, and code files upload as-is. No conversion step, no lost formatting."
+        },
+        {
+          "title": "Source citations",
+          "description": "Every answer names the exact page it came from — not a paraphrase you have to take on faith."
+        },
+        {
+          "title": "Auto-scroll to source",
+          "description": "Click a citation and the document jumps straight to the passage, highlighted in place."
+        }
+      ]
+    },
+    "pricing": {
+      "heading": "Simple, transparent pricing.",
+      "subtitle": "Start free, upgrade when you need more room.",
+      "mostPopular": "Most popular",
+      "ctaFree": "Get started",
+      "ctaChoosePlan": "Choose {plan}"
+    },
+    "whatsNew": {
+      "heading": "What's new.",
+      "subtitle": "Excerpta is actively evolving. Here's what shipped most recently.",
+      "items": [
+        {
+          "title": "Polished landing experience",
+          "description": "A dedicated public landing page, SEO metadata, and a real preview image."
+        },
+        {
+          "title": "Account & appearance settings",
+          "description": "Manage your profile, switch themes, and delete your account and data."
+        },
+        {
+          "title": "Public sharing",
+          "description": "Turn any conversation into a read-only link anyone can open, no sign-in needed."
+        },
+        {
+          "title": "Export conversations",
+          "description": "Download any conversation as a formatted PDF or DOCX, citations included."
+        }
+      ]
+    },
+    "howItWorks": {
+      "heading": "How it works",
+      "subtitle": "Three steps, from a raw file to an answer you can verify.",
+      "steps": [
+        {
+          "title": "Upload your document",
+          "description": "Drop in a PDF, Word file, spreadsheet, or code file. Excerpta parses it and prepares it for search in seconds."
+        },
+        {
+          "title": "Ask a question",
+          "description": "Ask in plain language. Excerpta searches the full document for the passages that actually answer it."
+        },
+        {
+          "title": "Get a cited answer",
+          "description": "Read the answer, then click any citation to jump straight to the source page — highlighted, in context."
+        }
+      ]
+    }
+  },
+  "Auth": {
+    "signIn": "Sign in"
+  },
+  "Pricing": {
+    "heading": "Simple, honest pricing.",
+    "subtitle": "Start free. Upgrade when you outgrow it.",
+    "redirecting": "Redirecting…"
   }
 }
