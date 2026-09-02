@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   SquaresFour,
   FileText,
@@ -32,8 +33,6 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
-const ACCOUNT_ITEMS = [{ href: "/settings", label: "Settings", icon: Gear }] as const;
-
 const COLLAPSE_STORAGE_KEY = "excerpta:sidebar-collapsed";
 
 export function Sidebar({
@@ -47,6 +46,7 @@ export function Sidebar({
   documentCount?: number;
   usage: { plan: PlanId; used: number; limit: number };
 }) {
+  const t = useTranslations("Nav");
   const pathname = usePathname();
   const router = useRouter();
   const { data: session } = useSession();
@@ -81,12 +81,14 @@ export function Sidebar({
   const user = session?.user;
 
   const workspaceItems = [
-    { href: "/dashboard", label: "Dashboard", icon: SquaresFour },
-    { href: "/documents", label: "Documents", icon: FileText, count: documentCount },
-    { href: "/collections", label: "Collections", icon: FolderStar },
-    { href: "/history", label: "History", icon: ClockCounterClockwise },
-    { href: "/analytics", label: "Analytics", icon: ChartLineUp },
-  ] as const;
+    { href: "/dashboard", label: t("dashboard"), icon: SquaresFour },
+    { href: "/documents", label: t("documents"), icon: FileText, count: documentCount },
+    { href: "/collections", label: t("collections"), icon: FolderStar },
+    { href: "/history", label: t("history"), icon: ClockCounterClockwise },
+    { href: "/analytics", label: t("analytics"), icon: ChartLineUp },
+  ];
+
+  const accountItems = [{ href: "/settings", label: t("settings"), icon: Gear }];
 
   return (
     <>
@@ -114,7 +116,7 @@ export function Sidebar({
           <button
             type="button"
             onClick={onMobileClose}
-            aria-label="Close menu"
+            aria-label={t("closeMenu")}
             className="flex h-8 w-8 items-center justify-center rounded-md text-text-secondary transition-colors hover:bg-background hover:text-text-primary"
           >
             <X size={18} weight="regular" />
@@ -131,8 +133,8 @@ export function Sidebar({
               "flex h-10 items-center justify-center rounded-md bg-primary font-sans text-sm font-medium text-white transition-[width,gap,background-color] duration-200 ease-in-out hover:bg-primary/90",
               collapsed ? "w-10 gap-0" : "w-full gap-2"
             )}
-            aria-label="New document"
-            title="New document"
+            aria-label={t("newDocument")}
+            title={t("newDocument")}
           >
             <Plus size={18} weight="bold" className="shrink-0" />
             <span
@@ -141,7 +143,7 @@ export function Sidebar({
                 collapsed ? "max-w-0 opacity-0" : "max-w-[10rem] opacity-100"
               )}
             >
-              New document
+              {t("newDocument")}
             </span>
           </Link>
         </div>
@@ -154,7 +156,7 @@ export function Sidebar({
             collapsed ? "max-h-0 opacity-0" : "mb-1 max-h-6 opacity-100"
           )}
         >
-          Workspace
+          {t("workspace")}
         </span>
         {workspaceItems.map((item) => (
           <SidebarNavItem
@@ -177,9 +179,9 @@ export function Sidebar({
             collapsed ? "max-h-0 opacity-0" : "mb-1 max-h-6 opacity-100"
           )}
         >
-          Account
+          {t("account")}
         </span>
-        {ACCOUNT_ITEMS.map((item) => (
+        {accountItems.map((item) => (
           <SidebarNavItem
             key={item.href}
             item={item}
@@ -197,8 +199,8 @@ export function Sidebar({
         <button
           type="button"
           onClick={toggleCollapsed}
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          aria-label={collapsed ? t("expandSidebar") : t("collapseSidebar")}
+          title={collapsed ? t("expandSidebar") : t("collapseSidebar")}
           className={cn(
             "flex h-9 w-full items-center rounded-md text-text-secondary transition-[padding,gap,background-color,color] duration-200 ease-in-out hover:bg-background hover:text-text-primary",
             collapsed ? "justify-center gap-0" : "gap-2 px-2"
@@ -211,7 +213,7 @@ export function Sidebar({
               collapsed ? "max-w-0 opacity-0" : "max-w-[10rem] opacity-100"
             )}
           >
-            Collapse
+            {t("collapse")}
           </span>
         </button>
       </div>
@@ -228,7 +230,7 @@ export function Sidebar({
                 "flex items-center rounded-md py-1.5 text-left transition-[width,padding,gap,background-color] duration-200 ease-in-out hover:bg-background",
                 collapsed ? "w-10 justify-center gap-0 px-0" : "w-full gap-2 px-2"
               )}
-              aria-label="Account menu"
+              aria-label={t("accountMenu")}
             >
               <Avatar name={user?.name} email={user?.email} size="sm" className="shrink-0" />
               <div
@@ -239,7 +241,7 @@ export function Sidebar({
               >
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-sans text-sm font-medium text-text-primary">
-                    {user?.name || "Account"}
+                    {user?.name || t("account")}
                   </p>
                   <p className="truncate font-sans text-xs text-text-secondary">{user?.email ?? ""}</p>
                 </div>
@@ -248,16 +250,16 @@ export function Sidebar({
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top" align={collapsed ? "center" : "start"}>
-            <DropdownMenuLabel>{user?.email ?? "Account"}</DropdownMenuLabel>
+            <DropdownMenuLabel>{user?.email ?? t("account")}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link href="/settings" onClick={onMobileClose} className="flex w-full items-center gap-2">
-                <Gear size={16} /> Settings
+                <Gear size={16} /> {t("settings")}
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem destructive onSelect={handleSignOut}>
-              <SignOut size={16} /> Sign out
+              <SignOut size={16} /> {t("signOut")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

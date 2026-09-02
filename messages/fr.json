@@ -1,5 +1,36 @@
 {
   "Common": {
     "changeLanguage": "Changer de langue"
+  },
+  "Nav": {
+    "dashboard": "Tableau de bord",
+    "documents": "Documents",
+    "collections": "Collections",
+    "history": "Historique",
+    "analytics": "Analytique",
+    "settings": "Paramètres",
+    "workspace": "Espace de travail",
+    "account": "Compte",
+    "newDocument": "Nouveau document",
+    "closeMenu": "Fermer le menu",
+    "openMenu": "Ouvrir le menu",
+    "expandSidebar": "Déployer la barre latérale",
+    "collapseSidebar": "Réduire la barre latérale",
+    "collapse": "Réduire",
+    "accountMenu": "Menu du compte",
+    "signOut": "Se déconnecter",
+    "openCommandPalette": "Ouvrir la palette de commandes",
+    "commandPaletteShortcut": "Palette de commandes (⌘K)"
+  },
+  "CommandPalette": {
+    "label": "Palette de commandes",
+    "searchPlaceholder": "Rechercher un document ou lancer une commande…",
+    "noResults": "Aucun résultat.",
+    "groupNavigation": "Navigation",
+    "groupDocuments": "Documents",
+    "groupActions": "Actions",
+    "switchToLight": "Passer au thème clair",
+    "switchToDark": "Passer au thème sombre",
+    "replayTour": "Revoir la visite guidée"
   }
 }
