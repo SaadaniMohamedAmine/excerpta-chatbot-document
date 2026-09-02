@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { ALLOWED_EXTENSIONS, MAX_FILE_SIZE_BYTES } from "@/lib/documents/constraints";
 import { assertCanUpload, incrementUsage } from "@/lib/billing/usage";
+import { resolveUploadCollectionId } from "@/lib/collections";
 
 type FinalizeBody = {
   fileUrl: string;
@@ -52,6 +53,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     );
   }
 
+  // collectionId is required in the schema — resolved here rather than
+  // waiting on the post-upload popup, so the document is already correctly
+  // filed (last-used collection, or the default) before that popup, which
+  // only offers to move it, ever shows.
+  const collectionId = await resolveUploadCollectionId(session.user.id);
+
   const document = await prisma.document.create({
     data: {
       userId: session.user.id,
@@ -60,6 +67,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       fileUrl,
       fileSize,
       status: "processing",
+      collectionId,
     },
   });
 

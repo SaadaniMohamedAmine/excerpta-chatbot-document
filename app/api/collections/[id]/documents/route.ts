@@ -22,23 +22,27 @@ export async function POST(
     return NextResponse.json({ error: "documentIds is required" }, { status: 400 });
   }
 
-  // SECURITY: only attach documents the caller actually owns — otherwise a
-  // collection could be used to smuggle another user's document into this
+  // Every document belongs to exactly one collection now, so "adding" a
+  // document here MOVES it out of whatever collection it was in before —
+  // SECURITY: still scoped to documents the caller actually owns, otherwise
+  // this could be used to smuggle another user's document into this
   // collection's chat retrieval scope (queryVector trusts collection
   // membership as-is, see the security note in lib/vector/upstash.ts).
-  const ownedDocuments = await prisma.document.findMany({
-    where: { id: { in: documentIds }, userId: session.user.id },
-    select: { id: true },
+  const { count } = await prisma.$transaction(async (tx) => {
+    const result = await tx.document.updateMany({
+      where: { id: { in: documentIds }, userId: session.user.id },
+      data: { collectionId: collection.id },
+    });
+    await tx.user.update({
+      where: { id: session.user.id },
+      data: { lastUsedCollectionId: collection.id },
+    });
+    return result;
   });
 
-  if (ownedDocuments.length === 0) {
-    return NextResponse.json({ error: "No valid documents to add" }, { status: 400 });
+  if (count === 0) {
+    return NextResponse.json({ error: "No valid documents to move" }, { status: 400 });
   }
 
-  await prisma.collectionDocument.createMany({
-    data: ownedDocuments.map((d) => ({ collectionId: collection.id, documentId: d.id })),
-    skipDuplicates: true,
-  });
-
-  return NextResponse.json({ ok: true, added: ownedDocuments.length }, { status: 201 });
+  return NextResponse.json({ ok: true, moved: count }, { status: 201 });
 }

@@ -14,7 +14,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   const collection = await prisma.collection.create({
     data: { name, userId: session.user.id },
-    include: { documents: { include: { document: true } } },
   });
 
   return NextResponse.json(collection, { status: 201 });
@@ -26,9 +25,16 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   const collections = await prisma.collection.findMany({
     where: { userId: session.user.id },
-    include: { documents: { include: { document: true } } },
-    orderBy: { createdAt: "desc" },
+    include: { _count: { select: { documents: true } } },
+    orderBy: [{ isDefault: "desc" }, { createdAt: "desc" }],
   });
 
-  return NextResponse.json(collections);
+  return NextResponse.json({
+    collections: collections.map((c) => ({
+      id: c.id,
+      name: c.name,
+      isDefault: c.isDefault,
+      documentCount: c._count.documents,
+    })),
+  });
 }
