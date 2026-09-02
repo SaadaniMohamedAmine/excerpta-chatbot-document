@@ -23,6 +23,10 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
+  // --- Collections (always-assigned, one-to-many) ---
+  lastUsedCollectionId String?
+  lastUsedCollection   Collection? @relation("UserLastUsedCollection", fields: [lastUsedCollectionId], references: [id], onDelete: SetNull)
+
   // --- Billing (Stripe, test mode) ---
   plan                     String   @default("free") // free | pro | team
   stripeCustomerId         String?  @unique
@@ -93,6 +97,12 @@ model Document {
   chunks             Chunk[]
   conversations      Conversation[]
   collections        CollectionDocument[]
+
+  // TEMPORARY: nullable during the many-to-many -> one-to-many migration —
+  // see lib/collections.ts and scripts/backfill-collections.ts. Becomes
+  // required (String, not String?) once every existing document has been
+  // backfilled to exactly one collection.
+  collectionId String?
 }
 
 model Chunk {
@@ -110,9 +120,15 @@ model Collection {
   userId        String
   user          User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   name          String
+  isDefault     Boolean              @default(false)
   createdAt     DateTime             @default(now())
   documents     CollectionDocument[]
   conversations Conversation[]
+
+  // Inverse of User.lastUsedCollectionId. Never more than one row in
+  // practice (an account only ever points at its own last-used collection),
+  // but Prisma models the inverse of an optional FK as an array.
+  lastUsedByUsers User[] @relation("UserLastUsedCollection")
 }
 
 model CollectionDocument {
