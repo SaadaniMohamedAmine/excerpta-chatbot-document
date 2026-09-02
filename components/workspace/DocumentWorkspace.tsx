@@ -11,6 +11,7 @@ import ChatPanel from "./ChatPanel";
 import ProcessingPanel from "./ProcessingPanel";
 import ErrorPanel from "./ErrorPanel";
 import ConversationHistoryList from "@/components/dashboard/ConversationHistoryList";
+import CollectionAssignGate from "@/components/dashboard/CollectionAssignGate";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
@@ -152,6 +153,7 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
   return (
     <div className="flex h-full flex-col bg-background p-4">
       <WorkspaceTour />
+      <CollectionAssignGate documentId={document.id} />
       <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-border">
         <div className="flex items-center justify-between border-b border-border bg-surface px-4 py-2">
           <div className="flex min-w-0 items-center gap-2.5">
