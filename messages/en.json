@@ -168,5 +168,11 @@
     "heading": "Simple, honest pricing.",
     "subtitle": "Start free. Upgrade when you outgrow it.",
     "redirecting": "Redirecting…"
+  },
+  "Share": {
+    "homeAriaLabel": "Excerpta home",
+    "defaultTitle": "Shared conversation",
+    "readOnlySubtitle": "Shared conversation — read-only.",
+    "footerTagline": "Shared with Excerpta — Precise answers, cited to the line."
   }
 }

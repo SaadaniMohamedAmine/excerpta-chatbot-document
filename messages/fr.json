@@ -168,5 +168,11 @@
     "heading": "Une tarification simple et honnête.",
     "subtitle": "Commencez gratuitement. Passez à un plan supérieur quand vous en avez besoin.",
     "redirecting": "Redirection…"
+  },
+  "Share": {
+    "homeAriaLabel": "Accueil Excerpta",
+    "defaultTitle": "Conversation partagée",
+    "readOnlySubtitle": "Conversation partagée — lecture seule.",
+    "footerTagline": "Partagé avec Excerpta — Des réponses précises, citées à la ligne près."
   }
 }

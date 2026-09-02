@@ -6,6 +6,7 @@
 // is reachable without a session (verified, not just assumed).
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { prisma } from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
@@ -20,6 +21,8 @@ interface SharePageProps {
 
 export default async function SharePage({ params }: SharePageProps) {
   const { token } = await params;
+  const t = await getTranslations("Share");
+  const tLanding = await getTranslations("Landing");
 
   const conversation = await prisma.conversation.findFirst({
     where: { shareToken: token, isPublic: true },
@@ -30,7 +33,7 @@ export default async function SharePage({ params }: SharePageProps) {
     notFound();
   }
 
-  let title = "Shared conversation";
+  let title = t("defaultTitle");
   if (conversation.documentId) {
     const document = await prisma.document.findUnique({
       where: { id: conversation.documentId },
@@ -49,18 +52,18 @@ export default async function SharePage({ params }: SharePageProps) {
     <div className="flex min-h-screen flex-col bg-background">
       <header className="border-b border-border">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4">
-          <Link href="/" aria-label="Excerpta home">
+          <Link href="/" aria-label={t("homeAriaLabel")}>
             <Logo />
           </Link>
           <Link href="/sign-up">
-            <Button size="sm">Try Excerpta</Button>
+            <Button size="sm">{tLanding("hero.ctaSignedOut")}</Button>
           </Link>
         </div>
       </header>
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
         <h1 className="mb-1 font-serif text-2xl text-text-primary">{title}</h1>
-        <p className="mb-8 text-sm text-text-secondary">Shared conversation — read-only.</p>
+        <p className="mb-8 text-sm text-text-secondary">{t("readOnlySubtitle")}</p>
 
         <div className="flex flex-col gap-6">
           {conversation.messages.map((message) => (
@@ -79,7 +82,7 @@ export default async function SharePage({ params }: SharePageProps) {
       </main>
 
       <footer className="border-t border-border py-6 text-center text-sm text-text-secondary">
-        Shared with Excerpta — Precise answers, cited to the line.
+        {t("footerTagline")}
       </footer>
     </div>
   );
