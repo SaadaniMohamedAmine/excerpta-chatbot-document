@@ -1,6 +1,7 @@
 {
   "Common": {
-    "changeLanguage": "Changer de langue"
+    "changeLanguage": "Changer de langue",
+    "newConversation": "Nouvelle conversation"
   },
   "Nav": {
     "dashboard": "Tableau de bord",
@@ -168,6 +169,26 @@
     "heading": "Une tarification simple et honnête.",
     "subtitle": "Commencez gratuitement. Passez à un plan supérieur quand vous en avez besoin.",
     "redirecting": "Redirection…"
+  },
+  "Dashboard": {
+    "greetingMorning": "Bonjour",
+    "greetingAfternoon": "Bon après-midi",
+    "greetingEvening": "Bonsoir",
+    "fallbackName": "à vous",
+    "subtitle": "{documentCount, plural, one {# document suivi} other {# documents suivis}} · {conversationCount, plural, one {# conversation} other {# conversations}}",
+    "statDocuments": "Documents",
+    "statConversations": "Conversations",
+    "statCitationsGiven": "Citations données",
+    "statCollections": "Collections",
+    "recentDocuments": "Documents récents",
+    "recentConversations": "Conversations récentes",
+    "viewAll": "Tout voir",
+    "noDocumentsYet": "Importez un document pour le voir ici.",
+    "noConversationsYet": "Démarrez une conversation depuis un document pour la voir ici.",
+    "uploadDocument": "Importer un document",
+    "uploadDocumentHint": "Obtenez des réponses citées en quelques secondes.",
+    "askDocuments": "Interrogez vos documents",
+    "askDocumentsHint": "Recherchez dans tout ce que vous avez importé."
   },
   "Share": {
     "homeAriaLabel": "Accueil Excerpta",

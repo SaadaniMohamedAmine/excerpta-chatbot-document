@@ -1,5 +1,6 @@
 // components/dashboard/RecentDocumentsList.tsx
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { FilePdf, FileDoc, FileCsv, FileCode, CircleNotch, WarningCircle } from "@phosphor-icons/react/dist/ssr";
 import { formatRelativeDate } from "@/lib/format";
 
@@ -14,17 +15,19 @@ export interface RecentDocument {
 }
 
 export function RecentDocumentsList({ documents }: { documents: RecentDocument[] }) {
+  const t = useTranslations("Dashboard");
+
   return (
     <div className="rounded-lg border border-border bg-surface p-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-sans text-sm font-medium text-text-primary">Recent documents</h2>
+        <h2 className="font-sans text-sm font-medium text-text-primary">{t("recentDocuments")}</h2>
         <Link href="/documents" className="font-sans text-xs text-primary hover:underline">
-          View all
+          {t("viewAll")}
         </Link>
       </div>
 
       {documents.length === 0 ? (
-        <p className="mt-4 font-sans text-sm text-text-secondary">Upload a document to see it here.</p>
+        <p className="mt-4 font-sans text-sm text-text-secondary">{t("noDocumentsYet")}</p>
       ) : (
         <ul className="mt-3 flex flex-col gap-1">
           {documents.map((doc) => {

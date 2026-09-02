@@ -1,6 +1,7 @@
 {
   "Common": {
-    "changeLanguage": "Change language"
+    "changeLanguage": "Change language",
+    "newConversation": "New conversation"
   },
   "Nav": {
     "dashboard": "Dashboard",
@@ -168,6 +169,26 @@
     "heading": "Simple, honest pricing.",
     "subtitle": "Start free. Upgrade when you outgrow it.",
     "redirecting": "Redirecting…"
+  },
+  "Dashboard": {
+    "greetingMorning": "Good morning",
+    "greetingAfternoon": "Good afternoon",
+    "greetingEvening": "Good evening",
+    "fallbackName": "there",
+    "subtitle": "{documentCount, plural, one {# document} other {# documents}} tracked · {conversationCount, plural, one {# conversation} other {# conversations}}",
+    "statDocuments": "Documents",
+    "statConversations": "Conversations",
+    "statCitationsGiven": "Citations given",
+    "statCollections": "Collections",
+    "recentDocuments": "Recent documents",
+    "recentConversations": "Recent conversations",
+    "viewAll": "View all",
+    "noDocumentsYet": "Upload a document to see it here.",
+    "noConversationsYet": "Start a conversation from a document to see it here.",
+    "uploadDocument": "Upload a document",
+    "uploadDocumentHint": "Get cited answers in seconds.",
+    "askDocuments": "Ask your documents",
+    "askDocumentsHint": "Search across everything you've uploaded."
   },
   "Share": {
     "homeAriaLabel": "Excerpta home",

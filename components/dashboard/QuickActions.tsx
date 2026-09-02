@@ -2,9 +2,12 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { UploadSimple, MagnifyingGlass } from "@phosphor-icons/react";
 
 export function QuickActions() {
+  const t = useTranslations("Dashboard");
+
   return (
     <div className="mt-4 grid gap-4 md:grid-cols-2">
       <Link
@@ -16,9 +19,9 @@ export function QuickActions() {
         </span>
         <div>
           <h3 className="font-sans text-sm font-medium text-text-primary group-hover:text-primary">
-            Upload a document
+            {t("uploadDocument")}
           </h3>
-          <p className="mt-0.5 font-sans text-xs text-text-secondary">Get cited answers in seconds.</p>
+          <p className="mt-0.5 font-sans text-xs text-text-secondary">{t("uploadDocumentHint")}</p>
         </div>
       </Link>
 
@@ -33,11 +36,9 @@ export function QuickActions() {
           </span>
           <div>
             <h3 className="font-sans text-sm font-medium text-text-primary group-hover:text-primary">
-              Ask your documents
+              {t("askDocuments")}
             </h3>
-            <p className="mt-0.5 font-sans text-xs text-text-secondary">
-              Search across everything you&apos;ve uploaded.
-            </p>
+            <p className="mt-0.5 font-sans text-xs text-text-secondary">{t("askDocumentsHint")}</p>
           </div>
         </div>
         <kbd className="shrink-0 rounded border border-border bg-background px-1.5 py-0.5 font-sans text-[10px] text-text-secondary">
