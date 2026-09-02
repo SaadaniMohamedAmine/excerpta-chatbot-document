@@ -4,6 +4,7 @@
 import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { upload } from "@vercel/blob/client";
 import { UploadSimple, FilePdf, FileDoc, FileCsv, FileCode, X } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
@@ -79,6 +80,7 @@ function DropzoneBody({
   progress: number | null;
   error: string | null;
 }) {
+  const t = useTranslations("UploadDropzone");
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -105,8 +107,8 @@ function DropzoneBody({
       }`}
     >
       <UploadSimple className="h-10 w-10 text-primary" weight="duotone" />
-      <h2 className="font-sans text-base font-medium text-text-primary">Upload a document to begin.</h2>
-      <p className="font-sans text-sm text-text-secondary">PDF, DOCX, CSV, or a code file.</p>
+      <h2 className="font-sans text-base font-medium text-text-primary">{t("title")}</h2>
+      <p className="font-sans text-sm text-text-secondary">{t("subtitle")}</p>
 
       <div className="mt-1 flex items-center gap-3 text-text-secondary">
         <FilePdf className="h-5 w-5" weight="regular" />
@@ -118,7 +120,7 @@ function DropzoneBody({
       {progress === null ? (
         <>
           <Button className="mt-3" onClick={() => inputRef.current?.click()}>
-            Browse files
+            {t("browseFiles")}
           </Button>
           <input
             ref={inputRef}
@@ -136,7 +138,7 @@ function DropzoneBody({
           <div className="h-1.5 overflow-hidden rounded-full bg-border">
             <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${progress}%` }} />
           </div>
-          <p className="mt-1.5 font-sans text-xs text-text-secondary">Uploading… {progress}%</p>
+          <p className="mt-1.5 font-sans text-xs text-text-secondary">{t("uploading", { percent: progress })}</p>
         </div>
       )}
 
@@ -147,7 +149,7 @@ function DropzoneBody({
             <>
               {" "}
               <Link href="/settings?tab=billing" className="underline hover:no-underline">
-                Manage your plan
+                {t("managePlan")}
               </Link>
             </>
           )}
@@ -158,6 +160,8 @@ function DropzoneBody({
 }
 
 export default function UploadDropzone({ variant }: UploadDropzoneProps) {
+  const t = useTranslations("UploadDropzone");
+  const tCommon = useTranslations("Common");
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [progress, setProgress] = useState<number | null>(null);
@@ -167,7 +171,7 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
     async (file: File) => {
       const ext = "." + file.name.split(".").pop()?.toLowerCase();
       if (!ACCEPTED_EXTENSIONS.includes(ext)) {
-        setError("This format isn't supported yet. Try PDF, DOCX, CSV, or a code file.");
+        setError(t("unsupportedFormat"));
         return;
       }
       setError(null);
@@ -179,11 +183,11 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
         // document seeded at onboarding.
         router.push(`/documents/${created.id}?assignCollection=1`);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Upload failed.");
+        setError(err instanceof Error ? err.message : t("uploadFailedGeneric"));
         setProgress(null);
       }
     },
-    [router]
+    [router, t]
   );
 
   if (variant === "empty-state") {
@@ -194,7 +198,7 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
     <>
       <Button onClick={() => setModalOpen(true)}>
         <UploadSimple className="mr-1.5 h-4 w-4" weight="bold" />
-        Upload document
+        {t("uploadDocument")}
       </Button>
 
       {modalOpen && (
@@ -204,7 +208,7 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
               type="button"
               onClick={() => setModalOpen(false)}
               className="absolute right-3 top-3 rounded p-1 text-text-secondary hover:text-text-primary"
-              aria-label="Close"
+              aria-label={tCommon("close")}
             >
               <X className="h-4 w-4" weight="bold" />
             </button>

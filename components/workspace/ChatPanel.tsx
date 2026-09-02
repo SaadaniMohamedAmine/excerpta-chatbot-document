@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChatCircleText } from "@phosphor-icons/react";
 import { useDocumentChat, type ChatUIMessage } from "@/lib/chat";
 import MessageBubble from "./MessageBubble";
@@ -26,6 +27,7 @@ export default function ChatPanel({
   onCitationClick,
   resolveDocumentTitle,
 }: ChatPanelProps) {
+  const t = useTranslations("Chat");
   const bottomRef = useRef<HTMLDivElement>(null);
   const { messages, sendMessage, isLoading } = useDocumentChat(conversationId, initialMessages);
   const [input, setInput] = useState("");
@@ -56,7 +58,7 @@ export default function ChatPanel({
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70 text-white shadow-md shadow-primary/30">
               <ChatCircleText size={22} weight="duotone" />
             </span>
-            <p className="font-sans text-sm text-text-secondary">Ask a question</p>
+            <p className="font-sans text-sm text-text-secondary">{t("askQuestion")}</p>
             {suggestedQuestions.length > 0 && (
               <SuggestedQuestions questions={suggestedQuestions} onSelect={handleSuggestedQuestion} />
             )}

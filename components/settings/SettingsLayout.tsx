@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { User, PaintBrush, ShieldWarning, Gear, CreditCard } from "@phosphor-icons/react";
 import { PageHeaderBanner } from "@/components/ui/page-header-banner";
@@ -35,6 +36,7 @@ const TABS: Array<{ id: SettingsTab; label: string; icon: typeof User }> = [
 ];
 
 export function SettingsLayout({ user, providers, usage }: SettingsLayoutProps) {
+  const tCommon = useTranslations("Common");
   const router = useRouter();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<SettingsTab>("profile");
@@ -52,7 +54,7 @@ export function SettingsLayout({ user, providers, usage }: SettingsLayoutProps) 
     if (searchParams.get("billing") !== "success" || billingToastShown.current) return;
     billingToastShown.current = true;
 
-    toast.success("Payment successful — your plan has been updated.");
+    toast.success(tCommon("paymentSuccessful"));
 
     const params = new URLSearchParams(searchParams.toString());
     params.delete("billing");
@@ -63,7 +65,7 @@ export function SettingsLayout({ user, providers, usage }: SettingsLayoutProps) 
     // after so the new plan actually shows instead of the pre-upgrade one.
     const timeout = setTimeout(() => router.refresh(), 1500);
     return () => clearTimeout(timeout);
-  }, [searchParams, router]);
+  }, [searchParams, router, tCommon]);
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col px-4 py-10 sm:px-6">

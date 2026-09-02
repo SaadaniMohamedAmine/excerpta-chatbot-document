@@ -1,7 +1,13 @@
 {
   "Common": {
     "changeLanguage": "Changer de langue",
-    "newConversation": "Nouvelle conversation"
+    "newConversation": "Nouvelle conversation",
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "skip": "Ignorer",
+    "paymentSuccessful": "Paiement réussi — votre plan a été mis à jour."
   },
   "Nav": {
     "dashboard": "Tableau de bord",
@@ -189,6 +195,83 @@
     "uploadDocumentHint": "Obtenez des réponses citées en quelques secondes.",
     "askDocuments": "Interrogez vos documents",
     "askDocumentsHint": "Recherchez dans tout ce que vous avez importé."
+  },
+  "Documents": {
+    "searchPlaceholder": "Rechercher des documents…",
+    "searchAriaLabel": "Rechercher des documents",
+    "clearSearch": "Effacer la recherche",
+    "countAndSize": "{count, plural, one {# document} other {# documents}} · {size}",
+    "noMatch": "Aucun document ne correspond à « {query} ».",
+    "pageOf": "Page {current} sur {total}",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "statusProcessing": "Traitement",
+    "statusFailed": "Échec",
+    "conversationCount": "{count, plural, one {# conversation} other {# conversations}}"
+  },
+  "UploadDropzone": {
+    "title": "Importez un document pour commencer.",
+    "subtitle": "PDF, DOCX, CSV ou un fichier de code.",
+    "browseFiles": "Parcourir les fichiers",
+    "uploading": "Import… {percent}%",
+    "unsupportedFormat": "Ce format n'est pas encore pris en charge. Essayez un PDF, DOCX, CSV ou un fichier de code.",
+    "uploadFailedGeneric": "L'import a échoué.",
+    "managePlan": "Gérer votre plan",
+    "uploadDocument": "Importer un document"
+  },
+  "Workspace": {
+    "conversationHistory": "Historique des conversations",
+    "share": "Partager",
+    "export": "Exporter",
+    "shareConversation": "Partager la conversation",
+    "exportConversation": "Exporter la conversation",
+    "startingConversation": "Démarrage de la conversation…"
+  },
+  "PdfViewer": {
+    "previousPage": "Page précédente",
+    "nextPage": "Page suivante",
+    "pageNumber": "Numéro de page",
+    "page": "Page",
+    "ofPages": "sur {total}",
+    "zoomOut": "Zoom arrière",
+    "zoomIn": "Zoom avant",
+    "loadError": "Impossible de charger ce PDF."
+  },
+  "Chat": {
+    "askQuestion": "Posez une question",
+    "sendMessage": "Envoyer le message"
+  },
+  "ProcessingPanel": {
+    "reading": "Lecture de votre document…",
+    "indexing": "Indexation des pages 1 à {pageCount}…",
+    "hint": "Cela peut prendre une minute pour les documents plus longs."
+  },
+  "ErrorPanel": {
+    "title": "Impossible de traiter ce document.",
+    "subtitle": "Réessayez, ou importez un autre fichier.",
+    "retry": "Réessayer",
+    "retrying": "Nouvelle tentative…",
+    "retryFailed": "La nouvelle tentative n'a pas abouti. Vérifiez votre connexion et réessayez."
+  },
+  "ConversationHistory": {
+    "loading": "Chargement des conversations…",
+    "empty": "Aucune conversation passée pour le moment.",
+    "delete": "Supprimer la conversation"
+  },
+  "CollectionPopup": {
+    "dismiss": "Ignorer",
+    "addToCollection": "Ajouter à une collection",
+    "nameFirstCollection": "Nommez votre première collection",
+    "firstCollectionHint": "Chaque document appartient à une collection. Vous pouvez renommer celle-ci ou garder « My Documents » — vous pourrez toujours en créer d'autres depuis Collections.",
+    "savedTo": "Enregistré dans « {name} ». Déplacez-le, ou laissez-le ici.",
+    "createNewCollection": "Créer une nouvelle collection",
+    "collectionNamePlaceholder": "Nom de la collection",
+    "nameRequired": "Donnez un nom à votre collection.",
+    "renameFailed": "Impossible de renommer la collection",
+    "createFailed": "Impossible de créer la collection",
+    "moveFailed": "Impossible de déplacer le document",
+    "genericError": "Une erreur est survenue.",
+    "defaultBadge": "(par défaut)"
   },
   "Share": {
     "homeAriaLabel": "Accueil Excerpta",

@@ -3,6 +3,7 @@
 
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useTranslations } from "next-intl";
 import { X } from "@phosphor-icons/react";
 
 interface ModalProps {
@@ -14,6 +15,7 @@ interface ModalProps {
 }
 
 export function Modal({ open, onClose, title, description, children }: ModalProps) {
+  const t = useTranslations("Common");
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -65,7 +67,7 @@ export function Modal({ open, onClose, title, description, children }: ModalProp
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close"
+            aria-label={t("close")}
             className="rounded-md p-1 text-text-secondary transition-colors hover:bg-background hover:text-text-primary"
           >
             <X size={18} />

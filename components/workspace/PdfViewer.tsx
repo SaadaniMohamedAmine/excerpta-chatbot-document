@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useTranslations } from "next-intl";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -47,6 +48,7 @@ const PdfViewer = forwardRef<PdfViewerHandle, PdfViewerProps>(function PdfViewer
   { fileUrl, activeCitation },
   ref
 ) {
+  const t = useTranslations("PdfViewer");
   const [numPages, setNumPages] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [scale, setScale] = useState(1);
@@ -101,28 +103,28 @@ const PdfViewer = forwardRef<PdfViewerHandle, PdfViewerProps>(function PdfViewer
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage <= 1}
             className="rounded-full p-1.5 text-text-secondary hover:bg-primary/10 hover:text-primary disabled:opacity-30"
-            aria-label="Previous page"
+            aria-label={t("previousPage")}
           >
             <CaretLeft className="h-4 w-4" weight="bold" />
           </button>
           <div className="flex items-center gap-1 font-sans text-sm text-text-primary">
-            <span>Page</span>
+            <span>{t("page")}</span>
             <input
               value={pageInput}
               onChange={(e) => setPageInput(e.target.value)}
               onBlur={handlePageInputCommit}
               onKeyDown={(e) => e.key === "Enter" && handlePageInputCommit()}
               className="w-10 rounded border border-border bg-background px-1 py-0.5 text-center text-sm"
-              aria-label="Page number"
+              aria-label={t("pageNumber")}
             />
-            <span>of {numPages ?? "…"}</span>
+            <span>{t("ofPages", { total: numPages ?? "…" })}</span>
           </div>
           <button
             type="button"
             onClick={() => goToPage(currentPage + 1)}
             disabled={!numPages || currentPage >= numPages}
             className="rounded-full p-1.5 text-text-secondary hover:bg-primary/10 hover:text-primary disabled:opacity-30"
-            aria-label="Next page"
+            aria-label={t("nextPage")}
           >
             <CaretRight className="h-4 w-4" weight="bold" />
           </button>
@@ -134,7 +136,7 @@ const PdfViewer = forwardRef<PdfViewerHandle, PdfViewerProps>(function PdfViewer
             onClick={() => setScale((s) => Math.max(MIN_SCALE, +(s - SCALE_STEP).toFixed(2)))}
             disabled={scale <= MIN_SCALE}
             className="rounded-full p-1.5 text-text-secondary hover:bg-primary/10 hover:text-primary disabled:opacity-30"
-            aria-label="Zoom out"
+            aria-label={t("zoomOut")}
           >
             <MagnifyingGlassMinus className="h-4 w-4" weight="regular" />
           </button>
@@ -146,7 +148,7 @@ const PdfViewer = forwardRef<PdfViewerHandle, PdfViewerProps>(function PdfViewer
             onClick={() => setScale((s) => Math.min(MAX_SCALE, +(s + SCALE_STEP).toFixed(2)))}
             disabled={scale >= MAX_SCALE}
             className="rounded-full p-1.5 text-text-secondary hover:bg-primary/10 hover:text-primary disabled:opacity-30"
-            aria-label="Zoom in"
+            aria-label={t("zoomIn")}
           >
             <MagnifyingGlassPlus className="h-4 w-4" weight="regular" />
           </button>
@@ -165,7 +167,7 @@ const PdfViewer = forwardRef<PdfViewerHandle, PdfViewerProps>(function PdfViewer
             }
             error={
               <div className="flex h-96 w-96 items-center justify-center text-sm text-error">
-                Couldn&apos;t load this PDF.
+                {t("loadError")}
               </div>
             }
           >

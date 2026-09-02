@@ -1,7 +1,13 @@
 {
   "Common": {
     "changeLanguage": "Change language",
-    "newConversation": "New conversation"
+    "newConversation": "New conversation",
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving…",
+    "skip": "Skip",
+    "paymentSuccessful": "Payment successful — your plan has been updated."
   },
   "Nav": {
     "dashboard": "Dashboard",
@@ -189,6 +195,83 @@
     "uploadDocumentHint": "Get cited answers in seconds.",
     "askDocuments": "Ask your documents",
     "askDocumentsHint": "Search across everything you've uploaded."
+  },
+  "Documents": {
+    "searchPlaceholder": "Search documents…",
+    "searchAriaLabel": "Search documents",
+    "clearSearch": "Clear search",
+    "countAndSize": "{count, plural, one {# document} other {# documents}} · {size}",
+    "noMatch": "No documents match “{query}”.",
+    "pageOf": "Page {current} of {total}",
+    "previous": "Previous",
+    "next": "Next",
+    "statusProcessing": "Processing",
+    "statusFailed": "Failed",
+    "conversationCount": "{count, plural, one {# conversation} other {# conversations}}"
+  },
+  "UploadDropzone": {
+    "title": "Upload a document to begin.",
+    "subtitle": "PDF, DOCX, CSV, or a code file.",
+    "browseFiles": "Browse files",
+    "uploading": "Uploading… {percent}%",
+    "unsupportedFormat": "This format isn't supported yet. Try PDF, DOCX, CSV, or a code file.",
+    "uploadFailedGeneric": "Upload failed.",
+    "managePlan": "Manage your plan",
+    "uploadDocument": "Upload document"
+  },
+  "Workspace": {
+    "conversationHistory": "Conversation history",
+    "share": "Share",
+    "export": "Export",
+    "shareConversation": "Share conversation",
+    "exportConversation": "Export conversation",
+    "startingConversation": "Starting conversation…"
+  },
+  "PdfViewer": {
+    "previousPage": "Previous page",
+    "nextPage": "Next page",
+    "pageNumber": "Page number",
+    "page": "Page",
+    "ofPages": "of {total}",
+    "zoomOut": "Zoom out",
+    "zoomIn": "Zoom in",
+    "loadError": "Couldn't load this PDF."
+  },
+  "Chat": {
+    "askQuestion": "Ask a question",
+    "sendMessage": "Send message"
+  },
+  "ProcessingPanel": {
+    "reading": "Reading your document…",
+    "indexing": "Indexing pages 1–{pageCount}…",
+    "hint": "This can take a minute for longer documents."
+  },
+  "ErrorPanel": {
+    "title": "We couldn't process this document.",
+    "subtitle": "Try again, or upload a different file.",
+    "retry": "Retry",
+    "retrying": "Retrying…",
+    "retryFailed": "The retry didn't go through. Check your connection and try again."
+  },
+  "ConversationHistory": {
+    "loading": "Loading conversations…",
+    "empty": "No past conversations yet.",
+    "delete": "Delete conversation"
+  },
+  "CollectionPopup": {
+    "dismiss": "Dismiss",
+    "addToCollection": "Add to a collection",
+    "nameFirstCollection": "Name your first collection",
+    "firstCollectionHint": "Every document lives in a collection. You can rename this one, or keep “My Documents” — you can always create more from Collections.",
+    "savedTo": "Saved to “{name}”. Move it, or leave it here.",
+    "createNewCollection": "Create new collection",
+    "collectionNamePlaceholder": "Collection name",
+    "nameRequired": "Give your collection a name.",
+    "renameFailed": "Failed to rename collection",
+    "createFailed": "Failed to create collection",
+    "moveFailed": "Failed to move document",
+    "genericError": "Something went wrong.",
+    "defaultBadge": "(default)"
   },
   "Share": {
     "homeAriaLabel": "Excerpta home",

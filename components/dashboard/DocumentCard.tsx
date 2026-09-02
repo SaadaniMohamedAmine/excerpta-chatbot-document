@@ -1,5 +1,6 @@
 // components/dashboard/DocumentCard.tsx
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   FilePdf,
   FileDoc,
@@ -22,6 +23,7 @@ export default function DocumentCard({
   document: DashboardDocument;
   highlightForTour?: boolean;
 }) {
+  const t = useTranslations("Documents");
   const Icon = ICONS[document.fileType] ?? FileDoc;
 
   return (
@@ -45,13 +47,13 @@ export default function DocumentCard({
         {document.status === "processing" && (
           <span className="flex items-center gap-1 rounded-full bg-warning/10 px-2 py-0.5 text-[10px] font-medium text-warning">
             <CircleNotch className="h-3 w-3 animate-spin" weight="bold" />
-            Processing
+            {t("statusProcessing")}
           </span>
         )}
         {document.status === "failed" && (
           <span className="flex items-center gap-1 rounded-full bg-error/10 px-2 py-0.5 text-[10px] font-medium text-error">
             <WarningCircle className="h-3 w-3" weight="fill" />
-            Failed
+            {t("statusFailed")}
           </span>
         )}
       </div>
@@ -71,7 +73,7 @@ export default function DocumentCard({
       <div className="relative mt-auto flex items-center justify-between font-sans text-xs text-text-secondary">
         <span className="flex items-center gap-1">
           <ChatCircleText className="h-3.5 w-3.5" weight="regular" />
-          {document.conversationCount} conversation{document.conversationCount === 1 ? "" : "s"}
+          {t("conversationCount", { count: document.conversationCount })}
         </span>
         <span>{formatRelativeDate(document.createdAt)}</span>
       </div>

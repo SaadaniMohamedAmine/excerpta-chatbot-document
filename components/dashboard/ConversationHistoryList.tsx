@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Trash } from "@phosphor-icons/react";
 
 interface ConversationScope {
@@ -26,6 +27,7 @@ function formatTimestamp(iso: string): string {
 }
 
 export default function ConversationHistoryList({ scope, activeConversationId, onSelect }: ConversationHistoryListProps) {
+  const t = useTranslations("ConversationHistory");
   const [items, setItems] = useState<ConversationListItem[] | null>(null);
 
   useEffect(() => {
@@ -54,9 +56,9 @@ export default function ConversationHistoryList({ scope, activeConversationId, o
   return (
     <div className="max-h-56 overflow-y-auto border-b border-border bg-surface">
       {items === null ? (
-        <p className="px-4 py-3 font-sans text-xs text-text-secondary">Loading conversations…</p>
+        <p className="px-4 py-3 font-sans text-xs text-text-secondary">{t("loading")}</p>
       ) : items.length === 0 ? (
-        <p className="px-4 py-3 font-sans text-xs text-text-secondary">No past conversations yet.</p>
+        <p className="px-4 py-3 font-sans text-xs text-text-secondary">{t("empty")}</p>
       ) : (
         <ul className="divide-y divide-border">
           {items.map((item) => (
@@ -77,7 +79,7 @@ export default function ConversationHistoryList({ scope, activeConversationId, o
                   tabIndex={-1}
                   onClick={(e) => handleDelete(e, item.id)}
                   className="shrink-0 rounded p-1 text-text-secondary opacity-0 hover:text-error group-hover:opacity-100"
-                  aria-label="Delete conversation"
+                  aria-label={t("delete")}
                 >
                   <Trash className="h-3.5 w-3.5" weight="regular" />
                 </span>
