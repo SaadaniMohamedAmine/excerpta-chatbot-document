@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 
 interface NewCollectionModalProps {
   onClose: () => void;
-  onCreated: (collectionId: string) => void;
+  onCreated: (collectionId: string, name: string) => void;
 }
 
 export default function NewCollectionModal({ onClose, onCreated }: NewCollectionModalProps) {
@@ -35,7 +35,7 @@ export default function NewCollectionModal({ onClose, onCreated }: NewCollection
       });
       if (!res.ok) throw new Error(t("createFailed"));
       const collection = await res.json();
-      onCreated(collection.id);
+      onCreated(collection.id, trimmed);
     } catch (err) {
       setError(err instanceof Error ? err.message : t("createFailed"));
       setSubmitting(false);
@@ -43,8 +43,8 @@ export default function NewCollectionModal({ onClose, onCreated }: NewCollection
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-      <div className="relative w-full max-w-sm rounded-lg bg-surface p-6 shadow-xl">
+    <div className="animate-in fade-in-0 fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-md duration-200">
+      <div className="animate-in fade-in-0 zoom-in-95 relative w-full max-w-sm rounded-lg bg-surface p-6 shadow-xl duration-200">
         <button
           type="button"
           onClick={onClose}

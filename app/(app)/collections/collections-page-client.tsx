@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import CollectionCard, { type CollectionSummary } from "@/components/dashboard/CollectionCard";
 import NewCollectionModal from "@/components/dashboard/NewCollectionModal";
+import { CollectionCreatedModal } from "@/components/dashboard/CollectionCreatedModal";
 
 interface CollectionsPageClientProps {
   collections: CollectionSummary[];
@@ -19,10 +20,15 @@ export default function CollectionsPageClient({ collections }: CollectionsPageCl
   const tNav = useTranslations("Nav");
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
+  const [createdCollection, setCreatedCollection] = useState<{ name: string } | null>(null);
 
-  const handleCreated = (collectionId: string) => {
+  const handleCreated = (_collectionId: string, name: string) => {
     setModalOpen(false);
-    router.push(`/collections/${collectionId}`);
+    // Landing on the new (empty) collection's chat workspace has nothing to
+    // ask a question about yet — point at Documents instead, where the
+    // documents that would actually make it useful can be added to it.
+    setCreatedCollection({ name });
+    router.refresh();
   };
 
   return (
@@ -54,6 +60,14 @@ export default function CollectionsPageClient({ collections }: CollectionsPageCl
       </div>
 
       {modalOpen && <NewCollectionModal onClose={() => setModalOpen(false)} onCreated={handleCreated} />}
+
+      {createdCollection && (
+        <CollectionCreatedModal
+          open
+          collectionName={createdCollection.name}
+          onClose={() => setCreatedCollection(null)}
+        />
+      )}
     </div>
   );
 }
