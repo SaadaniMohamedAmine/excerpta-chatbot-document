@@ -227,7 +227,9 @@
     "missingFields": "Champs requis manquants",
     "fileTooLarge": "Le fichier dépasse la limite d'import de 25 Mo",
     "unsupportedFileType": "Type de fichier non pris en charge",
-    "quotaExceeded": "Vous avez atteint votre limite d'imports mensuelle. Passez à un plan supérieur pour ajouter plus de documents."
+    "quotaExceeded": "Vous avez atteint votre limite d'imports mensuelle. Passez à un plan supérieur pour ajouter plus de documents.",
+    "upgradeRequiredTitle": "Il est temps de passer à la vitesse supérieure",
+    "upgradeNow": "Mettre à niveau"
   },
   "Workspace": {
     "conversationHistory": "Historique des conversations",

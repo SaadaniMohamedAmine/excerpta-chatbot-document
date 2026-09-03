@@ -227,7 +227,9 @@
     "missingFields": "Missing required fields",
     "fileTooLarge": "File exceeds the 25MB upload limit",
     "unsupportedFileType": "Unsupported file type",
-    "quotaExceeded": "You've reached your monthly upload limit. Upgrade your plan to add more documents."
+    "quotaExceeded": "You've reached your monthly upload limit. Upgrade your plan to add more documents.",
+    "upgradeRequiredTitle": "Time to upgrade",
+    "upgradeNow": "Upgrade now"
   },
   "Workspace": {
     "conversationHistory": "Conversation history",
