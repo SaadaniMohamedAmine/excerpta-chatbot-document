@@ -306,7 +306,9 @@
     "earlierGroup": "Plus ancien",
     "subtitleCount": "{count, plural, one {# conversation} other {# conversations}}",
     "noConversationsYet": "Aucune conversation pour le moment.",
-    "emptyStateHint": "Démarrez une conversation depuis un document ou une collection pour la voir ici."
+    "emptyStateHint": "Démarrez une conversation depuis un document ou une collection pour la voir ici.",
+    "loadMore": "Charger plus",
+    "loadingMore": "Chargement…"
   },
   "Analytics": {
     "title": "Analytique",
