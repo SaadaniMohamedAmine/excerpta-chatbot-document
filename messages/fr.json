@@ -337,6 +337,25 @@
     "revokeFailed": "Impossible de révoquer le lien. Réessayez dans un instant.",
     "copyFailed": "Impossible de copier le lien — copiez-le manuellement."
   },
+  "Tour": {
+    "dashboard": {
+      "sidebar": "Documents, Collections et Historique se trouvent ici — c'est votre espace de travail.",
+      "newDocument": "Importez ici un PDF, DOCX, CSV ou fichier de code dès que vous êtes prêt à ajouter le vôtre.",
+      "demoDocument": "Nous avons déjà chargé un court guide pour vous. Cliquez dessus pour essayer de poser une question."
+    },
+    "workspace": {
+      "chatInput": "Posez une question sur ce document — essayez « De quoi parle ce guide ? ». La réponse citera la page exacte dont elle provient, et vous pouvez cliquer sur la citation pour y accéder directement."
+    },
+    "buttons": {
+      "back": "Retour",
+      "close": "Fermer",
+      "last": "Terminer",
+      "next": "Suivant",
+      "nextWithProgress": "Suivant ({current} sur {total})",
+      "open": "Ouvrir la boîte de dialogue",
+      "skip": "Ignorer"
+    }
+  },
   "Settings": {
     "title": "Paramètres",
     "subtitle": "Gérez votre profil, l'apparence et votre compte.",

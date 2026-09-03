@@ -337,6 +337,25 @@
     "revokeFailed": "Couldn't revoke the link. Try again in a moment.",
     "copyFailed": "Couldn't copy the link — copy it manually instead."
   },
+  "Tour": {
+    "dashboard": {
+      "sidebar": "Documents, Collections and History live here — this is your workspace.",
+      "newDocument": "Upload a PDF, DOCX, CSV or code file here whenever you're ready to add your own.",
+      "demoDocument": "We've already loaded a short guide for you. Click it to try asking a question."
+    },
+    "workspace": {
+      "chatInput": "Ask a question about this document — try \"What is this guide about?\". The answer will cite the exact page it came from, and you can click the citation to jump straight to it."
+    },
+    "buttons": {
+      "back": "Back",
+      "close": "Close",
+      "last": "Last",
+      "next": "Next",
+      "nextWithProgress": "Next ({current} of {total})",
+      "open": "Open the dialog",
+      "skip": "Skip"
+    }
+  },
   "Settings": {
     "title": "Settings",
     "subtitle": "Manage your profile, appearance, and account.",
