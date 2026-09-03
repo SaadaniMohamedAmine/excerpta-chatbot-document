@@ -305,8 +305,16 @@
     "creating": "Creating…",
     "create": "Create",
     "createdTitle": "“{name}” created",
-    "createdDescription": "It's empty for now — add documents to it from your Documents page.",
-    "goToDocuments": "Go to Documents"
+    "createdDescription": "It's empty for now — pick documents to add to it.",
+    "addDocumentsCta": "Add documents",
+    "addDocumentsTitle": "Add documents to “{name}”",
+    "addDocumentsDescription": "Select the documents you want in this collection.",
+    "addDocumentsFailed": "Couldn't add the documents. Try again.",
+    "documentsAddedToast": "{count, plural, one {# document} other {# documents}} added to “{collection}”.",
+    "addSelected": "{count, plural, =0 {Add documents} one {Add # document} other {Add # documents}}",
+    "loadingDocuments": "Loading documents…",
+    "noDocumentsToAdd": "You don't have any documents yet.",
+    "goToDocumentsPage": "Go to Documents"
   },
   "HistoryPage": {
     "todayGroup": "Today",
