@@ -314,7 +314,9 @@
     "addSelected": "{count, plural, =0 {Ajouter des documents} one {Ajouter # document} other {Ajouter # documents}}",
     "loadingDocuments": "Chargement des documents…",
     "noDocumentsToAdd": "Vous n'avez pas encore de documents.",
-    "goToDocumentsPage": "Aller aux documents"
+    "goToDocumentsPage": "Aller aux documents",
+    "previewDescription": "Documents de cette collection.",
+    "startConversation": "Démarrer une conversation"
   },
   "HistoryPage": {
     "todayGroup": "Aujourd'hui",
