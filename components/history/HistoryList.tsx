@@ -4,110 +4,91 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { ChatCircleText, MagnifyingGlass, Trash } from "@phosphor-icons/react";
+import { CaretLeft, CaretRight, ChatCircleText, MagnifyingGlass, Trash } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 import { formatRelativeDate } from "@/lib/format";
 import type { HistoryItem } from "@/lib/history";
 
-function groupByPeriod(items: HistoryItem[], labels: { today: string; thisWeek: string; earlier: string }) {
-  const groups: { label: string; items: HistoryItem[] }[] = [
-    { label: labels.today, items: [] },
-    { label: labels.thisWeek, items: [] },
-    { label: labels.earlier, items: [] },
-  ];
-  const now = Date.now();
-
-  for (const item of items) {
-    const diffDays = Math.floor((now - new Date(item.createdAt).getTime()) / (1000 * 60 * 60 * 24));
-    if (diffDays <= 0) groups[0].items.push(item);
-    else if (diffDays < 7) groups[1].items.push(item);
-    else groups[2].items.push(item);
-  }
-
-  return groups.filter((group) => group.items.length > 0);
-}
+// Kept in sync with lib/history.ts's HISTORY_PAGE_SIZE — not imported
+// directly since that module pulls in the server-only Prisma client.
+const PAGE_SIZE = 12;
 
 export function HistoryList({
   initialItems,
-  initialNextCursor,
+  initialTotalCount,
 }: {
   initialItems: HistoryItem[];
-  initialNextCursor: string | null;
+  initialTotalCount: number;
 }) {
   const t = useTranslations("HistoryPage");
   const tCommon = useTranslations("Common");
+  const tDocuments = useTranslations("Documents");
   const tRelative = useTranslations("Common.relativeDate");
   const tConversationHistory = useTranslations("ConversationHistory");
   const locale = useLocale();
 
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [page, setPage] = useState(1);
   const [items, setItems] = useState(initialItems);
-  const [nextCursor, setNextCursor] = useState(initialNextCursor);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [searching, setSearching] = useState(false);
+  const [totalCount, setTotalCount] = useState(initialTotalCount);
+  const [loading, setLoading] = useState(false);
 
+  // Debounces the query, and resets to page 1 in the same batch so the
+  // fetch effect below never runs with a (new query, stale page) pair.
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedQuery(query.trim()), 300);
+    const timer = setTimeout(() => {
+      setDebouncedQuery(query.trim());
+      setPage(1);
+    }, 300);
     return () => clearTimeout(timer);
   }, [query]);
 
-  // Clearing the search reverts to the server-rendered first page instead of
-  // refetching it — it's already sitting in props.
   useEffect(() => {
-    if (debouncedQuery === "") {
-      // Resets to the server-rendered first page when the search box is cleared.
+    if (page === 1 && debouncedQuery === "") {
+      // Matches what the server already rendered — reuse it instead of refetching.
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setItems(initialItems);
-      setNextCursor(initialNextCursor);
+      setTotalCount(initialTotalCount);
       return;
     }
     let cancelled = false;
-    setSearching(true);
-    fetch(`/api/conversations/history?q=${encodeURIComponent(debouncedQuery)}`)
-      .then((res) => (res.ok ? res.json() : { items: [], nextCursor: null }))
-      .then((data: { items: HistoryItem[]; nextCursor: string | null }) => {
+    setLoading(true);
+    const params = new URLSearchParams({ page: String(page) });
+    if (debouncedQuery) params.set("q", debouncedQuery);
+    fetch(`/api/conversations/history?${params.toString()}`)
+      .then((res) => (res.ok ? res.json() : { items: [], totalCount: 0 }))
+      .then((data: { items: HistoryItem[]; totalCount: number }) => {
         if (!cancelled) {
           setItems(data.items);
-          setNextCursor(data.nextCursor);
+          setTotalCount(data.totalCount);
         }
       })
       .finally(() => {
-        if (!cancelled) setSearching(false);
+        if (!cancelled) setLoading(false);
       });
     return () => {
       cancelled = true;
     };
-  }, [debouncedQuery, initialItems, initialNextCursor]);
+  }, [page, debouncedQuery, initialItems, initialTotalCount]);
 
   // Optimistic, fire-and-forget — same pattern as the sidebar's
-  // ConversationHistoryList: the row disappears immediately, and a failed
-  // DELETE just leaves it gone from this session (it'll reappear on the
-  // next full page load, which is an acceptable edge case here).
+  // ConversationHistoryList: the card disappears immediately, and a failed
+  // DELETE just leaves it gone from this session. Stepping back a page when
+  // the last card on a non-first page is removed avoids landing on an empty
+  // page — the page-change effect refetches from there.
   function handleDelete(id: string) {
-    setItems((prev) => prev.filter((item) => item.id !== id));
+    setTotalCount((prev) => Math.max(0, prev - 1));
+    if (items.length === 1 && page > 1) {
+      setPage((p) => p - 1);
+    } else {
+      setItems((prev) => prev.filter((item) => item.id !== id));
+    }
     fetch(`/api/conversations/${id}`, { method: "DELETE" }).catch(() => {});
   }
 
-  async function handleLoadMore() {
-    if (!nextCursor || loadingMore) return;
-    setLoadingMore(true);
-    try {
-      const params = new URLSearchParams({ cursor: nextCursor });
-      if (debouncedQuery) params.set("q", debouncedQuery);
-      const res = await fetch(`/api/conversations/history?${params.toString()}`);
-      if (res.ok) {
-        const data = (await res.json()) as { items: HistoryItem[]; nextCursor: string | null };
-        setItems((prev) => [...prev, ...data.items]);
-        setNextCursor(data.nextCursor);
-      }
-    } finally {
-      setLoadingMore(false);
-    }
-  }
-
-  const isSearching = debouncedQuery !== "";
-  const hasAnyConversations = initialItems.length > 0 || initialNextCursor !== null;
+  const hasAnyConversations = initialTotalCount > 0;
+  const pageCount = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
 
   if (!hasAnyConversations) {
     return (
@@ -118,17 +99,9 @@ export function HistoryList({
     );
   }
 
-  const groups = isSearching
-    ? [{ label: "", items }]
-    : groupByPeriod(items, {
-        today: t("todayGroup"),
-        thisWeek: t("thisWeekGroup"),
-        earlier: t("earlierGroup"),
-      });
-
   return (
     <div className="mt-6 flex flex-col gap-4">
-      <div className="group relative max-w-sm">
+      <div className="group relative">
         <MagnifyingGlass
           size={16}
           className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary transition-colors group-focus-within:text-primary"
@@ -142,67 +115,76 @@ export function HistoryList({
         />
       </div>
 
-      {items.length === 0 && !searching ? (
+      {items.length === 0 && !loading ? (
         <p className="py-10 text-center font-sans text-sm text-text-secondary">
-          {t("noMatch", { query: debouncedQuery })}
+          {debouncedQuery ? t("noMatch", { query: debouncedQuery }) : t("noConversationsYet")}
         </p>
       ) : (
-        <div className="flex flex-col gap-6">
-          {groups.map((group) => (
-            <div key={group.label || "search-results"} className="flex flex-col gap-2">
-              {group.label && (
-                <h2 className="px-1 font-sans text-xs font-medium uppercase tracking-wide text-text-secondary">
-                  {group.label}
-                </h2>
-              )}
-              <ul className="flex flex-col gap-2">
-                {group.items.map((item) => (
-                  <li key={item.id}>
-                    <div className="group relative flex items-start gap-3 rounded-lg border border-border bg-surface px-4 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md">
-                      <Link href={item.href} className="flex min-w-0 flex-1 items-start gap-3">
-                        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70 text-white shadow-sm shadow-primary/30">
-                          <ChatCircleText size={16} weight="duotone" />
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center justify-between gap-2 pr-6">
-                            <span className="truncate font-sans text-sm font-medium text-text-primary group-hover:text-primary">
-                              {item.label}
-                            </span>
-                            <span className="shrink-0 font-sans text-xs text-text-secondary">
-                              {formatRelativeDate(item.createdAt, tRelative, locale)}
-                            </span>
-                          </div>
-                          <p className="mt-0.5 line-clamp-1 font-sans text-sm text-text-secondary">
-                            {item.preview ?? tCommon("newConversation")}
-                          </p>
-                        </div>
-                      </Link>
-                      <button
-                        type="button"
-                        onClick={() => handleDelete(item.id)}
-                        aria-label={tConversationHistory("delete")}
-                        className="absolute right-3 top-3 shrink-0 rounded p-1 text-text-secondary opacity-0 transition-opacity hover:text-error group-hover:opacity-100"
-                      >
-                        <Trash size={14} weight="regular" />
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {items.map((item) => (
+              <div
+                key={item.id}
+                className="group relative flex flex-col gap-3 overflow-hidden rounded-lg border border-border bg-gradient-to-b from-surface to-background p-4 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10"
+              >
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-primary via-primary to-gold/60"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleDelete(item.id)}
+                  aria-label={tConversationHistory("delete")}
+                  className="absolute right-2 top-3 z-10 rounded p-1 text-text-secondary opacity-0 transition-opacity hover:text-error group-hover:opacity-100"
+                >
+                  <Trash size={14} weight="regular" />
+                </button>
+                <Link href={item.href} className="flex flex-1 flex-col gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70 text-white shadow-md shadow-primary/30">
+                    <ChatCircleText size={18} weight="duotone" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="truncate font-sans text-sm font-medium text-text-primary group-hover:text-primary">
+                      {item.label}
+                    </h3>
+                    <span className="mt-0.5 block font-sans text-xs text-text-secondary">
+                      {formatRelativeDate(item.createdAt, tRelative, locale)}
+                    </span>
+                    <p className="mt-1.5 line-clamp-2 font-sans text-xs text-text-secondary">
+                      {item.preview ?? tCommon("newConversation")}
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
 
-          {nextCursor && (
-            <button
-              type="button"
-              onClick={handleLoadMore}
-              disabled={loadingMore}
-              className="mx-auto mt-2 rounded-md border border-border px-4 py-2 font-sans text-sm text-text-secondary transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {loadingMore ? t("loadingMore") : t("loadMore")}
-            </button>
+          {pageCount > 1 && (
+            <div className="mt-2 flex items-center justify-between border-t border-border pt-4 font-sans text-xs text-text-secondary">
+              <span>{tDocuments("pageOf", { current: page, total: pageCount })}</span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
+                >
+                  <CaretLeft size={12} weight="bold" />
+                  {tDocuments("previous")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+                  disabled={page === pageCount}
+                  className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
+                >
+                  {tDocuments("next")}
+                  <CaretRight size={12} weight="bold" />
+                </button>
+              </div>
+            </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );

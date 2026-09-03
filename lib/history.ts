@@ -6,7 +6,8 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/db";
 
-export const HISTORY_PAGE_SIZE = 20;
+// 12 = a clean 4-per-row x 3-row card grid on desktop.
+export const HISTORY_PAGE_SIZE = 12;
 
 const historyInclude = {
   document: { select: { id: true, title: true } },
@@ -43,29 +44,32 @@ function toHistoryItem(conversation: ConversationWithRelations): HistoryItem | n
 
 export async function fetchHistoryPage(
   userId: string,
-  { cursor, q }: { cursor?: string; q?: string } = {}
-): Promise<{ items: HistoryItem[]; nextCursor: string | null }> {
-  const conversations = await prisma.conversation.findMany({
-    where: {
-      userId,
-      ...(q
-        ? {
-            OR: [
-              { document: { title: { contains: q, mode: "insensitive" } } },
-              { collection: { name: { contains: q, mode: "insensitive" } } },
-            ],
-          }
-        : {}),
-    },
-    orderBy: { createdAt: "desc" },
-    include: historyInclude,
-    take: HISTORY_PAGE_SIZE + 1,
-    ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),
-  });
+  { page = 1, q }: { page?: number; q?: string } = {}
+): Promise<{ items: HistoryItem[]; totalCount: number }> {
+  const where: Prisma.ConversationWhereInput = {
+    userId,
+    ...(q
+      ? {
+          OR: [
+            { document: { title: { contains: q, mode: "insensitive" } } },
+            { collection: { name: { contains: q, mode: "insensitive" } } },
+          ],
+        }
+      : {}),
+  };
 
-  const hasMore = conversations.length > HISTORY_PAGE_SIZE;
-  const page = hasMore ? conversations.slice(0, HISTORY_PAGE_SIZE) : conversations;
-  const items = page.map(toHistoryItem).filter((item): item is HistoryItem => item !== null);
+  const [conversations, totalCount] = await Promise.all([
+    prisma.conversation.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      include: historyInclude,
+      take: HISTORY_PAGE_SIZE,
+      skip: (page - 1) * HISTORY_PAGE_SIZE,
+    }),
+    prisma.conversation.count({ where }),
+  ]);
 
-  return { items, nextCursor: hasMore ? page[page.length - 1].id : null };
+  const items = conversations.map(toHistoryItem).filter((item): item is HistoryItem => item !== null);
+
+  return { items, totalCount };
 }

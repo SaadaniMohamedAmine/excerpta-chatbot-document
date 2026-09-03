@@ -10,10 +10,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { searchParams } = new URL(request.url);
-  const cursor = searchParams.get("cursor") ?? undefined;
+  const page = Math.max(1, Number(searchParams.get("page")) || 1);
   const q = searchParams.get("q")?.trim() || undefined;
 
-  const { items, nextCursor } = await fetchHistoryPage(session.user.id, { cursor, q });
+  const { items, totalCount } = await fetchHistoryPage(session.user.id, { page, q });
 
-  return NextResponse.json({ items, nextCursor });
+  return NextResponse.json({ items, totalCount });
 }
