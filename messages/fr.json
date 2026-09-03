@@ -273,6 +273,31 @@
     "genericError": "Une erreur est survenue.",
     "defaultBadge": "(par défaut)"
   },
+  "Collections": {
+    "subtitle": "Regroupez des documents liés pour interroger l'ensemble en une seule fois.",
+    "newCollection": "Nouvelle collection",
+    "emptyState": "Pas encore de collection. Regroupez des documents pour les interroger ensemble.",
+    "collectionOptions": "Options de la collection",
+    "rename": "Renommer",
+    "delete": "Supprimer",
+    "documentCount": "{count, plural, one {# document} other {# documents}}",
+    "defaultBadge": "(par défaut)",
+    "deleteConfirmWithDocs": "Supprimer « {name} » ? Ses {count, plural, one {# document} other {# documents}} seront déplacés vers votre collection par défaut.",
+    "deleteConfirmEmpty": "Supprimer « {name} » ?",
+    "collectionNamePlaceholder": "Nom de la collection",
+    "nameRequired": "Donnez un nom à la collection.",
+    "createFailed": "Impossible de créer la collection.",
+    "creating": "Création…",
+    "create": "Créer"
+  },
+  "HistoryPage": {
+    "todayGroup": "Aujourd'hui",
+    "thisWeekGroup": "Cette semaine",
+    "earlierGroup": "Plus ancien",
+    "subtitleCount": "{count, plural, one {# conversation} other {# conversations}}",
+    "noConversationsYet": "Aucune conversation pour le moment.",
+    "emptyStateHint": "Démarrez une conversation depuis un document ou une collection pour la voir ici."
+  },
   "Share": {
     "homeAriaLabel": "Accueil Excerpta",
     "defaultTitle": "Conversation partagée",

@@ -273,6 +273,31 @@
     "genericError": "Something went wrong.",
     "defaultBadge": "(default)"
   },
+  "Collections": {
+    "subtitle": "Group related documents to ask questions across all of them at once.",
+    "newCollection": "New collection",
+    "emptyState": "No collections yet. Group documents together to ask questions across all of them.",
+    "collectionOptions": "Collection options",
+    "rename": "Rename",
+    "delete": "Delete",
+    "documentCount": "{count, plural, one {# document} other {# documents}}",
+    "defaultBadge": "(default)",
+    "deleteConfirmWithDocs": "Delete \"{name}\"? Its {count, plural, one {# document} other {# documents}} will move to your default collection.",
+    "deleteConfirmEmpty": "Delete \"{name}\"?",
+    "collectionNamePlaceholder": "Collection name",
+    "nameRequired": "Give the collection a name.",
+    "createFailed": "Couldn't create the collection.",
+    "creating": "Creating…",
+    "create": "Create"
+  },
+  "HistoryPage": {
+    "todayGroup": "Today",
+    "thisWeekGroup": "This week",
+    "earlierGroup": "Earlier",
+    "subtitleCount": "{count, plural, one {# conversation} other {# conversations}}",
+    "noConversationsYet": "No conversations yet.",
+    "emptyStateHint": "Start a conversation from a document or collection to see it here."
+  },
   "Share": {
     "homeAriaLabel": "Excerpta home",
     "defaultTitle": "Shared conversation",
