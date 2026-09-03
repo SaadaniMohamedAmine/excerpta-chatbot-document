@@ -1,6 +1,7 @@
 // app/(app)/analytics/page.tsx
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import {
   FileText,
   ChatCircleText,
@@ -29,6 +30,8 @@ export default async function AnalyticsPage() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) redirect("/sign-in");
 
+  const t = await getTranslations("Analytics");
+  const tDashboard = await getTranslations("Dashboard");
   const userId = session.user.id;
 
   const [
@@ -76,17 +79,13 @@ export default async function AnalyticsPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-      <PageHeaderBanner
-        icon={ChartLineUp}
-        title="Analytics"
-        subtitle="A look at how your documents and conversations are adding up."
-      />
+      <PageHeaderBanner icon={ChartLineUp} title={t("title")} subtitle={t("subtitle")} />
 
       <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Documents" value={documentCount} icon={FileText} />
-        <StatCard label="Conversations" value={conversationCount} icon={ChatCircleText} />
-        <StatCard label="Citations given" value={citationCount} icon={Quotes} />
-        <StatCard label="Collections" value={collectionCount} icon={FolderStar} />
+        <StatCard label={tDashboard("statDocuments")} value={documentCount} icon={FileText} />
+        <StatCard label={tDashboard("statConversations")} value={conversationCount} icon={ChatCircleText} />
+        <StatCard label={tDashboard("statCitationsGiven")} value={citationCount} icon={Quotes} />
+        <StatCard label={tDashboard("statCollections")} value={collectionCount} icon={FolderStar} />
       </div>
 
       <div className="mt-4">
@@ -95,16 +94,16 @@ export default async function AnalyticsPage() {
 
       <div className="mt-4 grid gap-4 md:grid-cols-2">
         <BarList
-          title="File types"
+          title={t("fileTypes")}
           icon={ChartPieSlice}
           items={fileTypeItems}
-          emptyMessage="Upload a document to see this."
+          emptyMessage={t("uploadToSeeThis")}
         />
         <BarList
-          title="Most active documents"
+          title={t("mostActiveDocuments")}
           icon={Trophy}
           items={topDocumentItems}
-          emptyMessage="Start a conversation to see this."
+          emptyMessage={t("startConversationToSeeThis")}
         />
       </div>
     </div>

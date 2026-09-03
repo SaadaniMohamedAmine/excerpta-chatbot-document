@@ -298,6 +298,90 @@
     "noConversationsYet": "No conversations yet.",
     "emptyStateHint": "Start a conversation from a document or collection to see it here."
   },
+  "Analytics": {
+    "title": "Analytics",
+    "subtitle": "A look at how your documents and conversations are adding up.",
+    "documentsPerWeek": "Documents per week",
+    "documentCount": "{count, plural, one {# document} other {# documents}}",
+    "fileTypes": "File types",
+    "mostActiveDocuments": "Most active documents",
+    "uploadToSeeThis": "Upload a document to see this.",
+    "startConversationToSeeThis": "Start a conversation to see this.",
+    "nothingYet": "Nothing yet."
+  },
+  "Settings": {
+    "title": "Settings",
+    "subtitle": "Manage your profile, appearance, and account.",
+    "tabProfile": "Profile",
+    "tabAppearance": "Appearance",
+    "tabBilling": "Billing",
+    "tabAccount": "Account",
+    "profile": {
+      "heading": "Profile",
+      "subtitle": "Your name and how you sign in.",
+      "nameLabel": "Name",
+      "nameRequired": "Name can't be empty.",
+      "saveFailed": "Couldn't save your name. Try again.",
+      "emailLabel": "Email",
+      "signedInWith": "Signed in with",
+      "noProvider": "No linked provider found.",
+      "edit": "Edit"
+    },
+    "appearance": {
+      "heading": "Appearance",
+      "subtitle": "Choose how Excerpta looks on this device.",
+      "themeLabel": "Theme",
+      "themeHint": "Switch between light and dark, or match your system setting.",
+      "tourLabel": "Product tour",
+      "tourHint": "Replay the guided walkthrough of Excerpta's workspace and chat.",
+      "replayTour": "Replay tour"
+    },
+    "billing": {
+      "heading": "Billing",
+      "subtitle": "Your plan and monthly usage.",
+      "planLabel": "{name} plan",
+      "usageLabel": "{used} / {limit} documents this month",
+      "manageSubscription": "Manage subscription",
+      "opening": "Opening…",
+      "upgradeTo": "Upgrade to {name}",
+      "redirecting": "Redirecting…"
+    },
+    "account": {
+      "heading": "Account",
+      "subtitle": "Manage or permanently remove your account.",
+      "deleteAccount": "Delete account",
+      "deleteWarning": "This permanently deletes your account, documents, and conversations. This cannot be undone.",
+      "confirmTitle": "Delete your account",
+      "confirmDescription": "This is permanent. Type DELETE or your email ({email}) to confirm.",
+      "typeToConfirm": "Type DELETE to confirm",
+      "permanentlyDelete": "Permanently delete",
+      "deleting": "Deleting…",
+      "deleteFailed": "Couldn't delete your account. Try again, or contact support."
+    }
+  },
+  "Billing": {
+    "plans": {
+      "free": {
+        "name": "Free",
+        "price": "$0",
+        "description": "Try Excerpta with a handful of documents every month.",
+        "features": ["3 documents / month", "PDF, DOCX, CSV, code", "Cited answers", "Collections"]
+      },
+      "pro": {
+        "name": "Pro",
+        "price": "$12/mo",
+        "description": "For individuals working with documents regularly.",
+        "features": ["100 documents / month", "Everything in Free", "Priority processing"]
+      },
+      "team": {
+        "name": "Team",
+        "price": "$39/mo",
+        "description": "For small teams sharing a lot of documents.",
+        "features": ["1,000 documents / month", "Everything in Pro", "Shared usage pool"]
+      }
+    },
+    "upgrade": "Upgrade"
+  },
   "Share": {
     "homeAriaLabel": "Excerpta home",
     "defaultTitle": "Shared conversation",

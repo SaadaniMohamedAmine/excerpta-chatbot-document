@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +31,8 @@ function providerLabel(providerId: string): string {
 }
 
 export function ProfileSection({ user, providers }: ProfileSectionProps) {
+  const t = useTranslations("Settings.profile");
+  const tCommon = useTranslations("Common");
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(user.name ?? "");
   const [savedName, setSavedName] = useState(user.name ?? "");
@@ -39,7 +42,7 @@ export function ProfileSection({ user, providers }: ProfileSectionProps) {
   async function handleSave() {
     const trimmed = name.trim();
     if (!trimmed) {
-      setError("Name can't be empty.");
+      setError(t("nameRequired"));
       return;
     }
     setIsSaving(true);
@@ -54,7 +57,7 @@ export function ProfileSection({ user, providers }: ProfileSectionProps) {
       setSavedName(trimmed);
       setIsEditing(false);
     } catch {
-      setError("Couldn't save your name. Try again.");
+      setError(t("saveFailed"));
     } finally {
       setIsSaving(false);
     }
@@ -69,14 +72,14 @@ export function ProfileSection({ user, providers }: ProfileSectionProps) {
   return (
     <section className="flex flex-col gap-8">
       <div>
-        <h2 className="text-lg font-semibold text-text-primary">Profile</h2>
-        <p className="mt-1 text-sm text-text-secondary">Your name and how you sign in.</p>
+        <h2 className="text-lg font-semibold text-text-primary">{t("heading")}</h2>
+        <p className="mt-1 text-sm text-text-secondary">{t("subtitle")}</p>
       </div>
 
       <div className="divide-y divide-border rounded-lg border border-border bg-surface">
         <div className="p-4">
           <label htmlFor="settings-name" className="text-sm font-medium text-text-primary">
-            Name
+            {t("nameLabel")}
           </label>
           {isEditing ? (
             <div className="mt-1.5 flex items-center gap-2">
@@ -88,21 +91,21 @@ export function ProfileSection({ user, providers }: ProfileSectionProps) {
                 className="max-w-xs"
               />
               <Button onClick={handleSave} disabled={isSaving} size="sm">
-                {isSaving ? "Saving…" : "Save"}
+                {isSaving ? tCommon("saving") : tCommon("save")}
               </Button>
               <button
                 type="button"
                 onClick={handleCancel}
                 className="text-sm text-text-secondary hover:text-text-primary"
               >
-                Cancel
+                {tCommon("cancel")}
               </button>
             </div>
           ) : (
             <div className="mt-1.5 flex items-center gap-3">
               <span className="text-sm text-text-secondary">{savedName || "—"}</span>
               <Button onClick={() => setIsEditing(true)} size="sm">
-                Edit
+                {t("edit")}
               </Button>
             </div>
           )}
@@ -110,12 +113,12 @@ export function ProfileSection({ user, providers }: ProfileSectionProps) {
         </div>
 
         <div className="p-4">
-          <div className="text-sm font-medium text-text-primary">Email</div>
+          <div className="text-sm font-medium text-text-primary">{t("emailLabel")}</div>
           <div className="mt-1 text-sm text-text-secondary">{user.email}</div>
         </div>
 
         <div className="p-4">
-          <div className="text-sm font-medium text-text-primary">Signed in with</div>
+          <div className="text-sm font-medium text-text-primary">{t("signedInWith")}</div>
           <div className="mt-1.5 flex flex-wrap gap-2">
             {providers.length > 0 ? (
               providers.map((providerId) => (
@@ -124,7 +127,7 @@ export function ProfileSection({ user, providers }: ProfileSectionProps) {
                 </Badge>
               ))
             ) : (
-              <span className="text-sm text-text-secondary">No linked provider found.</span>
+              <span className="text-sm text-text-secondary">{t("noProvider")}</span>
             )}
           </div>
         </div>

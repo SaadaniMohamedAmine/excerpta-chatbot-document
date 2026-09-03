@@ -28,15 +28,18 @@ interface SettingsLayoutProps {
 
 type SettingsTab = "profile" | "appearance" | "billing" | "account";
 
-const TABS: Array<{ id: SettingsTab; label: string; icon: typeof User }> = [
-  { id: "profile", label: "Profile", icon: User },
-  { id: "appearance", label: "Appearance", icon: PaintBrush },
-  { id: "billing", label: "Billing", icon: CreditCard },
-  { id: "account", label: "Account", icon: ShieldWarning },
-];
+const TAB_IDS: SettingsTab[] = ["profile", "appearance", "billing", "account"];
 
 export function SettingsLayout({ user, providers, usage }: SettingsLayoutProps) {
+  const t = useTranslations("Settings");
   const tCommon = useTranslations("Common");
+
+  const TABS: Array<{ id: SettingsTab; label: string; icon: typeof User }> = [
+    { id: "profile", label: t("tabProfile"), icon: User },
+    { id: "appearance", label: t("tabAppearance"), icon: PaintBrush },
+    { id: "billing", label: t("tabBilling"), icon: CreditCard },
+    { id: "account", label: t("tabAccount"), icon: ShieldWarning },
+  ];
   const router = useRouter();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<SettingsTab>("profile");
@@ -44,7 +47,7 @@ export function SettingsLayout({ user, providers, usage }: SettingsLayoutProps) 
 
   useEffect(() => {
     const tabParam = searchParams.get("tab");
-    if (tabParam && TABS.some((t) => t.id === tabParam)) {
+    if (tabParam && TAB_IDS.includes(tabParam as SettingsTab)) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveTab(tabParam as SettingsTab);
     }
@@ -71,8 +74,8 @@ export function SettingsLayout({ user, providers, usage }: SettingsLayoutProps) 
     <div className="mx-auto flex w-full max-w-6xl flex-col px-4 py-10 sm:px-6">
       <PageHeaderBanner
         icon={Gear}
-        title="Settings"
-        subtitle="Manage your profile, appearance, and account."
+        title={t("title")}
+        subtitle={t("subtitle")}
       />
 
       <div className="mt-6 flex gap-10">

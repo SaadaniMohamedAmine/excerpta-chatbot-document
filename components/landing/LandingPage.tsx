@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
 import { useSession } from "@/lib/auth-client";
-import { PLAN_DETAILS, type PlanId } from "@/lib/billing/plans";
+import { usePlanDetails, type PlanId } from "@/lib/billing/plans";
 
 // Icons stay in code, matched to translated title/description by array
 // position — see the Landing.features/whatsNew/howItWorks.steps message
@@ -29,30 +29,28 @@ import { PLAN_DETAILS, type PlanId } from "@/lib/billing/plans";
 const FEATURE_ICONS = [FileArrowUp, Quotes, CursorClick] as const;
 const CHANGELOG_ICONS = [Sparkle, Gear, ShareNetwork, FileArrowDown] as const;
 const STEP_NUMBERS = ["1", "2", "3"] as const;
-
-// Full plan comparison and the actual upgrade/checkout flow live on
-// /pricing (and Settings → Billing) — landing page cards link there rather
-// than duplicating that logic here. Plan name/price/description/features
-// stay in English for now — lib/billing/plans.ts translation is a separate
-// task (it's also read by Settings and the sidebar usage card).
-const PLAN_IDS = Object.keys(PLAN_DETAILS) as PlanId[];
+const PLAN_IDS: PlanId[] = ["free", "pro", "team"];
 
 export default function LandingPage() {
   const t = useTranslations("Landing");
+  const planDetails = usePlanDetails();
   const { data: session } = useSession();
   const isSignedIn = Boolean(session?.user);
 
   const features = t.raw("features.items") as { title: string; description: string }[];
   const changelog = t.raw("whatsNew.items") as { title: string; description: string }[];
   const steps = t.raw("howItWorks.steps") as { title: string; description: string }[];
+  // Full plan comparison and the actual upgrade/checkout flow live on
+  // /pricing (and Settings → Billing) — landing page cards link there
+  // rather than duplicating that logic here.
   const plans = PLAN_IDS.map((id) => ({
     id,
-    name: PLAN_DETAILS[id].name,
-    price: PLAN_DETAILS[id].price,
-    tagline: PLAN_DETAILS[id].description,
-    features: PLAN_DETAILS[id].features,
+    name: planDetails[id].name,
+    price: planDetails[id].price,
+    tagline: planDetails[id].description,
+    features: planDetails[id].features,
     cta: {
-      label: id === "free" ? t("pricing.ctaFree") : t("pricing.ctaChoosePlan", { plan: PLAN_DETAILS[id].name }),
+      label: id === "free" ? t("pricing.ctaFree") : t("pricing.ctaChoosePlan", { plan: planDetails[id].name }),
       href: "/pricing",
     },
     highlighted: id === "pro",

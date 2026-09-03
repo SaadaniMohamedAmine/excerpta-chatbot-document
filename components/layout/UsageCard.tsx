@@ -1,6 +1,7 @@
 // components/layout/UsageCard.tsx
 import Link from "next/link";
-import { PLAN_DETAILS, type PlanId } from "@/lib/billing/plans";
+import { useTranslations } from "next-intl";
+import { usePlanDetails, type PlanId } from "@/lib/billing/plans";
 import { cn } from "@/lib/utils";
 
 export function UsageCard({
@@ -14,13 +15,16 @@ export function UsageCard({
   limit: number;
   collapsed: boolean;
 }) {
+  const t = useTranslations("Settings.billing");
+  const tBilling = useTranslations("Billing");
+  const planDetails = usePlanDetails();
   const pct = Math.min(100, Math.round((used / Math.max(limit, 1)) * 100));
 
   if (collapsed) {
     return (
       <Link
         href="/settings?tab=billing"
-        title={`${used}/${limit} documents this month — ${PLAN_DETAILS[plan].name} plan`}
+        title={`${used}/${limit} — ${t("planLabel", { name: planDetails[plan].name })}`}
         className="mx-auto mb-3 flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background"
       >
         <span className={cn("h-2 w-2 rounded-full", pct >= 100 ? "bg-error" : "bg-primary")} aria-hidden="true" />
@@ -31,7 +35,7 @@ export function UsageCard({
   return (
     <div className="mx-3 mb-3 rounded-lg border border-border bg-background p-3">
       <div className="flex items-center justify-between font-sans text-xs">
-        <span className="font-medium text-text-primary">{PLAN_DETAILS[plan].name} plan</span>
+        <span className="font-medium text-text-primary">{t("planLabel", { name: planDetails[plan].name })}</span>
         <span className="text-text-secondary">
           {used}/{limit}
         </span>
@@ -47,7 +51,7 @@ export function UsageCard({
           href="/settings?tab=billing"
           className="mt-2 block text-center font-sans text-xs font-medium text-primary hover:underline"
         >
-          Upgrade
+          {tBilling("upgrade")}
         </Link>
       )}
     </div>

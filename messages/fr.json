@@ -298,6 +298,90 @@
     "noConversationsYet": "Aucune conversation pour le moment.",
     "emptyStateHint": "Démarrez une conversation depuis un document ou une collection pour la voir ici."
   },
+  "Analytics": {
+    "title": "Analytique",
+    "subtitle": "Un aperçu de vos documents et conversations au fil du temps.",
+    "documentsPerWeek": "Documents par semaine",
+    "documentCount": "{count, plural, one {# document} other {# documents}}",
+    "fileTypes": "Types de fichiers",
+    "mostActiveDocuments": "Documents les plus actifs",
+    "uploadToSeeThis": "Importez un document pour voir ceci.",
+    "startConversationToSeeThis": "Démarrez une conversation pour voir ceci.",
+    "nothingYet": "Rien pour le moment."
+  },
+  "Settings": {
+    "title": "Paramètres",
+    "subtitle": "Gérez votre profil, l'apparence et votre compte.",
+    "tabProfile": "Profil",
+    "tabAppearance": "Apparence",
+    "tabBilling": "Facturation",
+    "tabAccount": "Compte",
+    "profile": {
+      "heading": "Profil",
+      "subtitle": "Votre nom et votre mode de connexion.",
+      "nameLabel": "Nom",
+      "nameRequired": "Le nom ne peut pas être vide.",
+      "saveFailed": "Impossible d'enregistrer votre nom. Réessayez.",
+      "emailLabel": "E-mail",
+      "signedInWith": "Connecté avec",
+      "noProvider": "Aucun fournisseur lié trouvé.",
+      "edit": "Modifier"
+    },
+    "appearance": {
+      "heading": "Apparence",
+      "subtitle": "Choisissez l'apparence d'Excerpta sur cet appareil.",
+      "themeLabel": "Thème",
+      "themeHint": "Basculez entre clair et sombre, ou suivez le réglage de votre système.",
+      "tourLabel": "Visite guidée",
+      "tourHint": "Revoyez la visite guidée de l'espace de travail et du chat d'Excerpta.",
+      "replayTour": "Revoir la visite"
+    },
+    "billing": {
+      "heading": "Facturation",
+      "subtitle": "Votre plan et votre usage mensuel.",
+      "planLabel": "Plan {name}",
+      "usageLabel": "{used} / {limit} documents ce mois-ci",
+      "manageSubscription": "Gérer l'abonnement",
+      "opening": "Ouverture…",
+      "upgradeTo": "Passer au plan {name}",
+      "redirecting": "Redirection…"
+    },
+    "account": {
+      "heading": "Compte",
+      "subtitle": "Gérez ou supprimez définitivement votre compte.",
+      "deleteAccount": "Supprimer le compte",
+      "deleteWarning": "Ceci supprime définitivement votre compte, vos documents et vos conversations. Cette action est irréversible.",
+      "confirmTitle": "Supprimer votre compte",
+      "confirmDescription": "C'est définitif. Tapez DELETE ou votre e-mail ({email}) pour confirmer.",
+      "typeToConfirm": "Tapez DELETE pour confirmer",
+      "permanentlyDelete": "Supprimer définitivement",
+      "deleting": "Suppression…",
+      "deleteFailed": "Impossible de supprimer votre compte. Réessayez, ou contactez le support."
+    }
+  },
+  "Billing": {
+    "plans": {
+      "free": {
+        "name": "Free",
+        "price": "0 €",
+        "description": "Essayez Excerpta avec quelques documents chaque mois.",
+        "features": ["3 documents / mois", "PDF, DOCX, CSV, code", "Réponses citées", "Collections"]
+      },
+      "pro": {
+        "name": "Pro",
+        "price": "12 €/mois",
+        "description": "Pour les personnes qui travaillent régulièrement avec des documents.",
+        "features": ["100 documents / mois", "Tout ce qui est inclus dans Free", "Traitement prioritaire"]
+      },
+      "team": {
+        "name": "Team",
+        "price": "39 €/mois",
+        "description": "Pour les petites équipes qui partagent beaucoup de documents.",
+        "features": ["1 000 documents / mois", "Tout ce qui est inclus dans Pro", "Quota d'usage partagé"]
+      }
+    },
+    "upgrade": "Passer à un plan supérieur"
+  },
   "Share": {
     "homeAriaLabel": "Accueil Excerpta",
     "defaultTitle": "Conversation partagée",

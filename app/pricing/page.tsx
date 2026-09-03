@@ -9,11 +9,12 @@ import { SiteNav } from "@/components/layout/site-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { Button } from "@/components/ui/button";
 import { useSession } from "@/lib/auth-client";
-import { PLAN_DETAILS, type PlanId } from "@/lib/billing/plans";
+import { usePlanDetails, type PlanId } from "@/lib/billing/plans";
 
 export default function PricingPage() {
   const t = useTranslations("Pricing");
   const tLanding = useTranslations("Landing.pricing");
+  const planDetails = usePlanDetails();
   const { data: session } = useSession();
   const router = useRouter();
   const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
@@ -52,8 +53,8 @@ export default function PricingPage() {
           </div>
 
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {(Object.keys(PLAN_DETAILS) as PlanId[]).map((id) => {
-              const plan = PLAN_DETAILS[id];
+            {(["free", "pro", "team"] as PlanId[]).map((id) => {
+              const plan = planDetails[id];
               const isPro = id === "pro";
               return (
                 <div
