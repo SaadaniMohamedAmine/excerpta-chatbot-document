@@ -7,6 +7,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { PageHeaderBanner } from "@/components/ui/page-header-banner";
 import { resolveUploadCollectionId } from "@/lib/collections";
+import { getUsage } from "@/lib/billing/usage";
 import { DocumentsExplorer } from "@/components/dashboard/DocumentsExplorer";
 import UploadDropzone from "@/components/dashboard/UploadDropzone";
 import { DashboardTour } from "@/components/onboarding/DashboardTour";
@@ -80,6 +81,7 @@ export default async function DocumentsPage() {
   }));
 
   const totalConversations = serializable.reduce((sum, d) => sum + d.conversationCount, 0);
+  const usage = await getUsage(session.user.id);
 
   const citationCount =
     serializable.length === 0
@@ -101,7 +103,11 @@ export default async function DocumentsPage() {
             ? "Upload a document to begin."
             : `${serializable.length} document${serializable.length === 1 ? "" : "s"}`
         }
-        action={serializable.length > 0 ? <UploadDropzone variant="button" /> : undefined}
+        action={
+          serializable.length > 0 ? (
+            <UploadDropzone variant="button" isQuotaExceeded={usage.remaining <= 0} />
+          ) : undefined
+        }
       />
 
       <div className="mt-6">

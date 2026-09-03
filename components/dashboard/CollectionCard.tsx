@@ -5,16 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import {
-  FilePdf,
-  FileDoc,
-  FileCsv,
-  FileCode,
-  Stack,
-  DotsThree,
-  PencilSimple,
-  Trash,
-} from "@phosphor-icons/react";
+import { Stack, DotsThree, PencilSimple, Trash } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -23,14 +14,11 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 
-const ICONS = { pdf: FilePdf, docx: FileDoc, csv: FileCsv, code: FileCode } as const;
-
 export interface CollectionSummary {
   id: string;
   name: string;
   isDefault: boolean;
   documentCount: number;
-  previewDocuments: { id: string; title: string; fileType: "pdf" | "docx" | "csv" | "code" }[];
 }
 
 export default function CollectionCard({ collection }: { collection: CollectionSummary }) {
@@ -63,8 +51,13 @@ export default function CollectionCard({ collection }: { collection: CollectionS
   }
 
   return (
-    <div className="group relative flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 transition-colors hover:border-primary">
-      <div className="absolute right-2 top-2">
+    <div className="group relative flex flex-col gap-3 overflow-hidden rounded-lg border border-border bg-gradient-to-b from-surface to-background p-4 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10">
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-primary via-primary to-gold/60"
+      />
+
+      <div className="absolute right-2 top-3 z-10">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button
@@ -101,23 +94,9 @@ export default function CollectionCard({ collection }: { collection: CollectionS
       </div>
 
       <Link href={`/collections/${collection.id}`} className="flex flex-col gap-3">
-        <div className="flex items-center -space-x-2">
-          {collection.previewDocuments.length > 0 ? (
-            collection.previewDocuments.map((doc) => {
-              const Icon = ICONS[doc.fileType] ?? FileDoc;
-              return (
-                <span
-                  key={doc.id}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-surface bg-background"
-                >
-                  <Icon className="h-4 w-4 text-primary" weight="duotone" />
-                </span>
-              );
-            })
-          ) : (
-            <Stack className="h-8 w-8 text-primary" weight="duotone" />
-          )}
-        </div>
+        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70 text-white shadow-md shadow-primary/30">
+          <Stack size={18} weight="duotone" />
+        </span>
         <div>
           {renaming ? (
             <Input

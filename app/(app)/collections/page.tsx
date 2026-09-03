@@ -13,7 +13,6 @@ export default async function CollectionsPage() {
     where: { userId: session.user.id },
     orderBy: [{ isDefault: "desc" }, { createdAt: "desc" }],
     include: {
-      documents: { select: { id: true, title: true, fileType: true }, take: 4 },
       _count: { select: { documents: true } },
     },
   });
@@ -23,11 +22,6 @@ export default async function CollectionsPage() {
     name: c.name,
     isDefault: c.isDefault,
     documentCount: c._count.documents,
-    previewDocuments: c.documents.map((d) => ({
-      id: d.id,
-      title: d.title,
-      fileType: d.fileType as "pdf" | "docx" | "csv" | "code",
-    })),
   }));
 
   return <CollectionsPageClient collections={serializableCollections} />;

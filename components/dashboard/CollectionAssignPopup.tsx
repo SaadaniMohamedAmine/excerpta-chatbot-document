@@ -116,7 +116,7 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
   if (collections === null) return null; // no skeleton — shows up already loaded, or not at all
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 w-80 rounded-lg border border-border bg-surface p-4 shadow-xl">
+    <div className="animate-in fade-in-0 slide-in-from-top-2 fixed right-6 top-20 z-40 w-80 rounded-lg border border-border bg-surface p-4 shadow-xl duration-200">
       <button
         type="button"
         onClick={onDismiss}

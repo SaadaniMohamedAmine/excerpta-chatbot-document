@@ -6,11 +6,16 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { upload } from "@vercel/blob/client";
-import { UploadSimple, FilePdf, FileDoc, FileCsv, FileCode, X } from "@phosphor-icons/react";
+import { UploadSimple, FilePdf, FileDoc, FileCsv, FileCode, Warning, X } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
+import { UpgradeRequiredModal } from "./UpgradeRequiredModal";
 
 interface UploadDropzoneProps {
   variant: "empty-state" | "button";
+  // Only meaningful for variant="button" — the empty-state variant only ever
+  // renders when the account has zero documents, which can't itself be a
+  // quota-exceeded state on any current plan.
+  isQuotaExceeded?: boolean;
 }
 
 const ACCEPTED_EXTENSIONS = [
@@ -173,11 +178,12 @@ function DropzoneBody({
   );
 }
 
-export default function UploadDropzone({ variant }: UploadDropzoneProps) {
+export default function UploadDropzone({ variant, isQuotaExceeded = false }: UploadDropzoneProps) {
   const t = useTranslations("UploadDropzone");
   const tCommon = useTranslations("Common");
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
+  const [upgradeModalOpen, setUpgradeModalOpen] = useState(false);
   const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [quotaExceeded, setQuotaExceeded] = useState(false);
@@ -214,14 +220,29 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
 
   return (
     <>
-      <Button onClick={() => setModalOpen(true)}>
-        <UploadSimple className="mr-1.5 h-4 w-4" weight="bold" />
-        {t("uploadDocument")}
-      </Button>
+      <div className="relative inline-block">
+        <Button
+          onClick={() => (isQuotaExceeded ? setUpgradeModalOpen(true) : setModalOpen(true))}
+          title={isQuotaExceeded ? t("quotaExceeded") : undefined}
+        >
+          <UploadSimple className="mr-1.5 h-4 w-4" weight="bold" />
+          {t("uploadDocument")}
+        </Button>
+        {isQuotaExceeded && (
+          <span
+            aria-hidden="true"
+            className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-error text-white"
+          >
+            <Warning size={11} weight="bold" />
+          </span>
+        )}
+      </div>
+
+      <UpgradeRequiredModal open={upgradeModalOpen} onClose={() => setUpgradeModalOpen(false)} />
 
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-          <div className="relative w-full max-w-lg rounded-lg bg-surface p-2 shadow-xl">
+        <div className="animate-in fade-in-0 fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-md duration-200">
+          <div className="animate-in fade-in-0 zoom-in-95 relative w-full max-w-lg rounded-lg bg-surface p-2 shadow-xl duration-200">
             <button
               type="button"
               onClick={() => setModalOpen(false)}
