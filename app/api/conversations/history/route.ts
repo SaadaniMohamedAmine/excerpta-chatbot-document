@@ -11,8 +11,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   const { searchParams } = new URL(request.url);
   const cursor = searchParams.get("cursor") ?? undefined;
+  const q = searchParams.get("q")?.trim() || undefined;
 
-  const { items, nextCursor } = await fetchHistoryPage(session.user.id, cursor);
+  const { items, nextCursor } = await fetchHistoryPage(session.user.id, { cursor, q });
 
   return NextResponse.json({ items, nextCursor });
 }

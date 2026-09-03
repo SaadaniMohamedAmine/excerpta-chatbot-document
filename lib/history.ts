@@ -43,10 +43,20 @@ function toHistoryItem(conversation: ConversationWithRelations): HistoryItem | n
 
 export async function fetchHistoryPage(
   userId: string,
-  cursor?: string
+  { cursor, q }: { cursor?: string; q?: string } = {}
 ): Promise<{ items: HistoryItem[]; nextCursor: string | null }> {
   const conversations = await prisma.conversation.findMany({
-    where: { userId },
+    where: {
+      userId,
+      ...(q
+        ? {
+            OR: [
+              { document: { title: { contains: q, mode: "insensitive" } } },
+              { collection: { name: { contains: q, mode: "insensitive" } } },
+            ],
+          }
+        : {}),
+    },
     orderBy: { createdAt: "desc" },
     include: historyInclude,
     take: HISTORY_PAGE_SIZE + 1,

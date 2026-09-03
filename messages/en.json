@@ -308,7 +308,10 @@
     "noConversationsYet": "No conversations yet.",
     "emptyStateHint": "Start a conversation from a document or collection to see it here.",
     "loadMore": "Load more",
-    "loadingMore": "Loading…"
+    "loadingMore": "Loading…",
+    "searchPlaceholder": "Search by document or collection…",
+    "searchAriaLabel": "Search conversations",
+    "noMatch": "No conversations match “{query}”."
   },
   "Analytics": {
     "title": "Analytics",
