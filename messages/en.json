@@ -223,7 +223,11 @@
     "unsupportedFormat": "This format isn't supported yet. Try PDF, DOCX, CSV, or a code file.",
     "uploadFailedGeneric": "Upload failed.",
     "managePlan": "Manage your plan",
-    "uploadDocument": "Upload document"
+    "uploadDocument": "Upload document",
+    "missingFields": "Missing required fields",
+    "fileTooLarge": "File exceeds the 25MB upload limit",
+    "unsupportedFileType": "Unsupported file type",
+    "quotaExceeded": "You've reached your monthly upload limit. Upgrade your plan to add more documents."
   },
   "Workspace": {
     "conversationHistory": "Conversation history",

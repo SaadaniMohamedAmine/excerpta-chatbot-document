@@ -45,12 +45,20 @@ export async function getUsage(userId: string): Promise<Usage> {
   return { plan, used: uploadCount, limit, remaining: Math.max(0, limit - uploadCount) };
 }
 
+// No message here — this crosses into a route handler, which translates it
+// via getTranslations before it reaches the client, so hardcoding English
+// text on the error itself would just be dead weight.
+export class QuotaExceededError extends Error {
+  constructor() {
+    super("Quota exceeded");
+    this.name = "QuotaExceededError";
+  }
+}
+
 export async function assertCanUpload(userId: string): Promise<void> {
   const { remaining } = await getUsage(userId);
   if (remaining <= 0) {
-    throw new Error(
-      "You've reached your monthly upload limit. Upgrade your plan to add more documents."
-    );
+    throw new QuotaExceededError();
   }
 }
 

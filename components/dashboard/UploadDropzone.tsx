@@ -33,6 +33,18 @@ const ACCEPTED_EXTENSIONS = [
   ".rs",
 ];
 
+// Carries the server's `code` field alongside the translated message so the
+// UI can react to *what* failed (e.g. show the upgrade link for a quota
+// block) without pattern-matching translated text, which breaks the moment
+// the message isn't in English.
+class UploadError extends Error {
+  code?: string;
+  constructor(message: string, code?: string) {
+    super(message);
+    this.code = code;
+  }
+}
+
 /**
  * Uploads straight from the browser to Vercel Blob (Phase 2's client-upload
  * architecture — see app/api/documents/upload/route.ts's handleUpload and
@@ -65,7 +77,7 @@ async function uploadWithProgress(file: File, onProgress: (pct: number) => void)
     // without this, res.status alone can't distinguish a quota block from
     // any other failure, and DropzoneBody has nothing useful to show.
     const body = await res.json().catch(() => null);
-    throw new Error(body?.error ?? `Upload failed (${res.status}).`);
+    throw new UploadError(body?.error ?? `Upload failed (${res.status}).`, body?.code);
   }
   const { document } = await res.json();
   return document;
@@ -75,10 +87,12 @@ function DropzoneBody({
   onFile,
   progress,
   error,
+  quotaExceeded,
 }: {
   onFile: (file: File) => void;
   progress: number | null;
   error: string | null;
+  quotaExceeded: boolean;
 }) {
   const t = useTranslations("UploadDropzone");
   const [dragActive, setDragActive] = useState(false);
@@ -145,7 +159,7 @@ function DropzoneBody({
       {error && (
         <p className="font-sans text-xs text-error">
           {error}
-          {error.includes("upload limit") && (
+          {quotaExceeded && (
             <>
               {" "}
               <Link href="/settings?tab=billing" className="underline hover:no-underline">
@@ -166,15 +180,18 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [quotaExceeded, setQuotaExceeded] = useState(false);
 
   const handleFile = useCallback(
     async (file: File) => {
       const ext = "." + file.name.split(".").pop()?.toLowerCase();
       if (!ACCEPTED_EXTENSIONS.includes(ext)) {
         setError(t("unsupportedFormat"));
+        setQuotaExceeded(false);
         return;
       }
       setError(null);
+      setQuotaExceeded(false);
       setProgress(0);
       try {
         const created = await uploadWithProgress(file, setProgress);
@@ -184,6 +201,7 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
         router.push(`/documents/${created.id}?assignCollection=1`);
       } catch (err) {
         setError(err instanceof Error ? err.message : t("uploadFailedGeneric"));
+        setQuotaExceeded(err instanceof UploadError && err.code === "quota_exceeded");
         setProgress(null);
       }
     },
@@ -191,7 +209,7 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
   );
 
   if (variant === "empty-state") {
-    return <DropzoneBody onFile={handleFile} progress={progress} error={error} />;
+    return <DropzoneBody onFile={handleFile} progress={progress} error={error} quotaExceeded={quotaExceeded} />;
   }
 
   return (
@@ -212,7 +230,7 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
             >
               <X className="h-4 w-4" weight="bold" />
             </button>
-            <DropzoneBody onFile={handleFile} progress={progress} error={error} />
+            <DropzoneBody onFile={handleFile} progress={progress} error={error} quotaExceeded={quotaExceeded} />
           </div>
         </div>
       )}

@@ -1,9 +1,10 @@
 // app/api/documents/finalize/route.ts
 import { NextRequest, NextResponse } from "next/server";
+import { getTranslations } from "next-intl/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { ALLOWED_EXTENSIONS, MAX_FILE_SIZE_BYTES } from "@/lib/documents/constraints";
-import { assertCanUpload, incrementUsage } from "@/lib/billing/usage";
+import { assertCanUpload, incrementUsage, QuotaExceededError } from "@/lib/billing/usage";
 import { resolveUploadCollectionId } from "@/lib/collections";
 
 type FinalizeBody = {
@@ -20,18 +21,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   }
 
   const { fileUrl, pathname, title, fileSize } = (await request.json()) as FinalizeBody;
+  const t = await getTranslations("UploadDropzone");
 
   if (!fileUrl || !pathname || !title || !fileSize) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    return NextResponse.json({ error: t("missingFields") }, { status: 400 });
   }
   if (fileSize > MAX_FILE_SIZE_BYTES) {
-    return NextResponse.json({ error: "File exceeds the 25MB upload limit" }, { status: 400 });
+    return NextResponse.json({ error: t("fileTooLarge") }, { status: 400 });
   }
 
   const extension = pathname.split(".").pop()?.toLowerCase() ?? "";
   const fileType = ALLOWED_EXTENSIONS[extension];
   if (!fileType) {
-    return NextResponse.json({ error: "Unsupported file type" }, { status: 400 });
+    return NextResponse.json({ error: t("unsupportedFileType") }, { status: 400 });
   }
 
   // Idempotency guard — if the client retries this call (e.g. a flaky network
@@ -47,10 +49,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     await assertCanUpload(session.user.id);
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Quota exceeded" },
-      { status: 402 }
-    );
+    if (error instanceof QuotaExceededError) {
+      return NextResponse.json({ error: t("quotaExceeded"), code: "quota_exceeded" }, { status: 402 });
+    }
+    throw error;
   }
 
   // collectionId is required in the schema — resolved here rather than
