@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Stack, DotsThree, PencilSimple, Trash } from "@phosphor-icons/react";
+import { Stack, DotsThree, FilePlus, PencilSimple, Trash } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -13,6 +13,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { AddDocumentsToCollectionModal } from "./AddDocumentsToCollectionModal";
 
 export interface CollectionSummary {
   id: string;
@@ -28,6 +29,7 @@ export default function CollectionCard({ collection }: { collection: CollectionS
   const [renaming, setRenaming] = useState(false);
   const [name, setName] = useState(collection.name);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
+  const [addDocumentsOpen, setAddDocumentsOpen] = useState(false);
 
   async function handleRename() {
     const trimmed = name.trim();
@@ -70,6 +72,14 @@ export default function CollectionCard({ collection }: { collection: CollectionS
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
+            <DropdownMenuItem
+              onSelect={(e) => {
+                e.preventDefault();
+                setAddDocumentsOpen(true);
+              }}
+            >
+              <FilePlus size={16} /> {t("addDocumentsCta")}
+            </DropdownMenuItem>
             <DropdownMenuItem
               onSelect={(e) => {
                 e.preventDefault();
@@ -157,6 +167,13 @@ export default function CollectionCard({ collection }: { collection: CollectionS
           </div>
         </div>
       )}
+
+      <AddDocumentsToCollectionModal
+        open={addDocumentsOpen}
+        collectionId={collection.id}
+        collectionName={collection.name}
+        onClose={() => setAddDocumentsOpen(false)}
+      />
     </div>
   );
 }
