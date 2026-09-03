@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { PaperPlaneRight } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 
@@ -15,6 +16,7 @@ interface ChatInputProps {
 const MAX_HEIGHT_PX = 160;
 
 export default function ChatInput({ input, onChange, onSubmit, isLoading }: ChatInputProps) {
+  const t = useTranslations("Chat");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -40,13 +42,13 @@ export default function ChatInput({ input, onChange, onSubmit, isLoading }: Chat
         value={input}
         onChange={onChange}
         onKeyDown={handleKeyDown}
-        placeholder="Ask a question"
+        placeholder={t("askQuestion")}
         rows={1}
         disabled={isLoading}
         data-tour="chat-input"
         className="max-h-40 flex-1 resize-none rounded-md border border-border bg-background px-3 py-2 font-sans text-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-60"
       />
-      <Button type="submit" size="icon" disabled={isLoading || !input.trim()} aria-label="Send message">
+      <Button type="submit" size="icon" disabled={isLoading || !input.trim()} aria-label={t("sendMessage")}>
         <PaperPlaneRight className="h-4 w-4" weight="fill" />
       </Button>
     </form>

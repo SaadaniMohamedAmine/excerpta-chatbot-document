@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 import { geistSans, geistMono, sourceSerif } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 import { PageLoader } from "@/components/ui/page-loader";
@@ -33,19 +35,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale();
+
   return (
     <html
-      lang="en"
+      lang={locale}
       className={`${geistSans.variable} ${geistMono.variable} ${sourceSerif.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background font-sans text-text-primary antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <PageLoader />
-          <RouteTransitionOverlay />
-          {children}
-        </ThemeProvider>
+        <NextIntlClientProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <PageLoader />
+            <RouteTransitionOverlay />
+            {children}
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

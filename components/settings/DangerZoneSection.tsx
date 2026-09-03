@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Warning } from "@phosphor-icons/react";
 import { Modal } from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,8 @@ interface DangerZoneSectionProps {
 }
 
 export function DangerZoneSection({ userEmail }: DangerZoneSectionProps) {
+  const t = useTranslations("Settings.account");
+  const tCommon = useTranslations("Common");
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [confirmText, setConfirmText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -43,7 +46,7 @@ export function DangerZoneSection({ userEmail }: DangerZoneSectionProps) {
       // eslint-disable-next-line @next/next/no-location-assign-relative-destination
       window.location.href = "/";
     } catch {
-      setError("Couldn't delete your account. Try again, or contact support.");
+      setError(t("deleteFailed"));
       setIsDeleting(false);
     }
   }
@@ -51,27 +54,22 @@ export function DangerZoneSection({ userEmail }: DangerZoneSectionProps) {
   return (
     <section className="flex flex-col gap-6">
       <div>
-        <h2 className="text-lg font-semibold text-text-primary">Account</h2>
-        <p className="mt-1 text-sm text-text-secondary">
-          Manage or permanently remove your account.
-        </p>
+        <h2 className="text-lg font-semibold text-text-primary">{t("heading")}</h2>
+        <p className="mt-1 text-sm text-text-secondary">{t("subtitle")}</p>
       </div>
 
       <div className="rounded-lg border border-error/40 bg-error/5 p-5">
         <div className="flex items-start gap-3">
           <Warning size={20} className="mt-0.5 shrink-0 text-error" weight="fill" />
           <div className="flex-1">
-            <h3 className="text-sm font-semibold text-error">Delete account</h3>
-            <p className="mt-1 text-sm text-text-secondary">
-              This permanently deletes your account, documents, and conversations. This
-              cannot be undone.
-            </p>
+            <h3 className="text-sm font-semibold text-error">{t("deleteAccount")}</h3>
+            <p className="mt-1 text-sm text-text-secondary">{t("deleteWarning")}</p>
             <Button
               variant="destructive"
               className="mt-4"
               onClick={() => setConfirmOpen(true)}
             >
-              Delete account
+              {t("deleteAccount")}
             </Button>
           </div>
         </div>
@@ -84,14 +82,14 @@ export function DangerZoneSection({ userEmail }: DangerZoneSectionProps) {
           setConfirmText("");
           setError(null);
         }}
-        title="Delete your account"
-        description={`This is permanent. Type DELETE or your email (${userEmail}) to confirm.`}
+        title={t("confirmTitle")}
+        description={t("confirmDescription", { email: userEmail })}
       >
         <div className="flex flex-col gap-4">
           <Input
             value={confirmText}
             onChange={(event) => setConfirmText(event.target.value)}
-            placeholder="Type DELETE to confirm"
+            placeholder={t("typeToConfirm")}
             autoFocus
           />
           {error && <p className="text-sm text-error">{error}</p>}
@@ -104,14 +102,14 @@ export function DangerZoneSection({ userEmail }: DangerZoneSectionProps) {
               }}
               className="text-sm text-text-secondary hover:text-text-primary"
             >
-              Cancel
+              {tCommon("cancel")}
             </button>
             <Button
               variant="destructive"
               disabled={!isConfirmed || isDeleting}
               onClick={handleDelete}
             >
-              {isDeleting ? "Deleting…" : "Permanently delete"}
+              {isDeleting ? t("deleting") : t("permanentlyDelete")}
             </Button>
           </div>
         </div>

@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { X } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +13,8 @@ interface NewCollectionModalProps {
 }
 
 export default function NewCollectionModal({ onClose, onCreated }: NewCollectionModalProps) {
+  const t = useTranslations("Collections");
+  const tCommon = useTranslations("Common");
   const [name, setName] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -19,7 +22,7 @@ export default function NewCollectionModal({ onClose, onCreated }: NewCollection
   const handleSubmit = async () => {
     const trimmed = name.trim();
     if (!trimmed) {
-      setError("Give the collection a name.");
+      setError(t("nameRequired"));
       return;
     }
     setSubmitting(true);
@@ -30,11 +33,11 @@ export default function NewCollectionModal({ onClose, onCreated }: NewCollection
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: trimmed }),
       });
-      if (!res.ok) throw new Error("Couldn't create the collection.");
+      if (!res.ok) throw new Error(t("createFailed"));
       const collection = await res.json();
       onCreated(collection.id);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("createFailed"));
       setSubmitting(false);
     }
   };
@@ -46,17 +49,17 @@ export default function NewCollectionModal({ onClose, onCreated }: NewCollection
           type="button"
           onClick={onClose}
           className="absolute right-3 top-3 rounded p-1 text-text-secondary hover:text-text-primary"
-          aria-label="Close"
+          aria-label={tCommon("close")}
         >
           <X className="h-4 w-4" weight="bold" />
         </button>
 
-        <h2 className="font-sans text-base font-medium text-text-primary">New collection</h2>
+        <h2 className="font-sans text-base font-medium text-text-primary">{t("newCollection")}</h2>
         <Input
           autoFocus
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Collection name"
+          placeholder={t("collectionNamePlaceholder")}
           className="mt-4"
           maxLength={80}
           onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
@@ -64,10 +67,10 @@ export default function NewCollectionModal({ onClose, onCreated }: NewCollection
         {error && <p className="mt-2 font-sans text-xs text-error">{error}</p>}
         <div className="mt-4 flex justify-end gap-2">
           <Button variant="ghost" size="sm" onClick={onClose} disabled={submitting}>
-            Cancel
+            {tCommon("cancel")}
           </Button>
           <Button size="sm" onClick={handleSubmit} disabled={submitting}>
-            {submitting ? "Creating…" : "Create"}
+            {submitting ? t("creating") : t("create")}
           </Button>
         </div>
       </div>

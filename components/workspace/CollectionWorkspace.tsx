@@ -3,6 +3,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { SplitPane } from "@/components/layout/split-pane";
 import ChatPanel from "./ChatPanel";
 import ConversationHistoryList from "@/components/dashboard/ConversationHistoryList";
@@ -39,6 +40,9 @@ interface CollectionData {
 }
 
 export default function CollectionWorkspace({ collection }: { collection: CollectionData }) {
+  const tWorkspace = useTranslations("Workspace");
+  const tNav = useTranslations("Nav");
+  const tCommon = useTranslations("Common");
   const router = useRouter();
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [initialMessages, setInitialMessages] = useState<ChatUIMessage[]>([]);
@@ -121,17 +125,17 @@ export default function CollectionWorkspace({ collection }: { collection: Collec
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" onClick={() => setHistoryOpen((v) => !v)}>
             <ClockCounterClockwise className="mr-1.5 h-4 w-4" weight="regular" />
-            History
+            {tNav("history")}
           </Button>
           <Button variant="ghost" size="sm" onClick={startNewConversation}>
             <Plus className="mr-1.5 h-4 w-4" weight="regular" />
-            New conversation
+            {tCommon("newConversation")}
           </Button>
           <button
             type="button"
             onClick={() => setShareModalOpen(true)}
             disabled={!conversationId}
-            aria-label="Share conversation"
+            aria-label={tWorkspace("shareConversation")}
             className="rounded-md p-2 text-text-secondary transition-colors hover:bg-background hover:text-text-primary disabled:opacity-40"
           >
             <ShareNetwork size={18} />
@@ -140,7 +144,7 @@ export default function CollectionWorkspace({ collection }: { collection: Collec
             type="button"
             onClick={() => setExportModalOpen(true)}
             disabled={!conversationId}
-            aria-label="Export conversation"
+            aria-label={tWorkspace("exportConversation")}
             className="rounded-md p-2 text-text-secondary transition-colors hover:bg-background hover:text-text-primary disabled:opacity-40"
           >
             <Export size={18} />
@@ -196,7 +200,9 @@ export default function CollectionWorkspace({ collection }: { collection: Collec
           }
           right={
             conversationLoading || !conversationId ? (
-              <div className="flex h-full items-center justify-center text-sm text-text-secondary">Starting conversation…</div>
+              <div className="flex h-full items-center justify-center text-sm text-text-secondary">
+                {tWorkspace("startingConversation")}
+              </div>
             ) : (
               <ChatPanel
                 key={conversationId}

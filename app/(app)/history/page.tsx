@@ -2,6 +2,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ClockCounterClockwise, ChatCircleText } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
@@ -16,11 +17,14 @@ interface HistoryEntry {
   createdAt: Date;
 }
 
-function groupByPeriod(entries: HistoryEntry[]) {
+function groupByPeriod(
+  entries: HistoryEntry[],
+  labels: { today: string; thisWeek: string; earlier: string }
+) {
   const groups: { label: string; items: HistoryEntry[] }[] = [
-    { label: "Today", items: [] },
-    { label: "This week", items: [] },
-    { label: "Earlier", items: [] },
+    { label: labels.today, items: [] },
+    { label: labels.thisWeek, items: [] },
+    { label: labels.earlier, items: [] },
   ];
   const now = Date.now();
 
@@ -37,6 +41,12 @@ function groupByPeriod(entries: HistoryEntry[]) {
 export default async function HistoryPage() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) redirect("/sign-in");
+
+  const t = await getTranslations("HistoryPage");
+  const tNav = await getTranslations("Nav");
+  const tCommon = await getTranslations("Common");
+  const tRelative = await getTranslations("Common.relativeDate");
+  const locale = await getLocale();
 
   const conversations = await prisma.conversation.findMany({
     where: { userId: session.user.id },
@@ -62,32 +72,30 @@ export default async function HistoryPage() {
         id: conversation.id,
         href: target.href,
         label: target.label,
-        preview: conversation.messages[0]?.content ?? "New conversation",
+        preview: conversation.messages[0]?.content ?? tCommon("newConversation"),
         createdAt: conversation.createdAt,
       };
     })
     .filter((entry): entry is HistoryEntry => entry !== null);
 
-  const groups = groupByPeriod(entries);
+  const groups = groupByPeriod(entries, {
+    today: t("todayGroup"),
+    thisWeek: t("thisWeekGroup"),
+    earlier: t("earlierGroup"),
+  });
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <PageHeaderBanner
         icon={ClockCounterClockwise}
-        title="History"
-        subtitle={
-          entries.length === 0
-            ? "No conversations yet."
-            : `${entries.length} conversation${entries.length === 1 ? "" : "s"}`
-        }
+        title={tNav("history")}
+        subtitle={entries.length === 0 ? t("noConversationsYet") : t("subtitleCount", { count: entries.length })}
       />
 
       {entries.length === 0 ? (
         <div className="mt-6 flex flex-col items-center justify-center gap-3 rounded-lg border border-border bg-surface py-16 text-center">
           <ClockCounterClockwise size={32} className="text-text-secondary" />
-          <p className="font-sans text-sm text-text-secondary">
-            Start a conversation from a document or collection to see it here.
-          </p>
+          <p className="font-sans text-sm text-text-secondary">{t("emptyStateHint")}</p>
         </div>
       ) : (
         <div className="mt-6 flex flex-col gap-6">
@@ -112,7 +120,7 @@ export default async function HistoryPage() {
                             {entry.label}
                           </span>
                           <span className="shrink-0 font-sans text-xs text-text-secondary">
-                            {formatRelativeDate(entry.createdAt.toISOString())}
+                            {formatRelativeDate(entry.createdAt.toISOString(), tRelative, locale)}
                           </span>
                         </div>
                         <p className="mt-0.5 line-clamp-1 font-sans text-sm text-text-secondary">{entry.preview}</p>

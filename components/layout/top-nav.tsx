@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Command, Gear, List, SignOut } from "@phosphor-icons/react";
 import { Logo } from "@/components/ui/logo";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -19,6 +20,7 @@ import {
 import { useSession, authClient } from "@/lib/auth-client";
 
 export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
+  const t = useTranslations("Nav");
   const router = useRouter();
   const { data: session } = useSession();
   const user = session?.user;
@@ -39,7 +41,7 @@ export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
           <button
             type="button"
             onClick={onMenuClick}
-            aria-label="Open menu"
+            aria-label={t("openMenu")}
             className="flex h-9 w-9 items-center justify-center rounded-md text-text-secondary transition-colors hover:bg-background hover:text-text-primary md:hidden"
           >
             <List size={20} weight="regular" />
@@ -50,8 +52,8 @@ export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
           <button
             type="button"
             onClick={openCommandPalette}
-            aria-label="Open command palette"
-            title="Command palette (⌘K)"
+            aria-label={t("openCommandPalette")}
+            title={t("commandPaletteShortcut")}
             className="flex h-9 w-9 items-center justify-center rounded-md text-text-secondary transition-colors hover:bg-background hover:text-text-primary"
           >
             <Command size={20} weight="regular" />
@@ -62,23 +64,23 @@ export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
             <DropdownMenuTrigger asChild>
               <button
                 type="button"
-                aria-label="Account menu"
+                aria-label={t("accountMenu")}
                 className="ml-1 flex h-9 w-9 items-center justify-center rounded-full transition-opacity hover:opacity-80"
               >
                 <Avatar name={user?.name} email={user?.email} size="sm" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>{user?.email ?? "Account"}</DropdownMenuLabel>
+              <DropdownMenuLabel>{user?.email ?? t("account")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <Link href="/settings" className="flex w-full items-center gap-2">
-                  <Gear size={16} /> Settings
+                  <Gear size={16} /> {t("settings")}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem destructive onSelect={handleSignOut}>
-                <SignOut size={16} /> Sign out
+                <SignOut size={16} /> {t("signOut")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

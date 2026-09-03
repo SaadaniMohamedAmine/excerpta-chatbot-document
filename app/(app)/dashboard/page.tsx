@@ -1,6 +1,7 @@
 // app/(app)/dashboard/page.tsx
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { SquaresFour, FileText, ChatCircleText, Quotes, FolderStar } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
@@ -10,19 +11,22 @@ import { RecentDocumentsList } from "@/components/dashboard/RecentDocumentsList"
 import { RecentConversationsList } from "@/components/dashboard/RecentConversationsList";
 import { QuickActions } from "@/components/dashboard/QuickActions";
 
-function getGreeting(): string {
-  const hour = new Date().getHours();
-  if (hour < 12) return "Good morning";
-  if (hour < 18) return "Good afternoon";
-  return "Good evening";
-}
-
 export default async function DashboardPage() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) redirect("/sign-in");
 
+  const t = await getTranslations("Dashboard");
+  const tCommon = await getTranslations("Common");
+
+  function getGreeting(): string {
+    const hour = new Date().getHours();
+    if (hour < 12) return t("greetingMorning");
+    if (hour < 18) return t("greetingAfternoon");
+    return t("greetingEvening");
+  }
+
   const userId = session.user.id;
-  const firstName = session.user.name?.split(" ")[0] || "there";
+  const firstName = session.user.name?.split(" ")[0] || t("fallbackName");
 
   const [documentCount, conversationCount, collectionCount, citedMessages, recentDocuments, recentConversations] =
     await Promise.all([
@@ -76,7 +80,7 @@ export default async function DashboardPage() {
         id: conversation.id,
         href: target.href,
         label: target.label,
-        preview: conversation.messages[0]?.content ?? "New conversation",
+        preview: conversation.messages[0]?.content ?? tCommon("newConversation"),
         createdAt: conversation.createdAt.toISOString(),
       };
     })
@@ -91,19 +95,14 @@ export default async function DashboardPage() {
             {getGreeting()}, {firstName} <span aria-hidden="true">👋</span>
           </>
         }
-        subtitle={
-          <>
-            {documentCount} document{documentCount === 1 ? "" : "s"} tracked · {conversationCount}{" "}
-            conversation{conversationCount === 1 ? "" : "s"}
-          </>
-        }
+        subtitle={t("subtitle", { documentCount, conversationCount })}
       />
 
       <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Documents" value={documentCount} icon={FileText} />
-        <StatCard label="Conversations" value={conversationCount} icon={ChatCircleText} />
-        <StatCard label="Citations given" value={citationCount} icon={Quotes} />
-        <StatCard label="Collections" value={collectionCount} icon={FolderStar} />
+        <StatCard label={t("statDocuments")} value={documentCount} icon={FileText} />
+        <StatCard label={t("statConversations")} value={conversationCount} icon={ChatCircleText} />
+        <StatCard label={t("statCitationsGiven")} value={citationCount} icon={Quotes} />
+        <StatCard label={t("statCollections")} value={collectionCount} icon={FolderStar} />
       </div>
 
       <div className="mt-4 grid gap-4 md:grid-cols-2">

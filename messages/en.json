@@ -1,0 +1,442 @@
+{
+  "Common": {
+    "changeLanguage": "Change language",
+    "newConversation": "New conversation",
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving…",
+    "skip": "Skip",
+    "paymentSuccessful": "Payment successful — your plan has been updated.",
+    "relativeDate": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "daysAgo": "{count, plural, one {# day ago} other {# days ago}}",
+      "weeksAgo": "{count, plural, one {# week ago} other {# weeks ago}}"
+    }
+  },
+  "Nav": {
+    "dashboard": "Dashboard",
+    "documents": "Documents",
+    "collections": "Collections",
+    "history": "History",
+    "analytics": "Analytics",
+    "settings": "Settings",
+    "workspace": "Workspace",
+    "account": "Account",
+    "newDocument": "New document",
+    "closeMenu": "Close menu",
+    "openMenu": "Open menu",
+    "expandSidebar": "Expand sidebar",
+    "collapseSidebar": "Collapse sidebar",
+    "collapse": "Collapse",
+    "accountMenu": "Account menu",
+    "signOut": "Sign out",
+    "openCommandPalette": "Open command palette",
+    "commandPaletteShortcut": "Command palette (⌘K)"
+  },
+  "CommandPalette": {
+    "label": "Command palette",
+    "searchPlaceholder": "Search documents or run a command…",
+    "noResults": "No results found.",
+    "groupNavigation": "Navigation",
+    "groupDocuments": "Documents",
+    "groupActions": "Actions",
+    "switchToLight": "Switch to light theme",
+    "switchToDark": "Switch to dark theme",
+    "replayTour": "Replay guided tour"
+  },
+  "Landing": {
+    "nav": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "whatsNew": "What's new",
+      "howItWorks": "How it works"
+    },
+    "hero": {
+      "titleLine1": "Chat with any document.",
+      "titleHighlight": "Every answer cited to the page.",
+      "subtitle": "Precise answers, cited to the line. Upload a PDF, DOCX, spreadsheet, or code file, and ask it anything — every claim traces back to its source.",
+      "ctaSignedIn": "Go to Documents",
+      "ctaSignedOut": "Try Excerpta",
+      "howItWorksLink": "See how it works",
+      "mockFileName": "quarterly-report.pdf",
+      "mockPageLabel": "Page 4 of 12",
+      "mockQuestion": "What was Q3 revenue growth?",
+      "mockAnswer": "Revenue grew 18% quarter over quarter.",
+      "mockCitation": "p. 4"
+    },
+    "features": {
+      "heading": "Built to answer with evidence.",
+      "subtitle": "Excerpta is not a generic chatbot pointed at a file. Every part of it exists to keep an answer traceable to the exact place it came from.",
+      "items": [
+        {
+          "title": "Multi-format upload",
+          "description": "PDF, DOCX, CSV, and code files upload as-is. No conversion step, no lost formatting."
+        },
+        {
+          "title": "Source citations",
+          "description": "Every answer names the exact page it came from — not a paraphrase you have to take on faith."
+        },
+        {
+          "title": "Auto-scroll to source",
+          "description": "Click a citation and the document jumps straight to the passage, highlighted in place."
+        }
+      ]
+    },
+    "pricing": {
+      "heading": "Simple, transparent pricing.",
+      "subtitle": "Start free, upgrade when you need more room.",
+      "mostPopular": "Most popular",
+      "ctaFree": "Get started",
+      "ctaChoosePlan": "Choose {plan}"
+    },
+    "whatsNew": {
+      "heading": "What's new.",
+      "subtitle": "Excerpta is actively evolving. Here's what shipped most recently.",
+      "items": [
+        {
+          "title": "Polished landing experience",
+          "description": "A dedicated public landing page, SEO metadata, and a real preview image."
+        },
+        {
+          "title": "Account & appearance settings",
+          "description": "Manage your profile, switch themes, and delete your account and data."
+        },
+        {
+          "title": "Public sharing",
+          "description": "Turn any conversation into a read-only link anyone can open, no sign-in needed."
+        },
+        {
+          "title": "Export conversations",
+          "description": "Download any conversation as a formatted PDF or DOCX, citations included."
+        }
+      ]
+    },
+    "howItWorks": {
+      "heading": "How it works",
+      "subtitle": "Three steps, from a raw file to an answer you can verify.",
+      "steps": [
+        {
+          "title": "Upload your document",
+          "description": "Drop in a PDF, Word file, spreadsheet, or code file. Excerpta parses it and prepares it for search in seconds."
+        },
+        {
+          "title": "Ask a question",
+          "description": "Ask in plain language. Excerpta searches the full document for the passages that actually answer it."
+        },
+        {
+          "title": "Get a cited answer",
+          "description": "Read the answer, then click any citation to jump straight to the source page — highlighted, in context."
+        }
+      ]
+    }
+  },
+  "Auth": {
+    "signIn": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "or": "or",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithGithub": "Continue with GitHub",
+    "signInPage": {
+      "subtitle": "Sign in to continue reading with your documents.",
+      "forgotPassword": "Forgot password?",
+      "signingIn": "Signing in…",
+      "newToExcerpta": "New to Excerpta?",
+      "createAnAccount": "Create an account",
+      "defaultError": "Could not sign in. Check your email and password."
+    },
+    "signUpPage": {
+      "subtitle": "Create an account to start reading with Excerpta.",
+      "name": "Name",
+      "namePlaceholder": "Ada Lovelace",
+      "passwordPlaceholder": "At least 8 characters",
+      "creatingAccount": "Creating account…",
+      "createAccount": "Create account",
+      "alreadyHaveAccount": "Already have an account?",
+      "defaultError": "Could not create your account."
+    },
+    "forgotPasswordPage": {
+      "subtitle": "Enter your email and we'll send you a link to reset your password.",
+      "sendResetLink": "Send reset link",
+      "sending": "Sending…",
+      "sentMessage": "If that email has an account, a reset link is on its way. Check your inbox.",
+      "rememberedIt": "Remembered it?",
+      "backToSignIn": "Back to sign in",
+      "defaultError": "Could not send a reset link. Try again."
+    },
+    "resetPasswordPage": {
+      "subtitle": "Choose a new password.",
+      "newPassword": "New password",
+      "updatePassword": "Update password",
+      "updating": "Updating…",
+      "invalidLink": "This reset link is invalid or has expired.",
+      "requestNewOne": "Request a new one",
+      "updatedMessage": "Password updated. Redirecting you to sign in…",
+      "defaultError": "Could not reset your password. The link may have expired."
+    }
+  },
+  "Pricing": {
+    "heading": "Simple, honest pricing.",
+    "subtitle": "Start free. Upgrade when you outgrow it.",
+    "redirecting": "Redirecting…"
+  },
+  "Dashboard": {
+    "greetingMorning": "Good morning",
+    "greetingAfternoon": "Good afternoon",
+    "greetingEvening": "Good evening",
+    "fallbackName": "there",
+    "subtitle": "{documentCount, plural, one {# document} other {# documents}} tracked · {conversationCount, plural, one {# conversation} other {# conversations}}",
+    "statDocuments": "Documents",
+    "statConversations": "Conversations",
+    "statCitationsGiven": "Citations given",
+    "statCollections": "Collections",
+    "recentDocuments": "Recent documents",
+    "recentConversations": "Recent conversations",
+    "viewAll": "View all",
+    "noDocumentsYet": "Upload a document to see it here.",
+    "noConversationsYet": "Start a conversation from a document to see it here.",
+    "uploadDocument": "Upload a document",
+    "uploadDocumentHint": "Get cited answers in seconds.",
+    "askDocuments": "Ask your documents",
+    "askDocumentsHint": "Search across everything you've uploaded."
+  },
+  "Documents": {
+    "searchPlaceholder": "Search documents…",
+    "searchAriaLabel": "Search documents",
+    "clearSearch": "Clear search",
+    "countAndSize": "{count, plural, one {# document} other {# documents}} · {size}",
+    "noMatch": "No documents match “{query}”.",
+    "pageOf": "Page {current} of {total}",
+    "previous": "Previous",
+    "next": "Next",
+    "statusProcessing": "Processing",
+    "statusFailed": "Failed",
+    "conversationCount": "{count, plural, one {# conversation} other {# conversations}}"
+  },
+  "UploadDropzone": {
+    "title": "Upload a document to begin.",
+    "subtitle": "PDF, DOCX, CSV, or a code file.",
+    "browseFiles": "Browse files",
+    "uploading": "Uploading… {percent}%",
+    "unsupportedFormat": "This format isn't supported yet. Try PDF, DOCX, CSV, or a code file.",
+    "uploadFailedGeneric": "Upload failed.",
+    "managePlan": "Manage your plan",
+    "uploadDocument": "Upload document",
+    "missingFields": "Missing required fields",
+    "fileTooLarge": "File exceeds the 25MB upload limit",
+    "unsupportedFileType": "Unsupported file type",
+    "quotaExceeded": "You've reached your monthly upload limit. Upgrade your plan to add more documents."
+  },
+  "Workspace": {
+    "conversationHistory": "Conversation history",
+    "share": "Share",
+    "export": "Export",
+    "shareConversation": "Share conversation",
+    "exportConversation": "Export conversation",
+    "startingConversation": "Starting conversation…"
+  },
+  "PdfViewer": {
+    "previousPage": "Previous page",
+    "nextPage": "Next page",
+    "pageNumber": "Page number",
+    "page": "Page",
+    "ofPages": "of {total}",
+    "zoomOut": "Zoom out",
+    "zoomIn": "Zoom in",
+    "loadError": "Couldn't load this PDF."
+  },
+  "Chat": {
+    "askQuestion": "Ask a question",
+    "sendMessage": "Send message"
+  },
+  "ProcessingPanel": {
+    "reading": "Reading your document…",
+    "indexing": "Indexing pages 1–{pageCount}…",
+    "hint": "This can take a minute for longer documents."
+  },
+  "ErrorPanel": {
+    "title": "We couldn't process this document.",
+    "subtitle": "Try again, or upload a different file.",
+    "retry": "Retry",
+    "retrying": "Retrying…",
+    "retryFailed": "The retry didn't go through. Check your connection and try again."
+  },
+  "ConversationHistory": {
+    "loading": "Loading conversations…",
+    "empty": "No past conversations yet.",
+    "delete": "Delete conversation"
+  },
+  "CollectionPopup": {
+    "dismiss": "Dismiss",
+    "addToCollection": "Add to a collection",
+    "nameFirstCollection": "Name your first collection",
+    "firstCollectionHint": "Every document lives in a collection. You can rename this one, or keep “My Documents” — you can always create more from Collections.",
+    "savedTo": "Saved to “{name}”. Move it, or leave it here.",
+    "createNewCollection": "Create new collection",
+    "collectionNamePlaceholder": "Collection name",
+    "nameRequired": "Give your collection a name.",
+    "renameFailed": "Failed to rename collection",
+    "createFailed": "Failed to create collection",
+    "moveFailed": "Failed to move document",
+    "genericError": "Something went wrong.",
+    "defaultBadge": "(default)"
+  },
+  "Collections": {
+    "subtitle": "Group related documents to ask questions across all of them at once.",
+    "newCollection": "New collection",
+    "emptyState": "No collections yet. Group documents together to ask questions across all of them.",
+    "collectionOptions": "Collection options",
+    "rename": "Rename",
+    "delete": "Delete",
+    "documentCount": "{count, plural, one {# document} other {# documents}}",
+    "defaultBadge": "(default)",
+    "deleteConfirmWithDocs": "Delete \"{name}\"? Its {count, plural, one {# document} other {# documents}} will move to your default collection.",
+    "deleteConfirmEmpty": "Delete \"{name}\"?",
+    "collectionNamePlaceholder": "Collection name",
+    "nameRequired": "Give the collection a name.",
+    "createFailed": "Couldn't create the collection.",
+    "creating": "Creating…",
+    "create": "Create"
+  },
+  "HistoryPage": {
+    "todayGroup": "Today",
+    "thisWeekGroup": "This week",
+    "earlierGroup": "Earlier",
+    "subtitleCount": "{count, plural, one {# conversation} other {# conversations}}",
+    "noConversationsYet": "No conversations yet.",
+    "emptyStateHint": "Start a conversation from a document or collection to see it here."
+  },
+  "Analytics": {
+    "title": "Analytics",
+    "subtitle": "A look at how your documents and conversations are adding up.",
+    "documentsPerWeek": "Documents per week",
+    "documentCount": "{count, plural, one {# document} other {# documents}}",
+    "fileTypes": "File types",
+    "mostActiveDocuments": "Most active documents",
+    "uploadToSeeThis": "Upload a document to see this.",
+    "startConversationToSeeThis": "Start a conversation to see this.",
+    "nothingYet": "Nothing yet."
+  },
+  "ExportModal": {
+    "description": "Save this conversation, with citations, as a document.",
+    "formatPdfLabel": "PDF",
+    "formatPdfDescription": "Fixed layout, portable, ready to print.",
+    "formatDocxLabel": "Word (.docx)",
+    "formatDocxDescription": "Editable in Word or Google Docs.",
+    "downloadFailed": "Couldn't generate the file. Try again in a moment.",
+    "preparing": "Preparing…",
+    "download": "Download"
+  },
+  "ShareModal": {
+    "description": "Anyone with this link can view this conversation, read-only, without signing in.",
+    "copyLink": "Copy link",
+    "copied": "Copied",
+    "revokeHint": "Revoking turns off access for this link. It stops working immediately.",
+    "revoke": "Revoke",
+    "createLink": "Create share link",
+    "creatingLink": "Creating link…",
+    "createFailed": "Couldn't create a share link. Try again in a moment.",
+    "revokeFailed": "Couldn't revoke the link. Try again in a moment.",
+    "copyFailed": "Couldn't copy the link — copy it manually instead."
+  },
+  "Tour": {
+    "dashboard": {
+      "sidebar": "Documents, Collections and History live here — this is your workspace.",
+      "newDocument": "Upload a PDF, DOCX, CSV or code file here whenever you're ready to add your own.",
+      "demoDocument": "We've already loaded a short guide for you. Click it to try asking a question."
+    },
+    "workspace": {
+      "chatInput": "Ask a question about this document — try \"What is this guide about?\". The answer will cite the exact page it came from, and you can click the citation to jump straight to it."
+    },
+    "buttons": {
+      "back": "Back",
+      "close": "Close",
+      "last": "Last",
+      "next": "Next",
+      "nextWithProgress": "Next ({current} of {total})",
+      "open": "Open the dialog",
+      "skip": "Skip"
+    }
+  },
+  "Settings": {
+    "title": "Settings",
+    "subtitle": "Manage your profile, appearance, and account.",
+    "tabProfile": "Profile",
+    "tabAppearance": "Appearance",
+    "tabBilling": "Billing",
+    "tabAccount": "Account",
+    "profile": {
+      "heading": "Profile",
+      "subtitle": "Your name and how you sign in.",
+      "nameLabel": "Name",
+      "nameRequired": "Name can't be empty.",
+      "saveFailed": "Couldn't save your name. Try again.",
+      "emailLabel": "Email",
+      "signedInWith": "Signed in with",
+      "noProvider": "No linked provider found.",
+      "edit": "Edit"
+    },
+    "appearance": {
+      "heading": "Appearance",
+      "subtitle": "Choose how Excerpta looks on this device.",
+      "themeLabel": "Theme",
+      "themeHint": "Switch between light and dark, or match your system setting.",
+      "tourLabel": "Product tour",
+      "tourHint": "Replay the guided walkthrough of Excerpta's workspace and chat.",
+      "replayTour": "Replay tour"
+    },
+    "billing": {
+      "heading": "Billing",
+      "subtitle": "Your plan and monthly usage.",
+      "planLabel": "{name} plan",
+      "usageLabel": "{used} / {limit} documents this month",
+      "manageSubscription": "Manage subscription",
+      "opening": "Opening…",
+      "upgradeTo": "Upgrade to {name}",
+      "redirecting": "Redirecting…"
+    },
+    "account": {
+      "heading": "Account",
+      "subtitle": "Manage or permanently remove your account.",
+      "deleteAccount": "Delete account",
+      "deleteWarning": "This permanently deletes your account, documents, and conversations. This cannot be undone.",
+      "confirmTitle": "Delete your account",
+      "confirmDescription": "This is permanent. Type DELETE or your email ({email}) to confirm.",
+      "typeToConfirm": "Type DELETE to confirm",
+      "permanentlyDelete": "Permanently delete",
+      "deleting": "Deleting…",
+      "deleteFailed": "Couldn't delete your account. Try again, or contact support."
+    }
+  },
+  "Billing": {
+    "plans": {
+      "free": {
+        "name": "Free",
+        "price": "$0",
+        "description": "Try Excerpta with a handful of documents every month.",
+        "features": ["3 documents / month", "PDF, DOCX, CSV, code", "Cited answers", "Collections"]
+      },
+      "pro": {
+        "name": "Pro",
+        "price": "$12/mo",
+        "description": "For individuals working with documents regularly.",
+        "features": ["100 documents / month", "Everything in Free", "Priority processing"]
+      },
+      "team": {
+        "name": "Team",
+        "price": "$39/mo",
+        "description": "For small teams sharing a lot of documents.",
+        "features": ["1,000 documents / month", "Everything in Pro", "Shared usage pool"]
+      }
+    },
+    "upgrade": "Upgrade"
+  },
+  "Share": {
+    "homeAriaLabel": "Excerpta home",
+    "defaultTitle": "Shared conversation",
+    "readOnlySubtitle": "Shared conversation — read-only.",
+    "footerTagline": "Shared with Excerpta — Precise answers, cited to the line."
+  }
+}

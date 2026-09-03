@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { CircleNotch } from "@phosphor-icons/react";
 
 interface ProcessingPanelProps {
@@ -18,6 +19,7 @@ const POLL_INTERVAL_MS = 3000;
  * document. Polling every 3s is a plain GET, no persistent connection.
  */
 export default function ProcessingPanel({ documentId }: ProcessingPanelProps) {
+  const t = useTranslations("ProcessingPanel");
   const [status, setStatus] = useState<"processing" | "ready" | "failed">("processing");
   const [pageCount, setPageCount] = useState<number | null>(null);
   const [phase, setPhase] = useState<"reading" | "indexing">("reading");
@@ -62,7 +64,7 @@ export default function ProcessingPanel({ documentId }: ProcessingPanelProps) {
     return null;
   }
 
-  const statusText = phase === "reading" ? "Reading your document…" : `Indexing pages 1–${pageCount ?? "…"}…`;
+  const statusText = phase === "reading" ? t("reading") : t("indexing", { pageCount: pageCount ?? "…" });
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4 bg-background px-6 text-center">
@@ -71,7 +73,7 @@ export default function ProcessingPanel({ documentId }: ProcessingPanelProps) {
       <div className="h-1.5 w-64 overflow-hidden rounded-full bg-border">
         <div className="h-full w-1/2 animate-pulse rounded-full bg-primary" />
       </div>
-      <p className="font-sans text-xs text-text-secondary">This can take a minute for longer documents.</p>
+      <p className="font-sans text-xs text-text-secondary">{t("hint")}</p>
     </div>
   );
 }

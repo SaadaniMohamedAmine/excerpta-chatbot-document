@@ -3,6 +3,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { SplitPane } from "@/components/layout/split-pane";
 import PdfViewer, { type PdfViewerHandle } from "./PdfViewer";
 import CsvViewer from "./CsvViewer";
@@ -50,6 +51,8 @@ export interface ActiveCitation {
 }
 
 export default function DocumentWorkspace({ document }: { document: WorkspaceDocument }) {
+  const t = useTranslations("Workspace");
+  const tCommon = useTranslations("Common");
   const searchParams = useSearchParams();
   const initialCitePage = searchParams.get("citePage");
   const initialCiteExcerpt = searchParams.get("citeExcerpt");
@@ -165,14 +168,14 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
           <div className="flex items-center gap-2">
             <Button variant="primary" size="sm" onClick={startNewConversation}>
               <Plus className="mr-1.5 h-4 w-4" weight="bold" />
-              New conversation
+              {tCommon("newConversation")}
             </Button>
             <div className="flex items-center gap-1 rounded-full border border-border bg-background px-1 py-1 shadow-sm">
               <button
                 type="button"
                 onClick={() => setHistoryOpen((v) => !v)}
-                aria-label="Conversation history"
-                title="History"
+                aria-label={t("conversationHistory")}
+                title={t("conversationHistory")}
                 className={cn(
                   "rounded-full p-2 text-text-secondary transition-colors hover:bg-primary/10 hover:text-primary",
                   historyOpen && "bg-primary/10 text-primary"
@@ -184,8 +187,8 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
                 type="button"
                 onClick={() => setShareModalOpen(true)}
                 disabled={!conversationId}
-                aria-label="Share conversation"
-                title="Share"
+                aria-label={t("shareConversation")}
+                title={t("share")}
                 className="rounded-full p-2 text-text-secondary transition-colors hover:bg-primary/10 hover:text-primary disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-text-secondary"
               >
                 <ShareNetwork size={18} weight="duotone" />
@@ -194,8 +197,8 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
                 type="button"
                 onClick={() => setExportModalOpen(true)}
                 disabled={!conversationId}
-                aria-label="Export conversation"
-                title="Export"
+                aria-label={t("exportConversation")}
+                title={t("export")}
                 className="rounded-full p-2 text-text-secondary transition-colors hover:bg-primary/10 hover:text-primary disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-text-secondary"
               >
                 <Export size={18} weight="duotone" />
@@ -233,7 +236,7 @@ export default function DocumentWorkspace({ document }: { document: WorkspaceDoc
             right={
               conversationLoading || !conversationId ? (
                 <div className="flex h-full items-center justify-center text-sm text-text-secondary">
-                  Starting conversation…
+                  {t("startingConversation")}
                 </div>
               ) : (
                 <ChatPanel

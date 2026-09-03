@@ -3,14 +3,18 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { CheckCircle } from "@phosphor-icons/react";
 import { SiteNav } from "@/components/layout/site-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { Button } from "@/components/ui/button";
 import { useSession } from "@/lib/auth-client";
-import { PLAN_DETAILS, type PlanId } from "@/lib/billing/plans";
+import { usePlanDetails, type PlanId } from "@/lib/billing/plans";
 
 export default function PricingPage() {
+  const t = useTranslations("Pricing");
+  const tLanding = useTranslations("Landing.pricing");
+  const planDetails = usePlanDetails();
   const { data: session } = useSession();
   const router = useRouter();
   const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
@@ -44,15 +48,13 @@ export default function PricingPage() {
       <main className="flex-1">
         <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
           <div className="text-center">
-            <h1 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-              Simple, honest pricing.
-            </h1>
-            <p className="mt-3 text-text-secondary">Start free. Upgrade when you outgrow it.</p>
+            <h1 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{t("heading")}</h1>
+            <p className="mt-3 text-text-secondary">{t("subtitle")}</p>
           </div>
 
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {(Object.keys(PLAN_DETAILS) as PlanId[]).map((id) => {
-              const plan = PLAN_DETAILS[id];
+            {(["free", "pro", "team"] as PlanId[]).map((id) => {
+              const plan = planDetails[id];
               const isPro = id === "pro";
               return (
                 <div
@@ -63,7 +65,7 @@ export default function PricingPage() {
                 >
                   {isPro && (
                     <span className="w-fit rounded-full bg-primary/10 px-2.5 py-0.5 font-sans text-xs font-medium text-primary">
-                      Most popular
+                      {tLanding("mostPopular")}
                     </span>
                   )}
                   <div>
@@ -84,7 +86,11 @@ export default function PricingPage() {
                     onClick={() => handleSelect(id)}
                     disabled={loadingPlan === id}
                   >
-                    {loadingPlan === id ? "Redirecting…" : id === "free" ? "Get started" : `Choose ${plan.name}`}
+                    {loadingPlan === id
+                      ? t("redirecting")
+                      : id === "free"
+                      ? tLanding("ctaFree")
+                      : tLanding("ctaChoosePlan", { plan: plan.name })}
                   </Button>
                 </div>
               );

@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { X, Check, FolderStar, Plus } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +20,8 @@ interface CollectionAssignPopupProps {
 }
 
 export default function CollectionAssignPopup({ documentId, onDismiss }: CollectionAssignPopupProps) {
+  const t = useTranslations("CollectionPopup");
+  const tCommon = useTranslations("Common");
   const [collections, setCollections] = useState<CollectionOption[] | null>(null);
   const [currentCollectionId, setCurrentCollectionId] = useState<string | null>(null);
   const [selected, setSelected] = useState<string>(""); // collection id, or "__new__"
@@ -73,7 +76,7 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
       if (selected === "__new__") {
         const trimmed = newName.trim();
         if (!trimmed) {
-          setError("Give your collection a name.");
+          setError(t("nameRequired"));
           setSaving(false);
           return;
         }
@@ -85,14 +88,14 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: trimmed }),
           });
-          if (!res.ok) throw new Error("Failed to rename collection");
+          if (!res.ok) throw new Error(t("renameFailed"));
         } else {
           const res = await fetch(`/api/documents/${documentId}/collection`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ newCollectionName: trimmed }),
           });
-          if (!res.ok) throw new Error("Failed to create collection");
+          if (!res.ok) throw new Error(t("createFailed"));
         }
       } else if (selected && selected !== currentCollectionId) {
         const res = await fetch(`/api/documents/${documentId}/collection`, {
@@ -100,11 +103,11 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ collectionId: selected }),
         });
-        if (!res.ok) throw new Error("Failed to move document");
+        if (!res.ok) throw new Error(t("moveFailed"));
       }
       onDismiss();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("genericError"));
     } finally {
       setSaving(false);
     }
@@ -117,7 +120,7 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
       <button
         type="button"
         onClick={onDismiss}
-        aria-label="Dismiss"
+        aria-label={t("dismiss")}
         className="absolute right-2.5 top-2.5 rounded p-1 text-text-secondary hover:text-text-primary"
       >
         <X size={16} />
@@ -126,16 +129,13 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
       <div className="flex items-center gap-2 pr-5">
         <FolderStar size={18} className="text-primary" weight="duotone" />
         <h3 className="font-sans text-sm font-medium text-text-primary">
-          {isFirstCollectionEver ? "Name your first collection" : "Add to a collection"}
+          {isFirstCollectionEver ? t("nameFirstCollection") : t("addToCollection")}
         </h3>
       </div>
 
       {isFirstCollectionEver ? (
         <>
-          <p className="mt-1.5 font-sans text-xs text-text-secondary">
-            Every document lives in a collection. You can rename this one, or keep &ldquo;My
-            Documents&rdquo; — you can always create more from Collections.
-          </p>
+          <p className="mt-1.5 font-sans text-xs text-text-secondary">{t("firstCollectionHint")}</p>
           <Input
             ref={nameInputRef}
             value={newName}
@@ -147,8 +147,7 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
       ) : (
         <>
           <p className="mt-1.5 font-sans text-xs text-text-secondary">
-            Saved to &ldquo;{collections.find((c) => c.id === currentCollectionId)?.name}&rdquo;. Move it,
-            or leave it here.
+            {t("savedTo", { name: collections.find((c) => c.id === currentCollectionId)?.name ?? "" })}
           </p>
           <div className="mt-3 flex flex-col gap-1.5">
             {collections.map((c) => (
@@ -164,7 +163,7 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
               >
                 <span className="truncate">
                   {c.name}
-                  {c.isDefault && <span className="ml-1.5 text-xs text-text-secondary">(default)</span>}
+                  {c.isDefault && <span className="ml-1.5 text-xs text-text-secondary">{t("defaultBadge")}</span>}
                 </span>
                 {selected === c.id && <Check size={14} className="shrink-0 text-primary" weight="bold" />}
               </button>
@@ -179,7 +178,7 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
               }`}
             >
               <Plus size={14} weight="bold" />
-              Create new collection
+              {t("createNewCollection")}
             </button>
           </div>
           {selected === "__new__" && (
@@ -187,7 +186,7 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
               ref={nameInputRef}
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
-              placeholder="Collection name"
+              placeholder={t("collectionNamePlaceholder")}
               className="mt-2"
               maxLength={80}
             />
@@ -199,10 +198,10 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
 
       <div className="mt-3 flex justify-end gap-2">
         <Button variant="ghost" size="sm" onClick={onDismiss} disabled={saving}>
-          Skip
+          {tCommon("skip")}
         </Button>
         <Button size="sm" onClick={handleSave} disabled={saving}>
-          {saving ? "Saving…" : "Save"}
+          {saving ? tCommon("saving") : tCommon("save")}
         </Button>
       </div>
     </div>

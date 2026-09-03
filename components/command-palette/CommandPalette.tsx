@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Command } from "cmdk";
 import { useTheme } from "next-themes";
 import {
@@ -31,6 +32,8 @@ interface DocumentResult {
 const FILE_ICONS = { pdf: FilePdf, docx: FileDoc, csv: FileCsv, code: FileCode } as const;
 
 export function CommandPalette() {
+  const t = useTranslations("CommandPalette");
+  const tNav = useTranslations("Nav");
   const [open, setOpen] = useState(false);
   const [documents, setDocuments] = useState<DocumentResult[]>([]);
   const router = useRouter();
@@ -77,7 +80,7 @@ export function CommandPalette() {
     <Command.Dialog
       open={open}
       onOpenChange={setOpen}
-      label="Command palette"
+      label={t("label")}
       // cmdk's generic `className` prop lands on the inner Command root, not
       // the positioned dialog box (confirmed against the installed 1.x
       // source) — contentClassName/overlayClassName are the real hooks.
@@ -89,24 +92,24 @@ export function CommandPalette() {
     >
       <div className="flex items-center border-b border-border px-3">
         <Command.Input
-          placeholder="Search documents or run a command…"
+          placeholder={t("searchPlaceholder")}
           className="h-11 w-full bg-transparent font-sans text-sm text-text-primary placeholder:text-text-secondary focus:outline-none"
         />
       </div>
       <Command.List className="max-h-80 overflow-y-auto p-2">
         <Command.Empty className="py-6 text-center font-sans text-sm text-text-secondary">
-          No results found.
+          {t("noResults")}
         </Command.Empty>
 
-        <Command.Group heading="Navigation">
-          <PaletteItem icon={FileText} label="Documents" onSelect={() => go("/documents")} />
-          <PaletteItem icon={FolderStar} label="Collections" onSelect={() => go("/collections")} />
-          <PaletteItem icon={ClockCounterClockwise} label="History" onSelect={() => go("/history")} />
-          <PaletteItem icon={Gear} label="Settings" onSelect={() => go("/settings")} />
+        <Command.Group heading={t("groupNavigation")}>
+          <PaletteItem icon={FileText} label={tNav("documents")} onSelect={() => go("/documents")} />
+          <PaletteItem icon={FolderStar} label={tNav("collections")} onSelect={() => go("/collections")} />
+          <PaletteItem icon={ClockCounterClockwise} label={tNav("history")} onSelect={() => go("/history")} />
+          <PaletteItem icon={Gear} label={tNav("settings")} onSelect={() => go("/settings")} />
         </Command.Group>
 
         {documents.length > 0 && (
-          <Command.Group heading="Documents">
+          <Command.Group heading={t("groupDocuments")}>
             {documents.map((doc) => (
               <PaletteItem
                 key={doc.id}
@@ -118,18 +121,18 @@ export function CommandPalette() {
           </Command.Group>
         )}
 
-        <Command.Group heading="Actions">
-          <PaletteItem icon={Plus} label="New document" onSelect={() => go("/documents")} />
+        <Command.Group heading={t("groupActions")}>
+          <PaletteItem icon={Plus} label={tNav("newDocument")} onSelect={() => go("/documents")} />
           <PaletteItem
             icon={resolvedTheme === "dark" ? Sun : Moon}
-            label={resolvedTheme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            label={resolvedTheme === "dark" ? t("switchToLight") : t("switchToDark")}
             onSelect={() => {
               setTheme(resolvedTheme === "dark" ? "light" : "dark");
               setOpen(false);
             }}
           />
-          <PaletteItem icon={MagicWand} label="Replay guided tour" onSelect={() => go("/documents?tour=1")} />
-          <PaletteItem icon={SignOut} label="Sign out" onSelect={handleSignOut} destructive />
+          <PaletteItem icon={MagicWand} label={t("replayTour")} onSelect={() => go("/documents?tour=1")} />
+          <PaletteItem icon={SignOut} label={tNav("signOut")} onSelect={handleSignOut} destructive />
         </Command.Group>
       </Command.List>
     </Command.Dialog>

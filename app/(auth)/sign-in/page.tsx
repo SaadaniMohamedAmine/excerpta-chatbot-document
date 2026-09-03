@@ -4,6 +4,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { GoogleLogo, GithubLogo } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +14,7 @@ import { Logo } from "@/components/ui/logo";
 import { authClient } from "@/lib/auth-client";
 
 export default function SignInPage() {
+  const t = useTranslations("Auth");
   const router = useRouter();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -32,7 +34,7 @@ export default function SignInPage() {
     setIsSubmitting(false);
 
     if (signInError) {
-      setError(signInError.message ?? "Could not sign in. Check your email and password.");
+      setError(signInError.message ?? t("signInPage.defaultError"));
       return;
     }
 
@@ -52,9 +54,7 @@ export default function SignInPage() {
     <Card className="w-full max-w-sm">
       <CardHeader className="items-center pb-2 pt-8">
         <Logo href="/" className="pointer-events-none" />
-        <p className="mt-1 text-center text-sm text-text-secondary">
-          Sign in to continue reading with your documents.
-        </p>
+        <p className="mt-1 text-center text-sm text-text-secondary">{t("signInPage.subtitle")}</p>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 pb-8">
         {error && (
@@ -69,7 +69,7 @@ export default function SignInPage() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <div className="flex flex-col gap-1.5">
             <label htmlFor="email" className="text-sm font-medium text-text-primary">
-              Email
+              {t("email")}
             </label>
             <Input
               id="email"
@@ -84,10 +84,10 @@ export default function SignInPage() {
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center justify-between">
               <label htmlFor="password" className="text-sm font-medium text-text-primary">
-                Password
+                {t("password")}
               </label>
               <Link href="/forgot-password" className="text-xs text-primary hover:underline">
-                Forgot password?
+                {t("signInPage.forgotPassword")}
               </Link>
             </div>
             <PasswordInput
@@ -100,31 +100,31 @@ export default function SignInPage() {
             />
           </div>
           <Button type="submit" disabled={isSubmitting} className="mt-1">
-            {isSubmitting ? "Signing in…" : "Sign in"}
+            {isSubmitting ? t("signInPage.signingIn") : t("signIn")}
           </Button>
         </form>
 
         <div className="flex items-center gap-3">
           <div className="h-px flex-1 bg-border" />
-          <span className="text-xs uppercase tracking-wide text-text-secondary">or</span>
+          <span className="text-xs uppercase tracking-wide text-text-secondary">{t("or")}</span>
           <div className="h-px flex-1 bg-border" />
         </div>
 
         <div className="flex flex-col gap-2">
           <Button variant="secondary" type="button" onClick={() => handleSocial("google")}>
             <GoogleLogo size={18} weight="bold" />
-            Continue with Google
+            {t("continueWithGoogle")}
           </Button>
           <Button variant="secondary" type="button" onClick={() => handleSocial("github")}>
             <GithubLogo size={18} weight="bold" />
-            Continue with GitHub
+            {t("continueWithGithub")}
           </Button>
         </div>
 
         <p className="text-center text-sm text-text-secondary">
-          New to Excerpta?{" "}
+          {t("signInPage.newToExcerpta")}{" "}
           <Link href="/sign-up" className="font-medium text-primary hover:underline">
-            Create an account
+            {t("signInPage.createAnAccount")}
           </Link>
         </p>
       </CardContent>

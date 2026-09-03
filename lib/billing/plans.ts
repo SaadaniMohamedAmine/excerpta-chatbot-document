@@ -6,6 +6,8 @@
 // this file from a client component (the /pricing page needs the plan
 // copy) would inline `undefined` for it at build time, since server env
 // vars without a NEXT_PUBLIC_ prefix never reach the browser bundle.
+import { useTranslations } from "next-intl";
+
 export type PlanId = "free" | "pro" | "team";
 
 export const PLAN_LIMITS: Record<PlanId, number> = {
@@ -14,26 +16,30 @@ export const PLAN_LIMITS: Record<PlanId, number> = {
   team: 1000,
 };
 
-export const PLAN_DETAILS: Record<
-  PlanId,
-  { name: string; price: string; description: string; features: string[] }
-> = {
-  free: {
-    name: "Free",
-    price: "$0",
-    description: "Try Excerpta with a handful of documents every month.",
-    features: ["3 documents / month", "PDF, DOCX, CSV, code", "Cited answers", "Collections"],
-  },
-  pro: {
-    name: "Pro",
-    price: "$12/mo",
-    description: "For individuals working with documents regularly.",
-    features: ["100 documents / month", "Everything in Free", "Priority processing"],
-  },
-  team: {
-    name: "Team",
-    price: "$39/mo",
-    description: "For small teams sharing a lot of documents.",
-    features: ["1,000 documents / month", "Everything in Pro", "Shared usage pool"],
-  },
-};
+export interface PlanDetails {
+  name: string;
+  price: string;
+  description: string;
+  features: string[];
+}
+
+// Plan name/price/description/features are translated content, not static
+// data — this is a hook (not a plain export) so every consumer (landing
+// page, /pricing, Settings → Billing, the sidebar usage card) reads the
+// same messages/{locale}.json source instead of each holding its own copy
+// that can drift out of sync.
+export function usePlanDetails(): Record<PlanId, PlanDetails> {
+  const t = useTranslations("Billing.plans");
+  const ids: PlanId[] = ["free", "pro", "team"];
+  return Object.fromEntries(
+    ids.map((id) => [
+      id,
+      {
+        name: t(`${id}.name`),
+        price: t(`${id}.price`),
+        description: t(`${id}.description`),
+        features: t.raw(`${id}.features`) as string[],
+      },
+    ])
+  ) as Record<PlanId, PlanDetails>;
+}

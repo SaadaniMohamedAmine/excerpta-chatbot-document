@@ -4,6 +4,7 @@
 import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { upload } from "@vercel/blob/client";
 import { UploadSimple, FilePdf, FileDoc, FileCsv, FileCode, X } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,18 @@ const ACCEPTED_EXTENSIONS = [
   ".php",
   ".rs",
 ];
+
+// Carries the server's `code` field alongside the translated message so the
+// UI can react to *what* failed (e.g. show the upgrade link for a quota
+// block) without pattern-matching translated text, which breaks the moment
+// the message isn't in English.
+class UploadError extends Error {
+  code?: string;
+  constructor(message: string, code?: string) {
+    super(message);
+    this.code = code;
+  }
+}
 
 /**
  * Uploads straight from the browser to Vercel Blob (Phase 2's client-upload
@@ -64,7 +77,7 @@ async function uploadWithProgress(file: File, onProgress: (pct: number) => void)
     // without this, res.status alone can't distinguish a quota block from
     // any other failure, and DropzoneBody has nothing useful to show.
     const body = await res.json().catch(() => null);
-    throw new Error(body?.error ?? `Upload failed (${res.status}).`);
+    throw new UploadError(body?.error ?? `Upload failed (${res.status}).`, body?.code);
   }
   const { document } = await res.json();
   return document;
@@ -74,11 +87,14 @@ function DropzoneBody({
   onFile,
   progress,
   error,
+  quotaExceeded,
 }: {
   onFile: (file: File) => void;
   progress: number | null;
   error: string | null;
+  quotaExceeded: boolean;
 }) {
+  const t = useTranslations("UploadDropzone");
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -105,8 +121,8 @@ function DropzoneBody({
       }`}
     >
       <UploadSimple className="h-10 w-10 text-primary" weight="duotone" />
-      <h2 className="font-sans text-base font-medium text-text-primary">Upload a document to begin.</h2>
-      <p className="font-sans text-sm text-text-secondary">PDF, DOCX, CSV, or a code file.</p>
+      <h2 className="font-sans text-base font-medium text-text-primary">{t("title")}</h2>
+      <p className="font-sans text-sm text-text-secondary">{t("subtitle")}</p>
 
       <div className="mt-1 flex items-center gap-3 text-text-secondary">
         <FilePdf className="h-5 w-5" weight="regular" />
@@ -118,7 +134,7 @@ function DropzoneBody({
       {progress === null ? (
         <>
           <Button className="mt-3" onClick={() => inputRef.current?.click()}>
-            Browse files
+            {t("browseFiles")}
           </Button>
           <input
             ref={inputRef}
@@ -136,18 +152,18 @@ function DropzoneBody({
           <div className="h-1.5 overflow-hidden rounded-full bg-border">
             <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${progress}%` }} />
           </div>
-          <p className="mt-1.5 font-sans text-xs text-text-secondary">Uploading… {progress}%</p>
+          <p className="mt-1.5 font-sans text-xs text-text-secondary">{t("uploading", { percent: progress })}</p>
         </div>
       )}
 
       {error && (
         <p className="font-sans text-xs text-error">
           {error}
-          {error.includes("upload limit") && (
+          {quotaExceeded && (
             <>
               {" "}
               <Link href="/settings?tab=billing" className="underline hover:no-underline">
-                Manage your plan
+                {t("managePlan")}
               </Link>
             </>
           )}
@@ -158,19 +174,24 @@ function DropzoneBody({
 }
 
 export default function UploadDropzone({ variant }: UploadDropzoneProps) {
+  const t = useTranslations("UploadDropzone");
+  const tCommon = useTranslations("Common");
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [quotaExceeded, setQuotaExceeded] = useState(false);
 
   const handleFile = useCallback(
     async (file: File) => {
       const ext = "." + file.name.split(".").pop()?.toLowerCase();
       if (!ACCEPTED_EXTENSIONS.includes(ext)) {
-        setError("This format isn't supported yet. Try PDF, DOCX, CSV, or a code file.");
+        setError(t("unsupportedFormat"));
+        setQuotaExceeded(false);
         return;
       }
       setError(null);
+      setQuotaExceeded(false);
       setProgress(0);
       try {
         const created = await uploadWithProgress(file, setProgress);
@@ -179,22 +200,23 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
         // document seeded at onboarding.
         router.push(`/documents/${created.id}?assignCollection=1`);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Upload failed.");
+        setError(err instanceof Error ? err.message : t("uploadFailedGeneric"));
+        setQuotaExceeded(err instanceof UploadError && err.code === "quota_exceeded");
         setProgress(null);
       }
     },
-    [router]
+    [router, t]
   );
 
   if (variant === "empty-state") {
-    return <DropzoneBody onFile={handleFile} progress={progress} error={error} />;
+    return <DropzoneBody onFile={handleFile} progress={progress} error={error} quotaExceeded={quotaExceeded} />;
   }
 
   return (
     <>
       <Button onClick={() => setModalOpen(true)}>
         <UploadSimple className="mr-1.5 h-4 w-4" weight="bold" />
-        Upload document
+        {t("uploadDocument")}
       </Button>
 
       {modalOpen && (
@@ -204,11 +226,11 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
               type="button"
               onClick={() => setModalOpen(false)}
               className="absolute right-3 top-3 rounded p-1 text-text-secondary hover:text-text-primary"
-              aria-label="Close"
+              aria-label={tCommon("close")}
             >
               <X className="h-4 w-4" weight="bold" />
             </button>
-            <DropzoneBody onFile={handleFile} progress={progress} error={error} />
+            <DropzoneBody onFile={handleFile} progress={progress} error={error} quotaExceeded={quotaExceeded} />
           </div>
         </div>
       )}

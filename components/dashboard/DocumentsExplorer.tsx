@@ -2,6 +2,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { MagnifyingGlass, X, CaretLeft, CaretRight, FileText, ChatCircleText, Quotes } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 import { StatCard } from "@/components/analytics/StatCard";
@@ -20,6 +21,8 @@ export function DocumentsExplorer({
   totalConversations: number;
   citationCount: number;
 }) {
+  const t = useTranslations("Documents");
+  const tDashboard = useTranslations("Dashboard");
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
 
@@ -54,15 +57,15 @@ export function DocumentsExplorer({
           <Input
             value={query}
             onChange={(event) => handleQueryChange(event.target.value)}
-            placeholder="Search documents…"
+            placeholder={t("searchPlaceholder")}
             className="h-9 border-transparent bg-transparent pl-9 pr-8 shadow-none focus-visible:border-transparent focus-visible:ring-0"
-            aria-label="Search documents"
+            aria-label={t("searchAriaLabel")}
           />
           {query && (
             <button
               type="button"
               onClick={() => handleQueryChange("")}
-              aria-label="Clear search"
+              aria-label={t("clearSearch")}
               className="absolute right-2.5 top-1/2 -translate-y-1/2 text-text-secondary hover:text-text-primary"
             >
               <X size={14} />
@@ -70,7 +73,7 @@ export function DocumentsExplorer({
           )}
         </div>
         <span className="ml-auto hidden shrink-0 whitespace-nowrap pr-2 font-sans text-xs text-text-secondary sm:inline">
-          {documents.length} document{documents.length === 1 ? "" : "s"} · {formatFileSize(totalSize)}
+          {t("countAndSize", { count: documents.length, size: formatFileSize(totalSize) })}
         </span>
       </div>
 
@@ -83,9 +86,7 @@ export function DocumentsExplorer({
 
           <div className="flex-1">
             {filtered.length === 0 ? (
-              <p className="py-10 text-center font-sans text-sm text-text-secondary">
-                No documents match &ldquo;{query}&rdquo;.
-              </p>
+              <p className="py-10 text-center font-sans text-sm text-text-secondary">{t("noMatch", { query })}</p>
             ) : (
               <DocumentGrid documents={paginated} />
             )}
@@ -93,9 +94,7 @@ export function DocumentsExplorer({
 
           {filtered.length > 0 && (
             <div className="mt-4 flex items-center justify-between border-t border-border pt-4 font-sans text-xs text-text-secondary">
-              <span>
-                Page {currentPage} of {pageCount}
-              </span>
+              <span>{t("pageOf", { current: currentPage, total: pageCount })}</span>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -104,7 +103,7 @@ export function DocumentsExplorer({
                   className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
                 >
                   <CaretLeft size={12} weight="bold" />
-                  Previous
+                  {t("previous")}
                 </button>
                 <button
                   type="button"
@@ -112,7 +111,7 @@ export function DocumentsExplorer({
                   disabled={currentPage === pageCount}
                   className="flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 font-medium transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-text-secondary"
                 >
-                  Next
+                  {t("next")}
                   <CaretRight size={12} weight="bold" />
                 </button>
               </div>
@@ -122,9 +121,9 @@ export function DocumentsExplorer({
 
         <div className="flex flex-col gap-3">
           <AnalyticsTeaser conversationCount={totalConversations} citationCount={citationCount} />
-          <StatCard label="Documents" value={documents.length} icon={FileText} />
-          <StatCard label="Conversations" value={totalConversations} icon={ChatCircleText} />
-          <StatCard label="Citations given" value={citationCount} icon={Quotes} />
+          <StatCard label={tDashboard("statDocuments")} value={documents.length} icon={FileText} />
+          <StatCard label={tDashboard("statConversations")} value={totalConversations} icon={ChatCircleText} />
+          <StatCard label={tDashboard("statCitationsGiven")} value={citationCount} icon={Quotes} />
         </div>
       </div>
     </div>

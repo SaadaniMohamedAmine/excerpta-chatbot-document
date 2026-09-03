@@ -1,5 +1,6 @@
 // components/dashboard/RecentConversationsList.tsx
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { ChatCircleText } from "@phosphor-icons/react/dist/ssr";
 import { formatRelativeDate } from "@/lib/format";
 
@@ -12,19 +13,21 @@ export interface RecentConversation {
 }
 
 export function RecentConversationsList({ conversations }: { conversations: RecentConversation[] }) {
+  const t = useTranslations("Dashboard");
+  const tRelative = useTranslations("Common.relativeDate");
+  const locale = useLocale();
+
   return (
     <div className="rounded-lg border border-border bg-surface p-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-sans text-sm font-medium text-text-primary">Recent conversations</h2>
+        <h2 className="font-sans text-sm font-medium text-text-primary">{t("recentConversations")}</h2>
         <Link href="/history" className="font-sans text-xs text-primary hover:underline">
-          View all
+          {t("viewAll")}
         </Link>
       </div>
 
       {conversations.length === 0 ? (
-        <p className="mt-4 font-sans text-sm text-text-secondary">
-          Start a conversation from a document to see it here.
-        </p>
+        <p className="mt-4 font-sans text-sm text-text-secondary">{t("noConversationsYet")}</p>
       ) : (
         <ul className="mt-3 flex flex-col gap-1">
           {conversations.map((conversation) => (
@@ -45,7 +48,7 @@ export function RecentConversationsList({ conversations }: { conversations: Rece
                   </span>
                 </span>
                 <span className="shrink-0 font-sans text-xs text-text-secondary">
-                  {formatRelativeDate(conversation.createdAt)}
+                  {formatRelativeDate(conversation.createdAt, tRelative, locale)}
                 </span>
               </Link>
             </li>

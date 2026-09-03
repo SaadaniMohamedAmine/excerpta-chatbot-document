@@ -4,6 +4,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   FilePdf,
   FileDoc,
@@ -33,6 +34,8 @@ export interface CollectionSummary {
 }
 
 export default function CollectionCard({ collection }: { collection: CollectionSummary }) {
+  const t = useTranslations("Collections");
+  const tCommon = useTranslations("Common");
   const router = useRouter();
   const [renaming, setRenaming] = useState(false);
   const [name, setName] = useState(collection.name);
@@ -67,7 +70,7 @@ export default function CollectionCard({ collection }: { collection: CollectionS
             <button
               type="button"
               onClick={(e) => e.preventDefault()}
-              aria-label="Collection options"
+              aria-label={t("collectionOptions")}
               className="rounded p-1 text-text-secondary opacity-0 transition-opacity hover:text-text-primary group-hover:opacity-100"
             >
               <DotsThree size={18} weight="bold" />
@@ -80,7 +83,7 @@ export default function CollectionCard({ collection }: { collection: CollectionS
                 setRenaming(true);
               }}
             >
-              <PencilSimple size={16} /> Rename
+              <PencilSimple size={16} /> {t("rename")}
             </DropdownMenuItem>
             {!collection.isDefault && (
               <DropdownMenuItem
@@ -90,7 +93,7 @@ export default function CollectionCard({ collection }: { collection: CollectionS
                   setConfirmingDelete(true);
                 }}
               >
-                <Trash size={16} /> Delete
+                <Trash size={16} /> {t("delete")}
               </DropdownMenuItem>
             )}
           </DropdownMenuContent>
@@ -139,11 +142,13 @@ export default function CollectionCard({ collection }: { collection: CollectionS
           ) : (
             <h3 className="truncate font-sans text-sm font-medium text-text-primary group-hover:text-primary">
               {collection.name}
-              {collection.isDefault && <span className="ml-1.5 font-normal text-text-secondary">(default)</span>}
+              {collection.isDefault && (
+                <span className="ml-1.5 font-normal text-text-secondary">{t("defaultBadge")}</span>
+              )}
             </h3>
           )}
           <p className="mt-0.5 font-sans text-xs text-text-secondary">
-            {collection.documentCount} document{collection.documentCount === 1 ? "" : "s"}
+            {t("documentCount", { count: collection.documentCount })}
           </p>
         </div>
       </Link>
@@ -152,10 +157,8 @@ export default function CollectionCard({ collection }: { collection: CollectionS
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-lg bg-surface/97 p-4 text-center">
           <p className="font-sans text-xs text-text-primary">
             {collection.documentCount > 0
-              ? `Delete "${collection.name}"? Its ${collection.documentCount} document${
-                  collection.documentCount === 1 ? "" : "s"
-                } will move to your default collection.`
-              : `Delete "${collection.name}"?`}
+              ? t("deleteConfirmWithDocs", { name: collection.name, count: collection.documentCount })
+              : t("deleteConfirmEmpty", { name: collection.name })}
           </p>
           <div className="flex gap-2">
             <button
@@ -163,14 +166,14 @@ export default function CollectionCard({ collection }: { collection: CollectionS
               onClick={() => setConfirmingDelete(false)}
               className="rounded-md border border-border px-3 py-1.5 font-sans text-xs text-text-secondary hover:bg-background"
             >
-              Cancel
+              {tCommon("cancel")}
             </button>
             <button
               type="button"
               onClick={handleDelete}
               className="rounded-md bg-error px-3 py-1.5 font-sans text-xs font-medium text-white hover:bg-error/90"
             >
-              Delete
+              {t("delete")}
             </button>
           </div>
         </div>

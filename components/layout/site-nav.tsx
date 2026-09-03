@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -10,6 +11,9 @@ import { authClient, useSession } from "@/lib/auth-client";
 import { NAV_LINKS } from "@/components/layout/nav-links";
 
 function AuthActions() {
+  const tNav = useTranslations("Nav");
+  const tLanding = useTranslations("Landing");
+  const tAuth = useTranslations("Auth");
   const router = useRouter();
   const { data: session, isPending } = useSession();
 
@@ -29,10 +33,10 @@ function AuthActions() {
           }}
           className="hidden text-sm text-text-secondary transition-colors hover:text-text-primary sm:inline"
         >
-          Sign out
+          {tNav("signOut")}
         </button>
         <Button asChild size="sm">
-          <Link href="/documents">Go to Documents</Link>
+          <Link href="/documents">{tLanding("hero.ctaSignedIn")}</Link>
         </Button>
       </>
     );
@@ -44,16 +48,18 @@ function AuthActions() {
         href="/sign-in"
         className="hidden text-sm text-text-secondary transition-colors hover:text-text-primary sm:inline"
       >
-        Sign in
+        {tAuth("signIn")}
       </Link>
       <Button asChild size="sm">
-        <Link href="/sign-up">Try Excerpta</Link>
+        <Link href="/sign-up">{tLanding("hero.ctaSignedOut")}</Link>
       </Button>
     </>
   );
 }
 
 export function SiteNav() {
+  const t = useTranslations("Landing.nav");
+
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
@@ -66,7 +72,7 @@ export function SiteNav() {
               href={link.href}
               className="text-sm text-text-secondary transition-colors hover:text-text-primary"
             >
-              {link.label}
+              {t(link.key)}
             </Link>
           ))}
         </nav>
