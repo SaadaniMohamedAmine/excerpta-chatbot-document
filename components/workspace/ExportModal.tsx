@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { FilePdf, FileDoc, DownloadSimple } from "@phosphor-icons/react";
 import { Modal } from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
@@ -14,30 +15,33 @@ interface ExportModalProps {
   conversationId: string;
 }
 
-const FORMATS: Array<{
-  id: ExportFormat;
-  label: string;
-  description: string;
-  icon: typeof FilePdf;
-}> = [
-  {
-    id: "pdf",
-    label: "PDF",
-    description: "Fixed layout, portable, ready to print.",
-    icon: FilePdf,
-  },
-  {
-    id: "docx",
-    label: "Word (.docx)",
-    description: "Editable in Word or Google Docs.",
-    icon: FileDoc,
-  },
-];
-
 export function ExportModal({ open, onClose, conversationId }: ExportModalProps) {
+  const t = useTranslations("ExportModal");
+  const tWorkspace = useTranslations("Workspace");
+  const tCommon = useTranslations("Common");
   const [format, setFormat] = useState<ExportFormat>("pdf");
   const [isDownloading, setIsDownloading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const FORMATS: Array<{
+    id: ExportFormat;
+    label: string;
+    description: string;
+    icon: typeof FilePdf;
+  }> = [
+    {
+      id: "pdf",
+      label: t("formatPdfLabel"),
+      description: t("formatPdfDescription"),
+      icon: FilePdf,
+    },
+    {
+      id: "docx",
+      label: t("formatDocxLabel"),
+      description: t("formatDocxDescription"),
+      icon: FileDoc,
+    },
+  ];
 
   async function handleDownload() {
     setIsDownloading(true);
@@ -64,7 +68,7 @@ export function ExportModal({ open, onClose, conversationId }: ExportModalProps)
 
       onClose();
     } catch {
-      setError("Couldn't generate the file. Try again in a moment.");
+      setError(t("downloadFailed"));
     } finally {
       setIsDownloading(false);
     }
@@ -74,8 +78,8 @@ export function ExportModal({ open, onClose, conversationId }: ExportModalProps)
     <Modal
       open={open}
       onClose={onClose}
-      title="Export conversation"
-      description="Save this conversation, with citations, as a document."
+      title={tWorkspace("exportConversation")}
+      description={t("description")}
     >
       <div className="flex flex-col gap-3">
         <div className="grid grid-cols-2 gap-3">
@@ -115,11 +119,11 @@ export function ExportModal({ open, onClose, conversationId }: ExportModalProps)
             onClick={onClose}
             className="text-sm text-text-secondary hover:text-text-primary"
           >
-            Cancel
+            {tCommon("cancel")}
           </button>
           <Button onClick={handleDownload} disabled={isDownloading}>
             <DownloadSimple size={16} className="mr-1.5" />
-            {isDownloading ? "Preparing…" : "Download"}
+            {isDownloading ? t("preparing") : t("download")}
           </Button>
         </div>
       </div>

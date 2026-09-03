@@ -1,6 +1,6 @@
 // components/dashboard/RecentDocumentsList.tsx
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { FilePdf, FileDoc, FileCsv, FileCode, CircleNotch, WarningCircle } from "@phosphor-icons/react/dist/ssr";
 import { formatRelativeDate } from "@/lib/format";
 
@@ -16,6 +16,8 @@ export interface RecentDocument {
 
 export function RecentDocumentsList({ documents }: { documents: RecentDocument[] }) {
   const t = useTranslations("Dashboard");
+  const tRelative = useTranslations("Common.relativeDate");
+  const locale = useLocale();
 
   return (
     <div className="rounded-lg border border-border bg-surface p-4">
@@ -51,7 +53,7 @@ export function RecentDocumentsList({ documents }: { documents: RecentDocument[]
                     <WarningCircle className="h-3.5 w-3.5 shrink-0 text-error" weight="fill" />
                   )}
                   <span className="shrink-0 font-sans text-xs text-text-secondary">
-                    {formatRelativeDate(doc.createdAt)}
+                    {formatRelativeDate(doc.createdAt, tRelative, locale)}
                   </span>
                 </Link>
               </li>

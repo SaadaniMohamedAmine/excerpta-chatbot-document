@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Copy, Check, LinkBreak } from "@phosphor-icons/react";
 import { Modal } from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,8 @@ interface ShareModalProps {
 }
 
 export function ShareModal({ open, onClose, conversationId }: ShareModalProps) {
+  const t = useTranslations("ShareModal");
+  const tWorkspace = useTranslations("Workspace");
   const [shareUrl, setShareUrl] = useState<string | null>(null);
   const [isShared, setIsShared] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +44,7 @@ export function ShareModal({ open, onClose, conversationId }: ShareModalProps) {
       setShareUrl(data.url);
       setIsShared(true);
     } catch {
-      setError("Couldn't create a share link. Try again in a moment.");
+      setError(t("createFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -58,7 +61,7 @@ export function ShareModal({ open, onClose, conversationId }: ShareModalProps) {
       setIsShared(false);
       setCopied(false);
     } catch {
-      setError("Couldn't revoke the link. Try again in a moment.");
+      setError(t("revokeFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -71,7 +74,7 @@ export function ShareModal({ open, onClose, conversationId }: ShareModalProps) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      setError("Couldn't copy the link — copy it manually instead.");
+      setError(t("copyFailed"));
     }
   }
 
@@ -79,8 +82,8 @@ export function ShareModal({ open, onClose, conversationId }: ShareModalProps) {
     <Modal
       open={open}
       onClose={onClose}
-      title="Share conversation"
-      description="Anyone with this link can view this conversation, read-only, without signing in."
+      title={tWorkspace("shareConversation")}
+      description={t("description")}
     >
       <div className="flex flex-col gap-4">
         {isShared && shareUrl ? (
@@ -99,16 +102,14 @@ export function ShareModal({ open, onClose, conversationId }: ShareModalProps) {
                 ) : (
                   <Copy size={16} className="mr-1.5" />
                 )}
-                {copied ? "Copied" : "Copy link"}
+                {copied ? t("copied") : t("copyLink")}
               </Button>
             </div>
 
             {error && <p className="text-sm text-error">{error}</p>}
 
             <div className="flex items-center justify-between border-t border-border pt-4">
-              <p className="text-xs text-text-secondary">
-                Revoking turns off access for this link. It stops working immediately.
-              </p>
+              <p className="text-xs text-text-secondary">{t("revokeHint")}</p>
               <button
                 type="button"
                 onClick={revokeShareLink}
@@ -116,7 +117,7 @@ export function ShareModal({ open, onClose, conversationId }: ShareModalProps) {
                 className="flex items-center gap-1.5 text-sm text-error hover:underline"
               >
                 <LinkBreak size={14} />
-                Revoke
+                {t("revoke")}
               </button>
             </div>
           </>
@@ -124,7 +125,7 @@ export function ShareModal({ open, onClose, conversationId }: ShareModalProps) {
           <>
             {error && <p className="text-sm text-error">{error}</p>}
             <Button onClick={createShareLink} disabled={isLoading}>
-              {isLoading ? "Creating link…" : "Create share link"}
+              {isLoading ? t("creatingLink") : t("createLink")}
             </Button>
           </>
         )}

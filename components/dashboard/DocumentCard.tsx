@@ -1,6 +1,6 @@
 // components/dashboard/DocumentCard.tsx
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   FilePdf,
   FileDoc,
@@ -24,6 +24,8 @@ export default function DocumentCard({
   highlightForTour?: boolean;
 }) {
   const t = useTranslations("Documents");
+  const tRelative = useTranslations("Common.relativeDate");
+  const locale = useLocale();
   const Icon = ICONS[document.fileType] ?? FileDoc;
 
   return (
@@ -75,7 +77,7 @@ export default function DocumentCard({
           <ChatCircleText className="h-3.5 w-3.5" weight="regular" />
           {t("conversationCount", { count: document.conversationCount })}
         </span>
-        <span>{formatRelativeDate(document.createdAt)}</span>
+        <span>{formatRelativeDate(document.createdAt, tRelative, locale)}</span>
       </div>
     </Link>
   );

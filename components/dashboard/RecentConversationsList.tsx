@@ -1,6 +1,6 @@
 // components/dashboard/RecentConversationsList.tsx
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ChatCircleText } from "@phosphor-icons/react/dist/ssr";
 import { formatRelativeDate } from "@/lib/format";
 
@@ -14,6 +14,8 @@ export interface RecentConversation {
 
 export function RecentConversationsList({ conversations }: { conversations: RecentConversation[] }) {
   const t = useTranslations("Dashboard");
+  const tRelative = useTranslations("Common.relativeDate");
+  const locale = useLocale();
 
   return (
     <div className="rounded-lg border border-border bg-surface p-4">
@@ -46,7 +48,7 @@ export function RecentConversationsList({ conversations }: { conversations: Rece
                   </span>
                 </span>
                 <span className="shrink-0 font-sans text-xs text-text-secondary">
-                  {formatRelativeDate(conversation.createdAt)}
+                  {formatRelativeDate(conversation.createdAt, tRelative, locale)}
                 </span>
               </Link>
             </li>

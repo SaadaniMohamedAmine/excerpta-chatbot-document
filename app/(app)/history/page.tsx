@@ -2,7 +2,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ClockCounterClockwise, ChatCircleText } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
@@ -45,6 +45,8 @@ export default async function HistoryPage() {
   const t = await getTranslations("HistoryPage");
   const tNav = await getTranslations("Nav");
   const tCommon = await getTranslations("Common");
+  const tRelative = await getTranslations("Common.relativeDate");
+  const locale = await getLocale();
 
   const conversations = await prisma.conversation.findMany({
     where: { userId: session.user.id },
@@ -118,7 +120,7 @@ export default async function HistoryPage() {
                             {entry.label}
                           </span>
                           <span className="shrink-0 font-sans text-xs text-text-secondary">
-                            {formatRelativeDate(entry.createdAt.toISOString())}
+                            {formatRelativeDate(entry.createdAt.toISOString(), tRelative, locale)}
                           </span>
                         </div>
                         <p className="mt-0.5 line-clamp-1 font-sans text-sm text-text-secondary">{entry.preview}</p>

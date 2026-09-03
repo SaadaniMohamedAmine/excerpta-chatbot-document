@@ -7,7 +7,13 @@
     "save": "Enregistrer",
     "saving": "Enregistrement…",
     "skip": "Ignorer",
-    "paymentSuccessful": "Paiement réussi — votre plan a été mis à jour."
+    "paymentSuccessful": "Paiement réussi — votre plan a été mis à jour.",
+    "relativeDate": {
+      "today": "Aujourd'hui",
+      "yesterday": "Hier",
+      "daysAgo": "Il y a {count, plural, one {# jour} other {# jours}}",
+      "weeksAgo": "Il y a {count, plural, one {# semaine} other {# semaines}}"
+    }
   },
   "Nav": {
     "dashboard": "Tableau de bord",
@@ -308,6 +314,28 @@
     "uploadToSeeThis": "Importez un document pour voir ceci.",
     "startConversationToSeeThis": "Démarrez une conversation pour voir ceci.",
     "nothingYet": "Rien pour le moment."
+  },
+  "ExportModal": {
+    "description": "Enregistrez cette conversation, avec les citations, comme un document.",
+    "formatPdfLabel": "PDF",
+    "formatPdfDescription": "Mise en page fixe, portable, prête à imprimer.",
+    "formatDocxLabel": "Word (.docx)",
+    "formatDocxDescription": "Modifiable dans Word ou Google Docs.",
+    "downloadFailed": "Impossible de générer le fichier. Réessayez dans un instant.",
+    "preparing": "Préparation…",
+    "download": "Télécharger"
+  },
+  "ShareModal": {
+    "description": "Toute personne disposant de ce lien peut consulter cette conversation, en lecture seule, sans se connecter.",
+    "copyLink": "Copier le lien",
+    "copied": "Copié",
+    "revokeHint": "La révocation désactive l'accès à ce lien. Il cesse de fonctionner immédiatement.",
+    "revoke": "Révoquer",
+    "createLink": "Créer un lien de partage",
+    "creatingLink": "Création du lien…",
+    "createFailed": "Impossible de créer un lien de partage. Réessayez dans un instant.",
+    "revokeFailed": "Impossible de révoquer le lien. Réessayez dans un instant.",
+    "copyFailed": "Impossible de copier le lien — copiez-le manuellement."
   },
   "Settings": {
     "title": "Paramètres",

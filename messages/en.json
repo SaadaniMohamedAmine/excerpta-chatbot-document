@@ -7,7 +7,13 @@
     "save": "Save",
     "saving": "Saving…",
     "skip": "Skip",
-    "paymentSuccessful": "Payment successful — your plan has been updated."
+    "paymentSuccessful": "Payment successful — your plan has been updated.",
+    "relativeDate": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "daysAgo": "{count, plural, one {# day ago} other {# days ago}}",
+      "weeksAgo": "{count, plural, one {# week ago} other {# weeks ago}}"
+    }
   },
   "Nav": {
     "dashboard": "Dashboard",
@@ -308,6 +314,28 @@
     "uploadToSeeThis": "Upload a document to see this.",
     "startConversationToSeeThis": "Start a conversation to see this.",
     "nothingYet": "Nothing yet."
+  },
+  "ExportModal": {
+    "description": "Save this conversation, with citations, as a document.",
+    "formatPdfLabel": "PDF",
+    "formatPdfDescription": "Fixed layout, portable, ready to print.",
+    "formatDocxLabel": "Word (.docx)",
+    "formatDocxDescription": "Editable in Word or Google Docs.",
+    "downloadFailed": "Couldn't generate the file. Try again in a moment.",
+    "preparing": "Preparing…",
+    "download": "Download"
+  },
+  "ShareModal": {
+    "description": "Anyone with this link can view this conversation, read-only, without signing in.",
+    "copyLink": "Copy link",
+    "copied": "Copied",
+    "revokeHint": "Revoking turns off access for this link. It stops working immediately.",
+    "revoke": "Revoke",
+    "createLink": "Create share link",
+    "creatingLink": "Creating link…",
+    "createFailed": "Couldn't create a share link. Try again in a moment.",
+    "revokeFailed": "Couldn't revoke the link. Try again in a moment.",
+    "copyFailed": "Couldn't copy the link — copy it manually instead."
   },
   "Settings": {
     "title": "Settings",
