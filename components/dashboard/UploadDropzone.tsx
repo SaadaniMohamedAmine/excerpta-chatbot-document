@@ -220,8 +220,8 @@ export default function UploadDropzone({ variant }: UploadDropzoneProps) {
       </Button>
 
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-          <div className="relative w-full max-w-lg rounded-lg bg-surface p-2 shadow-xl">
+        <div className="animate-in fade-in-0 fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-md duration-200">
+          <div className="animate-in fade-in-0 zoom-in-95 relative w-full max-w-lg rounded-lg bg-surface p-2 shadow-xl duration-200">
             <button
               type="button"
               onClick={() => setModalOpen(false)}

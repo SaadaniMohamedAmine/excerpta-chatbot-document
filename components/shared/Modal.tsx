@@ -43,7 +43,10 @@ export function Modal({ open, onClose, title, description, children }: ModalProp
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
+      <div
+        className="animate-in fade-in-0 absolute inset-0 bg-black/40 backdrop-blur-sm duration-200"
+        onClick={onClose}
+      />
       <div
         ref={dialogRef}
         role="dialog"
@@ -51,7 +54,7 @@ export function Modal({ open, onClose, title, description, children }: ModalProp
         aria-labelledby="modal-title"
         aria-describedby={description ? "modal-description" : undefined}
         tabIndex={-1}
-        className="relative z-10 w-full max-w-md rounded-lg border border-border bg-surface p-6 shadow-xl outline-none"
+        className="animate-in fade-in-0 zoom-in-95 relative z-10 w-full max-w-md rounded-lg border border-border bg-surface p-6 shadow-xl outline-none duration-200"
       >
         <div className="mb-4 flex items-start justify-between gap-4">
           <div>
