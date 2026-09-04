@@ -25,6 +25,16 @@ const nextConfig: NextConfig = {
   // though it installs and builds fine locally. Marking it external here is
   // what tells Next's tracer to include its files as it does for pdf-parse.
   serverExternalPackages: ["pdf-parse", "mammoth", "@napi-rs/canvas"],
+  // serverExternalPackages alone controls BUNDLING (don't inline it into the
+  // route's JS chunk) — it does NOT guarantee the package's files are
+  // physically copied into the deployed function's node_modules, which is a
+  // separate step (Next's own output-file-tracing docs list this exact
+  // native-binary-package situation, e.g. sharp, as needing
+  // outputFileTracingIncludes too). Without this, @napi-rs/canvas kept being
+  // "Cannot find module" in prod even after being marked external.
+  outputFileTracingIncludes: {
+    "/api/workflows/process-document": ["./node_modules/@napi-rs/**/*"],
+  },
   images: {
     remotePatterns: [
       // Google OAuth profile pictures
