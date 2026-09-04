@@ -137,9 +137,17 @@
     "signIn": "Sign in",
     "email": "Email",
     "password": "Password",
+    "confirmPassword": "Confirm password",
     "or": "or",
     "continueWithGoogle": "Continue with Google",
     "continueWithGithub": "Continue with GitHub",
+    "validation": {
+      "required": "This field is required.",
+      "invalidEmail": "Enter a valid email address.",
+      "passwordTooShort": "Password must be at least 8 characters.",
+      "nameTooLong": "Name must be 100 characters or fewer.",
+      "passwordsDontMatch": "Passwords don't match."
+    },
     "signInPage": {
       "subtitle": "Sign in to continue reading with your documents.",
       "forgotPassword": "Forgot password?",
@@ -153,6 +161,7 @@
       "name": "Name",
       "namePlaceholder": "Ada Lovelace",
       "passwordPlaceholder": "At least 8 characters",
+      "confirmPasswordPlaceholder": "Re-enter your password",
       "creatingAccount": "Creating account…",
       "createAccount": "Create account",
       "alreadyHaveAccount": "Already have an account?",
@@ -170,6 +179,7 @@
     "resetPasswordPage": {
       "subtitle": "Choose a new password.",
       "newPassword": "New password",
+      "confirmPasswordPlaceholder": "Re-enter your new password",
       "updatePassword": "Update password",
       "updating": "Updating…",
       "invalidLink": "This reset link is invalid or has expired.",

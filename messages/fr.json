@@ -137,9 +137,17 @@
     "signIn": "Se connecter",
     "email": "E-mail",
     "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
     "or": "ou",
     "continueWithGoogle": "Continuer avec Google",
     "continueWithGithub": "Continuer avec GitHub",
+    "validation": {
+      "required": "Ce champ est requis.",
+      "invalidEmail": "Entrez une adresse e-mail valide.",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères.",
+      "nameTooLong": "Le nom ne doit pas dépasser 100 caractères.",
+      "passwordsDontMatch": "Les mots de passe ne correspondent pas."
+    },
     "signInPage": {
       "subtitle": "Connectez-vous pour continuer à discuter avec vos documents.",
       "forgotPassword": "Mot de passe oublié ?",
@@ -153,6 +161,7 @@
       "name": "Nom",
       "namePlaceholder": "Ada Lovelace",
       "passwordPlaceholder": "8 caractères minimum",
+      "confirmPasswordPlaceholder": "Ressaisissez votre mot de passe",
       "creatingAccount": "Création du compte…",
       "createAccount": "Créer le compte",
       "alreadyHaveAccount": "Vous avez déjà un compte ?",
@@ -170,6 +179,7 @@
     "resetPasswordPage": {
       "subtitle": "Choisissez un nouveau mot de passe.",
       "newPassword": "Nouveau mot de passe",
+      "confirmPasswordPlaceholder": "Ressaisissez votre nouveau mot de passe",
       "updatePassword": "Mettre à jour le mot de passe",
       "updating": "Mise à jour…",
       "invalidLink": "Ce lien de réinitialisation est invalide ou a expiré.",

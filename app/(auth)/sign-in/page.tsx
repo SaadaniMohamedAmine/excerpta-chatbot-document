@@ -12,6 +12,8 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
 import { authClient } from "@/lib/auth-client";
+import { signInSchema, type ValidationKey } from "@/lib/validation/auth";
+import { useFieldValidation } from "@/lib/validation/use-field-validation";
 
 export default function SignInPage() {
   const t = useTranslations("Auth");
@@ -20,16 +22,18 @@ export default function SignInPage() {
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const { errors, touched, validate, touch, touchAll } = useFieldValidation(signInSchema);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const values = { email, password };
+    touchAll(["email", "password"]);
+    if (!validate(values)) return;
+
     setError(null);
     setIsSubmitting(true);
 
-    const { error: signInError } = await authClient.signIn.email({
-      email,
-      password,
-    });
+    const { error: signInError } = await authClient.signIn.email(values);
 
     setIsSubmitting(false);
 
@@ -66,7 +70,7 @@ export default function SignInPage() {
           </p>
         )}
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
           <div className="flex flex-col gap-1.5">
             <label htmlFor="email" className="text-sm font-medium text-text-primary">
               {t("email")}
@@ -75,11 +79,18 @@ export default function SignInPage() {
               id="email"
               type="email"
               autoComplete="email"
-              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => {
+                touch("email");
+                validate({ email, password });
+              }}
+              aria-invalid={Boolean(touched.email && errors.email)}
               placeholder="you@example.com"
             />
+            {touched.email && errors.email && (
+              <p className="text-xs text-error">{t(`validation.${errors.email as ValidationKey}`)}</p>
+            )}
           </div>
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center justify-between">
@@ -93,11 +104,18 @@ export default function SignInPage() {
             <PasswordInput
               id="password"
               autoComplete="current-password"
-              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onBlur={() => {
+                touch("password");
+                validate({ email, password });
+              }}
+              aria-invalid={Boolean(touched.password && errors.password)}
               placeholder="••••••••"
             />
+            {touched.password && errors.password && (
+              <p className="text-xs text-error">{t(`validation.${errors.password as ValidationKey}`)}</p>
+            )}
           </div>
           <Button type="submit" disabled={isSubmitting} className="mt-1">
             {isSubmitting ? t("signInPage.signingIn") : t("signIn")}
