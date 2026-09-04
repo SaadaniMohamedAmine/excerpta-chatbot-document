@@ -17,7 +17,14 @@ const nextConfig: NextConfig = {
   },
   // pdf-parse/mammoth do Node-specific file/buffer work that breaks if bundled
   // into the serverless function — keep them as real external requires.
-  serverExternalPackages: ["pdf-parse", "mammoth"],
+  // @napi-rs/canvas is a native-binary package pdfjs-dist (pdf-parse's engine)
+  // requires conditionally at runtime, not via a static import anywhere in our
+  // own source — Next's file-tracing can't see that dynamic require to know
+  // it needs copying into the deployed function, which is exactly why it was
+  // missing in production ("Cannot find module '@napi-rs/canvas'") even
+  // though it installs and builds fine locally. Marking it external here is
+  // what tells Next's tracer to include its files as it does for pdf-parse.
+  serverExternalPackages: ["pdf-parse", "mammoth", "@napi-rs/canvas"],
   images: {
     remotePatterns: [
       // Google OAuth profile pictures
