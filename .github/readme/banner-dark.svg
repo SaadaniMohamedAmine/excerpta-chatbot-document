@@ -1,0 +1,28 @@
+<svg width="1200" height="380" viewBox="0 0 1200 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Excerpta — AI document chat that cites its sources, down to the page.">
+  <defs>
+    <radialGradient id="glowDark" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#6D8FFF" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#6D8FFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wordmarkDark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8FA6FF"/>
+      <stop offset="100%" stop-color="#E8C468"/>
+    </linearGradient>
+    <pattern id="dotsDark" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1.4" cy="1.4" r="1.4" fill="#6D8FFF" fill-opacity="0.16"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="380" fill="#0B1220"/>
+  <rect width="1200" height="380" fill="url(#dotsDark)"/>
+  <circle cx="600" cy="160" r="240" fill="url(#glowDark)"/>
+
+  <text x="600" y="190" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="84" font-weight="600" letter-spacing="-1" fill="url(#wordmarkDark)">Excerpta</text>
+  <text x="600" y="238" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#94A3B8">AI document chat that cites its sources, down to the page.</text>
+
+  <g transform="translate(487, 268)">
+    <rect width="226" height="38" rx="19" fill="#E8C468" fill-opacity="0.14" stroke="#E8C468" stroke-opacity="0.55"/>
+    <circle cx="24" cy="19" r="6" fill="#E8C468"/>
+    <text x="40" y="24" font-family="ui-monospace, Consolas, monospace" font-size="15" fill="#F1D89A">click a citation → “p. 3”</text>
+  </g>
+</svg>
