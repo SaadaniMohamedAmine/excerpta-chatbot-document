@@ -8,6 +8,7 @@
     "saving": "Enregistrement…",
     "skip": "Ignorer",
     "paymentSuccessful": "Paiement réussi — votre plan a été mis à jour.",
+    "tooManyRequests": "Trop de requêtes. Merci de patienter un instant puis de réessayer.",
     "relativeDate": {
       "today": "Aujourd'hui",
       "yesterday": "Hier",
@@ -136,9 +137,17 @@
     "signIn": "Se connecter",
     "email": "E-mail",
     "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
     "or": "ou",
     "continueWithGoogle": "Continuer avec Google",
     "continueWithGithub": "Continuer avec GitHub",
+    "validation": {
+      "required": "Ce champ est requis.",
+      "invalidEmail": "Entrez une adresse e-mail valide.",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères.",
+      "nameTooLong": "Le nom ne doit pas dépasser 100 caractères.",
+      "passwordsDontMatch": "Les mots de passe ne correspondent pas."
+    },
     "signInPage": {
       "subtitle": "Connectez-vous pour continuer à discuter avec vos documents.",
       "forgotPassword": "Mot de passe oublié ?",
@@ -152,6 +161,7 @@
       "name": "Nom",
       "namePlaceholder": "Ada Lovelace",
       "passwordPlaceholder": "8 caractères minimum",
+      "confirmPasswordPlaceholder": "Ressaisissez votre mot de passe",
       "creatingAccount": "Création du compte…",
       "createAccount": "Créer le compte",
       "alreadyHaveAccount": "Vous avez déjà un compte ?",
@@ -169,6 +179,7 @@
     "resetPasswordPage": {
       "subtitle": "Choisissez un nouveau mot de passe.",
       "newPassword": "Nouveau mot de passe",
+      "confirmPasswordPlaceholder": "Ressaisissez votre nouveau mot de passe",
       "updatePassword": "Mettre à jour le mot de passe",
       "updating": "Mise à jour…",
       "invalidLink": "Ce lien de réinitialisation est invalide ou a expiré.",
@@ -467,6 +478,11 @@
     "subtitle": "Nous n'avons pas trouvé ce que vous cherchiez — la page a peut-être été déplacée, ou n'a jamais existé.",
     "backToHome": "Retour à l'accueil",
     "backToDocuments": "Aller à vos documents"
+  },
+  "Error": {
+    "title": "Une erreur est survenue",
+    "subtitle": "Une erreur inattendue s'est produite de notre côté. Vous pouvez réessayer, ou revenir en lieu sûr.",
+    "tryAgain": "Réessayer"
   },
   "Legal": {
     "termsLink": "Conditions",

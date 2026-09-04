@@ -10,19 +10,30 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
 import { authClient } from "@/lib/auth-client";
+import { resetPasswordSchema, type ValidationKey } from "@/lib/validation/auth";
+import { useFieldValidation } from "@/lib/validation/use-field-validation";
 
 export function ResetPasswordForm() {
   const t = useTranslations("Auth");
   const router = useRouter();
   const token = useSearchParams().get("token");
   const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [done, setDone] = React.useState(false);
+  const { errors, touched, validate, touch, touchAll } = useFieldValidation(resetPasswordSchema);
+
+  function currentValues() {
+    return { password, confirmPassword };
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!token) return;
+
+    touchAll(["password", "confirmPassword"]);
+    if (!validate(currentValues())) return;
 
     setError(null);
     setIsSubmitting(true);
@@ -63,7 +74,7 @@ export function ResetPasswordForm() {
             {t("resetPasswordPage.updatedMessage")}
           </p>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
             {error && (
               <p
                 role="alert"
@@ -79,12 +90,38 @@ export function ResetPasswordForm() {
               <PasswordInput
                 id="password"
                 autoComplete="new-password"
-                required
-                minLength={8}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onBlur={() => {
+                  touch("password");
+                  validate(currentValues());
+                }}
+                aria-invalid={Boolean(touched.password && errors.password)}
                 placeholder="••••••••"
               />
+              {touched.password && errors.password && (
+                <p className="text-xs text-error">{t(`validation.${errors.password as ValidationKey}`)}</p>
+              )}
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="confirmPassword" className="text-sm font-medium text-text-primary">
+                {t("confirmPassword")}
+              </label>
+              <PasswordInput
+                id="confirmPassword"
+                autoComplete="new-password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                onBlur={() => {
+                  touch("confirmPassword");
+                  validate(currentValues());
+                }}
+                aria-invalid={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                placeholder={t("resetPasswordPage.confirmPasswordPlaceholder")}
+              />
+              {touched.confirmPassword && errors.confirmPassword && (
+                <p className="text-xs text-error">{t(`validation.${errors.confirmPassword as ValidationKey}`)}</p>
+              )}
             </div>
             <Button type="submit" disabled={isSubmitting} className="mt-1">
               {isSubmitting ? t("resetPasswordPage.updating") : t("resetPasswordPage.updatePassword")}

@@ -8,6 +8,7 @@
     "saving": "Saving…",
     "skip": "Skip",
     "paymentSuccessful": "Payment successful — your plan has been updated.",
+    "tooManyRequests": "Too many requests. Please wait a moment and try again.",
     "relativeDate": {
       "today": "Today",
       "yesterday": "Yesterday",
@@ -136,9 +137,17 @@
     "signIn": "Sign in",
     "email": "Email",
     "password": "Password",
+    "confirmPassword": "Confirm password",
     "or": "or",
     "continueWithGoogle": "Continue with Google",
     "continueWithGithub": "Continue with GitHub",
+    "validation": {
+      "required": "This field is required.",
+      "invalidEmail": "Enter a valid email address.",
+      "passwordTooShort": "Password must be at least 8 characters.",
+      "nameTooLong": "Name must be 100 characters or fewer.",
+      "passwordsDontMatch": "Passwords don't match."
+    },
     "signInPage": {
       "subtitle": "Sign in to continue reading with your documents.",
       "forgotPassword": "Forgot password?",
@@ -152,6 +161,7 @@
       "name": "Name",
       "namePlaceholder": "Ada Lovelace",
       "passwordPlaceholder": "At least 8 characters",
+      "confirmPasswordPlaceholder": "Re-enter your password",
       "creatingAccount": "Creating account…",
       "createAccount": "Create account",
       "alreadyHaveAccount": "Already have an account?",
@@ -169,6 +179,7 @@
     "resetPasswordPage": {
       "subtitle": "Choose a new password.",
       "newPassword": "New password",
+      "confirmPasswordPlaceholder": "Re-enter your new password",
       "updatePassword": "Update password",
       "updating": "Updating…",
       "invalidLink": "This reset link is invalid or has expired.",
@@ -467,6 +478,11 @@
     "subtitle": "We couldn't find what you were looking for — it may have moved, or never existed.",
     "backToHome": "Back to home",
     "backToDocuments": "Go to your documents"
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "subtitle": "An unexpected error occurred on our end. You can try again, or head back to safety.",
+    "tryAgain": "Try again"
   },
   "Legal": {
     "termsLink": "Terms",

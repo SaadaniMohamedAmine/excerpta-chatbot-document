@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
 import { authClient } from "@/lib/auth-client";
+import { forgotPasswordSchema, type ValidationKey } from "@/lib/validation/auth";
+import { useFieldValidation } from "@/lib/validation/use-field-validation";
 
 export default function ForgotPasswordPage() {
   const t = useTranslations("Auth");
@@ -16,9 +18,13 @@ export default function ForgotPasswordPage() {
   const [error, setError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
+  const { errors, touched, validate, touch, touchAll } = useFieldValidation(forgotPasswordSchema);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    touchAll(["email"]);
+    if (!validate({ email })) return;
+
     setError(null);
     setIsSubmitting(true);
 
@@ -49,7 +55,7 @@ export default function ForgotPasswordPage() {
             {t("forgotPasswordPage.sentMessage")}
           </p>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
             {error && (
               <p
                 role="alert"
@@ -66,11 +72,18 @@ export default function ForgotPasswordPage() {
                 id="email"
                 type="email"
                 autoComplete="email"
-                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onBlur={() => {
+                  touch("email");
+                  validate({ email });
+                }}
+                aria-invalid={Boolean(touched.email && errors.email)}
                 placeholder="you@example.com"
               />
+              {touched.email && errors.email && (
+                <p className="text-xs text-error">{t(`validation.${errors.email as ValidationKey}`)}</p>
+              )}
             </div>
             <Button type="submit" disabled={isSubmitting} className="mt-1">
               {isSubmitting ? t("forgotPasswordPage.sending") : t("forgotPasswordPage.sendResetLink")}

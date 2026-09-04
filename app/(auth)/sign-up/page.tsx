@@ -12,6 +12,8 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
 import { authClient } from "@/lib/auth-client";
+import { signUpSchema, type ValidationKey } from "@/lib/validation/auth";
+import { useFieldValidation } from "@/lib/validation/use-field-validation";
 
 export default function SignUpPage() {
   const t = useTranslations("Auth");
@@ -19,18 +21,28 @@ export default function SignUpPage() {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const { errors, touched, validate, touch, touchAll } = useFieldValidation(signUpSchema);
+
+  function currentValues() {
+    return { name, email, password, confirmPassword };
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const values = currentValues();
+    touchAll(["name", "email", "password", "confirmPassword"]);
+    if (!validate(values)) return;
+
     setError(null);
     setIsSubmitting(true);
 
     const { error: signUpError } = await authClient.signUp.email({
-      name,
-      email,
-      password,
+      name: values.name,
+      email: values.email,
+      password: values.password,
     });
 
     setIsSubmitting(false);
@@ -68,7 +80,7 @@ export default function SignUpPage() {
           </p>
         )}
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
           <div className="flex flex-col gap-1.5">
             <label htmlFor="name" className="text-sm font-medium text-text-primary">
               {t("signUpPage.name")}
@@ -77,11 +89,18 @@ export default function SignUpPage() {
               id="name"
               type="text"
               autoComplete="name"
-              required
               value={name}
               onChange={(e) => setName(e.target.value)}
+              onBlur={() => {
+                touch("name");
+                validate(currentValues());
+              }}
+              aria-invalid={Boolean(touched.name && errors.name)}
               placeholder={t("signUpPage.namePlaceholder")}
             />
+            {touched.name && errors.name && (
+              <p className="text-xs text-error">{t(`validation.${errors.name as ValidationKey}`)}</p>
+            )}
           </div>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="email" className="text-sm font-medium text-text-primary">
@@ -91,11 +110,18 @@ export default function SignUpPage() {
               id="email"
               type="email"
               autoComplete="email"
-              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => {
+                touch("email");
+                validate(currentValues());
+              }}
+              aria-invalid={Boolean(touched.email && errors.email)}
               placeholder="you@example.com"
             />
+            {touched.email && errors.email && (
+              <p className="text-xs text-error">{t(`validation.${errors.email as ValidationKey}`)}</p>
+            )}
           </div>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="password" className="text-sm font-medium text-text-primary">
@@ -104,12 +130,38 @@ export default function SignUpPage() {
             <PasswordInput
               id="password"
               autoComplete="new-password"
-              required
-              minLength={8}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onBlur={() => {
+                touch("password");
+                validate(currentValues());
+              }}
+              aria-invalid={Boolean(touched.password && errors.password)}
               placeholder={t("signUpPage.passwordPlaceholder")}
             />
+            {touched.password && errors.password && (
+              <p className="text-xs text-error">{t(`validation.${errors.password as ValidationKey}`)}</p>
+            )}
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="confirmPassword" className="text-sm font-medium text-text-primary">
+              {t("confirmPassword")}
+            </label>
+            <PasswordInput
+              id="confirmPassword"
+              autoComplete="new-password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              onBlur={() => {
+                touch("confirmPassword");
+                validate(currentValues());
+              }}
+              aria-invalid={Boolean(touched.confirmPassword && errors.confirmPassword)}
+              placeholder={t("signUpPage.confirmPasswordPlaceholder")}
+            />
+            {touched.confirmPassword && errors.confirmPassword && (
+              <p className="text-xs text-error">{t(`validation.${errors.confirmPassword as ValidationKey}`)}</p>
+            )}
           </div>
           <Button type="submit" disabled={isSubmitting} className="mt-1">
             {isSubmitting ? t("signUpPage.creatingAccount") : t("signUpPage.createAccount")}
