@@ -10,6 +10,7 @@ import { getTranslations } from "next-intl/server";
 import { prisma } from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
+import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { MessageBubble } from "@/components/workspace/MessageBubble";
 import type { Citation } from "@/lib/citations";
 
@@ -55,9 +56,12 @@ export default async function SharePage({ params }: SharePageProps) {
           <Link href="/" aria-label={t("homeAriaLabel")}>
             <Logo />
           </Link>
-          <Link href="/sign-up">
-            <Button size="sm">{tLanding("hero.ctaSignedOut")}</Button>
-          </Link>
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+            <Link href="/sign-up">
+              <Button size="sm">{tLanding("hero.ctaSignedOut")}</Button>
+            </Link>
+          </div>
         </div>
       </header>
 

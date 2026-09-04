@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
+import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { authClient, useSession } from "@/lib/auth-client";
 import { NAV_LINKS } from "@/components/layout/nav-links";
@@ -78,6 +79,7 @@ export function SiteNav() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <LanguageSwitcher />
           <ThemeToggle />
           <AuthActions />
         </div>
