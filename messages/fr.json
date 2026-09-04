@@ -468,6 +468,11 @@
     "backToHome": "Retour à l'accueil",
     "backToDocuments": "Aller à vos documents"
   },
+  "Error": {
+    "title": "Une erreur est survenue",
+    "subtitle": "Une erreur inattendue s'est produite de notre côté. Vous pouvez réessayer, ou revenir en lieu sûr.",
+    "tryAgain": "Réessayer"
+  },
   "Legal": {
     "termsLink": "Conditions",
     "privacyLink": "Confidentialité",

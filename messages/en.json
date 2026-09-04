@@ -468,6 +468,11 @@
     "backToHome": "Back to home",
     "backToDocuments": "Go to your documents"
   },
+  "Error": {
+    "title": "Something went wrong",
+    "subtitle": "An unexpected error occurred on our end. You can try again, or head back to safety.",
+    "tryAgain": "Try again"
+  },
   "Legal": {
     "termsLink": "Terms",
     "privacyLink": "Privacy",
