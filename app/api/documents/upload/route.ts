@@ -1,14 +1,32 @@
 // app/api/documents/upload/route.ts
 import { NextRequest, NextResponse } from "next/server";
+import { getTranslations } from "next-intl/server";
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { auth } from "@/lib/auth";
 import { ALLOWED_EXTENSIONS, ALLOWED_CONTENT_TYPES, MAX_FILE_SIZE_BYTES } from "@/lib/documents/constraints";
 import { assertCanUpload } from "@/lib/billing/usage";
+import { rateLimit } from "@/lib/rate-limit";
+
+// The monthly plan quota (assertCanUpload) already caps total volume; this
+// separately throttles the *rate* of requests to this token-generation
+// endpoint itself, which is cheap to call but still worth not letting a
+// script hammer.
+const UPLOAD_RATE_LIMIT = 10;
+const UPLOAD_RATE_WINDOW_MS = 60_000;
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const session = await auth.api.getSession({ headers: request.headers });
   if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const limit = rateLimit(`upload:${session.user.id}`, UPLOAD_RATE_LIMIT, UPLOAD_RATE_WINDOW_MS);
+  if (!limit.ok) {
+    const t = await getTranslations("Common");
+    return NextResponse.json(
+      { error: t("tooManyRequests") },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } }
+    );
   }
 
   const body = (await request.json()) as HandleUploadBody;

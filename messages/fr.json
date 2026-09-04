@@ -8,6 +8,7 @@
     "saving": "Enregistrement…",
     "skip": "Ignorer",
     "paymentSuccessful": "Paiement réussi — votre plan a été mis à jour.",
+    "tooManyRequests": "Trop de requêtes. Merci de patienter un instant puis de réessayer.",
     "relativeDate": {
       "today": "Aujourd'hui",
       "yesterday": "Hier",

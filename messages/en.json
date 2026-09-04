@@ -8,6 +8,7 @@
     "saving": "Saving…",
     "skip": "Skip",
     "paymentSuccessful": "Payment successful — your plan has been updated.",
+    "tooManyRequests": "Too many requests. Please wait a moment and try again.",
     "relativeDate": {
       "today": "Today",
       "yesterday": "Yesterday",

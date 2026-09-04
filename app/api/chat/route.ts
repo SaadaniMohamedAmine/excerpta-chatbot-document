@@ -1,12 +1,18 @@
 // app/api/chat/route.ts
 import { NextRequest } from "next/server";
+import { getTranslations } from "next-intl/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { getEmbedding, streamAnswer, type ChatMessage } from "@/lib/ai/orchestrator";
 import { queryVector, type VectorQueryResult } from "@/lib/vector/upstash";
+import { rateLimit } from "@/lib/rate-limit";
 
 const TOP_K = 5;
 const HISTORY_LIMIT = 10;
+// Real usage rarely exceeds a handful of messages a minute; this only bites
+// scripted flooding of an expensive (LLM-calling) endpoint.
+const CHAT_RATE_LIMIT = 20;
+const CHAT_RATE_WINDOW_MS = 60_000;
 
 // Accepts either the Vercel AI SDK useChat default POST body ({ id, messages })
 // or a direct call shape ({ conversationId, message }).
@@ -21,6 +27,15 @@ export async function POST(request: NextRequest): Promise<Response> {
   const session = await auth.api.getSession({ headers: request.headers });
   if (!session?.user) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+  }
+
+  const limit = rateLimit(`chat:${session.user.id}`, CHAT_RATE_LIMIT, CHAT_RATE_WINDOW_MS);
+  if (!limit.ok) {
+    const t = await getTranslations("Common");
+    return new Response(JSON.stringify({ error: t("tooManyRequests") }), {
+      status: 429,
+      headers: { "Retry-After": String(limit.retryAfterSeconds) },
+    });
   }
 
   const body = (await request.json()) as ChatRequestBody;
