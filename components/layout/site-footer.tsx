@@ -6,6 +6,7 @@ import { NAV_LINKS } from "@/components/layout/nav-links";
 
 export function SiteFooter() {
   const t = useTranslations("Landing.nav");
+  const tLegal = useTranslations("Legal");
 
   return (
     <footer className="border-t border-border">
@@ -17,8 +18,17 @@ export function SiteFooter() {
               {t(link.key)}
             </Link>
           ))}
+          <Link href="/terms" className="transition-colors hover:text-text-primary">
+            {tLegal("termsLink")}
+          </Link>
+          <Link href="/privacy" className="transition-colors hover:text-text-primary">
+            {tLegal("privacyLink")}
+          </Link>
         </div>
       </div>
+      <p className="pb-8 text-center font-sans text-xs text-text-secondary">
+        {tLegal("copyright", { year: new Date().getFullYear() })}
+      </p>
     </footer>
   );
 }
