@@ -1,8 +1,10 @@
 <div align="center">
 
-# Excerpta
-
-**AI document chat that cites its sources, down to the page.**
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/readme/banner-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset=".github/readme/banner-light.svg">
+  <img alt="Excerpta — AI document chat that cites its sources, down to the page." src=".github/readme/banner-light.svg" width="100%">
+</picture>
 
 Upload a document, ask it questions in plain language, and get answers grounded
 in the text — every claim backed by a citation you can click to jump straight to
@@ -26,6 +28,7 @@ the exact page and passage it came from.
 
 - [What it does](#what-it-does)
 - [Features](#features)
+- [Architecture](#architecture)
 - [Tech stack](#tech-stack)
 - [Getting started](#getting-started)
 - [Project structure](#project-structure)
@@ -82,6 +85,50 @@ built around a different idea: an answer is only useful if you can verify it.
   theme
 - Terms of Service and Privacy Policy pages, and custom 404 / error pages that
   match the rest of the app instead of framework defaults
+
+## Architecture
+
+```mermaid
+flowchart TB
+    subgraph Client["Browser"]
+        UI["Next.js App Router UI<br/>React 19 · Tailwind · next-intl"]
+    end
+
+    subgraph App["Next.js Route Handlers"]
+        Auth["Better Auth<br/>email/password, Google, GitHub"]
+        Upload["Upload / Finalize"]
+        Chat["Chat"]
+        Billing["Billing"]
+    end
+
+    PG[("PostgreSQL — Neon<br/>via Prisma")]
+    Blob[("Vercel Blob<br/>file storage")]
+    Vector[("Upstash Vector<br/>embeddings index")]
+    Groq["Groq<br/>primary chat inference"]
+    Gemini["Google Gemini<br/>embeddings + fallback chat"]
+    Stripe[("Stripe<br/>Checkout · Portal · Webhooks")]
+
+    UI -->|sign in| Auth --> PG
+    UI -->|upload file| Upload --> Blob
+    Upload -->|extract, chunk, embed| Gemini --> Vector
+    Upload --> PG
+
+    UI -->|ask a question| Chat
+    Chat -->|retrieve relevant chunks| Vector
+    Chat -->|generate answer| Groq
+    Groq -.->|on rate limit / error| Gemini
+    Chat -->|persist message + citations| PG
+    Chat -->|stream tokens| UI
+
+    UI -->|upgrade / manage plan| Billing <--> Stripe
+    Stripe -->|webhook: plan updated| PG
+```
+
+Groq handles chat generation by default, falling back to Gemini automatically
+on a rate limit or provider error — the fallback decision happens before any
+tokens reach the client, so a stream never starts on one provider and switches
+mid-answer. Embeddings always go through Gemini, since Groq has no embeddings
+endpoint.
 
 ## Tech stack
 
