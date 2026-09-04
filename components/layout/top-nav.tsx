@@ -67,7 +67,7 @@ export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
                 aria-label={t("accountMenu")}
                 className="ml-1 flex h-9 w-9 items-center justify-center rounded-full transition-opacity hover:opacity-80"
               >
-                <Avatar name={user?.name} email={user?.email} size="sm" />
+                <Avatar name={user?.name} email={user?.email} image={user?.image} size="sm" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
