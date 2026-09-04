@@ -461,5 +461,166 @@
     "defaultTitle": "Conversation partagée",
     "readOnlySubtitle": "Conversation partagée — lecture seule.",
     "footerTagline": "Partagé avec Excerpta — Des réponses précises, citées à la ligne près."
+  },
+  "NotFound": {
+    "title": "Cette page a perdu sa citation",
+    "subtitle": "Nous n'avons pas trouvé ce que vous cherchiez — la page a peut-être été déplacée, ou n'a jamais existé.",
+    "backToHome": "Retour à l'accueil",
+    "backToDocuments": "Aller à vos documents"
+  },
+  "Legal": {
+    "termsLink": "Conditions",
+    "privacyLink": "Confidentialité",
+    "copyright": "© {year} Excerpta. Tous droits réservés.",
+    "terms": {
+      "title": "Conditions d'Utilisation",
+      "lastUpdated": "Dernière mise à jour le 4 septembre 2026",
+      "sections": [
+        {
+          "heading": "1. Acceptation de ces conditions",
+          "paragraphs": [
+            "En créant un compte ou en utilisant Excerpta (« le Service »), vous acceptez d'être lié par ces Conditions d'Utilisation. Si vous n'êtes pas d'accord, merci de ne pas utiliser le Service."
+          ]
+        },
+        {
+          "heading": "2. Ce que fait Excerpta",
+          "paragraphs": [
+            "Excerpta vous permet d'importer des documents (PDF, DOCX, CSV et les formats de fichiers de code courants) et de leur poser des questions en langage naturel. Les réponses sont générées par une IA et s'appuient autant que possible sur vos documents, avec des citations renvoyant exactement à la page ou au passage dont elles sont issues.",
+            "Les citations sont un outil pour vérifier une réponse, pas une garantie d'exactitude. Vérifiez toujours vous-même le passage cité avant de vous fier à une réponse pour quoi que ce soit d'important."
+          ]
+        },
+        {
+          "heading": "3. Votre compte",
+          "paragraphs": [
+            "Vous pouvez créer un compte avec un e-mail et un mot de passe, ou en vous connectant avec Google ou GitHub. Vous êtes responsable de la sécurité de vos identifiants et de toute activité sur votre compte.",
+            "Vous devez avoir l'âge légal requis dans votre pays de résidence pour accepter ces conditions."
+          ]
+        },
+        {
+          "heading": "4. Votre contenu",
+          "paragraphs": [
+            "Vous conservez la propriété des documents que vous importez. En important un document, vous autorisez Excerpta à le stocker, à en extraire le texte, à en générer des vecteurs d'indexation (embeddings) et à le traiter via des modèles d'IA, uniquement pour vous fournir le Service.",
+            "N'importez rien que vous n'avez pas le droit d'importer, ni de contenu illégal, portant atteinte à des tiers ou nuisible."
+          ]
+        },
+        {
+          "heading": "5. Formules et facturation",
+          "paragraphs": [
+            "Excerpta propose une formule Gratuite ainsi que des formules payantes Pro et Team, chacune avec une limite mensuelle d'import de documents, réinitialisée au début de chaque mois calendaire. Les formules payantes sont facturées via Stripe.",
+            "Vous pouvez changer de formule ou résilier à tout moment depuis Paramètres → Facturation, qui ouvre le portail de facturation Stripe. Les paiements déjà effectués ne sont pas remboursés, sauf obligation légale contraire."
+          ]
+        },
+        {
+          "heading": "6. Utilisation acceptable",
+          "paragraphs": [
+            "N'utilisez pas Excerpta pour tenter de contourner le Service, accéder aux données d'un autre utilisateur, importer un logiciel malveillant, ou automatiser un volume abusif de requêtes."
+          ]
+        },
+        {
+          "heading": "7. Fermeture de votre compte",
+          "paragraphs": [
+            "Vous pouvez supprimer votre compte à tout moment depuis Paramètres → Compte. Cela supprime définitivement vos documents, vos conversations et les données de votre compte — voir notre Politique de Confidentialité pour le détail exact. Nous pouvons également suspendre ou résilier les comptes qui enfreignent ces conditions."
+          ]
+        },
+        {
+          "heading": "8. Avertissements",
+          "paragraphs": [
+            "Le Service est fourni « en l'état ». Les réponses générées par l'IA peuvent être incomplètes ou erronées, même lorsqu'une citation est affichée. Excerpta ne peut être tenu responsable des décisions prises sur la base des réponses du Service."
+          ]
+        },
+        {
+          "heading": "9. Modifications de ces conditions",
+          "paragraphs": [
+            "Nous pouvons mettre à jour ces conditions à mesure que le Service évolue. En cas de changement important, nous mettrons à jour la date en haut de cette page."
+          ]
+        },
+        {
+          "heading": "10. Contact",
+          "paragraphs": ["Des questions sur ces conditions ? Contactez-nous à legal@excerpta.app."]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Politique de Confidentialité",
+      "lastUpdated": "Dernière mise à jour le 4 septembre 2026",
+      "sections": [
+        {
+          "heading": "1. Vue d'ensemble",
+          "paragraphs": [
+            "Cette Politique de Confidentialité explique quelles informations Excerpta collecte, pourquoi, et comment elles sont traitées. Utiliser le Service signifie que vous acceptez ce qui est décrit ici."
+          ]
+        },
+        {
+          "heading": "2. Informations que nous collectons",
+          "paragraphs": [
+            "Informations de compte : votre nom, votre adresse e-mail, et les informations de profil provenant de Google ou GitHub si vous vous connectez ainsi.",
+            "Vos documents : les fichiers que vous importez, le texte qui en est extrait, et les vecteurs d'indexation générés à partir de ce texte pour que le Service puisse retrouver les passages pertinents lorsque vous posez une question.",
+            "Vos conversations : les questions que vous posez, ainsi que les réponses et citations générées en retour.",
+            "Informations de facturation : votre formule d'abonnement et votre utilisation, gérées via Stripe — Excerpta ne voit ni ne stocke jamais directement les détails de votre carte bancaire.",
+            "Un minimum de données techniques (comme la langue choisie), stockées dans des cookies — voir ci-dessous."
+          ]
+        },
+        {
+          "heading": "3. Comment nous les utilisons",
+          "paragraphs": [
+            "Pour faire fonctionner le Service : traiter vos documents, répondre à vos questions, et faire fonctionner votre compte et votre abonnement.",
+            "Pour appliquer les limites de votre formule et prévenir les abus.",
+            "Nous ne vendons pas vos données, et nous n'utilisons pas vos documents pour entraîner des modèles d'IA."
+          ]
+        },
+        {
+          "heading": "4. Où les choses sont stockées et traitées",
+          "paragraphs": [
+            "Les fichiers importés sont stockés sur Vercel Blob. Le texte extrait est converti en vecteurs d'indexation et stocké dans une base de données vectorielle (Upstash) afin que les passages pertinents puissent être retrouvés lorsque vous posez une question. Les questions et extraits de documents sont envoyés à des fournisseurs d'IA tiers (Google Gemini, Groq) pour générer une réponse — uniquement ce qui est nécessaire pour répondre à cette question, pas l'intégralité de votre bibliothèque de documents à la fois."
+          ]
+        },
+        {
+          "heading": "5. Cookies",
+          "paragraphs": [
+            "Excerpta utilise un cookie de session pour vous garder connecté, et un petit cookie pour mémoriser votre préférence de langue (anglais ou français). Nous n'utilisons pas de cookies publicitaires ou de suivi tiers."
+          ]
+        },
+        {
+          "heading": "6. Avec qui nous partageons des données",
+          "paragraphs": [
+            "Uniquement avec les prestataires nécessaires au fonctionnement d'Excerpta : Stripe pour la facturation, Vercel pour l'hébergement et le stockage des fichiers, Upstash pour la base de données vectorielle, et les fournisseurs d'IA utilisés pour générer les réponses. Aucun d'entre eux ne peut utiliser vos données à d'autres fins que de fournir ce service à Excerpta."
+          ]
+        },
+        {
+          "heading": "7. Conservation et suppression de vos données",
+          "paragraphs": [
+            "Vos documents et conversations restent stockés tant que votre compte existe. Supprimer votre compte — depuis Paramètres → Compte — supprime définitivement vos fichiers importés, leur texte extrait et leurs vecteurs d'indexation, vos conversations, et l'enregistrement de votre compte. Cette action est irréversible."
+          ]
+        },
+        {
+          "heading": "8. Vos droits",
+          "paragraphs": [
+            "Vous pouvez consulter, modifier ou supprimer vos données à tout moment depuis Paramètres, sans avoir besoin de nous contacter. Si vous préférez nous écrire directement, envoyez un e-mail à privacy@excerpta.app."
+          ]
+        },
+        {
+          "heading": "9. Sécurité",
+          "paragraphs": [
+            "Les données sont chiffrées en transit, et l'accès à celles-ci est limité à ce qui est nécessaire au fonctionnement du Service. Aucun système n'est parfaitement sécurisé, mais nous prenons des mesures raisonnables pour protéger vos informations."
+          ]
+        },
+        {
+          "heading": "10. Enfants",
+          "paragraphs": [
+            "Excerpta ne s'adresse pas aux enfants, et nous ne collectons pas sciemment de données auprès de toute personne n'ayant pas l'âge requis pour détenir légalement un compte dans son pays."
+          ]
+        },
+        {
+          "heading": "11. Modifications de cette politique",
+          "paragraphs": [
+            "En cas de changement important dans la manière dont nous traitons vos données, nous mettrons à jour la date en haut de cette page."
+          ]
+        },
+        {
+          "heading": "12. Contact",
+          "paragraphs": ["Des questions sur cette politique ? Contactez-nous à privacy@excerpta.app."]
+        }
+      ]
+    }
   }
 }
