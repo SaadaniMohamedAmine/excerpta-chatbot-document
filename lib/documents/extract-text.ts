@@ -19,6 +19,16 @@ export type ExtractedDocument =
   | { kind: "csv"; data: CsvExtraction }
   | { kind: "code"; data: CodeExtraction };
 
+// Postgres' UTF8 encoding rejects the NUL byte outright (`invalid byte
+// sequence for encoding "UTF8": 0x00`), which pdf-parse occasionally emits
+// for PDFs with unusual embedded font/CID mappings — the chunk insert then
+// crashes the whole workflow. Strip it at the extraction boundary so no
+// downstream stage (chunking, storage) ever sees it.
+function stripNulBytes(text: string): string {
+  const NUL = String.fromCharCode(0);
+  return text.indexOf(NUL) === -1 ? text : text.split(NUL).join("");
+}
+
 /**
  * PDF extraction, PER PAGE. pdf-parse v2 rewrote its API around a `PDFParse`
  * class (the old v1 default-export function + `pagerender` hook override no
@@ -29,7 +39,7 @@ export async function extractPdfText(buffer: Buffer): Promise<PdfExtraction> {
   const parser = new PDFParse({ data: buffer });
   try {
     const result = await parser.getText();
-    const pages: ExtractedPage[] = result.pages.map((p) => ({ pageNumber: p.num, text: p.text }));
+    const pages: ExtractedPage[] = result.pages.map((p) => ({ pageNumber: p.num, text: stripNulBytes(p.text) }));
     return { pages, pageCount: result.total };
   } finally {
     await parser.destroy();
@@ -45,7 +55,7 @@ export async function extractPdfText(buffer: Buffer): Promise<PdfExtraction> {
  */
 export async function extractDocxText(buffer: Buffer): Promise<DocxExtraction> {
   const result = await mammoth.extractRawText({ buffer });
-  return { pages: [{ pageNumber: 1, text: result.value }], pageCount: null };
+  return { pages: [{ pageNumber: 1, text: stripNulBytes(result.value) }], pageCount: null };
 }
 
 export async function extractCsvText(buffer: Buffer): Promise<CsvExtraction> {
@@ -58,7 +68,7 @@ export async function extractCsvText(buffer: Buffer): Promise<CsvExtraction> {
   const headers = parsed.meta.fields ?? [];
   const rows: CsvRow[] = parsed.data.map((row, index) => ({
     rowNumber: index + 1,
-    text: headers.map((h) => `${h}: ${row[h] ?? ""}`).join(", "),
+    text: stripNulBytes(headers.map((h) => `${h}: ${row[h] ?? ""}`).join(", ")),
   }));
 
   return { rows, headers };
@@ -89,7 +99,7 @@ const EXTENSION_TO_LANGUAGE: Record<string, string> = {
 };
 
 export function extractCodeText(buffer: Buffer, filename: string): CodeExtraction {
-  const content = buffer.toString("utf-8");
+  const content = stripNulBytes(buffer.toString("utf-8"));
   const lines: CodeLine[] = content.split("\n").map((text, index) => ({
     lineNumber: index + 1,
     text,
