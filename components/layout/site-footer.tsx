@@ -18,21 +18,17 @@ export function SiteFooter() {
               {t(link.key)}
             </Link>
           ))}
+          <Link href="/terms" className="transition-colors hover:text-text-primary">
+            {tLegal("termsLink")}
+          </Link>
+          <Link href="/privacy" className="transition-colors hover:text-text-primary">
+            {tLegal("privacyLink")}
+          </Link>
         </div>
       </div>
-      <div className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 py-5 font-sans text-xs text-text-secondary sm:flex-row sm:justify-between sm:px-6">
-          <span>{tLegal("copyright", { year: new Date().getFullYear() })}</span>
-          <div className="flex items-center gap-5">
-            <Link href="/terms" className="transition-colors hover:text-text-primary">
-              {tLegal("termsLink")}
-            </Link>
-            <Link href="/privacy" className="transition-colors hover:text-text-primary">
-              {tLegal("privacyLink")}
-            </Link>
-          </div>
-        </div>
-      </div>
+      <p className="pb-8 text-center font-sans text-xs text-text-secondary">
+        {tLegal("copyright", { year: new Date().getFullYear() })}
+      </p>
     </footer>
   );
 }
