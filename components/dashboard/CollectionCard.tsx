@@ -2,10 +2,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Stack, DotsThree, PencilSimple, Trash } from "@phosphor-icons/react";
+import { Stack, DotsThree, FilePlus, PencilSimple, Trash } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -13,6 +12,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { AddDocumentsToCollectionModal } from "./AddDocumentsToCollectionModal";
+import { CollectionPreviewModal } from "./CollectionPreviewModal";
 
 export interface CollectionSummary {
   id: string;
@@ -28,6 +29,8 @@ export default function CollectionCard({ collection }: { collection: CollectionS
   const [renaming, setRenaming] = useState(false);
   const [name, setName] = useState(collection.name);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
+  const [addDocumentsOpen, setAddDocumentsOpen] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
 
   async function handleRename() {
     const trimmed = name.trim();
@@ -73,6 +76,14 @@ export default function CollectionCard({ collection }: { collection: CollectionS
             <DropdownMenuItem
               onSelect={(e) => {
                 e.preventDefault();
+                setAddDocumentsOpen(true);
+              }}
+            >
+              <FilePlus size={16} /> {t("addDocumentsCta")}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onSelect={(e) => {
+                e.preventDefault();
                 setRenaming(true);
               }}
             >
@@ -93,7 +104,18 @@ export default function CollectionCard({ collection }: { collection: CollectionS
         </DropdownMenu>
       </div>
 
-      <Link href={`/collections/${collection.id}`} className="flex flex-col gap-3">
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() => setPreviewOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setPreviewOpen(true);
+          }
+        }}
+        className="flex cursor-pointer flex-col gap-3"
+      >
         <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/70 text-white shadow-md shadow-primary/30">
           <Stack size={18} weight="duotone" />
         </span>
@@ -103,9 +125,10 @@ export default function CollectionCard({ collection }: { collection: CollectionS
               autoFocus
               value={name}
               onChange={(e) => setName(e.target.value)}
-              onClick={(e) => e.preventDefault()}
+              onClick={(e) => e.stopPropagation()}
               onBlur={handleRename}
               onKeyDown={(e) => {
+                e.stopPropagation();
                 if (e.key === "Enter") {
                   e.preventDefault();
                   handleRename();
@@ -130,7 +153,7 @@ export default function CollectionCard({ collection }: { collection: CollectionS
             {t("documentCount", { count: collection.documentCount })}
           </p>
         </div>
-      </Link>
+      </div>
 
       {confirmingDelete && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-lg bg-surface/97 p-4 text-center">
@@ -157,6 +180,20 @@ export default function CollectionCard({ collection }: { collection: CollectionS
           </div>
         </div>
       )}
+
+      <AddDocumentsToCollectionModal
+        open={addDocumentsOpen}
+        collectionId={collection.id}
+        collectionName={collection.name}
+        onClose={() => setAddDocumentsOpen(false)}
+      />
+
+      <CollectionPreviewModal
+        open={previewOpen}
+        collectionId={collection.id}
+        collectionName={collection.name}
+        onClose={() => setPreviewOpen(false)}
+      />
     </div>
   );
 }

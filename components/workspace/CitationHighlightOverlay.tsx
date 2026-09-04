@@ -17,6 +17,42 @@ interface CitationHighlightOverlayProps {
 const HIGHLIGHT_CLASS = "citation-highlight";
 const MAX_ATTEMPTS = 25;
 const RETRY_DELAY_MS = 100;
+// Below this many words, a partial match is too weak a signal to trust —
+// short common phrases ("in this document") would light up the wrong spot.
+const MIN_MATCH_WORDS = 6;
+
+/**
+ * The excerpt (built at chat time from pdf-parse's extraction) and the page
+ * text searched here (pdf.js's own text layer) are two independent
+ * extractions of the same PDF — they usually agree, but small divergences
+ * (reordered columns, a stray ligature, a hyphenation pdf-parse resolved
+ * differently) make a full-excerpt exact match fail even though most of the
+ * excerpt is present verbatim. Rather than give up and silently show no
+ * highlight, progressively trim words off the end, then off the start, of
+ * the excerpt and retry — this finds a slightly shorter match instead of no
+ * match at all, at the cost of not requiring the exact full string.
+ */
+function findMatchRange(concatenated: string, normalizedExcerpt: string): { start: number; end: number } | null {
+  const exact = concatenated.indexOf(normalizedExcerpt);
+  if (exact !== -1) return { start: exact, end: exact + normalizedExcerpt.length };
+
+  const words = normalizedExcerpt.split(" ");
+  if (words.length <= MIN_MATCH_WORDS) return null;
+
+  for (let end = words.length - 1; end > MIN_MATCH_WORDS; end--) {
+    const candidate = words.slice(0, end).join(" ");
+    const idx = concatenated.indexOf(candidate);
+    if (idx !== -1) return { start: idx, end: idx + candidate.length };
+  }
+
+  for (let start = 1; start < words.length - MIN_MATCH_WORDS; start++) {
+    const candidate = words.slice(start).join(" ");
+    const idx = concatenated.indexOf(candidate);
+    if (idx !== -1) return { start: idx, end: idx + candidate.length };
+  }
+
+  return null;
+}
 
 /**
  * WHY THIS APPROACH, AND ITS LIMITATIONS:
@@ -36,7 +72,10 @@ const RETRY_DELAY_MS = 100;
  *      that concatenated string.
  *   2. Normalize whitespace/case on both the concatenated text and the
  *      citation excerpt (see normalizeForMatch), then find the excerpt with
- *      a plain substring search (indexOf).
+ *      a substring search — exact first, falling back to progressively
+ *      trimmed versions of the excerpt (see findMatchRange) since the
+ *      excerpt and the text layer are two independent extractions of the
+ *      same PDF and can disagree at the margins.
  *   3. Add a CSS class to every span whose offset range overlaps the match
  *      range — the whole span, not a sub-string of it.
  *
@@ -91,9 +130,9 @@ export default function CitationHighlightOverlay({
         ranges.push({ span: span as HTMLElement, start, end });
       }
 
-      const matchStart = concatenated.indexOf(normalizedExcerpt);
-      if (matchStart === -1) return;
-      const matchEnd = matchStart + normalizedExcerpt.length;
+      const match = findMatchRange(concatenated, normalizedExcerpt);
+      if (!match) return;
+      const { start: matchStart, end: matchEnd } = match;
 
       let firstHighlighted: HTMLElement | null = null;
       for (const { span, start, end } of ranges) {

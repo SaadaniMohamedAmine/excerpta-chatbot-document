@@ -5,7 +5,13 @@ import { useState } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import CollectionAssignPopup from "./CollectionAssignPopup";
 
-export default function CollectionAssignGate({ documentId }: { documentId: string }) {
+export default function CollectionAssignGate({
+  documentId,
+  documentTitle,
+}: {
+  documentId: string;
+  documentTitle: string;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -20,5 +26,5 @@ export default function CollectionAssignGate({ documentId }: { documentId: strin
     router.replace(pathname, { scroll: false });
   }
 
-  return <CollectionAssignPopup documentId={documentId} onDismiss={handleDismiss} />;
+  return <CollectionAssignPopup documentId={documentId} documentTitle={documentTitle} onDismiss={handleDismiss} />;
 }

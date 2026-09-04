@@ -213,7 +213,9 @@
     "next": "Next",
     "statusProcessing": "Processing",
     "statusFailed": "Failed",
-    "conversationCount": "{count, plural, one {# conversation} other {# conversations}}"
+    "conversationCount": "{count, plural, one {# conversation} other {# conversations}}",
+    "documentOptions": "Document options",
+    "moveToCollection": "Move to collection"
   },
   "UploadDropzone": {
     "title": "Upload a document to begin.",
@@ -283,7 +285,8 @@
     "createFailed": "Failed to create collection",
     "moveFailed": "Failed to move document",
     "genericError": "Something went wrong.",
-    "defaultBadge": "(default)"
+    "defaultBadge": "(default)",
+    "movedToast": "“{document}” added to “{collection}”."
   },
   "Collections": {
     "subtitle": "Group related documents to ask questions across all of them at once.",
@@ -300,7 +303,20 @@
     "nameRequired": "Give the collection a name.",
     "createFailed": "Couldn't create the collection.",
     "creating": "Creating…",
-    "create": "Create"
+    "create": "Create",
+    "createdTitle": "“{name}” created",
+    "createdDescription": "It's empty for now — pick documents to add to it.",
+    "addDocumentsCta": "Add documents",
+    "addDocumentsTitle": "Add documents to “{name}”",
+    "addDocumentsDescription": "Select the documents you want in this collection.",
+    "addDocumentsFailed": "Couldn't add the documents. Try again.",
+    "documentsAddedToast": "{count, plural, one {# document} other {# documents}} added to “{collection}”.",
+    "addSelected": "{count, plural, =0 {Add documents} one {Add # document} other {Add # documents}}",
+    "loadingDocuments": "Loading documents…",
+    "noDocumentsToAdd": "You don't have any documents yet.",
+    "goToDocumentsPage": "Go to Documents",
+    "previewDescription": "Documents in this collection.",
+    "startConversation": "Start a conversation"
   },
   "HistoryPage": {
     "todayGroup": "Today",

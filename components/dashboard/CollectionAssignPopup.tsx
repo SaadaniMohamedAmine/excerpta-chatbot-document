@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
 import { X, Check, FolderStar, Plus } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,10 +17,11 @@ interface CollectionOption {
 
 interface CollectionAssignPopupProps {
   documentId: string;
+  documentTitle: string;
   onDismiss: () => void;
 }
 
-export default function CollectionAssignPopup({ documentId, onDismiss }: CollectionAssignPopupProps) {
+export default function CollectionAssignPopup({ documentId, documentTitle, onDismiss }: CollectionAssignPopupProps) {
   const t = useTranslations("CollectionPopup");
   const tCommon = useTranslations("Common");
   const [collections, setCollections] = useState<CollectionOption[] | null>(null);
@@ -73,6 +75,11 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
     setSaving(true);
     setError(null);
     try {
+      // Only the two branches that actually move the document into a
+      // (new or different) collection get a confirmation toast — renaming
+      // the collection it's already in isn't a move.
+      let movedTo: string | null = null;
+
       if (selected === "__new__") {
         const trimmed = newName.trim();
         if (!trimmed) {
@@ -96,6 +103,7 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
             body: JSON.stringify({ newCollectionName: trimmed }),
           });
           if (!res.ok) throw new Error(t("createFailed"));
+          movedTo = trimmed;
         }
       } else if (selected && selected !== currentCollectionId) {
         const res = await fetch(`/api/documents/${documentId}/collection`, {
@@ -104,6 +112,11 @@ export default function CollectionAssignPopup({ documentId, onDismiss }: Collect
           body: JSON.stringify({ collectionId: selected }),
         });
         if (!res.ok) throw new Error(t("moveFailed"));
+        movedTo = collections?.find((c) => c.id === selected)?.name ?? null;
+      }
+
+      if (movedTo) {
+        toast.success(t("movedToast", { document: documentTitle, collection: movedTo }));
       }
       onDismiss();
     } catch (err) {

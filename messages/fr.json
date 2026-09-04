@@ -213,7 +213,9 @@
     "next": "Suivant",
     "statusProcessing": "Traitement",
     "statusFailed": "Échec",
-    "conversationCount": "{count, plural, one {# conversation} other {# conversations}}"
+    "conversationCount": "{count, plural, one {# conversation} other {# conversations}}",
+    "documentOptions": "Options du document",
+    "moveToCollection": "Déplacer vers une collection"
   },
   "UploadDropzone": {
     "title": "Importez un document pour commencer.",
@@ -283,7 +285,8 @@
     "createFailed": "Impossible de créer la collection",
     "moveFailed": "Impossible de déplacer le document",
     "genericError": "Une erreur est survenue.",
-    "defaultBadge": "(par défaut)"
+    "defaultBadge": "(par défaut)",
+    "movedToast": "« {document} » ajouté à « {collection} »."
   },
   "Collections": {
     "subtitle": "Regroupez des documents liés pour interroger l'ensemble en une seule fois.",
@@ -300,7 +303,20 @@
     "nameRequired": "Donnez un nom à la collection.",
     "createFailed": "Impossible de créer la collection.",
     "creating": "Création…",
-    "create": "Créer"
+    "create": "Créer",
+    "createdTitle": "« {name} » créée",
+    "createdDescription": "Elle est vide pour l'instant — choisissez des documents à y ajouter.",
+    "addDocumentsCta": "Ajouter des documents",
+    "addDocumentsTitle": "Ajouter des documents à « {name} »",
+    "addDocumentsDescription": "Sélectionnez les documents à inclure dans cette collection.",
+    "addDocumentsFailed": "Impossible d'ajouter les documents. Réessayez.",
+    "documentsAddedToast": "{count, plural, one {# document ajouté} other {# documents ajoutés}} à « {collection} ».",
+    "addSelected": "{count, plural, =0 {Ajouter des documents} one {Ajouter # document} other {Ajouter # documents}}",
+    "loadingDocuments": "Chargement des documents…",
+    "noDocumentsToAdd": "Vous n'avez pas encore de documents.",
+    "goToDocumentsPage": "Aller aux documents",
+    "previewDescription": "Documents de cette collection.",
+    "startConversation": "Démarrer une conversation"
   },
   "HistoryPage": {
     "todayGroup": "Aujourd'hui",

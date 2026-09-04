@@ -4,6 +4,37 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { getOrCreateDefaultCollection } from "@/lib/collections";
 
+// Powers CollectionPreviewModal — the documents already in a collection,
+// shown before deciding whether to open its chat workspace.
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+): Promise<NextResponse> {
+  const session = await auth.api.getSession({ headers: request.headers });
+  if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const { id } = await params;
+
+  const collection = await prisma.collection.findFirst({
+    where: { id, userId: session.user.id },
+    include: {
+      documents: {
+        select: { id: true, title: true, fileType: true, status: true },
+        orderBy: { createdAt: "desc" },
+      },
+    },
+  });
+  if (!collection) {
+    return NextResponse.json({ error: "Collection not found" }, { status: 404 });
+  }
+
+  return NextResponse.json({
+    id: collection.id,
+    name: collection.name,
+    documents: collection.documents,
+  });
+}
+
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
