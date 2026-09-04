@@ -32,8 +32,12 @@ const nextConfig: NextConfig = {
   // native-binary-package situation, e.g. sharp, as needing
   // outputFileTracingIncludes too). Without this, @napi-rs/canvas kept being
   // "Cannot find module" in prod even after being marked external.
+  // Only pdfjs-dist's own entry file (legacy/build/pdf.mjs) was being traced,
+  // not the rest of the package — pdf.mjs loads pdf.worker.mjs (its PDF.js
+  // "worker") via a dynamic path at runtime, which the tracer can't follow
+  // either, so it was missing the same way @napi-rs/canvas was.
   outputFileTracingIncludes: {
-    "/api/workflows/process-document": ["./node_modules/@napi-rs/**/*"],
+    "/api/workflows/process-document": ["./node_modules/@napi-rs/**/*", "./node_modules/pdfjs-dist/**/*"],
   },
   images: {
     remotePatterns: [
