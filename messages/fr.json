@@ -269,7 +269,10 @@
   "ProcessingPanel": {
     "reading": "Lecture de votre document…",
     "indexing": "Indexation des pages 1 à {pageCount}…",
-    "hint": "Cela peut prendre une minute pour les documents plus longs."
+    "hint": "Cela peut prendre une minute pour les documents plus longs.",
+    "stuckHint": "Cela prend plus de temps que prévu.",
+    "retryNow": "Réessayer maintenant",
+    "retrying": "Nouvel essai…"
   },
   "ErrorPanel": {
     "title": "Impossible de traiter ce document.",

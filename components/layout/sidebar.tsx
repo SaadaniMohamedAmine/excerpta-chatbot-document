@@ -232,7 +232,7 @@ export function Sidebar({
               )}
               aria-label={t("accountMenu")}
             >
-              <Avatar name={user?.name} email={user?.email} size="sm" className="shrink-0" />
+              <Avatar name={user?.name} email={user?.email} image={user?.image} size="sm" className="shrink-0" />
               <div
                 className={cn(
                   "flex min-w-0 items-center gap-2 overflow-hidden transition-[max-width,opacity] duration-200 ease-in-out",
