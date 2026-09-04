@@ -2,6 +2,7 @@
 import { Suspense } from "react";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import { FileText } from "@phosphor-icons/react/dist/ssr";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
@@ -52,13 +53,18 @@ export default async function DocumentsPage() {
     // has an explicit note not to call lib/documents/process.ts directly, so
     // this doesn't either. Fire-and-forget: the page renders immediately
     // with the document showing "processing", same as any other upload.
-    fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/workflows/process-document`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ documentId: demoDocument.id }),
-    }).catch((error) => {
-      console.error("[documents/page] failed to trigger demo document processing:", error);
-    });
+    // Wrapped in after() — see the identical comment in
+    // app/api/documents/finalize/route.ts for why a bare, un-awaited fetch
+    // here can silently never go out.
+    after(() =>
+      fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/workflows/process-document`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ documentId: demoDocument.id }),
+      }).catch((error) => {
+        console.error("[documents/page] failed to trigger demo document processing:", error);
+      })
+    );
 
     await prisma.user.update({ where: { id: session.user.id }, data: { onboardedAt: new Date() } });
     justOnboarded = true;

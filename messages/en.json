@@ -269,7 +269,10 @@
   "ProcessingPanel": {
     "reading": "Reading your document…",
     "indexing": "Indexing pages 1–{pageCount}…",
-    "hint": "This can take a minute for longer documents."
+    "hint": "This can take a minute for longer documents.",
+    "stuckHint": "This is taking longer than expected.",
+    "retryNow": "Retry now",
+    "retrying": "Retrying…"
   },
   "ErrorPanel": {
     "title": "We couldn't process this document.",

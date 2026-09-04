@@ -1,5 +1,5 @@
 // app/api/documents/finalize/route.ts
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { getTranslations } from "next-intl/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
@@ -75,15 +75,23 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   await incrementUsage(session.user.id);
 
-  // Fire-and-forget trigger of async processing — do NOT await this.
+  // Fire-and-forget trigger of async processing — do NOT await this. Wrapped
+  // in after() rather than a bare, un-awaited fetch: Vercel can freeze/tear
+  // down this invocation as soon as the response below is sent, and a bare
+  // fetch has no guarantee of actually going out before that happens (the
+  // .catch() never even gets a chance to fire, so a dropped trigger produces
+  // no error anywhere — just a document stuck at status "processing"
+  // forever). after() keeps the invocation alive until this completes.
   const workflowUrl = new URL("/api/workflows/process-document", request.url);
-  fetch(workflowUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ documentId: document.id }),
-  }).catch((error) => {
-    console.error("[finalize] failed to trigger processing workflow:", error);
-  });
+  after(() =>
+    fetch(workflowUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ documentId: document.id }),
+    }).catch((error) => {
+      console.error("[finalize] failed to trigger processing workflow:", error);
+    })
+  );
 
   return NextResponse.json({ document }, { status: 201 });
 }
